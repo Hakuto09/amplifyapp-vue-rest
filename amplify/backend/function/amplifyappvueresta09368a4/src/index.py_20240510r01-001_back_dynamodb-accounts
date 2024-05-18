@@ -1,0 +1,278 @@
+import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
+from aws_lambda_powertools import Logger
+from pydantic import BaseModel
+import boto3
+import uuid
+from boto3.dynamodb.conditions import Key, Attr
+
+# 環境変数取得
+ENV = os.environ['ENV']
+print('ENV ', ENV)
+#STORAGE_DB_NAME = os.environ.get("STORAGE_DB_NAME")
+#STORAGE_DB_NAME = 'dynamo29652a67-dev'
+STORAGE_DB_NAME = 'amplifyappvuerest_accounts'
+print('STORAGE_DB_NAME ', STORAGE_DB_NAME)
+
+# boto3 IoT Core 初期化
+iot_client = boto3.client('iot')
+
+# boto3 DynamoDB 初期化
+ddb = boto3.resource("dynamodb")
+table = ddb.Table(STORAGE_DB_NAME)
+
+ddb_client = boto3.client('dynamodb')
+
+
+## FastAPI 初期化
+app = FastAPI(
+    title="AmplifyFastAPI",
+    root_path=f"/{ENV}",
+    openapi_url="/openapi.json"
+)
+
+# ロガー初期化
+app.logger = Logger(level="INFO", service=__name__)
+
+# CORS設定
+allow_origins = ['http://localhost:8080']
+if 'ALLOW_ORIGIN' in os.environ.keys():
+    allow_origins.append(os.environ['ALLOW_ORIGIN'])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allow_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# スキーマ設定
+class Request_Item(BaseModel):
+    """
+    リクエストスキーマ
+    """
+    id: str
+    createdAt: str
+
+class Response_Item(BaseModel):
+    """
+    レスポンススキーマ
+    """
+    id: str
+    createdAt: str
+
+class Request_Account(BaseModel):
+    """
+    リクエストスキーマ
+    """
+    account_id: str
+    account_name: str
+    email: str
+    password: str
+
+class Response_Account(BaseModel):
+    """
+    レスポンススキーマ
+    """
+    account_name: str
+    email: str
+    password: str
+
+class Request_DGroup(BaseModel):
+    """
+    リクエストスキーマ
+    """
+    dgroup_id: str
+    dgroup_name: str
+    account_id: str
+
+class Response_DGroup(BaseModel):
+    """
+    レスポンススキーマ
+    """
+    account_name: str
+    email: str
+    password: str
+
+@app.get("/items")
+def get_items_list():
+    """
+    Item 一覧を取得する
+    """
+    print('get_items_list(): In')
+
+    # Item 一覧取得処理を書く
+    return {
+        "id": "test",
+        "createdAt": "2000-04-25T12:00:01+09:00"
+    }
+
+#    response = table.query(
+#      KeyConditionExpression = Key("id").eq(id), # 取得するKey情報
+#      ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
+#      Limit = 1 # 取得するデータ件数
+#    )
+#    print('response ', response)
+#
+#    return response["Items"]
+
+@app.get("/accounts")
+def get_accounts_list():
+    """
+    アカウントの一覧を取得する
+    """
+    print('get_accounts_list(): In')
+
+    response = ddb_client.scan(
+      TableName = STORAGE_DB_NAME,
+      Limit = 100 # 取得するデータ件数
+    )
+    print('response ', response)
+
+    return response["Items"]
+
+@app.get("/items/{id}")
+def get_items(id: str):
+    """
+    Item アイテムを取得する
+    """
+    print('get_items(): In')
+
+    key = {
+        "id": id
+    }
+#    print('id ', id)
+    print('key ', key)
+
+    #response = table.get_item(Key=key)
+    #print('response ', response)
+
+    #queryData = table.query(
+    response = table.query(
+    #  KeyConditionExpression = Key("id").eq("your-partition-key-data") & Key("createdAt").eq("your-sort-key-data"), # 取得するKey情報
+      KeyConditionExpression = Key("id").eq(id), # 取得するKey情報
+#      FilterExpression = Attr('devices').contains('d0001'),
+      ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
+#      Limit = 1 # 取得するデータ件数
+    )
+    #print('queryData ', queryData)
+    print('response ', response)
+
+#    return Response.parse_obj(response["Item"])    # Error
+#    return Response.parse_obj(response["Items"])   # Error
+#    print('Befre return Response.parse_obj(response["LastEvaluatedKey"])')
+#    return Response.parse_obj(response["LastEvaluatedKey"])    # OK
+#    print('Befre return Response.parse_obj(response["Items"][0])')
+#    return Response.parse_obj(response["Items"][0])     #OK
+    print('Befre return response["Items"]')
+    return response["Items"]
+
+@app.get("/items2/{id}")
+def get_items_between(id: str, createdat_min: str, createdat_max: str):
+    """
+    Item アイテムを取得する
+    """
+    print('get_items_between(): In')
+    print('createdat_min ', createdat_min)
+    print('createdat_max ', createdat_max)
+
+    key = {
+        "id": id
+    }
+    print('key ', key)
+
+    response = table.query(
+    #  KeyConditionExpression = Key("id").eq("your-partition-key-data") & Key("createdAt").eq("your-sort-key-data"), # 取得するKey情報
+      KeyConditionExpression = Key("id").eq(id), # 取得するKey情報
+#      FilterExpression = Attr('createdAt').contains('d0001'),
+      FilterExpression = Attr('createdAt2').between(createdat_min, createdat_max),
+      ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
+#      Limit = 1 # 取得するデータ件数
+    )
+    #print('queryData ', queryData)
+    print('response ', response)
+
+    print('Befre return response["Items"]')
+    return response["Items"]
+    
+@app.post("/items", response_model=Response_Item)
+def post_item(item_in: Request_Item):
+    """
+    Itemを登録する
+    """
+    print('post_item(): In')
+
+    #id = str(uuid.uuid4())
+    #print('id ', id)
+    create_item = item_in.dict()
+    print('create_item ', create_item)
+    #create_item["id"] = id
+    #print('create_item["id"] ', create_item["id"])
+
+    #print('create_item ', create_item)
+    result = table.put_item(Item=create_item)
+    app.logger.info(result)
+
+    return Response_Item.parse_obj(create_item)
+
+@app.post("/account", response_model=Response_Account)
+def post_account(_in: Request_Account):
+    """
+    アカウントを登録する
+    """
+    print('post_account(): In')
+
+    create_account = _in.dict()
+    print('create_account ', create_account)
+
+    result = table.put_item(Item=create_account)
+    app.logger.info(result)
+
+    return Response_Account.parse_obj(create_account)
+
+@app.post("/g", response_model=Response_Account)
+def post_account(_in: Request_Account):
+    """
+    アカウントを登録する
+    """
+    print('post_account(): In')
+
+    create_account = _in.dict()
+    print('create_account ', create_account)
+
+    result = table.put_item(Item=create_account)
+    app.logger.info(result)
+
+    return Response_Account.parse_obj(create_account)
+
+@app.put("/items/{id}", response_model=Response_Item)
+def update_item(id: str):
+    """
+    Item アイテムを更新する
+    """
+    print('update_item(): In')
+
+    # Item アップデート処理
+    return {
+        "id": id,
+        "createdAt": "2000-04-25T12:00:01+09:00"
+    }
+
+@app.delete("/items/{id}")
+def delete_item(id: str):
+    """
+    Item アイテムを削除する
+    """
+    print('delete_item(): In')
+
+    # Item 削除処理
+    return {
+        "id": id,
+        "createdAt": "2000-04-25T12:00:01+09:00"
+    }
+
+
+handler = Mangum(app)

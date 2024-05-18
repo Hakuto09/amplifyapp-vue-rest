@@ -1,0 +1,50 @@
+{
+  "api": {
+    "apib620dd96": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "amplifyappvueresta09368a4"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "amplifyappvueresta09368a4": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amplifyappvueresta09368a4_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyappvueresta09368a4"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifyappvueresta09368a4_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifyappvueresta09368a4"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "dynamo29652a67": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}
