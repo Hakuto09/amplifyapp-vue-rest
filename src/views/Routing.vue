@@ -1,9 +1,9 @@
 <template>
-  <div :class="$style.parent">
-    <div :class="$style.child">
+  <!-- div :class="$style.parent" -->
+    <!-- div :class="$style.child" -->
       <h1>Routing Test Page</h1>
-    </div>
-  </div>
+    <!-- /div -->
+  <!-- /div -->
 </template>
 
 <script>
