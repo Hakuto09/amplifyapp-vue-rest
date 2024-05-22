@@ -1,6 +1,8 @@
 <template>
+  <div class="v-aspect-ratio-img" :style="style">
+    <img alt="Hakuto logo" src="./assets/Hakuto_logo.jpg">
+  </div>
   <div id="app">
-    <img alt="Vue logo" src="./assets/Hakuto_logo.jpg">
     <div 
       id="nav" 
       class="tab-area-base">
@@ -16,6 +18,12 @@
 </template>
 
 <style>
+.v-aspect-ratio-img
+  img
+    width 30%
+    height 30%
+    object-fit cover
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
