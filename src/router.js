@@ -11,7 +11,8 @@ import Routing from './views/Routing.vue'
 
 const routes = [
     {
-        path: "/",
+//        path: "/",
+        path: "/home",
         name: "home",
         compoents: Home
     },
