@@ -6,8 +6,10 @@
       class="tab-area-base">
       <ul class="tab-menu-base">
         <!-- `router.js` で定義したルーティングルールとの紐付けを行っている -->
-        <li><router-link to="/home">Home Test</router-link></li>
-        <li><router-link to="/home2">Home2 Test</router-link></li>
+        <li><router-link to="/home">Home</router-link></li>
+        <!-- *** -->
+        <!-- 省略 -->
+        <!-- *** -->
         <li><router-link to="/routing">Rounting Test</router-link></li>
       </ul>
     </div>

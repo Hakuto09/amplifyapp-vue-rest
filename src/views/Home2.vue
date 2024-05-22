@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-c2">
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Home2',
   props: {
     msg: String
   }
