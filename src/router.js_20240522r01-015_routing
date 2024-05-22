@@ -15,17 +15,17 @@ const routes = [
 //        path: "/",
         path: "/home",
         name: "home",
-        component: Home
+        compoents: Home
     },
     {
         path: "/home2",
         name: "home2",
-        component: Home2
+        compoents: Home2
     },
     {
         path: "/routing",
         name: "routing",
-        component: Routing
+        components: Routing
     }
 ]
 
