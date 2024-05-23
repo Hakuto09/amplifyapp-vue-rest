@@ -40,7 +40,7 @@ export default {
 //  },
   beforeUnmount: function() {
     console.log('[LifeCycle2-1] beforeUnmount.')
-  },beforeUnmount
+  },
 
   /**
    * [公式](https://jp.vuejs.org/v2/api/index.html#destroyed) から拝借｡
