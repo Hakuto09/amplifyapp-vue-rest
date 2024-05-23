@@ -4,29 +4,35 @@
 //import Routing from './views/Routing.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './views/Home.vue'
-import Home2 from './views/Home2.vue'
-import Routing from './views/Routing.vue'
+import UserDetail from './views/UserDetail.vue'
+//import Home from './views/Home.vue'
+//import Home2 from './views/Home2.vue'
+//import Routing from './views/Routing.vue'
 
 //Vue.use(Router)
 
 const routes = [
     {
-//        path: "/",
-        path: "/home",
-        name: "home",
-        component: Home
-    },
-    {
-        path: "/home2",
-        name: "home2",
-        component: Home2
-    },
-    {
-        path: "/routing",
-        name: "routing",
-        component: Routing
+        path: '/users/:id',
+        name: 'user-detail',
+        component: UserDetail
     }
+//    {
+////        path: "/",
+//        path: "/home",
+//        name: "home",
+//        component: Home
+//    },
+//    {
+//        path: "/home2",
+//        name: "home2",
+//        component: Home2
+//    },
+//    {
+//        path: "/routing",
+//        name: "routing",
+//        component: Routing
+//    }
 ]
 
 const router = createRouter({
