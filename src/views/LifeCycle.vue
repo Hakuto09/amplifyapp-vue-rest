@@ -115,8 +115,11 @@ export default {
    *
    * **このフックはサーバサイドレンダリングでは呼ばれません。**
    */
-  beforeDestroy: function() {
-    console.log(`[LifeCycle] beforeDestroy. this.properties.message = ${this.properties.message}`)
+//  beforeDestroy: function() {
+//    console.log(`[LifeCycle] beforeDestroy. this.properties.message = ${this.properties.message}`)
+//  },
+  beforeUnmount: function() {
+    console.log(`[LifeCycle] beforeUnmount. this.properties.message = ${this.properties.message}`)
   },
 
   /**
@@ -128,8 +131,11 @@ export default {
    *
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
-  destroyed: function() {
-    console.log(`[LifeCycle] destroyed. this.properties.message = ${this.properties.message}`)
+//  destroyed: function() {
+//    console.log(`[LifeCycle] destroyed. this.properties.message = ${this.properties.message}`)
+//  },
+  unmounted: function() {
+    console.log(`[LifeCycle] unmounted. this.properties.message = ${this.properties.message}`)
   },
 }
 </script>

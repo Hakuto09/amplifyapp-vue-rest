@@ -86,8 +86,11 @@ export default {
    *
    * **このフックはサーバサイドレンダリングでは呼ばれません。**
    */
-  beforeDestroy: function() {
-    console.log('[LifeCycle2] beforeDestroy.')
+//  beforeDestroy: function() {
+//    console.log('[LifeCycle2] beforeDestroy.')
+//  },
+  beforeUnmount: function() {
+    console.log('[LifeCycle2] beforeUnmount.')
   },
 
   /**
@@ -99,8 +102,11 @@ export default {
    *
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
-  destroyed: function() {
-    console.log('[LifeCycle2] destroyed.')
+//  destroyed: function() {
+//    console.log('[LifeCycle2] destroyed.')
+//  },
+  unmounted: function() {
+    console.log('[LifeCycle2] unmounted.')
   },
 
   /**
