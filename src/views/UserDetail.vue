@@ -1,23 +1,23 @@
 <template>
-  <div :class="$style.component">
+  <div :class="style_component">
     <h1>This page is user detail.</h1>
     <div
-      :class="$style.userinfo">
+      :class="style_userinfo">
       <table>
-        <th :class="$style.item">
+        <th :class="style_item">
           ITEM
         </th>
-        <th :class="$style.value">
+        <th :class="style_value">
           VALUE
         </th>
         <!-- users のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
         <tr
           v-for="(value, name) in users[$route.params.id - 1]"
           :key="name">
-          <td :class="$style.item">
+          <td :class="style_item">
             {{ name }}
           </td>
-          <td :class="$style.value">
+          <td :class="style_value">
             {{ value }}
           </td>
         </tr>
