@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.lifecycle2_child">
-    <p>input on LifeCycle21.</p>
+    <p>input on LifeCycle22.</p>
     <input
       v-model="properties.message"
       :class="$style.message"
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'LifeCycle21',
+  name: 'LifeCycle22',
   data: function() {
     return {
       properties: {
@@ -22,11 +22,6 @@ export default {
   },
 
   /* ################################ ライフサイクル ################################ */
-  // beforeCreate: function() {
-  //   // わざと例外を発生させて､
-  //   // 親コンポーネントである LifeCycle2.vue の `errorCaptured()` のフックに引っ掛けたい
-  //   this.properties.message = 'set on beforeCreate.'
-  // },
   /**
    * [公式](https://jp.vuejs.org/v2/api/index.html#beforeDestroy) から拝借｡
    *
@@ -35,12 +30,9 @@ export default {
    *
    * **このフックはサーバサイドレンダリングでは呼ばれません。**
    */
-//  beforeDestroy: function() {
-//    console.log('[LifeCycle2-1] beforeDestroy.')
-//  },
-  beforeUnmount: function() {
-    console.log('[LifeCycle2-1] beforeUnmount.')
-  },beforeUnmount
+  beforeDestroy: function() {
+    console.log('[LifeCycle2-2] beforeDestroy.')
+  },
 
   /**
    * [公式](https://jp.vuejs.org/v2/api/index.html#destroyed) から拝借｡
@@ -51,11 +43,8 @@ export default {
    *
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
-//  destroyed: function() {
-//    console.log('[LifeCycle2-1] destroyed.')
-//  },
-  unmounted: function() {
-    console.log('[LifeCycle2-1] unmounted.')
+  destroyed: function() {
+    console.log('[LifeCycle2-2] destroyed.')
   },
 
   /**
@@ -65,7 +54,7 @@ export default {
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
   activated: function() {
-    console.log('[LifeCycle2-1] activated.')
+    console.log('[LifeCycle2-2] activated.')
   },
 
   /**
@@ -75,7 +64,7 @@ export default {
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
   deactivated: function() {
-    console.log('[LifeCycle2-1] deactivated.')
+    console.log('[LifeCycle2-2] deactivated.')
   },
 }
 </script>

@@ -35,12 +35,9 @@ export default {
    *
    * **このフックはサーバサイドレンダリングでは呼ばれません。**
    */
-//  beforeDestroy: function() {
-//    console.log('[LifeCycle2-1] beforeDestroy.')
-//  },
-  beforeUnmount: function() {
-    console.log('[LifeCycle2-1] beforeUnmount.')
-  },beforeUnmount
+  beforeDestroy: function() {
+    console.log('[LifeCycle2-1] beforeDestroy.')
+  },
 
   /**
    * [公式](https://jp.vuejs.org/v2/api/index.html#destroyed) から拝借｡
@@ -51,11 +48,8 @@ export default {
    *
    * このフックはサーバサイドレンダリングでは呼ばれません。
    */
-//  destroyed: function() {
-//    console.log('[LifeCycle2-1] destroyed.')
-//  },
-  unmounted: function() {
-    console.log('[LifeCycle2-1] unmounted.')
+  destroyed: function() {
+    console.log('[LifeCycle2-1] destroyed.')
   },
 
   /**
