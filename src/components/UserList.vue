@@ -2,21 +2,34 @@
   <div>
     <h1>This page is user list.</h1>
     <div :class="$style.userlist">
-      <!-- Buefy のテーブルを使って実現 -->
-      <!-- https://buefy.org/documentation/table/ -->
-      <b-table
-        :data="properties.users"
-        :columns="columns"
-        :striped="true"
-        :hoverable="true"
-        :selected.sync="selected" />
+      <table>
+        <thead>
+          <tr>
+            <th><input :class="$style.headerRadio" type="radio" @click="select"></th>
+            <th v-for="(header, index) in properties.headers" v-bind:key="index">
+              {{header}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="user in properties.users" v-bind:key="user.id">
+            <td><input type="radio" :value="user" v-model="selected"></td>
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.live}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.mail}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div :class="$style.showmore">
-      <b-button
+      <button
         type="is-info"
         @click="showMoreInformation">
         Show more selected...
-      </b-button>
+      </button>
     </div>
   </div>
 </template>
@@ -31,33 +44,17 @@ export default {
     }
   },
   data: function() {
-    return { 
-      // `selected`, `columns` は Buefy のテーブルを使用する際に必要なパラメータ
-      // https://buefy.org/documentation/table/
+    return {
       selected: null,
-      columns: [
-        {
-          field: 'id',
-          label: 'ID',
-          width: '50',
-          numeric: true
-        },
-        {
-          field: 'name',
-          label: 'NAME',
-          width: '400',
-          centered: true
-        },
-        {
-          field: 'mail',
-          label: 'MAIL',
-          width: '400',
-          centered: true
-        },
-      ]
     }
   },
   methods: {
+    select: function() {
+      this.selected = []
+      for (let i in this.item) {
+        this.selected.push(this.items[i].id)
+      }
+    },
     showMoreInformation: function() {
       // アロー関数で定義すると `this` で `selected` が参照できない｡
       // 詳細は https://qiita.com/_Keitaro_/items/d48733a19c10889e2365 を参照のこと｡
@@ -68,11 +65,37 @@ export default {
       const selected = this.selected
       this.$router.push({
         name: 'user-detail',
-        params: { id: selected['id'] }
+        params: {
+          id: selected['id']
+        }
       })
     }
   }
 }
 </script>
 
-// スタイルは割愛
+<style module>
+
+.userlist {
+  margin: auto;
+  width: 100%;
+  /* 子要素を中央に配置する */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.usertable {
+  border: solid 1px;
+  width: 90%;
+  border-collapse: collapse;
+  /* 子要素を中央に配置する */
+  justify-content: center;
+  align-items: center;
+}
+
+.headerRadio {
+  opacity:0;
+}
+</style>
+

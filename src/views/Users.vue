@@ -9,16 +9,24 @@
 import UserList from '@/components/UserList.vue'
 
 export default {
-  name: 'Users',
+  name: 'UsersInfo',
 
   components: {
     UserList
   },
-  data: function () {
+  data: function() {
     // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
       properties: {
+        headers: [
+          'id',
+          'name',
+          'live',
+          'phone',
+          'gender',
+          'mail',
+        ],
         users: [
           {
             id: 1,
@@ -67,4 +75,8 @@ export default {
 }
 </script>
 
-// スタイルは割愛
+<style module>
+.component {
+  margin-top: 50px;
+}
+</style>

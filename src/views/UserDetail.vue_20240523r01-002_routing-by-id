@@ -1,23 +1,23 @@
 <template>
-  <div :class="$style.component">
+  <div :class="style_component">
     <h1>This page is user detail.</h1>
     <div
-      :class="$style.userinfo">
+      :class="style_userinfo">
       <table>
-        <th :class="$style.item">
+        <th :class="style_item">
           ITEM
         </th>
-        <th :class="$style.value">
+        <th :class="style_value">
           VALUE
         </th>
         <!-- users のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
         <tr
           v-for="(value, name) in users[$route.params.id - 1]"
           :key="name">
-          <td :class="$style.item">
+          <td :class="style_item">
             {{ name }}
           </td>
-          <td :class="$style.value">
+          <td :class="style_value">
             {{ value }}
           </td>
         </tr>
@@ -29,7 +29,7 @@
 <script>
 export default {
   name: 'UserDetail',
-  data: function() {
+  data: function () {
     // 返却するオブジェクト users は本コンポーネントで表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
@@ -80,26 +80,4 @@ export default {
 }
 </script>
 
-<style module>
-.component {
-  margin-top: 50px;
-  height: 500px;
-  width: 100%;
-}
-
-.userinfo {
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.item {
-  width: 150px;
-}
-
-.value {
-  width: 400px;
-}
-</style>
+// スタイルは割愛
