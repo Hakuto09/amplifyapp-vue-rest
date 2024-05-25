@@ -1,32 +1,13 @@
 <template>
   <div :class="$style.component">
-    <h1>This page is user detail.</h1>
-    <div
-      :class="$style.userinfo">
-      <table>
-        <th :class="$style.item">
-          ITEM
-        </th>
-        <th :class="$style.value">
-          VALUE
-        </th>
-        <!-- users のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
-        <tr
-          v-for="(value, name) in users[$route.params.id - 1]"
-          :key="name">
-          <td :class="$style.item">
-            {{ name }}
-          </td>
-          <td :class="$style.value">
-            {{ value }}
-          </td>
-        </tr>
-      </table>
-    </div>
+    <UserList :properties="properties" />
   </div>
 </template>
 
 <script>
+// @ を指定することで `/src` の代替となる
+import UserList from '@/components/UserList.vue'
+
 const users = [
   {
     id: 1,
@@ -71,12 +52,26 @@ const users = [
 ]
 
 export default {
-  name: 'UserDetail',
+  name: 'UsersInfo',
+
+  components: {
+    UserList
+  },
   data: function() {
-    // 返却するオブジェクト users は本コンポーネントで表示するユーザ情報
+    // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
-      users: users,
+      properties: {
+        headers: [
+          'id',
+          'name',
+          'live',
+          'phone',
+          'gender',
+          'mail',
+        ],
+        users: users,
+      }
     }
   }
 }
@@ -85,23 +80,5 @@ export default {
 <style module>
 .component {
   margin-top: 50px;
-  height: 500px;
-  width: 100%;
-}
-
-.userinfo {
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.item {
-  width: 150px;
-}
-
-.value {
-  width: 400px;
 }
 </style>
