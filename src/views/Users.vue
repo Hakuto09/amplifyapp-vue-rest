@@ -8,6 +8,49 @@
 // @ を指定することで `/src` の代替となる
 import UserList from '@/components/UserList.vue'
 
+const users = [
+  {
+    id: 1,
+    name: 'hogehoge',
+    live: 'Japan Tokyo',
+    phone: 'NNN-XXXX-HHHH',
+    gender: 'male',
+    mail: 'hogehoge@mail.com'
+  },
+  {
+    id: 2,
+    name: 'barbar',
+    live: 'Japan Kanagawa',
+    phone: 'NNN-XXXX-BBBB',
+    gender: 'male',
+    mail: 'barbar@mail.com'
+  },
+  {
+    id: 3,
+    name: 'piypiyo',
+    live: 'Japan Kanagawa',
+    phone: 'NNN-XXXX-PPPP',
+    gender: 'female',
+    mail: 'piypiyo@mail.com'
+  },
+  {
+    id: 4,
+    name: 'fugafuga',
+    live: 'Japan Chiba',
+    phone: 'NNN-XXXX-FFFF',
+    gender: 'male',
+    mail: 'fugafuga@mail.com'
+  },
+  {
+    id: 5,
+    name: 'varvar',
+    live: 'Japan Saitama',
+    phone: 'NNN-XXXX-VVVV',
+    gender: 'female',
+    mail: 'varvar@mail.com'
+  }
+]
+
 export default {
   name: 'UsersInfo',
 
@@ -27,48 +70,7 @@ export default {
           'gender',
           'mail',
         ],
-        users: [
-          {
-            id: 1,
-            name: 'hogehoge',
-            live: 'Japan Tokyo',
-            phone: 'NNN-XXXX-HHHH',
-            gender: 'male',
-            mail: 'hogehoge@mail.com'
-          },
-          {
-            id: 2,
-            name: 'barbar',
-            live: 'Japan Kanagawa',
-            phone: 'NNN-XXXX-BBBB',
-            gender: 'male',
-            mail: 'barbar@mail.com'
-          },
-          {
-            id: 3,
-            name: 'piypiyo',
-            live: 'Japan Kanagawa',
-            phone: 'NNN-XXXX-PPPP',
-            gender: 'female',
-            mail: 'piypiyo@mail.com'
-          },
-          {
-            id: 4,
-            name: 'fugafuga',
-            live: 'Japan Chiba',
-            phone: 'NNN-XXXX-FFFF',
-            gender: 'male',
-            mail: 'fugafuga@mail.com'
-          },
-          {
-            id: 5,
-            name: 'varvar',
-            live: 'Japan Saitama',
-            phone: 'NNN-XXXX-VVVV',
-            gender: 'female',
-            mail: 'varvar@mail.com'
-          }
-        ]
+        users: users,
       }
     }
   }
