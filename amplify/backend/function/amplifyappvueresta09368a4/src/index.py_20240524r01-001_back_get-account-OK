@@ -155,20 +155,13 @@ def get_accounts_list():
     """
     print('get_accounts_list(): In')
 
-#    response_ddb = client_ddb.scan(
-#      TableName = STORAGE_DB_ACCOUNTS,
-#      Limit = 100 # 取得するデータ件数
-#    )
-    response_ddb = ddb_table_accounts.scan(
-#      KeyConditionExpression = Key("account_id").eq(account_id), # 取得するKey情報
-#      FilterExpression = Attr('createdAt').contains('d0001'),
-#      FilterExpression = Attr('createdAt2').between(createdat_min, createdat_max),
-#        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
-        Limit = 100 # 取得するデータ件数
+    response = client_ddb.scan(
+      TableName = STORAGE_DB_ACCOUNTS,
+      Limit = 100 # 取得するデータ件数
     )
-    print('response_ddb ', response_ddb)
+    print('response ', response)
 
-    return response_ddb["Items"]
+    return response["Items"]
 
 @app.get("/items/{id}")
 def get_items(id: str):
