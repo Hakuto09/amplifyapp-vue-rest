@@ -15,8 +15,6 @@ axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accou
         console.log(response.status)
       })
 
-console.log(response)
-
 const users = [
   {
     id: 1,
