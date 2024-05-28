@@ -134,7 +134,7 @@ export default {
 //      for (let item of Array) {
       try {
         await new Promise((resolve, reject) => {
-          await axios.get(url)
+          /*await*/ axios.get(url)
           .then((response) => {
             // 非同期処理が成功した場合
             console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
