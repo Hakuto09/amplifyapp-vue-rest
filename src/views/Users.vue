@@ -134,6 +134,27 @@ export default {
     users = response_ga.data;
     console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
   },
+  created: function() {
+    console.log("Users.vue:", " created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log("Users.vue:", " beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log("Users.vue:", " mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log("Users.vue:", " beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log("Users.vue:", " updated-function(): In.");
+  },
+  beforeDestroy: function() {
+    console.log("Users.vue:", " beforeDestroy-function(): In.");
+  },
+  destroyed: function() {
+    console.log("Users.vue:", " destroyed-function(): In.");
+  },
   data: function() {
     console.log("Users.vue:", " data-function(): In.");
     // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
