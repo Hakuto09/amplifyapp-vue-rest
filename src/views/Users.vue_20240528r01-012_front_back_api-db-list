@@ -90,7 +90,6 @@ export default {
     UserList
   },
   beforeCreate: function() {
-    console.log("Users.vue:", " beforeCreate-function(): In.");
     async function getAccounts2() {
       console.log("Users.vue:", " getAccounts2(): In.");
  
@@ -135,7 +134,6 @@ export default {
     console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
   },
   data: function() {
-    console.log("Users.vue:", " data-function(): In.");
     // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
