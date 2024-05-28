@@ -130,6 +130,7 @@ export default {
 //    }
 
     const getAccounts2 = async () => {
+      let response_ga;
 //      for (let item of Array) {
       try {
         await new Promise((resolve, reject) => {
@@ -138,6 +139,7 @@ export default {
             // 非同期処理が成功した場合
             console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
             console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+            response_ga = response;
             resolve() // 処理が完了したらPromiseをresolveします
           })
           .catch((error) => {
@@ -166,7 +168,7 @@ export default {
       }
 //    }
       // 完全に終了した後に実行されます
-      users = response.data;
+      users = response_ga.data;
       console.log("Users.vue:", " 完全終了: ", " users ", users);
     }
 
@@ -184,7 +186,7 @@ export default {
       // 非同期処理を記述
       await axios.get(url, {
         .then((response) => {
-          console.log("Users.vue:", "methods:", " axios.get().then: ", " response ", response);
+          console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
           ret = response
         })
         .catch((error) => {
@@ -197,7 +199,7 @@ export default {
     settingXxx: async function(){
       // this.fetchSample()の実行が完了するまで待機
       let result = await this.fetchSample()
-      console.log("Users.vue:", "methods:", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+      console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
     },
   },
   created: function() {
