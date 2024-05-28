@@ -9,7 +9,9 @@
 import UserList from '@/components/UserList.vue'
 import axios from 'axios'
 
-//axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
+url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts'
+
+//axios.get(url)
 //      .then(response => {
 //        console.log(response.data)
 //        console.log(response.status)
@@ -21,7 +23,7 @@ async function getAccounts() {
   let response;
 
   try {
-    response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
+    response = await axios.get(url);
     console.log("getAccounts():", " response.status ", response.status)
     console.log("getAccounts():", " response.data ", response.data);
     return response;
@@ -91,48 +93,112 @@ export default {
   },
   beforeCreate: function() {
     console.log("Users.vue:", " beforeCreate-function(): In.");
-    async function getAccounts2() {
-      console.log("Users.vue:", " getAccounts2(): In.");
- 
-//      let response;
-//      try {
-//        response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
-//        while (response.status != 200){
-//          console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
-//          console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
-//          if (response.status == 200){
-//            return response;
-//          }
-//        }
-//      }
-//      catch (error) {
+//    async function getAccounts2() {
+//      console.log("Users.vue:", " getAccounts2(): In.");
+// 
+////      let response;
+////      try {
+////        response = await axios.get(url);
+////        while (response.status != 200){
+////          console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
+////          console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+////          if (response.status == 200){
+////            return response;
+////          }
+////        }
+////      }
+////      catch (error) {
+////        console.error("Users.vue:", "getAccounts2():", " error ", error);
+////        return error;
+////      }
+//
+//      // 非同期処理
+//      await axios.get(url)
+//      .then((response) => {
+//        // 非同期処理が成功した場合
+//        console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
+//        console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+//        users = response.data;
+//        console.log("Users.vue:", " At axios.get().then: ", " users ", users);
+//        return response;
+//      })
+//      .catch((error) => {
+//        // 非同期処理が失敗した場合
 //        console.error("Users.vue:", "getAccounts2():", " error ", error);
 //        return error;
-//      }
+//      })
+//    }
 
-      // 非同期処理
-      await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
-      .then((response) => {
-        // 非同期処理が成功した場合
-        console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
-        console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
-        users = response.data;
-        console.log("Users.vue:", " At axios.get().then: ", " users ", users);
-        return response;
-      })
-      .catch((error) => {
-        // 非同期処理が失敗した場合
-        console.error("Users.vue:", "getAccounts2():", " error ", error);
-        return error;
-      })
+    const getAccounts2 = async () => {
+//      for (let item of Array) {
+      try {
+        await new Promise((resolve, reject) => {
+          await axios.get(url)
+          .then((response) => {
+            // 非同期処理が成功した場合
+            console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
+            console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+            resolve() // 処理が完了したらPromiseをresolveします
+          })
+          .catch((error) => {
+            // 非同期処理が失敗した場合
+            console.error("Users.vue:", "getAccounts2():", " error ", error);
+            reject(error) // エラーが発生したらPromiseをrejectします
+          })
+//            featchData(
+//                {
+//                    query: item.name,
+//                },
+//                (res) => {
+//                    console.log('res =====', res)
+//                    resolve() // 処理が完了したらPromiseをresolveします
+//                },
+//                (err) => {
+//                    console.log('err', err)
+//                    reject(err) // エラーが発生したらPromiseをrejectします
+//                }
+//            )
+        })
+      } catch (err) {
+            // エラーハンドリングをここで行うことができます
+            // または、エラーを外部に伝播させるために再度throwすることもできます
+            throw err
+      }
+//    }
+      // 完全に終了した後に実行されます
+      users = response.data;
+      console.log("Users.vue:", " 完全終了: ", " users ", users);
     }
 
     // getAccounts2 を呼び出してデータを読み込む
-    let response_ga = getAccounts2();
-    console.log("Users.vue:", " After getAccounts2(): ", " response_ga ", response_ga);
+//    let response_ga = getAccounts2();
+//    console.log("Users.vue:", " After getAccounts2(): ", " response_ga ", response_ga);
 
-    users = response_ga.data;
-    console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
+//    users = response_ga.data;
+//    console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
+  },
+  methods: {
+    console.log("Users.vue:", " methods: In.");
+    fetchSample: async function(){
+      let ret = null
+      // 非同期処理を記述
+      await axios.get(url, {
+        .then((response) => {
+          console.log("Users.vue:", "methods:", " axios.get().then: ", " response ", response);
+          ret = response
+        })
+        .catch((error) => {
+          this.errorMsg = 'Error! Could not reach the API. ' + error
+          console.log(this.errorMsg)
+        })
+      })
+      return ret
+    },
+    settingXxx: async function(){
+      // this.fetchSample()の実行が完了するまで待機
+      let result = await this.fetchSample()
+      console.log("Users.vue:", "methods:", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+    },
   },
   created: function() {
     console.log("Users.vue:", " created-function(): In.");
