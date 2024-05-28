@@ -173,11 +173,12 @@ export default {
     }
 
     // getAccounts2 を呼び出してデータを読み込む
+    getAccounts2();
 //    let response_ga = getAccounts2();
 //    console.log("Users.vue:", " After getAccounts2(): ", " response_ga ", response_ga);
 
 //    users = response_ga.data;
-//    console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
+    console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
   },
 //  methods: {
 //    console.log("Users.vue:", " methods: In.");
