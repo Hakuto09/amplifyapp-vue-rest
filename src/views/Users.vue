@@ -164,7 +164,7 @@ export default {
       } catch (err) {
         // エラーハンドリングをここで行うことができます
         // または、エラーを外部に伝播させるために再度throwすることもできます
-        throw err
+//        throw err
         console.log("Users.vue:", " Promise().catch: ", " err ", err);
       }
 //    }
