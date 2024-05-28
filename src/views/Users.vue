@@ -214,6 +214,7 @@ export default {
     }
 //    let result = this.fetchSample();
 //    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+    settingXxx();
   },
   created: function() {
     console.log("Users.vue:", " created-function(): In.");
