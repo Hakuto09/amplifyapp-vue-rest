@@ -94,20 +94,33 @@ export default {
       console.log("Users.vue:", " getAccounts2(): In.");
       let response;
 
-      try {
-        response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
-        while (response.status != 200){
-          console.log("getAccounts2():", " response.status ", response.status);
-          console.log("getAccounts2():", " response.data ", response.data);
-          if (response.status == 200){
-            return response;
-          }
-        }
-      }
-      catch (error) {
-        console.error("getAccounts2():", " error ", error);
+//      try {
+//        response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
+//        while (response.status != 200){
+//          console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
+//          console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+//          if (response.status == 200){
+//            return response;
+//          }
+//        }
+//      }
+//      catch (error) {
+//        console.error("Users.vue:", "getAccounts2():", " error ", error);
+//        return error;
+//      }
+   	  // 非同期処理
+      await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
+      .then((responase) => {
+        // 非同期処理が成功した場合
+        console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
+        console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+        return response;
+      })
+      .catch((error) => {
+        // 非同期処理が失敗した場合
+        console.error("Users.vue:", "getAccounts2():", " error ", error);
         return error;
-      }
+      })
     }
 
     // getAccounts2 を呼び出してデータを読み込む
