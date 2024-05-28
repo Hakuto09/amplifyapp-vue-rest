@@ -181,41 +181,41 @@ export default {
 //    users = response_ga.data;
     console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
   },
-  methods: {
-    console.log("Users.vue:", " methods: In.");
-    fetchSample: async function(){
-      let ret = null
-      // 非同期処理を記述
-//      await axios.get(url, {
-//        .then((response) => {
-//          console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
-//          ret = response
-//        })
-//        .catch((error) => {
-//          this.errorMsg = 'Error! Could not reach the API. ' + error;
-//          console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
-//        })
+//  methods: {
+//    console.log("Users.vue:", " methods: In.");
+//    fetchSample: async function(){
+//      let ret = null
+//      // 非同期処理を記述
+////      await axios.get(url, {
+////        .then((response) => {
+////          console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
+////          ret = response
+////        })
+////        .catch((error) => {
+////          this.errorMsg = 'Error! Could not reach the API. ' + error;
+////          console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
+////        })
+////      })
+//      await axios.get(url)
+//      .then((response) => {
+//        console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
+//        ret = response
 //      })
-      await axios.get(url)
-      .then((response) => {
-        console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
-        ret = response
-      })
-      .catch((error) => {
-        this.errorMsg = 'Error! Could not reach the API. ' + error;
-        console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
-      })
-      return ret;
-    },
-    settingXxx: async function(){
-      // this.fetchSample()の実行が完了するまで待機
-      let result = await this.fetchSample()
-      console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
-    }
-//    let result = this.fetchSample();
-//    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
-    settingXxx();
-  },
+//      .catch((error) => {
+//        this.errorMsg = 'Error! Could not reach the API. ' + error;
+//        console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
+//      })
+//      return ret;
+//    },
+//    settingXxx: async function(){
+//      // this.fetchSample()の実行が完了するまで待機
+//      let result = await this.fetchSample()
+//      console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+//    }
+////    let result = this.fetchSample();
+////    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+//    settingXxx();
+//  },
   created: function() {
     console.log("Users.vue:", " created-function(): In.");
   },
@@ -239,6 +239,10 @@ export default {
   },
   data: function() {
     console.log("Users.vue:", " data-function(): In.");
+    while (users === 'undefined'){
+      console.log("Users.vue:", " loop: users === 'undefined'.");
+    }
+    console.log("Users.vue:", " end of loop: users === 'undefined'.");
     // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
