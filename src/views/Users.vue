@@ -9,67 +9,79 @@
 import UserList from '@/components/UserList.vue'
 import axios from 'axios'
 
-axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
-      .then(response => {
-        console.log(response.data)
-        console.log(response.status)
-      })
+//axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
+//      .then(response => {
+//        console.log(response.data)
+//        console.log(response.status)
+//      })
 
-// 実際にデータを取得する getRequest 関数
-async function getRequest() {
+// 実際にデータを取得する getAccounts 関数
+async function getAccounts() {
+  console.log("getAccounts(): In.");
   let response;
+
   try {
     response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
+    console.log("getAccounts():", " response.status ", response.status)
+    console.log("getAccounts():", " response.data ", response.data);
+    return response;
+  }
+  catch (error) {
+    console.error("getAccounts():", " error ", error);
+    return error;
   }
 }
-// getRequest を呼び出してデータを読み込む
-getRequest();
 
-const users = [
-  {
-    id: 1,
-    name: 'hogehoge',
-    live: 'Japan Tokyo',
-    phone: 'NNN-XXXX-HHHH',
-    gender: 'male',
-    mail: 'hogehoge@mail.com'
-  },
-  {
-    id: 2,
-    name: 'barbar',
-    live: 'Japan Kanagawa',
-    phone: 'NNN-XXXX-BBBB',
-    gender: 'male',
-    mail: 'barbar@mail.com'
-  },
-  {
-    id: 3,
-    name: 'piypiyo',
-    live: 'Japan Kanagawa',
-    phone: 'NNN-XXXX-PPPP',
-    gender: 'female',
-    mail: 'piypiyo@mail.com'
-  },
-  {
-    id: 4,
-    name: 'fugafuga',
-    live: 'Japan Chiba',
-    phone: 'NNN-XXXX-FFFF',
-    gender: 'male',
-    mail: 'fugafuga@mail.com'
-  },
-  {
-    id: 5,
-    name: 'varvar',
-    live: 'Japan Saitama',
-    phone: 'NNN-XXXX-VVVV',
-    gender: 'female',
-    mail: 'varvar@mail.com'
-  }
-]
+// getAccounts を呼び出してデータを読み込む
+let response_ga = getAccounts();
+console.log(" response_ga ", response_ga);
+
+let users = response_ga.data;
+
+//const users = [
+//  {
+//    id: 1,
+//    name: 'hogehoge',
+//    live: 'Japan Tokyo',
+//    phone: 'NNN-XXXX-HHHH',
+//    gender: 'male',
+//    mail: 'hogehoge@mail.com'
+//  },
+//  {
+//    id: 2,
+//    name: 'barbar',
+//    live: 'Japan Kanagawa',
+//    phone: 'NNN-XXXX-BBBB',
+//    gender: 'male',
+//    mail: 'barbar@mail.com'
+//  },
+//  {
+//    id: 3,
+//    name: 'piypiyo',
+//    live: 'Japan Kanagawa',
+//    phone: 'NNN-XXXX-PPPP',
+//    gender: 'female',
+//    mail: 'piypiyo@mail.com'
+//  },
+//  {
+//    id: 4,
+//    name: 'fugafuga',
+//    live: 'Japan Chiba',
+//    phone: 'NNN-XXXX-FFFF',
+//    gender: 'male',
+//    mail: 'fugafuga@mail.com'
+//  },
+//  {
+//    id: 5,
+//    name: 'varvar',
+//    live: 'Japan Saitama',
+//    phone: 'NNN-XXXX-VVVV',
+//    gender: 'female',
+//    mail: 'varvar@mail.com'
+//  }
+//]
+
+console.log(" users ", users);
 
 export default {
   name: 'UsersInfo',
@@ -83,12 +95,16 @@ export default {
     return {
       properties: {
         headers: [
-          'id',
-          'name',
-          'live',
-          'phone',
-          'gender',
-          'mail',
+//          'id',
+//          'name',
+//          'live',
+//          'phone',
+//          'gender',
+//          'mail',
+          'account_name',
+          'password',
+          'account_id',
+          'email',
         ],
         users: users,
       }

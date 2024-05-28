@@ -14,12 +14,16 @@
         <tbody>
           <tr v-for="user in properties.users" v-bind:key="user.id">
             <td><input type="radio" :value="user" v-model="selected"></td>
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.live}}</td>
-            <td>{{user.phone}}</td>
-            <td>{{user.gender}}</td>
-            <td>{{user.mail}}</td>
+            <!-- td>{{user.id}}</td -->
+            <!-- td>{{user.name}}</td -->
+            <!-- td>{{user.live}}</td -->
+            <!-- td>{{user.phone}}</td -->
+            <!-- td>{{user.gender}}</td -->
+            <!-- td>{{user.mail}}</td -->
+            <td>{{user.account_name}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.account_id}}</td>
+            <td>{{user.email}}</td>
           </tr>
         </tbody>
       </table>
