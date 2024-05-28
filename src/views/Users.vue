@@ -108,9 +108,10 @@ export default {
 //        console.error("Users.vue:", "getAccounts2():", " error ", error);
 //        return error;
 //      }
+
    	  // 非同期処理
       await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
-      .then((responase) => {
+      .then((response) => {
         // 非同期処理が成功した場合
         console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
         console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
