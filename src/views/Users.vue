@@ -9,6 +9,7 @@
 import UserList from '@/components/UserList.vue'
 import axios from 'axios'
 
+let users;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
 
 //axios.get(url)
@@ -26,6 +27,7 @@ async function getAccounts() {
     response = await axios.get(url);
     console.log("Users.vue:", "getAccounts():", " response.status ", response.status)
     console.log("Users.vue:", "getAccounts():", " response.data ", response.data);
+    users = response.data;
     return response;
   }
   catch (error) {
@@ -38,7 +40,7 @@ async function getAccounts() {
 let response_ga = getAccounts();
 console.log("Users.vue:", " response_ga ", response_ga);
 
-let users = response_ga.data;
+users = response_ga.data;
 
 //const users = [
 //  {
