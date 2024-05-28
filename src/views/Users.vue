@@ -9,7 +9,7 @@
 import UserList from '@/components/UserList.vue'
 import axios from 'axios'
 
-url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts'
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
 
 //axios.get(url)
 //      .then(response => {
