@@ -186,25 +186,34 @@ export default {
     fetchSample: async function(){
       let ret = null
       // 非同期処理を記述
-      await axios.get(url, {
-        .then((response) => {
-          console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
-          ret = response
-        })
-        .catch((error) => {
-          this.errorMsg = 'Error! Could not reach the API. ' + error;
-          console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
-        })
+//      await axios.get(url, {
+//        .then((response) => {
+//          console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
+//          ret = response
+//        })
+//        .catch((error) => {
+//          this.errorMsg = 'Error! Could not reach the API. ' + error;
+//          console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
+//        })
+//      })
+      await axios.get(url)
+      .then((response) => {
+        console.log("Users.vue:", " methods: ", " axios.get().then: ", " response ", response);
+        ret = response
+      })
+      .catch((error) => {
+        this.errorMsg = 'Error! Could not reach the API. ' + error;
+        console.log("Users.vue:", " methods: ", " axios.get().catch: ", " this.errorMsg ", this.errorMsg);
       })
       return ret;
-//    },
-//    settingXxx: async function(){
-//      // this.fetchSample()の実行が完了するまで待機
-//      let result = await this.fetchSample()
-//      console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+    },
+    settingXxx: async function(){
+      // this.fetchSample()の実行が完了するまで待機
+      let result = await this.fetchSample()
+      console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
     }
-    let result = this.fetchSample();
-    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
+//    let result = this.fetchSample();
+//    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
   },
   created: function() {
     console.log("Users.vue:", " created-function(): In.");
