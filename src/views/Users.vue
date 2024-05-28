@@ -115,6 +115,8 @@ export default {
         // 非同期処理が成功した場合
         console.log("Users.vue:", "getAccounts2():", " response.status ", response.status);
         console.log("Users.vue:", "getAccounts2():", " response.data ", response.data);
+        users = response.data;
+        console.log("Users.vue:", " At axios.get().then: ", " users ", users);
         return response;
       })
       .catch((error) => {
