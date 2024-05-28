@@ -149,11 +149,11 @@ export default {
   updated: function() {
     console.log("Users.vue:", " updated-function(): In.");
   },
-  beforeDestroy: function() {
-    console.log("Users.vue:", " beforeDestroy-function(): In.");
+  beforeUnmount: function() {
+    console.log("Users.vue:", " beforeUnmount-function(): In.");
   },
-  destroyed: function() {
-    console.log("Users.vue:", " destroyed-function(): In.");
+  unmounted: function() {
+    console.log("Users.vue:", " unmounted-function(): In.");
   },
   data: function() {
     console.log("Users.vue:", " data-function(): In.");
