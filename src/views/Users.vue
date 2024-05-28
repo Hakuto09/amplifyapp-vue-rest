@@ -92,8 +92,8 @@ export default {
   beforeCreate: function() {
     async function getAccounts2() {
       console.log("Users.vue:", " getAccounts2(): In.");
-      let response;
-
+ 
+//      let response;
 //      try {
 //        response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
 //        while (response.status != 200){
