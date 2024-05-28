@@ -241,11 +241,11 @@ export default {
   },
   data: function() {
     console.log("Users.vue:", " data-function(): In.");
-    console.log("Users.vue:", " Before loop: users === 'undefined': ", " typeof users ", typeof users, " users ", users);
-    while (typeof users === 'undefined'){
-      console.log("Users.vue:", " loop: users === 'undefined'");
-    }
-    console.log("Users.vue:", " After loop: users === 'undefined': ", " typeof users ", typeof users, " users ", users);
+//    console.log("Users.vue:", " Before loop: users === 'undefined': ", " typeof users ", typeof users, " users ", users);
+//    while (typeof users === 'undefined'){
+//      console.log("Users.vue:", " loop: users === 'undefined'");
+//    }
+//    console.log("Users.vue:", " After loop: users === 'undefined': ", " typeof users ", typeof users, " users ", users);
     // ここで返却するデータは子コンポーネント `UserList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
