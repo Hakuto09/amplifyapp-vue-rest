@@ -90,12 +90,12 @@ export default {
     UserList
   },
   beforeCreate: function() {
-    async function getAccounts2() {
+    /*async*/ function getAccounts2() {
       console.log("Users.vue:", " getAccounts2(): In.");
       let response;
 
       try {
-        response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
+        response = /*await*/ axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
         console.log("getAccounts2():", " response.status ", response.status)
         console.log("getAccounts2():", " response.data ", response.data);
         return response;
