@@ -96,8 +96,8 @@ export default {
 
       try {
         response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
-        while (1){
-          console.log("getAccounts2():", " response.status ", response.status)
+        while (response.status != 200){
+          console.log("getAccounts2():", " response.status ", response.status);
           console.log("getAccounts2():", " response.data ", response.data);
           if (response.status == 200){
             return response;

@@ -36,7 +36,7 @@ async function getAccounts() {
 
   try {
     response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
-    console.log("getAccounts():", " response.status ", response.status)
+    console.log("getAccounts():", " response.status ", response.status);
     console.log("getAccounts():", " response.data ", response.data);
     return response;
   }
