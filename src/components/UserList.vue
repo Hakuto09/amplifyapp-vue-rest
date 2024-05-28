@@ -12,7 +12,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in properties.users" v-bind:key="user.id">
+          <!-- tr v-for="user in properties.users" v-bind:key="user.id" -->
+          <tr v-for="user in properties.users" v-bind:key="user.account_id">
             <td><input type="radio" :value="user" v-model="selected"></td>
             <!-- td>{{user.id}}</td -->
             <!-- td>{{user.name}}</td -->
@@ -56,7 +57,8 @@ export default {
     select: function() {
       this.selected = []
       for (let i in this.item) {
-        this.selected.push(this.items[i].id)
+//        this.selected.push(this.items[i].id)
+        this.selected.push(this.items[i].account_id)
       }
     },
     showMoreInformation: function() {
@@ -70,7 +72,8 @@ export default {
       this.$router.push({
         name: 'user-detail',
         params: {
-          id: selected['id']
+//          id: selected['id']
+          id: selected['account_id']
         }
       })
     }
