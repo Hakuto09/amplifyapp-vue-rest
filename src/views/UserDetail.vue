@@ -27,9 +27,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 // 実際にデータを取得する getAccounts 関数
 async function getAccounts() {
-  console.log("getAccounts(): In.");
+  console.log("UserDetail.vue:", " getAccounts(): In.");
   let response;
 
   try {
@@ -46,7 +48,7 @@ async function getAccounts() {
 
 // getAccounts を呼び出してデータを読み込む
 let response_ga = getAccounts();
-console.log(" response_ga ", response_ga);
+console.log("UserDetail.vue:", " response_ga ", response_ga);
 
 let users = response_ga.data;
 
@@ -93,7 +95,7 @@ let users = response_ga.data;
 //  }
 //]
 
-console.log(" users ", users);
+console.log("UserDetail.vue:", " users ", users);
 
 export default {
   name: 'UserDetail',
