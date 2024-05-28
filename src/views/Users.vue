@@ -109,7 +109,7 @@ export default {
 //        return error;
 //      }
 
-   	  // 非同期処理
+      // 非同期処理
       await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts')
       .then((response) => {
         // 非同期処理が成功した場合
