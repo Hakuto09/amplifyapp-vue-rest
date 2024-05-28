@@ -15,6 +15,19 @@ axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accou
         console.log(response.status)
       })
 
+// 実際にデータを取得する getRequest 関数
+async function getRequest() {
+  let response;
+  try {
+    response = await axios.get('https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts');
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+// getRequest を呼び出してデータを読み込む
+getRequest();
+
 const users = [
   {
     id: 1,
