@@ -56,7 +56,7 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("UserList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+      console.log("UserList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
 //        this.selected.push(this.items[i].account_id)
