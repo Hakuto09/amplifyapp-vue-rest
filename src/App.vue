@@ -40,6 +40,96 @@
   </div>
 </template>
 
+<script>
+import { Authenticator } from "@aws-amplify/ui-vue";
+import "@aws-amplify/ui-vue/styles.css";
+import { Hub } from "aws-amplify";
+
+const listener = (data) => {
+  const { payload } = data;
+  console.log(payload.data);
+  switch (payload.event) {
+    case "configured":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "signIn":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "signIn_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "signUp":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "signUp_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "confirmSignUp":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "completeNewPassword_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "autoSignIn":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "autoSignIn_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "forgotPassword":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "forgotPassword_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "forgotPasswordSubmit":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "forgotPasswordSubmit_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "verify":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "tokenRefresh":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "tokenRefresh_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "cognitoHostedUI":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "cognitoHostedUI_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "customOAuthState":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "customState_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "parsingCallbackUrl":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "userDeleted":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "updateUserAttributes":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "updateUserAttributes_failure":
+      console.log(`event: ${payload.event}`);
+      break;
+    case "signOut":
+      console.log(`event: ${payload.event}`);
+      break;
+  }
+};
+
+Hub.listen("auth", listener);
+</script>
+
 <style>
 html {
   height: 100%;
