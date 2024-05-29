@@ -7,7 +7,7 @@ import UserDetail from './views/UserDetail.vue'
 import Routing from './views/Routing.vue'
 
 import Vue from 'vue'
-import Login from './views/Login.vue'
+//import Login from './views/Login.vue'
 //import store from './components/store.js'
 
 // Amplify読み込み
@@ -19,12 +19,14 @@ console.log("router.js:", " After import: ");
 
 // ルーティング設定
 const routes = [
+  /*
   {
     // ログインページ
     path: '/login',
     name: 'login',
     component: Login
   },
+  */
   {
     // トップページ
     path: '/',
