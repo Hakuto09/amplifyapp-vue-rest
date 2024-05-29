@@ -69,7 +69,7 @@ const router = createRouter({
 })
 
 
-Vue.use(AmplifyPlugin, AmplifyModules)
+//Vue.use(AmplifyPlugin, AmplifyModules)
 
 let user;
 
