@@ -6,7 +6,8 @@ import { store } from './store'
 import { Amplify } from "aws-amplify";
 import aws_exports from './aws-exports';
 
-console.log("main.js:", " Before Amplify.configure(aws_exports): ");
+console.log("main.js:", " After import: ");
+
 Amplify.configure(aws_exports);
 console.log("main.js:", " After Amplify.configure(aws_exports): ");
 

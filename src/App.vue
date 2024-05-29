@@ -45,6 +45,8 @@
 //import "@aws-amplify/ui-vue/styles.css";
 //import { Hub } from "aws-amplify";
 
+console.log("App.vue:", " After import: ");
+
 /*
 const listener = (data) => {
   const { payload } = data;

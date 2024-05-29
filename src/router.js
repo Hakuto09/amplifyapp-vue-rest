@@ -8,13 +8,14 @@ import Routing from './views/Routing.vue'
 
 import Vue from 'vue'
 import Login from './views/Login.vue'
-import store from './store/index.js'
+import store from './components/store.js'
 
 // Amplify読み込み
 import { /*components,*/ AmplifyEventBus } from 'aws-amplify-vue'
 //import /*Amplify,*/ * as AmplifyModules from 'aws-amplify'
 //import { AmplifyPlugin } from 'aws-amplify-vue'
 
+console.log("router.js:", " After import: ");
 
 // ルーティング設定
 const routes = [

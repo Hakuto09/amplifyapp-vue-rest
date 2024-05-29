@@ -6,6 +6,8 @@
 </template>
 
 <script>
+    console.log("Login.vue:", " After import: ");
+
     export default {
         name: 'login'
     }
