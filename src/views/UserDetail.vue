@@ -12,7 +12,7 @@
         </th>
         <!-- users のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
         <tr
-          v-for="(value, name) in users[$route.params.id - 1]"
+          v-for="(value, name) in users[$route.params.id/* - 1*/]"
           :key="name">
         <!-- tr
           v-for="(value, name) in $route.params"
