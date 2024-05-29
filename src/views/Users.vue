@@ -125,7 +125,7 @@ export default {
 //        return error;
 //      })
 //    }
-
+//
 //    const getAccounts2 = async () => {
 //      let response_ga;
 ////      for (let item of Array) {
@@ -165,8 +165,8 @@ export default {
 ////    users = response_ga.data;
 //    console.log("Users.vue:", " After getAccounts2(): ", " users ", users);
   },
-  methods: {
-    console.log("Users.vue:", " methods: In.");
+//  methods: {
+//    console.log("Users.vue:", " methods: In.");
 //    fetchSample: async function(){
 //      let ret = null
 //      // 非同期処理を記述
@@ -199,7 +199,7 @@ export default {
 ////    let result = this.fetchSample();
 ////    console.log("Users.vue:", " methods: ", " After this.fetchSample(): ", " result ", result); //待機後の残りの処理を記述
 //    settingXxx();
-  },
+//  },
   created: function() {
     console.log("Users.vue:", " created-function(): In.");
   },
