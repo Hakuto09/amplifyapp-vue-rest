@@ -20,10 +20,17 @@ console.log("router.js:", " After import: ");
 // ルーティング設定
 const routes = [
   {
-    // ログインページ
+    path: '/register',
+    name: 'Register',
+    component: () =>
+        import('./views/Register.vue'),
+  },
+  {
     path: '/login',
-    name: 'login',
-    component: Login
+    name: 'Login',
+//    component: Login,
+    component: () =>
+        import('./views/Login.vue'),
   },
   {
     // トップページ
@@ -65,7 +72,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+//  history: createWebHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 console.log("router.js:", " After createRouter(): ");
