@@ -1,5 +1,6 @@
 <template>
-  <amplify-authenticator>
+  <authenticator>
+  <template v-slot="{ user, signOut }">
   <div id="app">
     <div 
       id="nav" 
@@ -39,8 +40,10 @@
     </div>
     <router-view />
   </div>
-    <amplify-sign-out></amplify-sign-out>
-  </amplify-authenticator>
+  <h1>Hello {{ user.username }}!</h1>
+  <button @click="signOut">Sign Out</button>
+  </template>
+  </authenticator>
 </template>
 
 <script>
