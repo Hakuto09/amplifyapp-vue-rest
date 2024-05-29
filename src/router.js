@@ -12,8 +12,8 @@ import store from './store/index.js'
 
 // Amplify読み込み
 import { /*components,*/ AmplifyEventBus } from 'aws-amplify-vue'
-import /*Amplify,*/ * as AmplifyModules from 'aws-amplify'
-import { AmplifyPlugin } from 'aws-amplify-vue'
+//import /*Amplify,*/ * as AmplifyModules from 'aws-amplify'
+//import { AmplifyPlugin } from 'aws-amplify-vue'
 
 
 // ルーティング設定
