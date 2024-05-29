@@ -56,10 +56,11 @@ export default {
   methods: {
     select: function() {
       this.selected = []
+      console.log("UserList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       for (let i in this.item) {
-//        this.selected.push(this.items[i].id)
-        this.selected.push(this.items[i].account_id)
-        console.log("UserList.vue:", "select-function():", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        this.selected.push(this.items[i].id)
+//        this.selected.push(this.items[i].account_id)
+        console.log("UserList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
@@ -74,11 +75,11 @@ export default {
       this.$router.push({
         name: 'user-detail',
         params: {
-//          id: selected['id']
-          account_id: selected['account_id'],
-          account_name: selected['account_name'],
-          password: selected['password'],
-          email: selected['email'],
+          id: selected['id']
+//          account_id: selected['account_id'],
+//          account_name: selected['account_name'],
+//          password: selected['password'],
+//          email: selected['email'],
         }
       })
     }
