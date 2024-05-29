@@ -43,8 +43,9 @@
 <script>
 //import { Authenticator } from "@aws-amplify/ui-vue";
 import "@aws-amplify/ui-vue/styles.css";
-import { Hub } from "aws-amplify";
+//import { Hub } from "aws-amplify";
 
+/*
 const listener = (data) => {
   const { payload } = data;
   console.log(payload.data);
@@ -128,6 +129,7 @@ const listener = (data) => {
 };
 
 Hub.listen("auth", listener);
+*/
 </script>
 
 <style>
