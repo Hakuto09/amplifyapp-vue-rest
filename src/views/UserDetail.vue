@@ -35,12 +35,6 @@ import axios from 'axios'
 let users;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
 
-//axios.get(url)
-//      .then(response => {
-//        console.log(response.data)
-//        console.log(response.status)
-//      })
-
 // 実際にデータを取得する getAccounts 関数
 async function getAccounts() {
   console.log("UserDetail.vue:", " getAccounts(): In.");

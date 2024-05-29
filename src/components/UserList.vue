@@ -71,6 +71,7 @@ export default {
         return false
       }
       const selected = this.selected
+      console.log("UserList.vue:", "showMoreInformation():", " this ", this);
       console.log("UserList.vue:", "showMoreInformation():", " selected ", selected);
       this.$router.push({
         name: 'user-detail',
