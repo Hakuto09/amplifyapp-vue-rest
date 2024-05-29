@@ -8,7 +8,7 @@ import Routing from './views/Routing.vue'
 
 import Vue from 'vue'
 import Login from './views/Login.vue'
-//import store from './components/store.js'
+import store from './components/store.js'
 
 // Amplify読み込み
 import { /*components,*/ AmplifyEventBus } from 'aws-amplify-vue'
@@ -86,11 +86,11 @@ console.log("router.js:", " After getUser(): ");
 function getUser() {
     return Vue.prototype.$Amplify.Auth.currentAuthenticatedUser().then((data) => {
         if (data && data.signInUserSession) {
-//            store.commit('setUser', data);
+            store.commit('setUser', data);
             return data;
         }
     }).catch(() => {
-//        store.commit('setUser', null);
+        store.commit('setUser', null);
         return null;
     });
 }
@@ -99,7 +99,7 @@ function getUser() {
 AmplifyEventBus.$on('authState', async (state) => {
     if (state === 'signedOut'){
         user = null;
-//        store.commit('setUser', null);
+        store.commit('setUser', null);
         router.push({path: '/login'});
     } else if (state === 'signedIn') {
         user = await getUser();
