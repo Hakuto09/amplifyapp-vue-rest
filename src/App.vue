@@ -1,7 +1,6 @@
 <template>
   <authenticator>
   <!-- template v-slot="{ user, signOut }" -->
-  <template>
   <div id="app">
     <div 
       id="nav" 
@@ -43,7 +42,6 @@
   </div>
   <!-- h1>Hello {{ user.username }}!</h1 -->
   <!-- button @click="signOut">Sign Out</button -->
-  </template>
   </authenticator>
 </template>
 
