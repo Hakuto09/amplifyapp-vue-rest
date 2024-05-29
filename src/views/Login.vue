@@ -1,7 +1,9 @@
 <template>
     <div class="login">
         <!--ログインコンポーネント-->
-        <amplify-authenticator></amplify-authenticator>
+        <amplify-authenticator>
+          <amplify-sign-out></amplify-sign-out>
+        </amplify-authenticator>
     </div>
 </template>
 
