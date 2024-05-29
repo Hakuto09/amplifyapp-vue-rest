@@ -72,8 +72,8 @@ export default {
       }
       const selected = this.selected
       console.log("UserList.vue:", "showMoreInformation():", " this ", this);
-      console.log("UserList.vue:", "showMoreInformation():", " this.selectedindex ", this.selectedindex);
-      console.log("UserList.vue:", "showMoreInformation():", " this.selectedComponent ", this.selectedComponent);
+      console.log("UserList.vue:", "showMoreInformation():", " this.selectedIndex ", this.selectedIndex);
+      console.log("UserList.vue:", "showMoreInformation():", " this.select.selectedIndex ", this.select.selectedIndex);
       console.log("UserList.vue:", "showMoreInformation():", " selected ", selected);
       this.$router.push({
         name: 'user-detail',
