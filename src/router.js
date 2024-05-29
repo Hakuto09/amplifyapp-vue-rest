@@ -7,7 +7,7 @@ import UserDetail from './views/UserDetail.vue'
 import Routing from './views/Routing.vue'
 
 //import Vue from 'vue'
-import Login from './views/Login.vue'
+//import Login from './views/Login.vue'
 //import store from './components/store.js'
 
 // Amplify読み込み
