@@ -21,9 +21,9 @@
             <!-- td>{{user.phone}}</td -->
             <!-- td>{{user.gender}}</td -->
             <!-- td>{{user.mail}}</td -->
+            <td>{{user.account_id}}</td>
             <td>{{user.account_name}}</td>
             <td>{{user.password}}</td>
-            <td>{{user.account_id}}</td>
             <td>{{user.email}}</td>
           </tr>
         </tbody>
@@ -75,7 +75,10 @@ export default {
         name: 'user-detail',
         params: {
 //          id: selected['id']
-          account_id: selected['account_id']
+          account_id: selected['account_id'],
+          account_name: selected['account_name'],
+          password: selected['password'],
+          email: selected['email'],
         }
       })
     }
