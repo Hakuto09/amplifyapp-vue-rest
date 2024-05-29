@@ -1,4 +1,5 @@
 <template>
+  <amplify-authenticator>
   <div id="app">
     <div 
       id="nav" 
@@ -38,6 +39,8 @@
     </div>
     <router-view />
   </div>
+    <amplify-sign-out></amplify-sign-out>
+  </amplify-authenticator>
 </template>
 
 <script>
