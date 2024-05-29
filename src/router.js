@@ -67,6 +67,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+console.log("router.js:", " After createRouter(): ");
 
 
 //Vue.use(AmplifyPlugin, AmplifyModules)
@@ -79,6 +80,7 @@ getUser().then((user) => {
         router.push({path: '/'});
     }
 });
+console.log("router.js:", " After getUser(): ");
 
 function getUser() {
     return Vue.prototype.$Amplify.Auth.currentAuthenticatedUser().then((data) => {
@@ -103,6 +105,7 @@ AmplifyEventBus.$on('authState', async (state) => {
         router.push({path: '/'});
     }
 });
+console.log("router.js:", " After AmplifyEventBus.$on(): ");
 
 // リダイレクト設定
 router.beforeResolve(async (to, from, next) => {
@@ -117,5 +120,6 @@ router.beforeResolve(async (to, from, next) => {
     }
     return next()
 });
+console.log("router.js:", " After router.beforeResolve(): ");
 
 export default router
