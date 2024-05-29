@@ -6,12 +6,12 @@ import LifeCycle2 from './views/LifeCycle2.vue'
 import UserDetail from './views/UserDetail.vue'
 import Routing from './views/Routing.vue'
 
-import Vue from 'vue'
+//import Vue from 'vue'
 //import Login from './views/Login.vue'
 //import store from './components/store.js'
 
 // Amplify読み込み
-import { /*components,*/ AmplifyEventBus } from 'aws-amplify-vue'
+//import { /*components,*/ AmplifyEventBus } from 'aws-amplify-vue'
 //import /*Amplify,*/ * as AmplifyModules from 'aws-amplify'
 //import { AmplifyPlugin } from 'aws-amplify-vue'
 
@@ -72,7 +72,7 @@ const router = createRouter({
 })
 console.log("router.js:", " After createRouter(): ");
 
-
+/*
 //Vue.use(AmplifyPlugin, AmplifyModules)
 
 let user;
@@ -124,5 +124,6 @@ router.beforeResolve(async (to, from, next) => {
     return next()
 });
 console.log("router.js:", " After router.beforeResolve(): ");
+*/
 
 export default router
