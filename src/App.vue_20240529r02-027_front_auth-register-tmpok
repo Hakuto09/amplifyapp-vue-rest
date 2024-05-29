@@ -1,6 +1,53 @@
-<script setup>
-import { Authenticator } from '@aws-amplify/ui-vue';
-import '@aws-amplify/ui-vue/styles.css';
+<template>
+  <authenticator>
+  <!-- template v-slot="{ user, signOut }" -->
+  <div id="app">
+    <div 
+      id="nav" 
+      class="tab-area-base">
+      <ul class="tab-menu-base">
+        <li>
+          <router-link to="/">
+            Home
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/routing">
+            Rounting Test
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/life-cycle">
+            Life Cycle
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/life-cycle2">
+            Life Cycle2
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/users">
+            User List
+          </router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'user-detail', params: {id: 1}}">
+            UserDetail
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <router-view />
+  </div>
+  <!-- h1>Hello {{ user.username }}!</h1 -->
+  <!-- button @click="signOut">Sign Out</button -->
+  </authenticator>
+</template>
+
+<script>
+//import { Authenticator } from "@aws-amplify/ui-vue";
+//import "@aws-amplify/ui-vue/styles.css";
 //import { Hub } from "aws-amplify";
 
 console.log("App.vue:", " After import: ");
@@ -91,54 +138,6 @@ const listener = (data) => {
 Hub.listen("auth", listener);
 */
 </script>
-
-<template>
-  <authenticator>
-    <template v-slot="{ user, signOut }">
-      <h1>Hello {{ user.username }}!</h1>
-      <button @click="signOut">Sign Out</button>
-  <div id="app">
-    <div 
-      id="nav" 
-      class="tab-area-base">
-      <ul class="tab-menu-base">
-        <li>
-          <router-link to="/">
-            Home
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/routing">
-            Rounting Test
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/life-cycle">
-            Life Cycle
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/life-cycle2">
-            Life Cycle2
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/users">
-            User List
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'user-detail', params: {id: 1}}">
-            UserDetail
-          </router-link>
-        </li>
-      </ul>
-    </div>
-    <router-view />
-  </div>
-    </template>
-  </authenticator>
-</template>
 
 <style>
 html {
