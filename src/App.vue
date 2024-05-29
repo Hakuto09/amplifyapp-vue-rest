@@ -42,7 +42,7 @@
 
 <script>
 //import { Authenticator } from "@aws-amplify/ui-vue";
-import "@aws-amplify/ui-vue/styles.css";
+//import "@aws-amplify/ui-vue/styles.css";
 //import { Hub } from "aws-amplify";
 
 /*
