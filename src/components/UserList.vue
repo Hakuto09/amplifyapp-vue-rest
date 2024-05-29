@@ -59,6 +59,7 @@ export default {
       for (let i in this.item) {
 //        this.selected.push(this.items[i].id)
         this.selected.push(this.items[i].account_id)
+        console.log("UserList.vue:", "select-function():", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
@@ -69,11 +70,12 @@ export default {
         return false
       }
       const selected = this.selected
+      console.log("UserList.vue:", "showMoreInformation():", " selected ", selected);
       this.$router.push({
         name: 'user-detail',
         params: {
 //          id: selected['id']
-          id: selected['account_id']
+          account_id: selected['account_id']
         }
       })
     }

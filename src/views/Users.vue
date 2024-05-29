@@ -40,7 +40,7 @@ async function getAccounts() {
 let response_ga = getAccounts();
 console.log("Users.vue:", " response_ga ", response_ga);
 
-users = response_ga.data;
+//users = response_ga.data;
 
 //const users = [
 //  {
