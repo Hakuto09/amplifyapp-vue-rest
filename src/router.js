@@ -30,37 +30,37 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
   {
     path: '/routing',
     name: 'routing',
     component: Routing,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
   {
     path: '/life-cycle',
     name: 'llfe-cycle',
     component: LifeCycle,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
   {
     path: '/life-cycle2',
     name: 'llfe-cycle2',
     component: LifeCycle2,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
   {
     path: '/users',
     name: 'users',
     component: Users,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
   {
     path: '/users/:id',
     name: 'user-detail',
     component: UserDetail,
-    meta: { requiresAuth: true},
+//    meta: { requiresAuth: true},
   },
 ]
 
