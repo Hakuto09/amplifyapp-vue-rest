@@ -35,6 +35,12 @@ export default {
    *
    * **このフックはサーバサイドレンダリングでは呼ばれません。**
    */
+  beforeUpdate: function() {
+    console.log('[LifeCycle2-1] beforeUpdate.')
+  },
+  updated: function() {
+    console.log('[LifeCycle2-1] updated.')
+  },
 //  beforeDestroy: function() {
 //    console.log('[LifeCycle2-1] beforeDestroy.')
 //  },

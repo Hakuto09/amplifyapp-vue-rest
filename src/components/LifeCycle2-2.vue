@@ -33,6 +33,12 @@ export default {
 //  beforeDestroy: function() {
 //    console.log('[LifeCycle2-2] beforeDestroy.')
 //  },
+  beforeUpdate: function() {
+    console.log('[LifeCycle2-2] beforeUpdate.')
+  },
+  updated: function() {
+    console.log('[LifeCycle2-2] updated.')
+  },
   beforeUnmount: function() {
     console.log('[LifeCycle2-2] beforeUnmount.')
   },
