@@ -22,6 +22,9 @@ async function getAccounts() {
     console.log("Users.vue:", "getAccounts():", " response.status ", response.status)
     console.log("Users.vue:", "getAccounts():", " response.data ", response.data);
     users = response.data;
+    for (let i = 0; i < users.length; i++) {
+      users[i].id = i;
+    }
     console.log("Users.vue:", "getAccounts():", " users ", users);
     return response;
   }
