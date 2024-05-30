@@ -19,6 +19,7 @@ console.log("router.js:", " After import: ");
 
 // ルーティング設定
 const routes = [
+  /*
   {
     path: '/register',
     name: 'Register',
@@ -32,6 +33,7 @@ const routes = [
     component: () =>
         import('./views/Login.vue'),
   },
+  */
   {
     // トップページ
     path: '/',

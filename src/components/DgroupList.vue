@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>This page is user list.</h1>
-    <div :class="$style.userlist">
+    <h1>This page is dgroup list.</h1>
+    <div :class="$style.dgrouplist">
       <table>
         <thead>
           <tr>
@@ -12,19 +12,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in properties.users" v-bind:key="user.id">
-          <!-- tr v-for="user in properties.users" v-bind:key="user.account_id" -->
-            <td><input type="radio" :value="user" v-model="selected"></td>
-            <!-- td>{{user.id}}</td -->
-            <!-- td>{{user.name}}</td -->
-            <!-- td>{{user.live}}</td -->
-            <!-- td>{{user.phone}}</td -->
-            <!-- td>{{user.gender}}</td -->
-            <!-- td>{{user.mail}}</td -->
-            <td>{{user.account_id}}</td>
-            <td>{{user.account_name}}</td>
-            <td>{{user.password}}</td>
-            <td>{{user.email}}</td>
+          <!-- tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id" -->
+          <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.account_id">
+            <td><input type="radio" :value="dgroup" v-model="selected"></td>
+            <td>{{dgroup.dgroup_id}}</td>
+            <td>{{dgroup.dgroup_name}}</td>
+            <td>{{dgroup.account_id}}</td>
           </tr>
         </tbody>
       </table>
@@ -41,7 +34,7 @@
 
 <script>
 export default {
-  name: 'UserList',
+  name: 'dgroupList',
   props: {
     properties: {
       type: Object,
@@ -56,11 +49,10 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("UserList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log("dgroupList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
-//        this.selected.push(this.items[i].account_id)
-        console.log("UserList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log("dgroupList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
@@ -71,18 +63,12 @@ export default {
         return false
       }
       const selected = this.selected
-      console.log("UserList.vue:", "showMoreInformation():", " this ", this);
-//      console.log("UserList.vue:", "showMoreInformation():", " this.selectedIndex ", this.selectedIndex);
-//      console.log("UserList.vue:", "showMoreInformation():", " this.select.selectedIndex ", this.select.selectedIndex);
-      console.log("UserList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log("dgroupList.vue:", "showMoreInformation():", " this ", this);
+      console.log("dgroupList.vue:", "showMoreInformation():", " selected ", selected);
       this.$router.push({
-        name: 'user-detail',
+        name: 'dgroup-detail',
         params: {
           id: selected['id']
-//          account_id: selected['account_id'],
-//          account_name: selected['account_name'],
-//          password: selected['password'],
-//          email: selected['email'],
         }
       })
     }
@@ -92,7 +78,7 @@ export default {
 
 <style module>
 
-.userlist {
+.dgrouplist {
   margin: auto;
   width: 100%;
   /* 子要素を中央に配置する */
@@ -101,7 +87,7 @@ export default {
   align-items: center;
 }
 
-.usertable {
+.dgrouptable {
   border: solid 1px;
   width: 90%;
   border-collapse: collapse;
