@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'dgroupList',
+  name: 'DgroupList',
   props: {
     properties: {
       type: Object,
