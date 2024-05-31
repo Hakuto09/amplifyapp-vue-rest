@@ -26,7 +26,7 @@ async function getDgroups() {
 
   try {
 //    response_api = await axios.get(url + properties.account_id);
-    response_api = await axios.get(url + message);
+    response_api = await axios.get(url + parentData);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
     dgroups = response_api.data;
@@ -65,7 +65,7 @@ export default {
           'account_id',
         ],
         dgroups: dgroups,
-        message: account_id,
+        message: parentData,
       }
     }
   }
