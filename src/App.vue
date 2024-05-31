@@ -129,7 +129,8 @@ export default {
         <div>
           <Dgroups :account_id=user.username /> //子コンポーネントのタグに属性として指定
           <Dgroups v-model="user" />
-          <p>inputData : {{ user.username }}</p>        </div>
+          <p>inputData : {{ user.username }}</p>
+        </div>
         <div 
           id="nav" 
           class="tab-area-base">
