@@ -8,6 +8,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 
 <script>
 import Dgroups from './views/Dgroups.vue';
+import { /*defineProps,*/ ref } from 'vue';
 
 console.log("App.vue:", "<script>:", " After import: ");
 
