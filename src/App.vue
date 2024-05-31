@@ -103,11 +103,11 @@ export default {
   components: {
     Dgroups,
   },
-  data() {
-    return {
-      account_id: user.username,
-    };
-  },
+//  data() {
+//    return {
+//      account_id: user.username,
+//    };
+//  },
 }
 </script>
 
@@ -118,7 +118,7 @@ export default {
       <button @click="signOut">Sign Out</button>
       <div id="app">
         <div>
-          <Dgroups :message="account_id" /> //子コンポーネントのタグに属性として指定
+          <Dgroups :message=user.username /> //子コンポーネントのタグに属性として指定
         </div>
         <div 
           id="nav" 
