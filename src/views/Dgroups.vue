@@ -14,7 +14,7 @@ const props = defineProps({
   message: String,
 })
 const parentData = ref(props.defineProps);
-console.log("Dgroups.vue:", "After reg(prop):", " parentData.message ", parentData.message);
+console.log("Dgroups.vue:", "After reg(prop):", " parentData.value ", parentData.value);
 
 let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -26,7 +26,7 @@ async function getDgroups() {
 
   try {
 //    response_api = await axios.get(url + properties.account_id);
-    response_api = await axios.get(url + parentData.message);
+    response_api = await axios.get(url + parentData.value);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
     dgroups = response_api.data;
