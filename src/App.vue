@@ -108,9 +108,9 @@ export default {
 
 <template>
   <authenticator>
-    <div>
+    <!-- div>
       <Dgroups :message="parentMessage" /> //子コンポーネントのタグに属性として指定
-    </div>
+    </div -->
     <template v-slot="{ user, signOut }">
       <h1>Hello {{ user.username }}!</h1>
       <button @click="signOut">Sign Out</button>
