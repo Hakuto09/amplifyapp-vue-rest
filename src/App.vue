@@ -111,12 +111,14 @@ export default {
     }
   },
   */
+  /*
   data() {
     let user = ref('')
     return {
       user.username,
     };
   },
+  */
 }
 </script>
 
