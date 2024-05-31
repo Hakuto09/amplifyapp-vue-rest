@@ -9,7 +9,8 @@
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
-import { Amplify } from "aws-amplify";
+//import { Amplify } from "aws-amplify";
+import { getCurrentUser } from 'aws-amplify/auth';
 
 /*
 const props = defineProps({
@@ -26,7 +27,8 @@ const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgr
 async function getDgroups() {
   console.log("Dgroups.vue:", " getDgroups(): In.");
 
-  let authUser = await Amplify.Auth.getCurrentUser();
+//  let authUser = await Amplify.Auth.getCurrentUser();
+  let authUser = await getCurrentUser();
   /*
   final username = switch (authUser.signInDetails) {
     // API-based login means calling the `Amplify.Auth.signIn` API
