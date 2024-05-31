@@ -93,9 +93,11 @@ Hub.listen("auth", listener);
 */
 
 export default {
-  components: {
-    Dgroups,
-  },
+    name: 'App',
+
+//  components: {
+//    Dgroups,
+//  },
 //  data() {
 //    return {
 //      parentMessage: 'Message from parent.',
