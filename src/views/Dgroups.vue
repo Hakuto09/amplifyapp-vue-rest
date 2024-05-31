@@ -10,11 +10,13 @@ import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 import { defineProps, ref } from 'vue';
 
+/*
 const props = defineProps({
   message: String,
 })
 const parentData = ref(props.defineProps);
 console.log("Dgroups.vue:", "After reg(prop):", " parentData.value ", parentData.value);
+*/
 
 let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -26,7 +28,7 @@ async function getDgroups() {
 
   try {
 //    response_api = await axios.get(url + properties.account_id);
-    response_api = await axios.get(url + parentData.value);
+    response_api = await axios.get(url/* + parentData.value*/);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
     dgroups = response_api.data;
@@ -49,7 +51,7 @@ console.log("Dgroups.vue:", "After getDgroups():", " ret ", ret);
 export default {
   name: 'Dgroups',
 
-  props: ['message'], //propsオプションで受け取る値の名前を指定
+  props: ['account_id'], //propsオプションで受け取る値の名前を指定
   components: {
     DgroupList
   },
@@ -65,9 +67,12 @@ export default {
           'account_id',
         ],
         dgroups: dgroups,
-        message: parentData,
+        account_id: account_id,
       }
     }
+  },
+  methods: function() {
+    console.log("Dgroups.vue:", "methods-function():", " account_id ", account_id);
   }
 }
 </script>
