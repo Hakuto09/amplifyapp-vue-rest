@@ -103,9 +103,18 @@ export default {
   components: {
     Dgroups,
   },
-  data() {
+  /*
+  setup() {
+    let inputData = ref('')
     return {
-      account_id: user.username,
+      inputData
+    }
+  },
+  */
+  data() {
+    let user = ref('')
+    return {
+      user.username,
     };
   },
 }
@@ -118,8 +127,9 @@ export default {
       <button @click="signOut">Sign Out</button>
       <div id="app">
         <div>
-          <Dgroups :account_id='account_id' /> //子コンポーネントのタグに属性として指定
-        </div>
+          <Dgroups :account_id=user.username /> //子コンポーネントのタグに属性として指定
+          <Dgroups v-model="user" />
+          <p>inputData : {{ user.username }}</p>        </div>
         <div 
           id="nav" 
           class="tab-area-base">
