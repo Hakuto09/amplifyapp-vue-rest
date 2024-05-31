@@ -115,7 +115,7 @@ export default {
   data() {
     let user = ref('')
     return {
-      user.username,
+      account_id: user.username,
     };
   },
   */
@@ -129,6 +129,7 @@ export default {
       <button @click="signOut">Sign Out</button>
       <div id="app">
         <div>
+          <templete v-model="user" / -->
           <Dgroups :account_id=user.username /> //子コンポーネントのタグに属性として指定
           <!-- Dgroups v-model="user" / -->
           <p>inputData : {{ user.username }}</p>
