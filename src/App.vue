@@ -130,7 +130,8 @@ export default {
       <div id="app">
         <div>
           <!-- templete v-model="user" / -->
-          <Dgroups :account_id=user.username /> //子コンポーネントのタグに属性として指定
+          <!-- Dgroups :account_id=user.username / --> //子コンポーネントのタグに属性として指定
+          <Dgroups :account_id="account_id" /> //子コンポーネントのタグに属性として指定
           <!-- Dgroups v-model="user" / -->
           <p>inputData : {{ user.username }}</p>
         </div>
