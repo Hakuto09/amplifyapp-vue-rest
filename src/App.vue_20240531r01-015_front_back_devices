@@ -11,6 +11,19 @@ import Dgroups from './views/Dgroups.vue';
 
 console.log("App.vue:", "<script>:", " After import: ");
 
+export default {
+  name: 'App',
+
+  components: {
+    Dgroups,
+  },
+  data() {
+    return {
+      parentMessage: 'Message from parent.',
+    };
+  },
+}
+
 /*
 const listener = (data) => {
   const { payload } = data;
@@ -96,19 +109,6 @@ const listener = (data) => {
 
 Hub.listen("auth", listener);
 */
-
-export default {
-  name: 'App',
-
-  components: {
-    Dgroups,
-  },
-  data() {
-    return {
-      account_id: user.username,
-    };
-  },
-}
 </script>
 
 <template>
@@ -118,7 +118,7 @@ export default {
       <button @click="signOut">Sign Out</button>
       <div id="app">
         <div>
-          <Dgroups :message="account_id" /> //子コンポーネントのタグに属性として指定
+          <Dgroups :message="parentMessage" /> //子コンポーネントのタグに属性として指定
         </div>
         <div 
           id="nav" 

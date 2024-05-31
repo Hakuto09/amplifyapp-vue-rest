@@ -3,7 +3,7 @@
     <h1>This page is dgroup list.</h1>
     <div :class="$style.dgrouplist">
       <div>
-        <p>{{ properties.account_id }}</p>
+        <p>{{ properties.message }}</p>
       </div>
       <table>
         <thead>
