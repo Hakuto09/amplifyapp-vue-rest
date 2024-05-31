@@ -114,8 +114,9 @@ export default {
   */
   data() {
     let user = ref('')
+    console.log("App.vue:", "data():", " user ", user);
     return {
-      account_id: user.username,
+      account_id: user.value.username,
     };
   },
 }
