@@ -14,14 +14,14 @@ console.log("App.vue:", "<script>:", " After import: ");
 export default {
     name: 'App',
 
-//  components: {
-//    Dgroups,
-//  },
-//  data() {
-//    return {
-//      parentMessage: 'Message from parent.',
-//    };
-//  },
+  components: {
+    Dgroups,
+  },
+  data() {
+    return {
+      parentMessage: 'Message from parent.',
+    };
+  },
 }
 
 /*
