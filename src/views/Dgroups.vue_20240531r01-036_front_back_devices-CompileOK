@@ -9,7 +9,6 @@
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
-import { Amplify } from "aws-amplify";
 
 /*
 const props = defineProps({
@@ -25,19 +24,6 @@ const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgr
 // 実際にデータを取得する getDgroups 関数
 async function getDgroups() {
   console.log("Dgroups.vue:", " getDgroups(): In.");
-
-  let authUser = await Amplify.Auth.getCurrentUser();
-  /*
-  final username = switch (authUser.signInDetails) {
-    // API-based login means calling the `Amplify.Auth.signIn` API
-    CognitoSignInDetailsApiBased(:final username) => username,
-
-    // Otherwise, fallback to the value assigned by Cognito
-    _ => authUser.username,
-  };
-  */
-  console.log("Dgroups.vue:", "getDgroups():", " authUser ", authUser);
-
   let response_api;
 
   try {
