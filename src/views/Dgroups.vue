@@ -28,7 +28,8 @@ async function getDgroups() {
   console.log("Dgroups.vue:", " getDgroups(): In.");
 
 //  let authUser = await Amplify.Auth.getCurrentUser();
-  let authUser = await getCurrentUser();
+//  let authUser = await getCurrentUser();
+  const { username, userId, signInDetails } = await getCurrentUser();
   /*
   final username = switch (authUser.signInDetails) {
     // API-based login means calling the `Amplify.Auth.signIn` API
