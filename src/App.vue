@@ -2,6 +2,7 @@
 import { Authenticator } from '@aws-amplify/ui-vue';
 import '@aws-amplify/ui-vue/styles.css';
 //import { Hub } from "aws-amplify";
+import Dgroups from './views/Dgroups.vue';
 
 console.log("App.vue:", " After import: ");
 
