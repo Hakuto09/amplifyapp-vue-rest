@@ -90,6 +90,15 @@ const listener = (data) => {
 
 Hub.listen("auth", listener);
 */
+
+components: {
+  Dgroups,
+},
+data() {
+  return {
+    parentMessage: '親からのメッセージ',
+  };
+}
 </script>
 
 <template>
@@ -98,6 +107,9 @@ Hub.listen("auth", listener);
       <h1>Hello {{ user.username }}!</h1>
       <button @click="signOut">Sign Out</button>
       <div id="app">
+        <div>
+          <Dgroups :message="parentMessage" /> //子コンポーネントのタグに属性として指定
+        </div>
         <div 
           id="nav" 
           class="tab-area-base">
@@ -118,7 +130,10 @@ Hub.listen("auth", listener);
               <router-link to="/users">User List</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'user-detail', params: {id: 1}}">UserDetail</router-link>
+              <router-link :to="{ name: 'user-detail', params: {id: 0} }">UserDetail</router-link>
+            </li>
+            <li>
+              <router-link to="/dgroups">Dgroup List</router-link>
             </li>
           </ul>
         </div>

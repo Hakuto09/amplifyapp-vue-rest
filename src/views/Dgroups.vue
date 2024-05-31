@@ -9,8 +9,8 @@
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 
-let dgroupss;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
+let dgroups;
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
 // 実際にデータを取得する getDgroups 関数
 async function getDgroups() {
@@ -18,14 +18,14 @@ async function getDgroups() {
   let response_api;
 
   try {
-    response_api = await axios.get(url);
+    response_api = await axios.get(url + account_id);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
-    dgroupss = response_api.data;
-    for (let i = 0; i < dgroupss.length; i++) {
-      dgroupss[i].id = i;
+    dgroups = response_api.data;
+    for (let i = 0; i < dgroups.length; i++) {
+      dgroups[i].id = i;
     }
-    console.log("Dgroups.vue:", "getDgroups():", " dgroupss ", dgroupss);
+    console.log("Dgroups.vue:", "getDgroups():", " dgroups ", dgroups);
     return response_api;
   }
   catch (error) {
@@ -38,11 +38,10 @@ async function getDgroups() {
 let ret = getDgroups();
 console.log("Dgroups.vue:", "After getDgroups():", " ret ", ret);
 
-console.log("Dgroups.vue:", " dgroupss ", dgroupss);
-
 export default {
   name: 'Dgroups',
 
+  props: ['message'], //propsオプションで受け取る値の名前を指定
   components: {
     DgroupList
   },
@@ -53,12 +52,12 @@ export default {
     return {
       properties: {
         headers: [
-          'account_name',
-          'password',
+          'dgroup_id',
+          'dgroup_name',
           'account_id',
-          'email',
         ],
-        dgroupss: dgroupss,
+        dgroups: dgroups,
+        message: message,
       }
     }
   }

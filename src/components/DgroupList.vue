@@ -2,6 +2,9 @@
   <div>
     <h1>This page is dgroup list.</h1>
     <div :class="$style.dgrouplist">
+      <div>
+        <p>{{ properties.message }}</p>
+      </div>
       <table>
         <thead>
           <tr>
@@ -12,8 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id" -->
-          <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.account_id">
+          <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id">
             <td><input type="radio" :value="dgroup" v-model="selected"></td>
             <td>{{dgroup.dgroup_id}}</td>
             <td>{{dgroup.dgroup_name}}</td>
@@ -56,8 +58,6 @@ export default {
       }
     },
     showMoreInformation: function() {
-      // アロー関数で定義すると `this` で `selected` が参照できない｡
-      // 詳細は https://qiita.com/_Keitaro_/items/d48733a19c10889e2365 を参照のこと｡
       if (!this.selected) {
         alert('No data selected...')
         return false
