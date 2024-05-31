@@ -92,13 +92,15 @@ const listener = (data) => {
 Hub.listen("auth", listener);
 */
 
-components: {
-  Dgroups,
-},
-data() {
-  return {
-    parentMessage: 'Message from parent.',
-  };
+export default {
+  components: {
+    Dgroups,
+  },
+  data() {
+    return {
+      parentMessage: 'Message from parent.',
+    };
+  },
 }
 </script>
 
