@@ -92,6 +92,7 @@ const listener = (data) => {
 Hub.listen("auth", listener);
 */
 
+/*
 export default {
   components: {
     Dgroups,
@@ -102,6 +103,7 @@ export default {
     };
   },
 }
+*/
 </script>
 
 <template>
