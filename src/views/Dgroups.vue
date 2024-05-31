@@ -60,7 +60,7 @@ export default {
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     let account_id = ref('')
-    console.log("Dgroups.vue:", "data():", " account_id ", account_id);
+    console.log("Dgroups.vue:", "data-function():", " account_id ", account_id);
     return {
       properties: {
         headers: [
@@ -74,6 +74,7 @@ export default {
     }
   },
   methods: function() {
+    let account_id = ref('')
     console.log("Dgroups.vue:", "methods-function():", " account_id ", account_id);
   }
 }
