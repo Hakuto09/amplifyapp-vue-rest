@@ -8,6 +8,7 @@
 // @ を指定することで `/src` の代替となる
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
+import { defineProps, ref } from 'vue';
 
 const props = defineProps({
   message: String,
