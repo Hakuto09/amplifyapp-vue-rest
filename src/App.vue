@@ -113,7 +113,7 @@ export default {
   },
   */
   data() {
-    let user = ref('')
+//    let user = ref('')
     console.log("App.vue:", "data():", " user ", user);
     return {
       account_id: user.value.username,
@@ -124,14 +124,15 @@ export default {
 
 <template>
   <authenticator>
-    <template v-slot="{ user, signOut }">
+    <!-- template v-slot="{ user, signOut }" -->
+    <template v-model="{ user, signOut }">
       <h1>Hello {{ user.username }}!</h1>
       <button @click="signOut">Sign Out</button>
       <div id="app">
         <div>
           <!-- templete v-model="user" / -->
           <!-- Dgroups :account_id=user.username / --> //子コンポーネントのタグに属性として指定
-          <Dgroups :account_id="account_id" /> //子コンポーネントのタグに属性として指定
+          <!-- Dgroups :account_id="account_id" / --> //子コンポーネントのタグに属性として指定
           <!-- Dgroups v-model="user" / -->
           <p>inputData : {{ user.username }}</p>
         </div>
