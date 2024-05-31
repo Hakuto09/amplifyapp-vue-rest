@@ -6,6 +6,19 @@ import Dgroups from './views/Dgroups.vue';
 
 console.log("App.vue:", " After import: ");
 
+export default {
+    name: 'App',
+
+//  components: {
+//    Dgroups,
+//  },
+//  data() {
+//    return {
+//      parentMessage: 'Message from parent.',
+//    };
+//  },
+}
+
 /*
 const listener = (data) => {
   const { payload } = data;
@@ -91,19 +104,6 @@ const listener = (data) => {
 
 Hub.listen("auth", listener);
 */
-
-export default {
-    name: 'App',
-
-//  components: {
-//    Dgroups,
-//  },
-//  data() {
-//    return {
-//      parentMessage: 'Message from parent.',
-//    };
-//  },
-}
 </script>
 
 <template>
