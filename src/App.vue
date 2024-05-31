@@ -106,13 +106,13 @@ export default {
 
 <template>
   <authenticator>
+    <div>
+      <Dgroups :message="parentMessage" /> //子コンポーネントのタグに属性として指定
+    </div>
     <template v-slot="{ user, signOut }">
       <h1>Hello {{ user.username }}!</h1>
       <button @click="signOut">Sign Out</button>
       <div id="app">
-        <div>
-          <Dgroups :message="parentMessage" /> //子コンポーネントのタグに属性として指定
-        </div>
         <div 
           id="nav" 
           class="tab-area-base">
