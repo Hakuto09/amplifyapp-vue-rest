@@ -2,9 +2,14 @@
 import { Authenticator } from '@aws-amplify/ui-vue';
 import '@aws-amplify/ui-vue/styles.css';
 //import { Hub } from "aws-amplify";
+
+console.log("App.vue:", "<script setup>:", " After import: ");
+</script>
+
+<script>
 import Dgroups from './views/Dgroups.vue';
 
-console.log("App.vue:", " After import: ");
+console.log("App.vue:", "<script>:", " After import: ");
 
 export default {
     name: 'App',
