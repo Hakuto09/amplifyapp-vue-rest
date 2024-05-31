@@ -9,6 +9,12 @@
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 
+const props = defineProps({
+  message: String,
+})
+const parentData = ref(props.message);
+console.log("Dgroups.vue:", "After reg(prop):", " parentData ", parentData);
+
 let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
