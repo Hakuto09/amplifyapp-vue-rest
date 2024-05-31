@@ -96,7 +96,7 @@ components: {
 },
 data() {
   return {
-    parentMessage: '親からのメッセージ',
+    parentMessage: 'Message from parent.',
   };
 }
 </script>
