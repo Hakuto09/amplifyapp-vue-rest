@@ -122,45 +122,45 @@ export default {
 //  data() {
   data: async function() {
 
-    const auth2 = useAuthenticator();
-    console.log("App.vue:", "data-function():", "After useA():", " auth2 ", auth2);
+//    const auth2 = useAuthenticator();
+//    console.log("App.vue:", "data-function():", "After useA():", " auth2 ", auth2);
 
 //    let authUser = await getCurrentUser();
 //    let authUser = await Amplify.Auth.getCurrentUser();
     const { username, userId, signInDetails } = await getCurrentUser();
     console.log("App.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
 
-    const state = reactive({msg:'hello world'});
-    console.log("App.vue:", "data-function():", "After reactive():", " state ", state);     
-    console.log("App.vue:", "data-function():", "After reactive():", " {...state} ", {...state});     
-    console.log("App.vue:", "data-function():", "After reactive():", " toRaw(state) ", toRaw(state));
-    const state_raw = toRaw(state);
-    console.log("App.vue:", "data-function():", "After toRaw():", " state_raw.msg ", state_raw.msg);
+//    const state = reactive({msg:'hello world'});
+//    console.log("App.vue:", "data-function():", "After reactive():", " state ", state);     
+//    console.log("App.vue:", "data-function():", "After reactive():", " {...state} ", {...state});     
+//    console.log("App.vue:", "data-function():", "After reactive():", " toRaw(state) ", toRaw(state));
+//    const state_raw = toRaw(state);
+//    console.log("App.vue:", "data-function():", "After toRaw():", " state_raw.msg ", state_raw.msg);
 
-//    let user = ref('')
-    const auth = ref(useAuthenticator());
-    console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
-    console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
-    console.log("App.vue:", "data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
-    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
-    const auth_value_raw = toRaw(auth.value);
-    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user ", auth_value_raw.user);
-    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.authStatus ", auth_value_raw.authStatus);
-    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.route ", auth_value_raw.route);
-    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.hasValidationErrors ", auth_value_raw.hasValidationErrors);
-    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user.userId ", auth_value_raw.user.userId);
+//    const auth = ref(useAuthenticator());
+//    console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
+//    console.log("App.vue:", "data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
+//    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
+//    const auth_value_raw = toRaw(auth.value);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user ", auth_value_raw.user);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.authStatus ", auth_value_raw.authStatus);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.route ", auth_value_raw.route);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.hasValidationErrors ", auth_value_raw.hasValidationErrors);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user.userId ", auth_value_raw.user.userId);
 
-    const { route, user, signOut } = toRefs(useAuthenticator());
-    console.log("App.vue:", "data-function():", "After toRefs():", " route ", route, " user ", user, " signOut ", signOut);
+//    const { route, user, signOut } = toRefs(useAuthenticator());
+//    console.log("App.vue:", "data-function():", "After toRefs():", " route ", route, " user ", user, " signOut ", signOut);
 
-    const user_raw = toRaw(useAuthenticator());
-    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
-    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user ", user_raw.user);
-    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user.userId ", user_raw.user.userId);
+//    const user_raw = toRaw(useAuthenticator());
+//    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
+//    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user ", user_raw.user);
+//    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user.userId ", user_raw.user.userId);
 
     return {
 //      account_id: auth.value.user.userId,
-      account_id: user.userId,
+//      account_id: user.userId,
+      account_id: userId,
     };
   },
 }
