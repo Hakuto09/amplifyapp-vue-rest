@@ -122,13 +122,14 @@ export default {
   data: function() {
 //    let user = ref('')
 //    const auth = ref(useAuthenticator());
-//    const { route, user, signOut } = toRefs(useAuthenticator());
-    const { route, user, signOut } = toRaw(toRefs(useAuthenticator()));
+    const { route, user, signOut } = toRefs(useAuthenticator());
 //    console.log("App.vue:", "data-function():", " auth ", auth);
 //    console.log("App.vue:", "data-function():", " auth.value ", auth.value);
 //    console.log("App.vue:", "data-function():", " auth.value.user ", auth.value.user);
 //    console.log("App.vue:", "data-function():", " auth.value.user.userId ", auth.value.user.userId);
     console.log("App.vue:", "data-function():", " route ", route, " user ", user, " signOut ", signOut);
+    user = toRaw(user.value);
+    console.log("App.vue:", "data-function():", "After toRaw():", " user ", user);
     return {
 //      account_id: auth.value.user.userId,
       account_id: user.userId,
