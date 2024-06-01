@@ -40,7 +40,7 @@ async function getDgroups() {
   };
   */
 //  console.log("Dgroups.vue:", "getDgroups():", " authUser ", authUser);
-  console.log("Dgroups.vue:", "getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+//  console.log("Dgroups.vue:", "getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
   let response_api;
 
