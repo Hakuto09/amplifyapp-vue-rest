@@ -121,14 +121,15 @@ export default {
 //  data() {
   data: function() {
 //    let user = ref('')
-//    const auth = ref(useAuthenticator());
+    const auth = ref(useAuthenticator());
+    console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
+    console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
+    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user ", auth.value.user);
+    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user.userId ", auth.value.user.userId);
+
     const { route, user, signOut } = toRefs(useAuthenticator());
-//    console.log("App.vue:", "data-function():", " auth ", auth);
-//    console.log("App.vue:", "data-function():", " auth.value ", auth.value);
-//    console.log("App.vue:", "data-function():", " auth.value.user ", auth.value.user);
-//    console.log("App.vue:", "data-function():", " auth.value.user.userId ", auth.value.user.userId);
-    console.log("App.vue:", "data-function():", " route ", route, " user ", user, " signOut ", signOut);
-//    const user_raw = toRaw(user.value);
+    console.log("App.vue:", "data-function():", "After toRefs():", " route ", route, " user ", user, " signOut ", signOut);
+
     const user_raw = toRaw(useAuthenticator());
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user ", user_raw.user);
