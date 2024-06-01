@@ -10,7 +10,7 @@ import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
-//import { getCurrentUser } from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 /*
 const props = defineProps({
@@ -73,8 +73,12 @@ export default {
   components: {
     DgroupList
   },
-  data: function() {
+  data: async function() {
     console.log("Dgroups.vue:", " data-function(): In.");
+
+    const { username, userId, signInDetails } = await getCurrentUser();
+    console.log("Dgroups.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
+
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
 //    let account_id = ref('')
