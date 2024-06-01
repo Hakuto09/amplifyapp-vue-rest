@@ -8,7 +8,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 
 <script>
 import Dgroups from './views/Dgroups.vue';
-//import { /*defineProps,*/ ref } from 'vue';
+import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 import { toRefs } from 'vue';
 
@@ -129,7 +129,8 @@ export default {
 //    console.log("App.vue:", "data-function():", " auth.value.user.userId ", auth.value.user.userId);
     console.log("App.vue:", "data-function():", " route ", route, " user ", user, " signOut ", signOut);
     return {
-      account_id: auth.value.user.userId,
+//      account_id: auth.value.user.userId,
+      account_id: user.userId,
     };
   },
 }
