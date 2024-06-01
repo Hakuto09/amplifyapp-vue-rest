@@ -134,10 +134,12 @@ export default {
     console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
     console.log("App.vue:", "data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
     console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
-//    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user ", auth.value.user);
-    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value).user ", toRaw(auth.value).user);
-//    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user.userId ", auth.value.user.userId);
-    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value).user.userId ", toRaw(auth.value).user.userId);
+    const auth_value_raw = toRaw(auth.value);
+    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user ", auth_value_raw.user);
+    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.authStatus ", auth_value_raw.authStatus);
+    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.route ", auth_value_raw.route);
+    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.hasValidationErrors ", auth_value_raw.hasValidationErrors);
+    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user.userId ", auth_value_raw.user.userId);
 
     const { route, user, signOut } = toRefs(useAuthenticator());
     console.log("App.vue:", "data-function():", "After toRefs():", " route ", route, " user ", user, " signOut ", signOut);
