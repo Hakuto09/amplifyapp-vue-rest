@@ -37,7 +37,8 @@ async function getDgroups(userId) {
 
   try {
 //    response_api = await axios.get(url + properties.account_id);
-    response_api = await axios.get(url + this.account_id);
+//    response_api = await axios.get(url + this.account_id);
+    response_api = await axios.get(url + userId);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
     dgroups = response_api.data;
