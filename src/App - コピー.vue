@@ -10,7 +10,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
-import { toRefs, toRaw } from 'vue';
+import { toRefs } from 'vue';
 
 console.log("App.vue:", "<script>:", " After import: ");
 
@@ -122,8 +122,7 @@ export default {
   data: function() {
 //    let user = ref('')
 //    const auth = ref(useAuthenticator());
-//    const { route, user, signOut } = toRefs(useAuthenticator());
-    const { route, user, signOut } = toRaw(toRefs(useAuthenticator()));
+    const { route, user, signOut } = toRefs(useAuthenticator());
 //    console.log("App.vue:", "data-function():", " auth ", auth);
 //    console.log("App.vue:", "data-function():", " auth.value ", auth.value);
 //    console.log("App.vue:", "data-function():", " auth.value.user ", auth.value.user);
