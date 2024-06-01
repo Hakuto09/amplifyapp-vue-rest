@@ -125,6 +125,8 @@ export default {
     console.log("App.vue:", "data-function():", "After reactive():", " state ", state);     
     console.log("App.vue:", "data-function():", "After reactive():", " {...state} ", {...state});     
     console.log("App.vue:", "data-function():", "After reactive():", " toRaw(state) ", toRaw(state));
+    const state_raw = toRaw(state);
+    console.log("App.vue:", "data-function():", "After toRaw():", " state_raw.msg ", state_raw.msg);
 
 //    let user = ref('')
     const auth = ref(useAuthenticator());
