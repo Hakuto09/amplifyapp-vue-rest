@@ -7,7 +7,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 </script>
 
 <script>
-import Dgroups from './views/Dgroups.vue';
+//import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 
