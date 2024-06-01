@@ -121,7 +121,8 @@ export default {
 //  data() {
   data: function() {
 
-    const state = reactive({msg:'hello world'});  
+    const state = reactive({msg:'hello world'});
+    console.log("App.vue:", "data-function():", "After reactive():", " state ", state);     
     console.log("App.vue:", "data-function():", "After reactive():", " {...state} ", {...state});     
     console.log("App.vue:", "data-function():", "After reactive():", " toRaw(state) ", toRaw(state));
 
