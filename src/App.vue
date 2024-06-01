@@ -10,7 +10,8 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
-import { toRefs, toRaw, reactive } from 'vue';
+import { toRaw } from 'vue';
+//import { toRefs, reactive } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
 
 console.log("App.vue:", "<script>:", " After import: ");
@@ -137,11 +138,11 @@ export default {
 //    const state_raw = toRaw(state);
 //    console.log("App.vue:", "data-function():", "After toRaw():", " state_raw.msg ", state_raw.msg);
 
-//    const auth = ref(useAuthenticator());
-//    console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
-//    console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
-//    console.log("App.vue:", "data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
-//    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
+    const auth = ref(useAuthenticator());
+    console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
+    console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
+    console.log("App.vue:", "data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
+    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
 //    const auth_value_raw = toRaw(auth.value);
 //    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.user ", auth_value_raw.user);
 //    console.log("App.vue:", "data-function():", "After ref():", " auth_value_raw.authStatus ", auth_value_raw.authStatus);
