@@ -9,6 +9,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 <script>
 import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
+import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 
 console.log("App.vue:", "<script>:", " After import: ");
 
@@ -113,7 +114,8 @@ export default {
   },
   */
   setup() {
-    console.log("App.vue:", "data():", " user ", user);
+    const auth = ref(useAuthenticator());
+    console.log("App.vue:", "setup():", " auth ", auth);
   },
   data() {
 //    let user = ref('')
