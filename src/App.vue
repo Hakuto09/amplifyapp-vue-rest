@@ -128,8 +128,8 @@ export default {
 //    console.log("App.vue:", "data-function():", " auth.value.user ", auth.value.user);
 //    console.log("App.vue:", "data-function():", " auth.value.user.userId ", auth.value.user.userId);
     console.log("App.vue:", "data-function():", " route ", route, " user ", user, " signOut ", signOut);
-    user = toRaw(user.value);
-    console.log("App.vue:", "data-function():", "After toRaw():", " user ", user);
+    const user_raw = toRaw(user.value);
+    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
     return {
 //      account_id: auth.value.user.userId,
       account_id: user.userId,
