@@ -8,9 +8,9 @@
 // @ を指定することで `/src` の代替となる
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
-import { /*defineProps,*/ ref } from 'vue';
+//import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
-import { getCurrentUser } from 'aws-amplify/auth';
+//import { getCurrentUser } from 'aws-amplify/auth';
 
 /*
 const props = defineProps({
@@ -29,7 +29,7 @@ async function getDgroups() {
 
 //  let authUser = await Amplify.Auth.getCurrentUser();
 //  let authUser = await getCurrentUser();
-  const { username, userId, signInDetails } = await getCurrentUser();
+//  const { username, userId, signInDetails } = await getCurrentUser();
   /*
   final username = switch (authUser.signInDetails) {
     // API-based login means calling the `Amplify.Auth.signIn` API
@@ -46,7 +46,7 @@ async function getDgroups() {
 
   try {
 //    response_api = await axios.get(url + properties.account_id);
-    response_api = await axios.get(url/* + parentData.value*/);
+    response_api = await axios.get(url + this.account_id);
     console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
     console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
     dgroups = response_api.data;
