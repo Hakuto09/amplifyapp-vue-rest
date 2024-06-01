@@ -10,7 +10,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
-import { toRefs, toRaw } from 'vue';
+import { toRefs, toRaw, reactive } from 'vue';
 
 console.log("App.vue:", "<script>:", " After import: ");
 
@@ -120,6 +120,11 @@ export default {
   },
 //  data() {
   data: function() {
+
+    const state = reactive({msg:'hello world'});  
+    console.log("App.vue:", "data-function():", "After reactive():", " {...state} ", {...state});     
+    console.log("App.vue:", "data-function():", "After reactive():", " toRaw(state) ", toRaw(state));
+
 //    let user = ref('')
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
@@ -134,6 +139,7 @@ export default {
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user ", user_raw.user);
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user.userId ", user_raw.user.userId);
+
     return {
 //      account_id: auth.value.user.userId,
       account_id: user.userId,
