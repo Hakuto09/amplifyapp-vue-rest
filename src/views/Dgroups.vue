@@ -24,21 +24,12 @@ let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
 // 実際にデータを取得する getDgroups 関数
-async function getDgroups() {
+async function getDgroups(userId) {
   console.log("Dgroups.vue:", " getDgroups(): In.");
 
 //  let authUser = await Amplify.Auth.getCurrentUser();
 //  let authUser = await getCurrentUser();
 //  const { username, userId, signInDetails } = await getCurrentUser();
-  /*
-  final username = switch (authUser.signInDetails) {
-    // API-based login means calling the `Amplify.Auth.signIn` API
-    CognitoSignInDetailsApiBased(:final username) => username,
-
-    // Otherwise, fallback to the value assigned by Cognito
-    _ => authUser.username,
-  };
-  */
 //  console.log("Dgroups.vue:", "getDgroups():", " authUser ", authUser);
 //  console.log("Dgroups.vue:", "getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
@@ -63,8 +54,8 @@ async function getDgroups() {
 }
 
 // getDgroups を呼び出してデータを読み込む
-let ret = getDgroups();
-console.log("Dgroups.vue:", "After getDgroups():", " ret ", ret);
+//let ret = getDgroups();
+//console.log("Dgroups.vue:", "After getDgroups():", " ret ", ret);
 
 export default {
   name: 'Dgroups',
@@ -78,6 +69,11 @@ export default {
 
     const { username, userId, signInDetails } = await getCurrentUser();
     console.log("Dgroups.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
+
+    if (userId) {
+      const ret = getDgroups(userId);
+      console.log("Dgroups.vue:", "data-function():", "After getDgroups():", " ret ", ret);
+    }
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
