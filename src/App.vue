@@ -8,8 +8,9 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 
 <script>
 import Dgroups from './views/Dgroups.vue';
-import { /*defineProps,*/ ref } from 'vue';
+//import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
+import { toRefs } from 'vue';
 
 console.log("App.vue:", "<script>:", " After import: ");
 
@@ -120,11 +121,13 @@ export default {
 //  data() {
   data: function() {
 //    let user = ref('')
-    const auth = ref(useAuthenticator());
-    console.log("App.vue:", "data():", " auth ", auth);
-    console.log("App.vue:", "data():", " auth.value ", auth.value);
-    console.log("App.vue:", "data():", " auth.value.user ", auth.value.user);
-    console.log("App.vue:", "data():", " auth.value.user.userId ", auth.value.user.userId);
+//    const auth = ref(useAuthenticator());
+    const { route, user, signOut } = toRefs(useAuthenticator());
+//    console.log("App.vue:", "data-function():", " auth ", auth);
+//    console.log("App.vue:", "data-function():", " auth.value ", auth.value);
+//    console.log("App.vue:", "data-function():", " auth.value.user ", auth.value.user);
+//    console.log("App.vue:", "data-function():", " auth.value.user.userId ", auth.value.user.userId);
+    console.log("App.vue:", "data-function():", " route ", route, " user ", user, " signOut ", signOut);
     return {
       account_id: auth.value.user.userId,
     };
