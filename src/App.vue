@@ -7,7 +7,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 </script>
 
 <script>
-//import Dgroups from './views/Dgroups.vue';
+import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 
@@ -102,11 +102,9 @@ Hub.listen("auth", listener);
 export default {
   name: 'App',
 
-  /*
   components: {
     Dgroups,
   },
-  */
   /*
   setup() {
     let inputData = ref('')
@@ -117,17 +115,16 @@ export default {
   */
   created() {
     const auth = ref(useAuthenticator());
-    console.log("App.vue:", "setup():", " auth ", auth);
+    console.log("App.vue:", "created():", " auth ", auth);
   },
-  /*
   data() {
 //    let user = ref('')
-    console.log("App.vue:", "data():", " user ", user);
+    const auth = ref(useAuthenticator());
+    console.log("App.vue:", "data():", " auth.user.userId ", auth.user.userId);
     return {
-      account_id: user.value.username,
+      account_id: auth.user.userId,
     };
   },
-  */
 }
 </script>
 
@@ -140,8 +137,8 @@ export default {
       <div id="app">
         <div>
           <!-- templete v-model="user" / -->
-          <!-- Dgroups :account_id=user.username / --> //子コンポーネントのタグに属性として指定
-          <!-- Dgroups :account_id="account_id" / --> //子コンポーネントのタグに属性として指定
+          <!-- Dgroups :account_id=user.username / -->
+          <!-- Dgroups :account_id="account_id" / -->
           <!-- Dgroups v-model="user" / -->
           <!-- p>inputData : {{ user.username }}</p -->
         </div>
