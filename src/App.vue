@@ -117,7 +117,8 @@ export default {
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "created():", " auth ", auth);
   },
-  data() {
+//  data() {
+  data: function() {
 //    let user = ref('')
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "data():", " auth.user.userId ", auth.user.userId);
