@@ -115,7 +115,7 @@ export default {
     }
   },
   */
-  setup() {
+  created() {
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "setup():", " auth ", auth);
   },
@@ -143,7 +143,7 @@ export default {
           <!-- Dgroups :account_id=user.username / --> //子コンポーネントのタグに属性として指定
           <!-- Dgroups :account_id="account_id" / --> //子コンポーネントのタグに属性として指定
           <!-- Dgroups v-model="user" / -->
-          <p>inputData : {{ user.username }}</p>
+          <!-- p>inputData : {{ user.username }}</p -->
         </div>
         <div 
           id="nav" 
