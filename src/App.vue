@@ -102,9 +102,11 @@ Hub.listen("auth", listener);
 export default {
   name: 'App',
 
+  /*
   components: {
     Dgroups,
   },
+  */
   /*
   setup() {
     let inputData = ref('')
@@ -117,6 +119,7 @@ export default {
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "setup():", " auth ", auth);
   },
+  /*
   data() {
 //    let user = ref('')
     console.log("App.vue:", "data():", " user ", user);
@@ -124,6 +127,7 @@ export default {
       account_id: user.value.username,
     };
   },
+  */
 }
 </script>
 
