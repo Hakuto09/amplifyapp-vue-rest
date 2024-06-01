@@ -131,6 +131,8 @@ export default {
 //    const user_raw = toRaw(user.value);
     const user_raw = toRaw(useAuthenticator());
     console.log("App.vue:", "data-function():", "After toRaw():", " user_raw ", user_raw);
+    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user ", user_raw.user);
+    console.log("App.vue:", "data-function():", "After toRaw():", " user_raw.user.userId ", user_raw.user.userId);
     return {
 //      account_id: auth.value.user.userId,
       account_id: user.userId,
