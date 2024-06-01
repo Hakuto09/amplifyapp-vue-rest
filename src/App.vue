@@ -121,9 +121,9 @@ export default {
   data: function() {
 //    let user = ref('')
     const auth = ref(useAuthenticator());
-    console.log("App.vue:", "data():", " auth.user.userId ", auth.user.userId);
+    console.log("App.vue:", "data():", " auth.value.user.userId ", auth.value.user.userId);
     return {
-      account_id: auth.user.userId,
+      account_id: auth.value.user.userId,
     };
   },
 }
@@ -139,7 +139,7 @@ export default {
         <div>
           <!-- templete v-model="user" / -->
           <!-- Dgroups :account_id=user.username / -->
-          <!-- Dgroups :account_id="account_id" / -->
+          <Dgroups :account_id="account_id" />
           <!-- Dgroups v-model="user" / -->
           <!-- p>inputData : {{ user.username }}</p -->
         </div>
