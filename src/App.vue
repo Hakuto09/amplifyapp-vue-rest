@@ -132,8 +132,10 @@ export default {
     const auth = ref(useAuthenticator());
     console.log("App.vue:", "data-function():", "After ref():", " auth ", auth);
     console.log("App.vue:", "data-function():", "After ref():", " auth.value ", auth.value);
-    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user ", auth.value.user);
-    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user.userId ", auth.value.user.userId);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user ", auth.value.user);
+    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value).user ", toRaw(auth.value).user);
+//    console.log("App.vue:", "data-function():", "After ref():", " auth.value.user.userId ", auth.value.user.userId);
+    console.log("App.vue:", "data-function():", "After ref():", " toRaw(auth.value).user.userId ", toRaw(auth.value).user.userId);
 
     const { route, user, signOut } = toRefs(useAuthenticator());
     console.log("App.vue:", "data-function():", "After toRefs():", " route ", route, " user ", user, " signOut ", signOut);
