@@ -11,6 +11,7 @@ import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 import { toRefs, toRaw, reactive } from 'vue';
+import { getCurrentUser } from 'aws-amplify/auth'
 
 console.log("App.vue:", "<script>:", " After import: ");
 
@@ -119,7 +120,15 @@ export default {
     console.log("App.vue:", "created():", " auth ", auth);
   },
 //  data() {
-  data: function() {
+  data: async function() {
+
+    const auth2 = useAuthenticator();
+    console.log("App.vue:", "data-function():", "After useA():", " auth2 ", auth2);
+
+//    let authUser = await getCurrentUser();
+//    let authUser = await Amplify.Auth.getCurrentUser();
+    const { username, userId, signInDetails } = await getCurrentUser();
+    console.log("App.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
 
     const state = reactive({msg:'hello world'});
     console.log("App.vue:", "data-function():", "After reactive():", " state ", state);     
