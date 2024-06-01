@@ -112,6 +112,9 @@ export default {
     }
   },
   */
+  setup() {
+    console.log("App.vue:", "data():", " user ", user);
+  },
   data() {
 //    let user = ref('')
     console.log("App.vue:", "data():", " user ", user);
@@ -124,8 +127,8 @@ export default {
 
 <template>
   <authenticator>
-    <!-- template v-slot="{ user, signOut }" -->
-    <template v-model="{ user, signOut }">
+    <template v-slot="{ user, signOut }">
+    <!-- template v-model="{ user, signOut }" -->
       <h1>Hello {{ user.username }}!</h1>
       <button @click="signOut">Sign Out</button>
       <div id="app">
