@@ -35,8 +35,7 @@
 </template>
 
 <script>
-//import { useStorage } from '@vueuse/core';
-import { ref } from 'vue';
+import { useStorage } from '@vueuse/core'
 
 console.log("DgroupList.vue:", " After import: ");
 
@@ -63,16 +62,8 @@ export default {
       }
     },
     showMoreInformation: function() {
-//      const msg = useStorage('msg', 'Hello World!')
-//      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
-
-      const inputText = ref('');
-      const saveLocal = () => {
-        console.log("DgroupList.vue:", "saveLocal():", " inputText.value ", inputText.value);
-        localStorage.setItem('inputText', "Test");
-      }
-      inputText.value = localStorage.getItem('inputText');
-      console.log("DgroupList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
+      const msg = useStorage('msg', 'Hello World!')
+      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
 
       if (!this.selected) {
         alert('No data selected...')
