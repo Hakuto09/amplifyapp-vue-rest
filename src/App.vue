@@ -7,7 +7,7 @@ console.log("App.vue:", "<script setup>:", " After import: ");
 </script>
 
 <script>
-import Dgroups from './views/Dgroups.vue';
+//import Dgroups from './views/Dgroups.vue';
 import { /*defineProps,*/ ref } from 'vue';
 import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 import { toRaw } from 'vue';
@@ -105,9 +105,11 @@ Hub.listen("auth", listener);
 export default {
   name: 'App',
 
+  /*
   components: {
     Dgroups,
   },
+  */
   /*
   setup() {
     let inputData = ref('')
@@ -161,7 +163,8 @@ export default {
     return {
 //      account_id: auth.value.user.userId,
 //      account_id: user.userId,
-      account_id: userId,
+//      account_id: userId,
+      userId,
     };
   },
 }
@@ -177,7 +180,7 @@ export default {
         <div>
           <!-- templete v-model="user" / -->
           <!-- Dgroups :account_id=user.username / -->
-          <Dgroups :account_id="account_id" />
+          <!-- Dgroups :account_id="account_id" / -->
           <!-- Dgroups v-model="user" / -->
           <!-- p>inputData : {{ user.username }}</p -->
         </div>

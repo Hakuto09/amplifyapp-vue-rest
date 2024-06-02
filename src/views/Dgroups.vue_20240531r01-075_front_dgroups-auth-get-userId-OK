@@ -61,7 +61,7 @@ async function getDgroups(userId) {
 export default {
   name: 'Dgroups',
 
-//  props: ['account_id'], //propsオプションで受け取る値の名前を指定
+  props: ['account_id'], //propsオプションで受け取る値の名前を指定
   components: {
     DgroupList
   },
@@ -89,7 +89,7 @@ export default {
           'account_id',
         ],
         dgroups: dgroups,
-//        account_id: this.account_id,
+        account_id: this.account_id,
       }
     }
   },
