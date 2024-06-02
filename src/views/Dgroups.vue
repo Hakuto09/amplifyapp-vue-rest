@@ -65,16 +65,16 @@ export default {
   components: {
     DgroupList
   },
-  data: async function() {
+  data: /*async*/ function() {
     console.log("Dgroups.vue:", " data-function(): In.");
 
-    const { username, userId, signInDetails } = await getCurrentUser();
-    console.log("Dgroups.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
+//   const { username, userId, signInDetails } = await getCurrentUser();
+//    console.log("Dgroups.vue:", "data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
 
-    if (userId) {
+//    if (userId) {
       const ret = getDgroups(/*userId*/);
       console.log("Dgroups.vue:", "data-function():", "After getDgroups():", " ret ", ret);
-    }
+//    }
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
