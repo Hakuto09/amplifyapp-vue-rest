@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>This page is dgroup list.</h1>
-    <div :class="$style.dgrouplist">
+    <h1>This page is device list.</h1>
+    <div :class="$style.devicelist">
       <!-- div>
         <p>{{ properties.account_id }}</p>
       </div -->
@@ -15,11 +15,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id">
-            <td><input type="radio" :value="dgroup" v-model="selected"></td>
-            <td>{{dgroup.dgroup_id}}</td>
-            <td>{{dgroup.dgroup_name}}</td>
-            <td>{{dgroup.account_id}}</td>
+          <tr v-for="device in properties.devices" v-bind:key="device.id">
+            <td><input type="radio" :value="device" v-model="selected"></td>
+            <td>{{device.device_id}}</td>
+            <td>{{device.device_name}}</td>
+            <td>{{device.account_id}}</td>
           </tr>
         </tbody>
       </table>
@@ -38,10 +38,10 @@
 //import { useStorage } from '@vueuse/core';
 import { ref } from 'vue';
 
-console.log("DgroupList.vue:", " After import: ");
+console.log("DeviceList.vue:", " After import: ");
 
 export default {
-  name: 'DgroupList',
+  name: 'DeviceList',
   props: {
     properties: {
       type: Object,
@@ -49,8 +49,6 @@ export default {
     }
   },
   data: function() {
-    console.log("DgroupList.vue:", "data-function():", " this.properties ", this.properties);
-
     return {
       selected: null,
     }
@@ -58,41 +56,39 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("DgroupList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log("DeviceList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
-        console.log("DgroupList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log("DeviceList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
-      console.log("DgroupList.vue:", "showMoreInformation():", " this.properties ", this.properties);
-
 //      const msg = useStorage('msg', 'Hello World!')
-//      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
+//      console.log("DeviceList.vue:", "showMoreInformation():", " msg.value ", msg.value);
 
       const inputText = ref('');
       const saveLocal = (text) => {
         localStorage.setItem('inputText', text);
-        console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " inputText.value ", inputText.value);
+        console.log("DeviceList.vue:", "saveLocal():", "After localStorage.setItem():", " inputText.value ", inputText.value);
       }
       saveLocal("Test");
       inputText.value = localStorage.getItem('inputText');
-      console.log("DgroupList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
+      console.log("DeviceList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
 
       if (!this.selected) {
         alert('No data selected...')
         return false
       }
       const selected = this.selected
-      console.log("DgroupList.vue:", "showMoreInformation():", " this ", this);
-      console.log("DgroupList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log("DeviceList.vue:", "showMoreInformation():", " this ", this);
+      console.log("DeviceList.vue:", "showMoreInformation():", " selected ", selected);
 
-//      this.$localStorage.set('dgrouplist_id', selected['id'])
-//      console.log("DgroupList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
+//      this.$localStorage.set('devicelist_id', selected['id'])
+//      console.log("DeviceList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
 
       /*
       this.$router.push({
-        name: 'dgroup-detail',
+        name: 'device-detail',
         params: {
           id: selected['id']
         }
@@ -105,7 +101,7 @@ export default {
 
 <style module>
 
-.dgrouplist {
+.devicelist {
   margin: auto;
   width: 100%;
   /* 子要素を中央に配置する */
@@ -114,7 +110,7 @@ export default {
   align-items: center;
 }
 
-.dgrouptable {
+.devicetable {
   border: solid 1px;
   width: 90%;
   border-collapse: collapse;

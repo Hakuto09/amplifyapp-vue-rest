@@ -78,6 +78,18 @@ const routes = [
     component: Dgroups,
 //    meta: { requiresAuth: true},
   },
+  {
+    path: '/devices',
+    name: 'devices',
+    component: Devices,
+//    meta: { requiresAuth: true},
+  },
+  {
+    path: '/devices/:id',
+    name: 'device-detail',
+    component: DeviceDetail,
+//    meta: { requiresAuth: true},
+  },
 ]
 
 const router = createRouter({

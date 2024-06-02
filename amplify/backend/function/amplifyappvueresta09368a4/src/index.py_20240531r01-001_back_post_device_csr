@@ -110,7 +110,7 @@ class Response_DGroup(BaseModel):
     thingGroupName: str
     thingGroupId: str
 
-class Request_PostDevice(BaseModel):
+class Request_Device(BaseModel):
     """
     デバイス用リクエストスキーマ
     """
@@ -119,7 +119,7 @@ class Request_PostDevice(BaseModel):
     dgroup_id: str
     csr: str
 
-class Response_PostDevice(BaseModel):
+class Response_Device(BaseModel):
     """
     デバイス用レスポンススキーマ
     """
@@ -185,24 +185,6 @@ def get_dgroups_list(account_id: str):
         Limit = 100 # 取得するデータ件数
     )
     print('get_dgroups_list():', ' response_ddb ', response_ddb)
-
-    return response_ddb["Items"]
-
-#@app.get("/devices/{dgroup_id}")
-@app.get("/_devices/{dgroup_id}")
-def get_devices_list(dgroup_id: str):
-    """
-    デバイスグループに紐付くデバイスの一覧を取得する
-    """
-    print('get_devices_list(): In')
-
-    response_ddb = ddb_table_devices.scan(
-#      TableName = STORAGE_DB_DEVICES,
-        FilterExpression = Attr('dgroup_id').eq(dgroup_id),
-#        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
-        Limit = 100 # 取得するデータ件数
-    )
-    print('get_devices_list():', ' response_ddb ', response_ddb)
 
     return response_ddb["Items"]
 
@@ -402,9 +384,9 @@ def post_dgroup(_in: Request_DGroup):
 
     return Response_DGroup.parse_obj(response_iot_dgroup)
 
-#@app.post("/device", response_model=Response_PostDevice)
-@app.post("/__device", response_model=Response_PostDevice)
-def post_device(_in: Request_PostDevice):
+#@app.post("/device", response_model=Response_Device)
+@app.post("/__device", response_model=Response_Device)
+def post_device(_in: Request_Device):
     """
     デバイスを登録する
     """
@@ -474,7 +456,7 @@ def post_device(_in: Request_PostDevice):
 #    print('After client_ddb.put_item():', ' response_ddb ', response_ddb)
     print('After ddb_table_devices.put_item():', ' response_ddb ', response_ddb)
 
-#    return Response_PostDevice.parse_obj(response_iot)
+#    return Response_Device.parse_obj(response_iot)
     return {
         'certificatePem': certificatePem
     }
