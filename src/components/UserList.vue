@@ -40,6 +40,10 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
+console.log("UserList.vue:", " After import: ");
+
 export default {
   name: 'UserList',
   props: {
@@ -64,6 +68,10 @@ export default {
       }
     },
     showMoreInformation: function() {
+      const inputText = ref('');
+      inputText.value = localStorage.getItem('inputText');
+      console.log("UserList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
+
       // アロー関数で定義すると `this` で `selected` が参照できない｡
       // 詳細は https://qiita.com/_Keitaro_/items/d48733a19c10889e2365 を参照のこと｡
       if (!this.selected) {
