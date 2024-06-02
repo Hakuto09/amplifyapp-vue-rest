@@ -6,7 +6,7 @@ import router from './router'
 import { Amplify } from "aws-amplify";
 import aws_exports from './aws-exports';
 
-import VueLocalStorage from 'vue-localstorage'
+//import VueLocalStorage from 'vue-localstorage'
 
 console.log("main.js:", " After import: ");
 
