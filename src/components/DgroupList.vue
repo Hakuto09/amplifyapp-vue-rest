@@ -65,6 +65,10 @@ export default {
       const selected = this.selected
       console.log("DgroupList.vue:", "showMoreInformation():", " this ", this);
       console.log("DgroupList.vue:", "showMoreInformation():", " selected ", selected);
+
+      this.$localStorage.set('dgrouplist_id', selected['id'])
+      console.log("DgroupList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
+
       /*
       this.$router.push({
         name: 'dgroup-detail',
