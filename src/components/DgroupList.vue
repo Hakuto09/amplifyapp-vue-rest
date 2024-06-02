@@ -2,9 +2,9 @@
   <div>
     <h1>This page is dgroup list.</h1>
     <div :class="$style.dgrouplist">
-      <div>
+      <!-- div>
         <p>{{ properties.account_id }}</p>
-      </div>
+      </div -->
       <table>
         <thead>
           <tr>
