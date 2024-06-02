@@ -12,6 +12,8 @@ import axios from 'axios'
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
 
+console.log("Dgroups.vue:", " After import: ");
+
 /*
 const props = defineProps({
   message: String,

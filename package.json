@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^4.2.8",
+    "@vueuse/core": "^10.10.0",
     "aws-amplify": "^6.3.4",
     "aws-amplify-vue": "^2.1.9",
     "axios": "^1.7.2",

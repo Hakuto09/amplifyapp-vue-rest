@@ -35,6 +35,10 @@
 </template>
 
 <script>
+import { useStorage } from '@vueuse/core'
+
+console.log("DgroupList.vue:", " After import: ");
+
 export default {
   name: 'DgroupList',
   props: {
@@ -58,6 +62,9 @@ export default {
       }
     },
     showMoreInformation: function() {
+      const msg = useStorage('msg', 'Hello World!')
+      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
+
       if (!this.selected) {
         alert('No data selected...')
         return false
