@@ -81,7 +81,6 @@ export default {
 //    let account_id = ref('')
 //    console.log("Dgroups.vue:", "data-function():", " account_id ", account_id);
 //    console.log("Dgroups.vue:", "data-function():", " this.account_id ", this.account_id);
-    console.log("Dgroups.vue:", "data-function():", "Before return():", " dgroups ", dgroups);
     return {
       properties: {
         headers: [
