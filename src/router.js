@@ -71,6 +71,12 @@ const routes = [
     component: UserDetail,
 //    meta: { requiresAuth: true},
   },
+  {
+    path: '/dgroups',
+    name: 'dgroups',
+    component: Dgroups,
+//    meta: { requiresAuth: true},
+  },
 ]
 
 const router = createRouter({

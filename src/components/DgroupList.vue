@@ -51,10 +51,10 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("dgroupList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log("DgroupList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
-        console.log("dgroupList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log("DgroupList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
@@ -63,14 +63,16 @@ export default {
         return false
       }
       const selected = this.selected
-      console.log("dgroupList.vue:", "showMoreInformation():", " this ", this);
-      console.log("dgroupList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log("DgroupList.vue:", "showMoreInformation():", " this ", this);
+      console.log("DgroupList.vue:", "showMoreInformation():", " selected ", selected);
+      /*
       this.$router.push({
         name: 'dgroup-detail',
         params: {
           id: selected['id']
         }
       })
+      */
     }
   }
 }
