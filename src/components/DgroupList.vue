@@ -67,10 +67,11 @@ export default {
 //      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
 
       const inputText = ref('');
-      const saveLocal = () => {
-        console.log("DgroupList.vue:", "saveLocal():", " inputText.value ", inputText.value);
-        localStorage.setItem('inputText', "Test");
+      const saveLocal = (text) => {
+        localStorage.setItem('inputText', text);
+        console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " inputText.value ", inputText.value);
       }
+      saveLocal("Test");
       inputText.value = localStorage.getItem('inputText');
       console.log("DgroupList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
 
