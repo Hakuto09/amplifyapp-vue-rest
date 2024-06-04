@@ -7,7 +7,7 @@ import UserDetail from './views/UserDetail.vue'
 import Routing from './views/Routing.vue'
 import Dgroups from './views/Dgroups.vue'
 import Devices from './views/Devices.vue'
-import DeviceDetal from './views/DeviceDetal.vue'
+import DeviceDetail from './views/DeviceDetail.vue'
 
 //import Vue from 'vue'
 //import Login from './views/Login.vue'
