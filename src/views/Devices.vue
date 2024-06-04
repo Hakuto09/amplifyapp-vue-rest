@@ -87,7 +87,7 @@ export default {
           'device_name',
           'dgroup_id',
         ],
-        Devices: Devices,
+        devices: devices,
       }
     }
   },
