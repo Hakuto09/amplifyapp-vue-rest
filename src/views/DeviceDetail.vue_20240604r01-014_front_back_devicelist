@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.component">
-    <h2>Device details with device_id: </h2>
-    <h2>{{ $route.params.device_id }}</h2>
+    <h1>This page is device detail.</h1>
     <div
       :class="$style.deviceinfo">
       <table>

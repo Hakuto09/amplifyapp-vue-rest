@@ -86,7 +86,8 @@ export default {
       this.$router.push({
         name: 'device-detail',
         params: {
-          id: selected['id']
+          id: selected['id'],
+          device_id: selected['device_id'],
         }
       })
     }
