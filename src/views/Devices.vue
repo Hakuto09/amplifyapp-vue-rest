@@ -22,7 +22,7 @@ const parentData = ref(props.defineProps);
 console.log("Devices.vue:", "After reg(prop):", " parentData.value ", parentData.value);
 */
 
-let Devices;
+let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 
 // 実際にデータを取得する getDevices 関数
@@ -43,11 +43,11 @@ async function getDevices(dgroupId) {
     response_api = await axios.get(url + dgroupId);
     console.log("Devices.vue:", "getDevices():", " response_api.status ", response_api.status)
     console.log("Devices.vue:", "getDevices():", " response_api.data ", response_api.data);
-    Devices = response_api.data;
-    for (let i = 0; i < Devices.length; i++) {
-      Devices[i].id = i;
+    devices = response_api.data;
+    for (let i = 0; i < devices.length; i++) {
+      devices[i].id = i;
     }
-    console.log("Devices.vue:", "getDevices():", " Devices ", Devices);
+    console.log("Devices.vue:", "getDevices():", " devices ", devices);
     return response_api;
   }
   catch (error) {
@@ -79,7 +79,7 @@ export default {
 
     // ここで返却するデータは子コンポーネント `DeviceList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
-    console.log("Devices.vue:", "data-function():", "Before return():", " Devices ", Devices);
+    console.log("Devices.vue:", "data-function():", "Before return():", " devices ", devices);
     return {
       properties: {
         headers: [
