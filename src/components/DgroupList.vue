@@ -75,9 +75,6 @@ export default {
         localStorage.setItem('dgroupId', dgroupId);
         console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " dgroupId ", dgroupId);
       }
-      saveLocal(selected['dgroup_id']);
-      dgroupId.value = localStorage.getItem('dgroupId');
-      console.log("DgroupList.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
       if (!this.selected) {
         alert('No data selected...')
@@ -86,6 +83,10 @@ export default {
       const selected = this.selected
       console.log("DgroupList.vue:", "showMoreInformation():", " this ", this);
       console.log("DgroupList.vue:", "showMoreInformation():", " selected ", selected);
+
+      saveLocal(selected['dgroup_id']);
+      dgroupId.value = localStorage.getItem('dgroupId');
+      console.log("DgroupList.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
 //      this.$localStorage.set('dgrouplist_id', selected['id'])
 //      console.log("DgroupList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
