@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios'
+import { /*defineProps,*/ ref } from 'vue';
 
 let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/devices';
