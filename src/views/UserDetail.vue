@@ -55,7 +55,7 @@ async function getAccounts() {
 
 // getAccounts を呼び出してデータを読み込む
 let response_ga = getAccounts();
-console.log("UserDetail.vue:", " response_ga ", response_ga);
+console.log("UserDetail.vue:", "After getAccounts()", " users ", users, " response_ga ", response_ga);
 
 //users = response_ga.data;
 

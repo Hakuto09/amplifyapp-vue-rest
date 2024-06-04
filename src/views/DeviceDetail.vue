@@ -14,9 +14,6 @@
         <tr
           v-for="(value, name) in devices[$route.params.id/* - 1*/]"
           :key="name">
-        <!-- tr
-          v-for="(value, name) in $route.params"
-          :key="name" -->
           <td :class="$style.item">
             {{ name }}
           </td>
@@ -59,10 +56,9 @@ dgroupId.value = localStorage.getItem('dgroupId');
 console.log("DeviceDetail.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
 // getDevices を呼び出してデータを読み込む
-let response_ga = getDevices(dgroupId);
-console.log("DeviceDetail.vue:", " response_ga ", response_ga);
+let response_ga = getDevices(dgroupId.value);
+console.log("DeviceDetail.vue:", "After getDevices()", " devices ", devices, " response_ga ", response_ga);
 
-console.log("DeviceDetail.vue:", " devices ", devices);
 
 export default {
   name: 'DeviceDetail',
