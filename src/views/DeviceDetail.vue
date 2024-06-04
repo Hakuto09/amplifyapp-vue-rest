@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <h2>Device details with device_id: {{ $route.params.device_id }}</h2>
-    <h2>Device details with dgroup_id: {{ dgroupId.value }}</h2>
+    <h2>Device details with dgroup_id: {{ dgroupId }}</h2>
     <div
       :class="$style.deviceinfo">
       <table>
@@ -69,6 +69,7 @@ export default {
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {
       devices: devices,
+      dgroupId: dgroupId.value,
     }
   }
 }
