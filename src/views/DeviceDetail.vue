@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.component">
-    <h2>Device details with device_id: </h2>
-    <h2>{{ $route.params.device_id }}</h2>
+    <h2>Device details with device_id: {{ $route.params.device_id }}</h2>
     <div
       :class="$style.deviceinfo">
       <table>
