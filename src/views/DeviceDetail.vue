@@ -34,7 +34,7 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 
 let devices;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/devices';
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices';
 
 // 実際にデータを取得する getDevices 関数
 async function getDevices(dgroupId) {
