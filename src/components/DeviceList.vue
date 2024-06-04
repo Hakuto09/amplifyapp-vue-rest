@@ -2,9 +2,6 @@
   <div>
     <h1>This page is device list.</h1>
     <div :class="$style.devicelist">
-      <!-- div>
-        <p>{{ properties.account_id }}</p>
-      </div -->
       <table>
         <thead>
           <tr>
@@ -19,7 +16,7 @@
             <td><input type="radio" :value="device" v-model="selected"></td>
             <td>{{device.device_id}}</td>
             <td>{{device.device_name}}</td>
-            <td>{{device.account_id}}</td>
+            <td>{{device.dgroup_id}}</td>/
           </tr>
         </tbody>
       </table>
