@@ -70,14 +70,14 @@ export default {
 //      const msg = useStorage('msg', 'Hello World!')
 //      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
 
-      const inputText = ref('');
-      const saveLocal = (text) => {
-        localStorage.setItem('inputText', text);
-        console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " inputText.value ", inputText.value);
+      const dgroupId = ref('');
+      const saveLocal = (dgroupId) => {
+        localStorage.setItem('dgroupId', dgroupId);
+        console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " dgroupId ", dgroupId);
       }
-      saveLocal("Test");
-      inputText.value = localStorage.getItem('inputText');
-      console.log("DgroupList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
+      saveLocal(selected['dgroup_id']);
+      dgroupId.value = localStorage.getItem('dgroupId');
+      console.log("DgroupList.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
       if (!this.selected) {
         alert('No data selected...')

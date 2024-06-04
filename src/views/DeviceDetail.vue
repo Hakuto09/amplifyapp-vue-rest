@@ -35,26 +35,26 @@ import axios from 'axios'
 let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/devices';
 
-// 実際にデータを取得する getAccounts 関数
-async function getAccounts() {
-  console.log("DeviceDetail.vue:", " getAccounts(): In.");
+// 実際にデータを取得する getDevices 関数
+async function getDevices() {
+  console.log("DeviceDetail.vue:", " getDevices(): In.");
   let response;
 
   try {
     response = await axios.get(url);
-    console.log("DeviceDetail.vue:", "getAccounts():", " response.status ", response.status)
-    console.log("DeviceDetail.vue:", "getAccounts():", " response.data ", response.data);
+    console.log("DeviceDetail.vue:", "getDevices():", " response.status ", response.status)
+    console.log("DeviceDetail.vue:", "getDevices():", " response.data ", response.data);
     devices = response.data;
     return response;
   }
   catch (error) {
-    console.error("DeviceDetail.vue:", "getAccounts():", " error ", error);
+    console.error("DeviceDetail.vue:", "getDevices():", " error ", error);
     return error;
   }
 }
 
-// getAccounts を呼び出してデータを読み込む
-let response_ga = getAccounts();
+// getDevices を呼び出してデータを読み込む
+let response_ga = getDevices();
 console.log("DeviceDetail.vue:", " response_ga ", response_ga);
 
 console.log("DeviceDetail.vue:", " devices ", devices);

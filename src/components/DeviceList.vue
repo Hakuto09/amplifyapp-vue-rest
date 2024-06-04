@@ -86,14 +86,12 @@ export default {
 //      this.$localStorage.set('devicelist_id', selected['id'])
 //      console.log("DeviceList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
 
-      /*
       this.$router.push({
         name: 'device-detail',
         params: {
           id: selected['id']
         }
       })
-      */
     }
   }
 }

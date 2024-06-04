@@ -203,10 +203,16 @@ export default {
               <router-link to="/users">User List</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'user-detail', params: {id: 0} }">UserDetail</router-link>
+              <router-link :to="{ name: 'user-detail', params: {id: 0} }">User Detail</router-link>
             </li>
             <li>
               <router-link to="/dgroups">Dgroup List</router-link>
+            </li>
+            <li>
+              <router-link to="/devices">Device List</router-link>
+            </li>
+            <li>
+              <router-link :to="{ name: 'device-detail', params: {id: 0} }">Device Detail</router-link>
             </li>
           </ul>
         </div>
