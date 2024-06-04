@@ -36,12 +36,12 @@ let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/devices';
 
 // 実際にデータを取得する getDevices 関数
-async function getDevices() {
-  console.log("DeviceDetail.vue:", " getDevices(): In.");
+async function getDevices(dgroupId) {
+  console.log("DeviceDetail.vue:", " getDevices(): In.", " dgroupId ", dgroupId);
   let response;
 
   try {
-    response = await axios.get(url);
+    response = await axios.get(url + dgroupId);
     console.log("DeviceDetail.vue:", "getDevices():", " response.status ", response.status)
     console.log("DeviceDetail.vue:", "getDevices():", " response.data ", response.data);
     devices = response.data;
@@ -53,8 +53,12 @@ async function getDevices() {
   }
 }
 
+const dgroupId = ref('');
+dgroupId.value = localStorage.getItem('dgroupId');
+console.log("DeviceDetail.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+
 // getDevices を呼び出してデータを読み込む
-let response_ga = getDevices();
+let response_ga = getDevices(dgroupId);
 console.log("DeviceDetail.vue:", " response_ga ", response_ga);
 
 console.log("DeviceDetail.vue:", " devices ", devices);
