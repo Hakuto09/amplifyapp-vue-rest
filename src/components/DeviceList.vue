@@ -78,7 +78,7 @@ export default {
       console.log("DeviceList.vue:", "showMoreInformation():", " selected ", selected);
 
       saveLocal(selected['device_id']);
-      deviceId.value = localStorage.getItem('device_id');
+      deviceId.value = localStorage.getItem('deviceId');
       console.log("DeviceList.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
 //      this.$localStorage.set('devicelist_id', selected['id'])

@@ -72,7 +72,7 @@ export default {
 
     const dgroupId = ref('');
     dgroupId.value = localStorage.getItem('dgroupId');
-    console.log("UserList.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+    console.log("Devices.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
     const ret = getDevices(dgroupId.value);
     console.log("Devices.vue:", "data-function():", "After getDevices():", " ret ", ret);
