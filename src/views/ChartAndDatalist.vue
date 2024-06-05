@@ -85,10 +85,10 @@ export default {
     Line
   },
   data: function() {
-    console.log(fileName, ":data-function():", " devices ", devices);
+    console.log(fileName, ":data-function(): In.");
 
     const deviceId = ref('');
-    dgroupId.value = localStorage.getItem('deviceId');
+    deviceId.value = localStorage.getItem('deviceId');
     console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
     // getDevices を呼び出してデータを読み込む
