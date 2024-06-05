@@ -188,9 +188,9 @@ export default {
         x: {
           type: 'time',
           title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須　表示設定 省略時は false
+            display: true,             // ★必須 表示設定 省略時は false
             position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '日付時刻'           // ★必須　タイトルの文字列
+            text: '日付時刻'           // ★必須 タイトルの文字列
           },
           time: {
             unit: 'minute',
@@ -202,9 +202,9 @@ export default {
         yleft: {
           stacked: false,
           title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須　表示設定 省略時は false
+            display: true,             // ★必須 表示設定 省略時は false
             position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '温度'           // ★必須　タイトルの文字列
+            text: '温度'           // ★必須 タイトルの文字列
           },
         },
         /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
@@ -212,9 +212,9 @@ export default {
           stacked: false,
           position: "right",
           title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須　表示設定 省略時は false
+            display: true,             // ★必須 表示設定 省略時は false
             position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '湿度'           // ★必須　タイトルの文字列
+            text: '湿度'           // ★必須 タイトルの文字列
           },
         },
       },
