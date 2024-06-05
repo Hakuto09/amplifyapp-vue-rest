@@ -58,23 +58,23 @@ ChartJS.register(
   Legend
 )
 
-let ddata;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
+let devices;
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 
-// データを取得する関数
-async function getDeviceData(deviceId) {
-  console.log(fileName, ":getDeviceData(): In.", " deviceId ", deviceId);
+// 実際にデータを取得する getDevices 関数
+async function getDevices(dgroupId) {
+  console.log("DeviceDetail.vue:", " getDevices(): In.", " dgroupId ", dgroupId);
   let response;
 
   try {
-    response = await axios.get(url + deviceId);
-    console.log(fileName, ":getDeviceData():", " response.status ", response.status)
-    console.log(fileName, ":getDeviceData():", " response.data ", response.data);
-    ddata = response.data;
+    response = await axios.get(url + dgroupId);
+    console.log("DeviceDetail.vue:", "getDevices():", " response.status ", response.status)
+    console.log("DeviceDetail.vue:", "getDevices():", " response.data ", response.data);
+    devices = response.data;
     return response;
   }
   catch (error) {
-    console.error(fileName, ":getDeviceData():", " error ", error);
+    console.error("DeviceDetail.vue:", "getDevices():", " error ", error);
     return error;
   }
 }
@@ -87,13 +87,17 @@ export default {
   data: function() {
     console.log(fileName, ":data-function():", " devices ", devices);
 
-    const deviceId = ref('');
-    dgroupId.value = localStorage.getItem('deviceId');
-    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
+    const dgroupId = ref('');
+    dgroupId.value = localStorage.getItem('dgroupId');
+    console.log("DeviceDetail.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
     // getDevices を呼び出してデータを読み込む
-    let response_ga = getDeviceData(deviceId.value);
-    console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
+    let response_ga = getDevices(dgroupId.value);
+    console.log("DeviceDetail.vue:", "After getDevices()", " devices ", devices, " response_ga ", response_ga);
+
+    const deviceId = ref('');
+    deviceId.value = localStorage.getItem('deviceId');
+    console.log("DeviceDetail.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
     const chartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

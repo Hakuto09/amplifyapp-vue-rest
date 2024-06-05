@@ -15,7 +15,7 @@
           VALUE
         </th>
         <!-- devices のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
-        <tr
+        <!-- tr
           v-for="(value, name) in devices[$route.params.id/* - 1*/]"
           :key="name">
           <td :class="$style.item">
@@ -24,7 +24,7 @@
           <td :class="$style.value">
             {{ value }}
           </td>
-        </tr>
+        </tr -->
       </table>
     </div>
   </div>
@@ -44,7 +44,7 @@ import {
   Legend
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-const fileName = "ChartAndData.vue";
+const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
 
@@ -58,46 +58,42 @@ ChartJS.register(
   Legend
 )
 
-let devices;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
+let ddata;
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
 
-// 実際にデータを取得する getDevices 関数
-async function getDevices(dgroupId) {
-  console.log("DeviceDetail.vue:", " getDevices(): In.", " dgroupId ", dgroupId);
+// データを取得する関数
+async function getDeviceData(deviceId) {
+  console.log(fileName, ":getDeviceData(): In.", " deviceId ", deviceId);
   let response;
 
   try {
-    response = await axios.get(url + dgroupId);
-    console.log("DeviceDetail.vue:", "getDevices():", " response.status ", response.status)
-    console.log("DeviceDetail.vue:", "getDevices():", " response.data ", response.data);
-    devices = response.data;
+    response = await axios.get(url + deviceId);
+    console.log(fileName, ":getDeviceData():", " response.status ", response.status)
+    console.log(fileName, ":getDeviceData():", " response.data ", response.data);
+    ddata = response.data;
     return response;
   }
   catch (error) {
-    console.error("DeviceDetail.vue:", "getDevices():", " error ", error);
+    console.error(fileName, ":getDeviceData():", " error ", error);
     return error;
   }
 }
 
 export default {
-  name: 'ChartAndData',
+  name: 'ChartAndDatalist',
   components: {
     Line
   },
   data: function() {
     console.log(fileName, ":data-function():", " devices ", devices);
 
-    const dgroupId = ref('');
-    dgroupId.value = localStorage.getItem('dgroupId');
-    console.log("DeviceDetail.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+    const deviceId = ref('');
+    dgroupId.value = localStorage.getItem('deviceId');
+    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
     // getDevices を呼び出してデータを読み込む
-    let response_ga = getDevices(dgroupId.value);
-    console.log("DeviceDetail.vue:", "After getDevices()", " devices ", devices, " response_ga ", response_ga);
-
-    const deviceId = ref('');
-    deviceId.value = localStorage.getItem('deviceId');
-    console.log("DeviceDetail.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
+    let response_ga = getDeviceData(deviceId.value);
+    console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
     const chartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
