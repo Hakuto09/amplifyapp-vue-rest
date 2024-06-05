@@ -105,7 +105,7 @@ export default {
     let loops = ddata.length;
     for(let i = 0; i < loops; ++i) {
 //      let j = loops - i - 1;
-      let date_nt = notesFromAPI[i/*j*/].date.replace('T', ' ');
+      let date_nt = ddata[i/*j*/].date.replace('T', ' ');
       let date_nt_jst = date_nt.substr(0, 23);
 
       labels.push(date_nt_jst);
