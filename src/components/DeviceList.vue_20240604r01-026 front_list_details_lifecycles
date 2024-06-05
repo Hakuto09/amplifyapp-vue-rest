@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- h1>This page is device list.</h1 -->
-    <h2>Device list of dgroup_id: {{ dgroupId }}</h2>
+    <h1>This page is device list.</h1>
     <div :class="$style.devicelist">
       <table>
         <thead>

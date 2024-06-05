@@ -1,7 +1,6 @@
 <template>
   <div>
-    <!-- h1>This page is dgroup list.</h1 -->
-    <h2>Device group list of account_id: {{ accountId }}</h2>
+    <h1>This page is dgroup list.</h1>
     <div :class="$style.dgrouplist">
       <!-- div>
         <p>{{ properties.account_id }}</p>
