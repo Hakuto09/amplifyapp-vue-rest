@@ -37,6 +37,7 @@
 <script>
 //import { useStorage } from '@vueuse/core';
 import { ref } from 'vue';
+import { toRaw } from 'vue';
 const fileName = "DeviceList.vue";
 
 console.log(fileName, ":After import:");
@@ -52,6 +53,7 @@ export default {
   },
   data: function() {
     console.log(fileName, ":data-function():", " this.properties ", this.properties);
+    console.log(fileName, ":data-function():", " toRaw(this.properties).devices ", toRaw(this.properties).devices);
 
     return {
       selected: null,

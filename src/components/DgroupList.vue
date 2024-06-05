@@ -38,6 +38,7 @@
 <script>
 //import { useStorage } from '@vueuse/core';
 import { ref } from 'vue';
+import { toRaw } from 'vue';
 const fileName = "DgroupList.vue";
 
 console.log(fileName, ":After import:");
@@ -53,6 +54,7 @@ export default {
   },
   data: function() {
     console.log(fileName, ":data-function():", " this.properties ", this.properties);
+    console.log(fileName, ":data-function():", " toRaw(this.properties).dgroups ", toRaw(this.properties).dgroups);
 
     return {
       selected: null,
