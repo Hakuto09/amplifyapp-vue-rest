@@ -5,9 +5,7 @@
       <table>
         <thead>
           <tr>
-            <!-- th><input :class="$style.headerRadio" type="radio" @click="select"></th -->
-            <!-- th><input :class="$style.headerRadio" type="radio" v-on:click="select"></th -->
-            <th><input :class="$style.headerRadio" type="radio" v-on:change="select"></th>
+            <th><input :class="$style.headerRadio" type="radio" @click="select"></th>
             <th v-for="(header, index) in properties.headers" v-bind:key="index">
               {{header}}
             </th>
