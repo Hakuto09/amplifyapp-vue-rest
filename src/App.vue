@@ -13,8 +13,9 @@ import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 import { toRaw } from 'vue';
 //import { toRefs, reactive } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
+const fileName = "App.vue";
 
-console.log("App.vue:", "<script>:", " After import: ");
+console.log(fileName, ":<script>:", " After import: ");
 
 /*
 const listener = (data) => {

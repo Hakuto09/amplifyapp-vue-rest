@@ -37,8 +37,10 @@
 <script>
 //import { useStorage } from '@vueuse/core';
 import { ref } from 'vue';
+const fileName = "DgroupList.vue";
 
-console.log("DgroupList.vue:", " After import: ");
+console.log(fileName, ":After import:");
+
 
 export default {
   name: 'DgroupList',

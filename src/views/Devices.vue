@@ -11,8 +11,9 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 //import { getCurrentUser } from 'aws-amplify/auth';
+const fileName = "Devices.vue";
 
-console.log("Devices.vue:", " After import: ");
+console.log(fileName, ":After import:");
 
 /*
 const props = defineProps({

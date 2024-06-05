@@ -38,7 +38,7 @@
 import { ref } from 'vue';
 const fileName = "DeviceList.vue";
 
-console.log(fileName, ":After import: ");
+console.log(fileName, ":After import:");
 
 
 export default {
