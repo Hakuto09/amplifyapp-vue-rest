@@ -102,7 +102,7 @@ export default {
     console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
     let cnt = 0;
-    while (ddata == null && cnt < 1000) {
+    while (ddata == null && cnt < 100000) {
       console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
       cnt++;
     }
