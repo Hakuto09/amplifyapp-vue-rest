@@ -101,8 +101,10 @@ export default {
     let response_ga = getDeviceData(deviceId.value);
     console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
-    while (ddata == null) {
-      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata);
+    let cnt = 0;
+    while (ddata == null && cnt < 1000) {
+      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+      cnt++;
     }
 
     // add graph data.
