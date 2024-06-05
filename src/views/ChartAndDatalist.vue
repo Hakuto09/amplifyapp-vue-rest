@@ -113,8 +113,9 @@ export default {
       let loops = ddata.length;
       for(let i = 0; i < loops; ++i) {
   //      let j = loops - i - 1;
-        let date_nt = ddata[i/*j*/].date.replace('T', ' ');
+        let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
         let date_nt_jst = date_nt.substr(0, 23);
+        console.log(fileName, ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
         labels.push(date_nt_jst);
         data0s.push(ddata[i/*j*/].data0);
