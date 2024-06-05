@@ -103,9 +103,10 @@ export default {
 
     let cnt = 0;
     while (ddata == null && cnt < 100000) {
-      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+//      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
       cnt++;
     }
+    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
 
     // add graph data.
     let loops = ddata.length;
