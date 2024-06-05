@@ -28,17 +28,6 @@ export default {
   data: /*async*/ function() {
     console.log("Dgroups.vue:", " data-function(): In.");
 
-//  if (userId) {
-    const ret = getDgroups(/*userId*/);
-    console.log("Dgroups.vue:", "data-function():", "After getDgroups():", " ret ", ret);
-//  }
-
-    // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
-    // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
-//    let account_id = ref('')
-//    console.log("Dgroups.vue:", "data-function():", " account_id ", account_id);
-//    console.log("Dgroups.vue:", "data-function():", " this.account_id ", this.account_id);
-
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
       console.log("Dgroups.vue:", " getDgroups(): In.");
@@ -69,6 +58,17 @@ export default {
         return error;
       }
     }
+
+    //  if (userId) {
+    const ret = getDgroups(/*userId*/);
+    console.log("Dgroups.vue:", "data-function():", "After getDgroups():", " ret ", ret);
+//  }
+
+    // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
+    // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
+//    let account_id = ref('')
+//    console.log("Dgroups.vue:", "data-function():", " account_id ", account_id);
+//    console.log("Dgroups.vue:", "data-function():", " this.account_id ", this.account_id);
 
     console.log("Dgroups.vue:", "data-function():", "Before return():", " dgroups ", dgroups);
     return {

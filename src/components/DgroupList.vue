@@ -52,7 +52,7 @@ export default {
     }
   },
   data: function() {
-    console.log("DgroupList.vue:", "data-function():", " this.properties ", this.properties);
+    console.log(fileName, ":data-function():", " this.properties ", this.properties);
 
     return {
       selected: null,
