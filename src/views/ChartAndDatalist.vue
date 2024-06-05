@@ -61,6 +61,12 @@ ChartJS.register(
 let ddata;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
 
+// Graph data reset.
+let labels = [];
+let data0s = [];
+let data1s = [];
+let data2s = [];
+
 // データを取得する関数
 async function getDeviceData(deviceId) {
   console.log(fileName, ":getDeviceData(): In.", " deviceId ", deviceId);
@@ -95,14 +101,38 @@ export default {
     let response_ga = getDeviceData(deviceId.value);
     console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
+    // add graph data.
+    let loops = ddata.length;
+    for(let i = 0; i < loops; ++i) {
+//      let j = loops - i - 1;
+      let date_nt = notesFromAPI[i/*j*/].date.replace('T', ' ');
+      let date_nt_jst = date_nt.substr(0, 23);
+
+      labels.push(date_nt_jst);
+      data0s.push(ddata[i/*j*/].data0);
+      data1s.push(ddata[i/*j*/].data1);
+      data2s.push(ddata[i/*j*/].data2);
+    }
+    console.log(fileName, ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
+
     const chartData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: labels,
       datasets: [
         {
-          label: 'Data One',
+          label: 'data0',
           backgroundColor: '#f87979',
-          data: [40, 39, 10, 40, 39, 80, 40]
-        }
+          data: data0s
+        },
+        {
+          label: 'data1',
+          backgroundColor: '#f879f9',
+          data: data1s
+        },
+        {
+          label: 'data2',
+          backgroundColor: '#f8f979',
+          data: data2s
+        },
       ]
     }
 
