@@ -136,26 +136,89 @@ export default {
       datasets: [
         {
           label: 'data0',
+          yAxisID: "yleft",
           backgroundColor: '#f87979',
-          data: data0s
+          fill: false,
+          borderWidth: 2,
+          borderColor: "rgba(2,63,138,0.8)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(2,63,138,0.8)",
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#1D5191",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 2,
+          tension: 0,
+          data: data0s,
         },
         {
           label: 'data1',
-          backgroundColor: '#f879f9',
-          data: data1s
+          yAxisID: "yleft",
+//          backgroundColor: '#f879f9',
+          backgroundColor: "#3A7AC9",
+          fill: false,
+          borderWidth: 2,
+          borderColor: "rgba(201,60,58,0.8)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(201,60,58,0.8)",
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#9A1B19",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 2,
+          tension: 0,
+          data: data1s,
         },
         {
           label: 'data2',
-          backgroundColor: '#f8f979',
-          data: data2s
+          yAxisID: "yright",
+//          backgroundColor: '#f8f979',
+          backgroundColor: "#DB514E",
+          data: data2s,
         },
       ]
     }
 
     const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-    }
+//      responsive: true,
+      responsive: false,    // グラフのスクロール対応
+      maintainAspectRatio: false,
+      spanGaps: true,   //点をつなげる場合
+      scales: {
+        x: {
+          type: 'time',
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須　表示設定 省略時は false
+            position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '日付時刻'           // ★必須　タイトルの文字列
+          },
+          time: {
+            unit: 'minute',
+            displayFormats: {
+              minute: 'YYYY-MM-DD HH:mm'
+            }
+          },
+        },
+        yleft: {
+          stacked: false,
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須　表示設定 省略時は false
+            position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '温度'           // ★必須　タイトルの文字列
+          },
+        },
+        /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+        yright: {
+          stacked: false,
+          position: "right",
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須　表示設定 省略時は false
+            position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '湿度'           // ★必須　タイトルの文字列
+          },
+        },
+      },
+    };
 
     return {
       data: chartData,
