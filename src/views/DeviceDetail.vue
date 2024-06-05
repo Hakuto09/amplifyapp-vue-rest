@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
-    <h2>Device details with device_id: {{ $route.params.device_id }}</h2>
-    <h2>Device details with dgroup_id: {{ dgroupId }}</h2>script if???
+    <!-- h2>Device details with device_id: {{ $route.params.device_id }}</h2 -->
+    <h2>Device details with device_id: {{ deviceId }}</h2>
     <div
       :class="$style.deviceinfo">
       <table>
@@ -60,6 +60,9 @@ console.log("DeviceDetail.vue:", "After localStorage.getItem():", " dgroupId.val
 let response_ga = getDevices(dgroupId.value);
 console.log("DeviceDetail.vue:", "After getDevices()", " devices ", devices, " response_ga ", response_ga);
 
+const deviceId = ref('');
+deviceId.value = localStorage.getItem('deviceId');
+console.log("DeviceDetail.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
 export default {
   name: 'DeviceDetail',
@@ -70,6 +73,7 @@ export default {
     return {
       devices: devices,
       dgroupId: dgroupId.value,
+      deviceId: deviceId.value,
     }
   }
 }

@@ -63,14 +63,11 @@ export default {
 //      const msg = useStorage('msg', 'Hello World!')
 //      console.log("DeviceList.vue:", "showMoreInformation():", " msg.value ", msg.value);
 
-      const inputText = ref('');
-      const saveLocal = (text) => {
-        localStorage.setItem('inputText', text);
-        console.log("DeviceList.vue:", "saveLocal():", "After localStorage.setItem():", " inputText.value ", inputText.value);
+      const deviceId = ref('');
+      const saveLocal = (deviceId) => {
+        localStorage.setItem('deviceId', deviceId);
+        console.log("DeviceList.vue:", "saveLocal():", "After localStorage.setItem():", " deviceId ", deviceId);
       }
-      saveLocal("Test");
-      inputText.value = localStorage.getItem('inputText');
-      console.log("DeviceList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
 
       if (!this.selected) {
         alert('No data selected...')
@@ -79,6 +76,10 @@ export default {
       const selected = this.selected
       console.log("DeviceList.vue:", "showMoreInformation():", " this ", this);
       console.log("DeviceList.vue:", "showMoreInformation():", " selected ", selected);
+
+      saveLocal(selected['device_id']);
+      deviceId.value = localStorage.getItem('device_id');
+      console.log("DeviceList.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
 //      this.$localStorage.set('devicelist_id', selected['id'])
 //      console.log("DeviceList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
