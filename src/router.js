@@ -8,6 +8,7 @@ import Routing from './views/Routing.vue'
 import Dgroups from './views/Dgroups.vue'
 import Devices from './views/Devices.vue'
 import DeviceDetail from './views/DeviceDetail.vue'
+import ChartAndDatalist from './views/ChartAndDatalist.vue'
 
 //import Vue from 'vue'
 //import Login from './views/Login.vue'
@@ -90,6 +91,12 @@ const routes = [
     path: '/devices/:id',
     name: 'device-detail',
     component: DeviceDetail,
+//    meta: { requiresAuth: true},
+  },
+  {
+    path: '/chart',
+    name: 'chart',
+    component: ChartAndDatalist,
 //    meta: { requiresAuth: true},
   },
 ]
