@@ -101,26 +101,28 @@ export default {
     let response_ga = getDeviceData(deviceId.value);
     console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
-    let cnt = 0;
-    while (ddata == null && cnt < 100000) {
-//      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
-      cnt++;
-    }
-    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+//    let cnt = 0;
+//    while (ddata == null && cnt < 100000) {
+////      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+//      cnt++;
+//    }
+//    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
 
-    // add graph data.
-    let loops = ddata.length;
-    for(let i = 0; i < loops; ++i) {
-//      let j = loops - i - 1;
-      let date_nt = ddata[i/*j*/].date.replace('T', ' ');
-      let date_nt_jst = date_nt.substr(0, 23);
+    if (ddata != null) {
+      // add graph data.
+      let loops = ddata.length;
+      for(let i = 0; i < loops; ++i) {
+  //      let j = loops - i - 1;
+        let date_nt = ddata[i/*j*/].date.replace('T', ' ');
+        let date_nt_jst = date_nt.substr(0, 23);
 
-      labels.push(date_nt_jst);
-      data0s.push(ddata[i/*j*/].data0);
-      data1s.push(ddata[i/*j*/].data1);
-      data2s.push(ddata[i/*j*/].data2);
+        labels.push(date_nt_jst);
+        data0s.push(ddata[i/*j*/].data0);
+        data1s.push(ddata[i/*j*/].data1);
+        data2s.push(ddata[i/*j*/].data2);
+      }
+      console.log(fileName, ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
     }
-    console.log(fileName, ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
 
     const chartData = {
       labels: labels,
