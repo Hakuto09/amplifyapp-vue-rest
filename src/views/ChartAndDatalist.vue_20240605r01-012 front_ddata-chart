@@ -109,12 +109,6 @@ export default {
 //    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
 
     if (ddata != null) {
-      // Graph data reset.
-      labels = [];
-      data0s = [];
-      data1s = [];
-      data2s = [];
-
       // add graph data.
       let loops = ddata.length;
       for(let i = 0; i < loops; ++i) {
