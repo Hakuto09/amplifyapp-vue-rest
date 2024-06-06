@@ -11,6 +11,7 @@ import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
+const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
 
