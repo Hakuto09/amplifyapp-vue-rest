@@ -3,7 +3,7 @@
     <!-- h2>Device details with device_id: {{ $route.params.device_id }}</h2 -->
     <h2>Chart and data list of device_id: {{ deviceId }}</h2>
     <div>
-      <Line width="1280" height="720" :data="data" :options="options" />
+      <Line :data="data" :options="options" />
     </div>
     <div
       :class="$style.deviceinfo">
@@ -184,8 +184,8 @@ export default {
     }
 
     const chartOptions = {
-      responsive: true,    // グラフのスクロール対応
-//      responsive: false,    // グラフのスクロール対応
+//      responsive: true,
+      responsive: false,    // グラフのスクロール対応
       maintainAspectRatio: false,
       spanGaps: true,   //点をつなげる場合
       scales: {
