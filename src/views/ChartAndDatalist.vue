@@ -41,7 +41,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  TimeScale,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 const fileName = "ChartAndDatalist.vue";
@@ -55,7 +56,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  TimeScale,
 )
 
 let ddata;
