@@ -45,6 +45,8 @@ import {
   TimeScale,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
+import 'chartjs-adapter-moment';
+//import moment from "moment";
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
