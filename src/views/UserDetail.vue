@@ -31,31 +31,32 @@
 
 <script>
 import axios from 'axios'
+const fileName = "UserDetail.vue";
 
 let users;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
 
 // 実際にデータを取得する getAccounts 関数
 async function getAccounts() {
-  console.log("UserDetail.vue:", " getAccounts(): In.");
+  console.log(fileName, ":getAccounts(): In.");
   let response;
 
   try {
     response = await axios.get(url);
-    console.log("UserDetail.vue:", "getAccounts():", " response.status ", response.status)
-    console.log("UserDetail.vue:", "getAccounts():", " response.data ", response.data);
+    console.log(fileName, ":getAccounts():", " response.status ", response.status)
+    console.log(fileName, ":getAccounts():", " response.data ", response.data);
     users = response.data;
     return response;
   }
   catch (error) {
-    console.error("UserDetail.vue:", "getAccounts():", " error ", error);
+    console.error(fileName, ":getAccounts():", " error ", error);
     return error;
   }
 }
 
 // getAccounts を呼び出してデータを読み込む
 let response_ga = getAccounts();
-console.log("UserDetail.vue:", "After getAccounts()", " users ", users, " response_ga ", response_ga);
+console.log(fileName, ":After getAccounts()", " users ", users, " response_ga ", response_ga);
 
 //users = response_ga.data;
 
@@ -103,12 +104,12 @@ console.log("UserDetail.vue:", "After getAccounts()", " users ", users, " respon
 //  }
 //]
 
-console.log("UserDetail.vue:", " users ", users);
+console.log(fileName, ":users ", users);
 
 export default {
   name: 'UserDetail',
   data: function() {
-    console.log("UserDetail.vue:", "data-function():", " users ", users);
+    console.log(fileName, ":data-function():", " users ", users);
     // 返却するオブジェクト users は本コンポーネントで表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     return {

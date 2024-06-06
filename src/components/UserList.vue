@@ -41,8 +41,9 @@
 
 <script>
 import { ref } from 'vue';
+const fileName = "UserList.vue";
 
-console.log("UserList.vue:", " After import: ");
+console.log(fileName, ": After import: ");
 
 export default {
   name: 'UserList',
@@ -60,17 +61,17 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("UserList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log(fileName, ":select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
 //        this.selected.push(this.items[i].account_id)
-        console.log("UserList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
       const inputText = ref('');
       inputText.value = localStorage.getItem('inputText');
-      console.log("UserList.vue:", "After localStorage.getItem():", " inputText.value ", inputText.value);
+      console.log(fileName, ":After localStorage.getItem():", " inputText.value ", inputText.value);
 
       // アロー関数で定義すると `this` で `selected` が参照できない｡
       // 詳細は https://qiita.com/_Keitaro_/items/d48733a19c10889e2365 を参照のこと｡
@@ -79,10 +80,10 @@ export default {
         return false
       }
       const selected = this.selected
-      console.log("UserList.vue:", "showMoreInformation():", " this ", this);
-//      console.log("UserList.vue:", "showMoreInformation():", " this.selectedIndex ", this.selectedIndex);
-//      console.log("UserList.vue:", "showMoreInformation():", " this.select.selectedIndex ", this.select.selectedIndex);
-      console.log("UserList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log(fileName, ":showMoreInformation():", " this ", this);
+//      console.log(fileName, ":showMoreInformation():", " this.selectedIndex ", this.selectedIndex);
+//      console.log(fileName, ":showMoreInformation():", " this.select.selectedIndex ", this.select.selectedIndex);
+      console.log(fileName, ":showMoreInformation():", " selected ", selected);
       this.$router.push({
         name: 'user-detail',
         params: {

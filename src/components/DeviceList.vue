@@ -62,20 +62,20 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("DeviceList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log(fileName, ":select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
-        console.log("DeviceList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
 //      const msg = useStorage('msg', 'Hello World!')
-//      console.log("DeviceList.vue:", "showMoreInformation():", " msg.value ", msg.value);
+//      console.log(fileName, ":showMoreInformation():", " msg.value ", msg.value);
 
       const deviceId = ref('');
       const saveLocal = (deviceId) => {
         localStorage.setItem('deviceId', deviceId);
-        console.log("DeviceList.vue:", "saveLocal():", "After localStorage.setItem():", " deviceId ", deviceId);
+        console.log(fileName, ":saveLocal():", "After localStorage.setItem():", " deviceId ", deviceId);
       }
 
       if (!this.selected) {
@@ -83,15 +83,15 @@ export default {
         return false
       }
       const selected = this.selected
-      console.log("DeviceList.vue:", "showMoreInformation():", " this ", this);
-      console.log("DeviceList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log(fileName, ":showMoreInformation():", " this ", this);
+      console.log(fileName, ":showMoreInformation():", " selected ", selected);
 
       saveLocal(selected['device_id']);
       deviceId.value = localStorage.getItem('deviceId');
-      console.log("DeviceList.vue:", "After localStorage.getItem():", " deviceId.value ", deviceId.value);
+      console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
 //      this.$localStorage.set('devicelist_id', selected['id'])
-//      console.log("DeviceList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
+//      console.log(fileName, ":After localStorage.set():", " selected['id'] ", selected['id']);
 
       this.$router.push({
         name: 'device-detail',

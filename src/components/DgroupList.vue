@@ -63,22 +63,22 @@ export default {
   methods: {
     select: function() {
       this.selected = []
-      console.log("DgroupList.vue:", "select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+      console.log(fileName, ":select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
       for (let i in this.item) {
         this.selected.push(this.items[i].id)
-        console.log("DgroupList.vue:", "select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+        console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
     showMoreInformation: function() {
-      console.log("DgroupList.vue:", "showMoreInformation():", " this.properties ", this.properties);
+      console.log(fileName, ":showMoreInformation():", " this.properties ", this.properties);
 
 //      const msg = useStorage('msg', 'Hello World!')
-//      console.log("DgroupList.vue:", "showMoreInformation():", " msg.value ", msg.value);
+//      console.log(fileName, ":showMoreInformation():", " msg.value ", msg.value);
 
       const dgroupId = ref('');
       const saveLocal = (dgroupId) => {
         localStorage.setItem('dgroupId', dgroupId);
-        console.log("DgroupList.vue:", "saveLocal():", "After localStorage.setItem():", " dgroupId ", dgroupId);
+        console.log(fileName, ":saveLocal():", "After localStorage.setItem():", " dgroupId ", dgroupId);
       }
 
       if (!this.selected) {
@@ -86,15 +86,15 @@ export default {
         return false
       }
       const selected = this.selected
-      console.log("DgroupList.vue:", "showMoreInformation():", " this ", this);
-      console.log("DgroupList.vue:", "showMoreInformation():", " selected ", selected);
+      console.log(fileName, ":showMoreInformation():", " this ", this);
+      console.log(fileName, ":showMoreInformation():", " selected ", selected);
 
       saveLocal(selected['dgroup_id']);
       dgroupId.value = localStorage.getItem('dgroupId');
-      console.log("DgroupList.vue:", "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+      console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
 //      this.$localStorage.set('dgrouplist_id', selected['id'])
-//      console.log("DgroupList.vue:", "After localStorage.set():", " selected['id'] ", selected['id']);
+//      console.log(fileName, ":After localStorage.set():", " selected['id'] ", selected['id']);
 
       /*
       this.$router.push({
