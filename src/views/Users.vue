@@ -8,7 +8,7 @@
 // @ を指定することで `/src` の代替となる
 import UserList from '@/components/UserList.vue'
 import axios from 'axios'
-const fileNmae = "Users.vue";
+const fileName = "Users.vue";
 
 let users;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/accounts';
