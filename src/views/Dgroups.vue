@@ -12,7 +12,7 @@ import axios from 'axios'
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
 
-console.log("Dgroups.vue:", " After import: ");
+console.log(fileName, ":After import: ");
 
 let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -26,17 +26,17 @@ export default {
     DgroupList
   },
   data: /*async*/ function() {
-    console.log("Dgroups.vue:", " data-function(): In.");
+    console.log(fileName, ":data-function(): In.");
 
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
-      console.log("Dgroups.vue:", " getDgroups(): In.");
+      console.log(fileName, ":getDgroups(): In.");
 
     //  let authUser = await Amplify.Auth.getCurrentUser();
     //  let authUser = await getCurrentUser();
       const { username, userId, signInDetails } = await getCurrentUser();
-    //  console.log("Dgroups.vue:", "getDgroups():", " authUser ", authUser);
-      console.log("Dgroups.vue:", "getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+    //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
+      console.log(fileName, ":getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
       let response_api;
 
@@ -44,33 +44,33 @@ export default {
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
         response_api = await axios.get(url + userId);
-        console.log("Dgroups.vue:", "getDgroups():", " response_api.status ", response_api.status)
-        console.log("Dgroups.vue:", "getDgroups():", " response_api.data ", response_api.data);
+        console.log(fileName, ":getDgroups():", " response_api.status ", response_api.status)
+        console.log(fileName, ":getDgroups():", " response_api.data ", response_api.data);
         dgroups = response_api.data;
         for (let i = 0; i < dgroups.length; i++) {
           dgroups[i].id = i;
         }
-        console.log("Dgroups.vue:", "getDgroups():", " dgroups ", dgroups);
+        console.log(fileName, ":getDgroups():", " dgroups ", dgroups);
         return response_api;
       }
       catch (error) {
-        console.error("Dgroups.vue:", "getDgroups():", " error ", error);
+        console.error(fileName, ":getDgroups():", " error ", error);
         return error;
       }
     }
 
     //  if (userId) {
     const ret = getDgroups(/*userId*/);
-    console.log("Dgroups.vue:", "data-function():", "After getDgroups():", " ret ", ret);
+    console.log(fileName, ":data-function():", "After getDgroups():", " ret ", ret);
 //  }
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
 //    let account_id = ref('')
-//    console.log("Dgroups.vue:", "data-function():", " account_id ", account_id);
-//    console.log("Dgroups.vue:", "data-function():", " this.account_id ", this.account_id);
+//    console.log(fileName, ":data-function():", " account_id ", account_id);
+//    console.log(fileName, ":data-function():", " this.account_id ", this.account_id);
 
-    console.log("Dgroups.vue:", "data-function():", "Before return():", " dgroups ", dgroups);
+    console.log(fileName, ":data-function():", "Before return():", " dgroups ", dgroups);
     return {
       properties: {
         headers: [
@@ -85,9 +85,33 @@ export default {
   },
   methods: function() {
 //    let account_id = ref('')
-//    console.log("Dgroups.vue:", "methods-function():", " account_id ", account_id);
-    console.log("Dgroups.vue:", "methods-function():", " this.account_id ", this.account_id);
-  }
+//    console.log(fileName, ":methods-function():", " account_id ", account_id);
+    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
+  },
+  beforeCreate: function() {
+    console.log(fileName, ":beforeCreate-function(): In.");
+  },
+  created: function() {
+    console.log(fileName, ":created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log(fileName, ":beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log(fileName, ":mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log(fileName, ":beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log(fileName, ":updated-function(): In.");
+  },
+  beforeUnmount: function() {
+    console.log(fileName, ":beforeUnmount-function(): In.");
+  },
+  unmounted: function() {
+    console.log(fileName, ":unmounted-function(): In.");
+  },
 }
 </script>
 

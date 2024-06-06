@@ -55,6 +55,7 @@ export default {
     console.log(fileName, ":data-function():", " this.properties ", this.properties);
     console.log(fileName, ":data-function():", " toRaw(this.properties).devices ", toRaw(this.properties).devices);
 
+    console.log(fileName, ":data-function():", "Before return():");
     return {
       selected: null,
     }

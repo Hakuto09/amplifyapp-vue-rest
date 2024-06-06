@@ -96,7 +96,31 @@ export default {
 //    let account_id = ref('')
 //    console.log(fileName, ":methods-function():", " account_id ", account_id);
     console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
-  }
+  },
+  beforeCreate: function() {
+    console.log(fileName, ":beforeCreate-function(): In.");
+  },
+  created: function() {
+    console.log(fileName, ":created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log(fileName, ":beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log(fileName, ":mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log(fileName, ":beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log(fileName, ":updated-function(): In.");
+  },
+  beforeUnmount: function() {
+    console.log(fileName, ":beforeUnmount-function(): In.");
+  },
+  unmounted: function() {
+    console.log(fileName, ":unmounted-function(): In.");
+  },
 }
 </script>
 

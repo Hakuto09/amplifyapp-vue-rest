@@ -74,12 +74,37 @@ export default {
     deviceId.value = localStorage.getItem('deviceId');
     console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
+    console.log(fileName, ":data-function():", "Before return():", " devices ", devices, " dgroupId.value ", dgroupId.value, " deviceId.value ", deviceId.value);
     return {
       devices: devices,
       dgroupId: dgroupId.value,
       deviceId: deviceId.value,
     }
-  }
+  },
+  beforeCreate: function() {
+    console.log(fileName, ":beforeCreate-function(): In.");
+  },
+  created: function() {
+    console.log(fileName, ":created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log(fileName, ":beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log(fileName, ":mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log(fileName, ":beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log(fileName, ":updated-function(): In.");
+  },
+  beforeUnmount: function() {
+    console.log(fileName, ":beforeUnmount-function(): In.");
+  },
+  unmounted: function() {
+    console.log(fileName, ":unmounted-function(): In.");
+  },
 }
 </script>
 

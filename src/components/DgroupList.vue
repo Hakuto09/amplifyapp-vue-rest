@@ -56,6 +56,7 @@ export default {
     console.log(fileName, ":data-function():", " this.properties ", this.properties);
     console.log(fileName, ":data-function():", " toRaw(this.properties).dgroups ", toRaw(this.properties).dgroups);
 
+    console.log(fileName, ":data-function():", "Before return():");
     return {
       selected: null,
     }
@@ -105,7 +106,31 @@ export default {
       })
       */
     }
-  }
+  },
+  beforeCreate: function() {
+    console.log(fileName, ":beforeCreate-function(): In.");
+  },
+  created: function() {
+    console.log(fileName, ":created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log(fileName, ":beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log(fileName, ":mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log(fileName, ":beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log(fileName, ":updated-function(): In.");
+  },
+  beforeUnmount: function() {
+    console.log(fileName, ":beforeUnmount-function(): In.");
+  },
+  unmounted: function() {
+    console.log(fileName, ":unmounted-function(): In.");
+  },
 }
 </script>
 
