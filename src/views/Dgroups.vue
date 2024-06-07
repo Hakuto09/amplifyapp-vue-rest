@@ -114,7 +114,7 @@ export default {
 //  methods: function() {
   methods: {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
-    console.log(fileName, ":methods:", "In");
+//    console.log(fileName, ":methods:", "In");
 
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
