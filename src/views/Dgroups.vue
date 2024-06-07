@@ -19,6 +19,7 @@ console.log(fileName, ":After import: ");
 let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
+let userInfo/* = { username, userId, signInDetails }*/; 
 
 export default {
   name: 'Dgroups',
@@ -119,7 +120,7 @@ export default {
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
-      let userInfo/* = { username, userId, signInDetails }*/; 
+//      let userInfo/* = { username, userId, signInDetails }*/; 
       const getCurrentUserlap = async () => {
         console.log(fileName, ":methods:", ":listUpdate():", "Before await getCurrentUser():");
         userInfo = await getCurrentUser();
@@ -165,7 +166,7 @@ export default {
       }
     )
 
-    let userInfo/* = { username, userId, signInDetails }*/; 
+//    let userInfo/* = { username, userId, signInDetails }*/; 
     const getCurrentUserlap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
       userInfo = await getCurrentUser();
@@ -175,8 +176,8 @@ export default {
     console.log(fileName, ":beforeCreate-function(): Mid.");
     let response_api;
     const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " this.userInfo ", this.userInfo);
-      response_api = await axios.get(url + this.userInfo.userId);
+      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " userInfo ", userInfo);
+      response_api = await axios.get(url + userInfo.userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
