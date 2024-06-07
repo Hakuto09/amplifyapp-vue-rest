@@ -95,8 +95,9 @@ export default {
     function myPromise() {
       return new Promise(function(resolve/*, reject*/) {
         setTimeout(function() {
-            resolve(fileName, ":beforeCreate-function():", "2nd")
-        }, 3000)
+          resolve("Dgroups.vue:beforeCreate-function():2nd")
+//          resolve(fileName, ":beforeCreate-function():", "2nd")
+        }, 10000)
       })
     }
     console.log(fileName, ":beforeCreate-function():", "1st");
