@@ -53,12 +53,12 @@ export default {
           dgroups[i].id = i;
         }
         console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
-        getDgroupsFinFlag = 1;
+//        getDgroupsFinFlag = 1;
         return response_api;
       }
       catch (error) {
         console.error(fileName, ":data-function():", ":getDgroups():", " error ", error);
-        getDgroupsFinFlag = 1;
+//        getDgroupsFinFlag = 1;
         return error;
       }
     }
