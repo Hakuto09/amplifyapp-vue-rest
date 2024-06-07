@@ -78,16 +78,16 @@ export default {
       })
     }
     console.log(fileName, ":data-function():", "1st");
-    while (!getDgroupsFinFlag) {
+//    while (!getDgroupsFinFlag) {
       let cnt = 0;
       myPromise().then(
         function(second) {
           console.log(second)
-          console.log(fileName, ":data-function():", "3rd", " cnt ", cnt)
+          console.log(fileName, ":data-function():", "3rd", " cnt ", cnt, " getDgroupsFinFlag ", getDgroupsFinFlag)
           cnt++;
         }
       )
-    }
+//    }
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
