@@ -34,30 +34,30 @@ export default {
 
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
-      console.log(fileName, ":getDgroups(): In.");
+      console.log(fileName, ":data-function():", ":getDgroups(): In.");
 
-      console.log(fileName, ":getDgroups():", "Before await getCurrentUser():");
+      console.log(fileName, ":data-function():", ":getDgroups():", "Before await getCurrentUser():");
       const { username, userId, signInDetails } = await getCurrentUser();
     //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
-      console.log(fileName, ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+      console.log(fileName, ":data-function():", ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
 //      let response_api;
 
       try {
-        console.log(fileName, ":getDgroups():", "Before await axios.get()");
+        console.log(fileName, ":data-function():", ":getDgroups():", "Before await axios.get()");
         response_api = await axios.get(url + userId);
-        console.log(fileName, ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
-        console.log(fileName, ":getDgroups():", " response_api.data ", response_api.data);
+        console.log(fileName, ":data-function():", ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
+        console.log(fileName, ":data-function():", ":getDgroups():", " response_api.data ", response_api.data);
         dgroups = response_api.data;
         for (let i = 0; i < dgroups.length; i++) {
           dgroups[i].id = i;
         }
-        console.log(fileName, ":getDgroups():", " dgroups ", dgroups);
+        console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
         getDgroupsFinFlag = 1;
         return response_api;
       }
       catch (error) {
-        console.error(fileName, ":getDgroups():", " error ", error);
+        console.error(fileName, ":data-function():", ":getDgroups():", " error ", error);
         getDgroupsFinFlag = 1;
         return error;
       }
@@ -70,16 +70,18 @@ export default {
 
     function myPromise() {
       return new Promise(function(resolve/*, reject*/) {
-        for (let i = 0; i < 10; i++) {
+//        for (let i = 0; i < 10; i++) {
           setTimeout(function() {
-            if (getDgroupsFinFlag) resolve("Dgroups.vue: data-function():2nd")
-          }, 1000)
-        }
+           /*if (getDgroupsFinFlag)*/ resolve("Dgroups.vue: data-function(): 2nd")
+          }, 10000)
+//        }
       })
     }
+    console.log(fileName, ":data-function():", "1st");
     myPromise().then(
-      function(word) {
-        console.log(word)
+      function(second) {
+        console.log(second)
+        console.log(fileName, ":data-function():", "3rd")
       }
     )
 
