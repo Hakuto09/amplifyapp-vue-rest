@@ -91,6 +91,11 @@ export default {
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
+    const { username, userId, signInDetails } = getCurrentUser();
+    console.log(fileName, ":beforeCreate-function():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+    let response_api;
+    response_api = axios.get(url + userId);
+    console.log(fileName, ":beforeCreate-function():", " response_api.status ", response_api.status);
   },
   created: function() {
     console.log(fileName, ":created-function(): In.");
