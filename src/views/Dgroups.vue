@@ -33,19 +33,17 @@ export default {
     async function getDgroups(/*userId*/) {
       console.log(fileName, ":getDgroups(): In.");
 
-    //  let authUser = await Amplify.Auth.getCurrentUser();
-    //  let authUser = await getCurrentUser();
+      console.log(fileName, ":getDgroups():", "Before await getCurrentUser():");
       const { username, userId, signInDetails } = await getCurrentUser();
     //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
-      console.log(fileName, ":getDgroups():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+      console.log(fileName, ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
       let response_api;
 
       try {
-    //    response_api = await axios.get(url + properties.account_id);
-    //    response_api = await axios.get(url + this.account_id);
+        console.log(fileName, ":getDgroups():", "Before await axios.get()");
         response_api = await axios.get(url + userId);
-        console.log(fileName, ":getDgroups():", " response_api.status ", response_api.status)
+        console.log(fileName, ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
         console.log(fileName, ":getDgroups():", " response_api.data ", response_api.data);
         dgroups = response_api.data;
         for (let i = 0; i < dgroups.length; i++) {
