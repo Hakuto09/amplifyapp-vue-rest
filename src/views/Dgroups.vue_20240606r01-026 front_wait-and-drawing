@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.component">
     <DgroupList :properties="properties" />
-    <button type="is-info" @click="listUpdate">listUpdate</button>
   </div>
 </template>
 
@@ -111,39 +110,10 @@ export default {
       }
     }
   },
-//  methods: function() {
-  methods: {
-//    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
-    console.log(fileName, ":methods:", "In");
-
-    listUpdate: function() {
-      console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
-
-      let userId/* = { username, userId, signInDetails }*/; 
-      const getCurrentUserlap = async () => {
-        console.log(fileName, ":methods:", ":listUpdate():", "Before await getCurrentUser():");
-        userId = await getCurrentUser();
-        console.log(fileName, ":methods:", ":listUpdate():", "After await getCurrentUser():", " userId ", userId);
-      }
-      getCurrentUserlap();
-      console.log(fileName, ":methods:", ":listUpdate():", "Mid.");
-      let response_api;
-      const axiosGetLap = async () => {
-        console.log(fileName, ":methods:", ":listUpdate():", "Before await axios.get():");
-        response_api = await axios.get(url + userId);
-        console.log(fileName, ":methods:", ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
-        dgroups = response_api.data;
-        for (let i = 0; i < dgroups.length; i++) {
-          dgroups[i].id = i;
-        }
-        console.log(fileName, ":methods:", ":listUpdate():", ":getDgroups():", " dgroups ", dgroups);
-  //        getDgroupsFinFlag = 1;
-        // this.$setを使ってリアクティブにする
-        this.$set(this.dgroups, 'dgroups', dgroups);
-      }
-      axiosGetLap();
-      console.log(fileName, ":methods:", ":listUpdate():", "Out.");
-    }
+  methods: function() {
+//    let account_id = ref('')
+//    console.log(fileName, ":methods-function():", " account_id ", account_id);
+    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
