@@ -139,7 +139,8 @@ export default {
         console.log(fileName, ":methods:", ":listUpdate():", ":getDgroups():", " dgroups ", dgroups);
   //        getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
-        this.$set(this.dgroups, 'dgroups', dgroups);
+//        this.$set(this.dgroups, 'dgroups', dgroups);
+        this.dgroups = dgroups;
       }
       axiosGetLap();
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
