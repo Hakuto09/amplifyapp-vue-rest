@@ -95,12 +95,14 @@ export default {
       userId = await getCurrentUser();
       console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userId ", userId);
     }
+    console.log(fileName, ":beforeCreate-function(): Mid.");
     let response_api;
     async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await axios.get():");
       response_api = await axios.get(url + userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
     }
+    console.log(fileName, ":beforeCreate-function(): Out.");
   },
   created: function() {
     console.log(fileName, ":created-function(): In.");
