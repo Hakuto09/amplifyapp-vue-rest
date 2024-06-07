@@ -129,7 +129,7 @@ export default {
       console.log(fileName, ":methods:", ":listUpdate():", "Mid.");
       let response_api;
       const axiosGetLap = async () => {
-        console.log(fileName, ":methods:", ":listUpdate():", "Before await axios.get():", " url + userId ", url + userId);
+        console.log(fileName, ":methods:", ":listUpdate():", "Before await axios.get():", " url + userId ", url + userInfo.userId);
         response_api = await axios.get(url + userInfo.userId);
         console.log(fileName, ":methods:", ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
         dgroups = response_api.data;
@@ -165,7 +165,7 @@ export default {
       }
     )
 
-    let userId/* = { username, userId, signInDetails }*/; 
+    let userInfo/* = { username, userId, signInDetails }*/; 
     const getCurrentUserlap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
       userInfo = await getCurrentUser();
