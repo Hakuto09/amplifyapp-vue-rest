@@ -30,7 +30,7 @@ export default {
     console.log(fileName, ":data-function(): In.");
 
     let response_api;
-//    let getDgroupsFinFlag = 0;
+    let getDgroupsFinFlag = 0;
 
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
@@ -53,12 +53,12 @@ export default {
           dgroups[i].id = i;
         }
         console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
-//        getDgroupsFinFlag = 1;
+        getDgroupsFinFlag = 1;
         return response_api;
       }
       catch (error) {
         console.error(fileName, ":data-function():", ":getDgroups():", " error ", error);
-//        getDgroupsFinFlag = 1;
+        getDgroupsFinFlag = 1;
         return error;
       }
     }
@@ -73,17 +73,21 @@ export default {
 //        for (let i = 0; i < 10; i++) {
           setTimeout(function() {
            /*if (getDgroupsFinFlag)*/ resolve("Dgroups.vue: data-function(): 2nd")
-          }, 10000)
+          }, 1000)
 //        }
       })
     }
     console.log(fileName, ":data-function():", "1st");
-    myPromise().then(
-      function(second) {
-        console.log(second)
-        console.log(fileName, ":data-function():", "3rd")
-      }
-    )
+    while (!getDgroupsFinFlag) {
+      let cnt = 0;
+      myPromise().then(
+        function(second) {
+          console.log(second)
+          console.log(fileName, ":data-function():", "3rd", " cnt ", cnt)
+          cnt++;
+        }
+      )
+    }
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
