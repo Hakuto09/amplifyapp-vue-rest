@@ -1,0 +1,282 @@
+<template>
+  <div :class="$style.component">
+    <!-- h2>Device details with device_id: {{ $route.params.device_id }}</h2 -->
+    <h2>Chart and data list of device_id: {{ deviceId }}</h2>
+    <div>
+      <Line width="1280" height="720" :data="data" :options="options" />
+    </div>
+    <div
+      :class="$style.deviceinfo">
+      <table>
+        <th :class="$style.item">
+          ITEM
+        </th>
+        <th :class="$style.value">
+          VALUE
+        </th>
+        <!-- devices のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
+        <!-- tr
+          v-for="(value, name) in devices[$route.params.id/* - 1*/]"
+          :key="name">
+          <td :class="$style.item">
+            {{ name }}
+          </td>
+          <td :class="$style.value">
+            {{ value }}
+          </td>
+        </tr -->
+      </table>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import { /*defineProps,*/ ref } from 'vue';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale,
+} from 'chart.js'
+import { Line } from 'vue-chartjs'
+import 'chartjs-adapter-moment';
+//import moment from "moment";
+const fileName = "ChartAndDatalist.vue";
+
+console.log(fileName, ":After import:");
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale,
+)
+
+let ddata;
+const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
+
+// Graph data reset.
+let labels = [];
+let data0s = [];
+let data1s = [];
+let data2s = [];
+
+// データを取得する関数
+async function getDeviceData(deviceId) {
+  console.log(fileName, ":getDeviceData(): In.", " deviceId ", deviceId);
+  let response;
+
+  try {
+    response = await axios.get(url + deviceId);
+    console.log(fileName, ":getDeviceData():", " response.status ", response.status)
+    console.log(fileName, ":getDeviceData():", " response.data ", response.data);
+    ddata = response.data;
+    return response;
+  }
+  catch (error) {
+    console.error(fileName, ":getDeviceData():", " error ", error);
+    return error;
+  }
+}
+
+export default {
+  name: 'ChartAndDatalist',
+  components: {
+    Line
+  },
+  data: function() {
+    console.log(fileName, ":data-function(): In.");
+
+    const deviceId = ref('');
+    deviceId.value = localStorage.getItem('deviceId');
+    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
+
+    // getDevices を呼び出してデータを読み込む
+    let response_ga = getDeviceData(deviceId.value);
+    console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
+
+//    let cnt = 0;
+//    while (ddata == null && cnt < 100000) {
+////      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+//      cnt++;
+//    }
+//    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+
+    if (ddata != null) {
+      // Graph data reset.
+      labels = [];
+      data0s = [];
+      data1s = [];
+      data2s = [];
+
+      // add graph data.
+      let loops = ddata.length;
+      for(let i = 0; i < loops; ++i) {
+  //      let j = loops - i - 1;
+        let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
+        let date_nt_jst = date_nt.substr(0, 23);
+        console.log(fileName, ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+
+        labels.push(date_nt_jst);
+        data0s.push(ddata[i/*j*/].data0);
+        data1s.push(ddata[i/*j*/].data1);
+        data2s.push(ddata[i/*j*/].data2);
+      }
+      console.log(fileName, ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
+    }
+
+    const chartData = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'data0',
+          yAxisID: "yleft",
+          backgroundColor: '#f87979',
+          fill: false,
+          borderWidth: 2,
+          borderColor: "rgba(2,63,138,0.8)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(2,63,138,0.8)",
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#1D5191",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 2,
+          tension: 0,
+          data: data0s,
+        },
+        {
+          label: 'data1',
+          yAxisID: "yleft",
+//          backgroundColor: '#f879f9',
+          backgroundColor: "#3A7AC9",
+          fill: false,
+          borderWidth: 2,
+          borderColor: "rgba(201,60,58,0.8)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(201,60,58,0.8)",
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "#9A1B19",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 2,
+          tension: 0,
+          data: data1s,
+        },
+        {
+          label: 'data2',
+          yAxisID: "yright",
+//          backgroundColor: '#f8f979',
+          backgroundColor: "#DB514E",
+          data: data2s,
+        },
+      ]
+    }
+
+    const chartOptions = {
+      responsive: true,    // グラフのスクロール対応
+//      responsive: false,    // グラフのスクロール対応
+      maintainAspectRatio: false,
+      spanGaps: true,   //点をつなげる場合
+      scales: {
+        x: {
+          type: 'time',
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須 表示設定 省略時は false
+            position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '日付時刻'           // ★必須 タイトルの文字列
+          },
+          time: {
+            unit: 'minute',
+            displayFormats: {
+              minute: 'YYYY-MM-DD HH:mm'
+            }
+          },
+        },
+        yleft: {
+          stacked: false,
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須 表示設定 省略時は false
+            position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '温度'           // ★必須 タイトルの文字列
+          },
+        },
+        /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+        yright: {
+          stacked: false,
+          position: "right",
+          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+            display: true,             // ★必須 表示設定 省略時は false
+            position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+            text: '湿度'           // ★必須 タイトルの文字列
+          },
+        },
+      },
+    };
+
+    console.log(fileName, ":data-function():", "Before return():", " chartData ", chartData, " chartOptions ", chartOptions);
+    return {
+      data: chartData,
+      options: chartOptions,
+    }
+  },
+  beforeCreate: function() {
+    console.log(fileName, ":beforeCreate-function(): In.");
+  },
+  created: function() {
+    console.log(fileName, ":created-function(): In.");
+  },
+  beforeMount: function() {
+    console.log(fileName, ":beforeMount-function(): In.");
+  },
+  mounted: function() {
+    console.log(fileName, ":mounted-function(): In.");
+  },
+  beforeUpdate: function() {
+    console.log(fileName, ":beforeUpdate-function(): In.");
+  },
+  updated: function() {
+    console.log(fileName, ":updated-function(): In.");
+  },
+  beforeUnmount: function() {
+    console.log(fileName, ":beforeUnmount-function(): In.");
+  },
+  unmounted: function() {
+    console.log(fileName, ":unmounted-function(): In.");
+  },
+}
+</script>
+
+<style module>
+.component {
+  margin-top: 50px;
+  height: 500px;
+  width: 100%;
+}
+
+.deviceinfo {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  width: 150px;
+}
+
+.value {
+  width: 400px;
+}
+</style>
