@@ -17,7 +17,6 @@ const fileName = "Dgroups.vue";
 console.log(fileName, ":After import: ");
 
 let dgroups;
-let dgroups2 = [];
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
 let userInfo/* = { username, userId, signInDetails }*/; 
@@ -143,7 +142,6 @@ export default {
   //        getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
 //        this.$set(this.dgroups, 'dgroups', dgroups);
-        this.dgroups = dgroups2;
         this.dgroups = dgroups;
       }
       axiosGetLap();
