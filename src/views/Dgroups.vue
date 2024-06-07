@@ -91,11 +91,18 @@ export default {
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
-    const { username, userId, signInDetails } = getCurrentUser();
-    console.log(fileName, ":beforeCreate-function():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+    let response_gcu/* = { username, userId, signInDetails }*/; 
+    async () => {
+      console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
+      response_gcu = await getCurrentUser();
+      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " response_gcu ", response_gcu);
+    }
     let response_api;
-    response_api = axios.get(url + userId);
-    console.log(fileName, ":beforeCreate-function():", " response_api.status ", response_api.status);
+    async () => {
+      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():");
+      response_api = await axios.get(url + userId);
+      console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
+    }
   },
   created: function() {
     console.log(fileName, ":created-function(): In.");
