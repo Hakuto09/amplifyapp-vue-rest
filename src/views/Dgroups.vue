@@ -121,15 +121,16 @@ export default {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
 //      let userInfo/* = { username, userId, signInDetails }*/; 
-      const getCurrentUserlap = async () => {
+      let response_api;
+//      const getCurrentUserlap = async () => {
+      const axiosGetLap = async () => {
         console.log(fileName, ":methods:", ":listUpdate():", "Before await getCurrentUser():");
         userInfo = await getCurrentUser();
         console.log(fileName, ":methods:", ":listUpdate():", "After await getCurrentUser():", " userInfo ", userInfo);
-      }
-      getCurrentUserlap();
-      console.log(fileName, ":methods:", ":listUpdate():", "Mid.");
-      let response_api;
-      const axiosGetLap = async () => {
+//      }
+//      getCurrentUserlap();
+//      console.log(fileName, ":methods:", ":listUpdate():", "Mid.");
+//      const axiosGetLap = async () => {
         console.log(fileName, ":methods:", ":listUpdate():", "Before await axios.get():", " url + userId ", url + userInfo.userId);
         response_api = await axios.get(url + userInfo.userId);
         console.log(fileName, ":methods:", ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
@@ -167,15 +168,16 @@ export default {
     )
 
 //    let userInfo/* = { username, userId, signInDetails }*/; 
-    const getCurrentUserlap = async () => {
+    let response_api;
+//    const getCurrentUserlap = async () => {
+    const axiosGetLap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
       userInfo = await getCurrentUser();
       console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userInfo ", userInfo);
-    }
-    getCurrentUserlap();
-    console.log(fileName, ":beforeCreate-function(): Mid.");
-    let response_api;
-    const axiosGetLap = async () => {
+//    }
+//    getCurrentUserlap();
+//    console.log(fileName, ":beforeCreate-function(): Mid.");
+//    const axiosGetLap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " userInfo ", userInfo);
       response_api = await axios.get(url + userInfo.userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
