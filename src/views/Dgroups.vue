@@ -175,8 +175,8 @@ export default {
     console.log(fileName, ":beforeCreate-function(): Mid.");
     let response_api;
     const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " userInfo ", userInfo);
-      response_api = await axios.get(url + userInfo.userId);
+      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " this.userInfo ", this.userInfo);
+      response_api = await axios.get(url + this.userInfo.userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
