@@ -54,6 +54,8 @@ export default {
         }
         console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
         getDgroupsFinFlag = 1;
+        // this.$setを使ってリアクティブにする
+        this.$set(this.dgroups, 'dgroups', dgroups);
         return response_api;
       }
       catch (error) {
