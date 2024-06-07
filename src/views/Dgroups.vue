@@ -30,7 +30,7 @@ export default {
     console.log(fileName, ":data-function(): In.");
 
     let response_api;
-    let getDgroupsFinFlag = 0;
+//    let getDgroupsFinFlag = 0;
 
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
