@@ -119,18 +119,18 @@ export default {
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
-      let userInfo/* = { username, userId, signInDetails }*/; 
+      let userId/* = { username, userId, signInDetails }*/; 
       const getCurrentUserlap = async () => {
         console.log(fileName, ":methods:", ":listUpdate():", "Before await getCurrentUser():");
-        userInfo = await getCurrentUser();
-        console.log(fileName, ":methods:", ":listUpdate():", "After await getCurrentUser():", " userInfo ", userInfo);
+        userId = await getCurrentUser();
+        console.log(fileName, ":methods:", ":listUpdate():", "After await getCurrentUser():", " userId ", userId);
       }
       getCurrentUserlap();
       console.log(fileName, ":methods:", ":listUpdate():", "Mid.");
       let response_api;
       const axiosGetLap = async () => {
         console.log(fileName, ":methods:", ":listUpdate():", "Before await axios.get():", " url + userId ", url + userId);
-        response_api = await axios.get(url + userInfo.userId);
+        response_api = await axios.get(url + userId);
         console.log(fileName, ":methods:", ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
         dgroups = response_api.data;
         for (let i = 0; i < dgroups.length; i++) {
@@ -168,15 +168,15 @@ export default {
     let userId/* = { username, userId, signInDetails }*/; 
     const getCurrentUserlap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
-      userInfo = await getCurrentUser();
-      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userInfo ", userInfo);
+      userId = await getCurrentUser();
+      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userId ", userId);
     }
     getCurrentUserlap();
     console.log(fileName, ":beforeCreate-function(): Mid.");
     let response_api;
     const axiosGetLap = async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await axios.get():");
-      response_api = await axios.get(url + userInfo.userId);
+      response_api = await axios.get(url + userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
