@@ -29,6 +29,8 @@ export default {
   data: /*async*/ function() {
     console.log(fileName, ":data-function(): In.");
 
+    let response_api;
+
     // 実際にデータを取得する getDgroups 関数
     async function getDgroups(/*userId*/) {
       console.log(fileName, ":getDgroups(): In.");
@@ -38,7 +40,7 @@ export default {
     //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
       console.log(fileName, ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
 
-      let response_api;
+//      let response_api;
 
       try {
         console.log(fileName, ":getDgroups():", "Before await axios.get()");
