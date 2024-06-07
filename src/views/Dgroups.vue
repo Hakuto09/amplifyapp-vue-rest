@@ -55,7 +55,7 @@ export default {
         console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
         getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
-        this.$set(this.dgroups, 'dgroups', dgroups);
+//        this.$set(this.dgroups, 'dgroups', dgroups);
         return response_api;
       }
       catch (error) {
@@ -162,6 +162,45 @@ export default {
   },
   beforeUpdate: function() {
     console.log(fileName, ":beforeUpdate-function(): In.");
+
+    let response_api;
+
+    // 実際にデータを取得する getDgroups 関数
+    async function getDgroups(/*userId*/) {
+      console.log(fileName, ":beforeUpdate-function():", ":getDgroups(): In.");
+
+      console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "Before await getCurrentUser():");
+      const { username, userId, signInDetails } = await getCurrentUser();
+    //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
+      console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+
+//      let response_api;
+
+      try {
+        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "Before await axios.get()");
+        response_api = await axios.get(url + userId);
+        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
+        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", " response_api.data ", response_api.data);
+        dgroups = response_api.data;
+        for (let i = 0; i < dgroups.length; i++) {
+          dgroups[i].id = i;
+        }
+        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", " dgroups ", dgroups);
+        getDgroupsFinFlag = 1;
+        // this.$setを使ってリアクティブにする
+        this.$set(this.dgroups, 'dgroups', dgroups);
+        return response_api;
+      }
+      catch (error) {
+        console.error(fileName, ":beforeUpdate-function():", ":getDgroups():", " error ", error);
+        getDgroupsFinFlag = 1;
+        return error;
+      }
+    }
+
+    //  if (userId) {
+    const ret = getDgroups(/*userId*/);
+    console.log(fileName, ":beforeUpdate-function():", "After getDgroups():", " ret ", ret);
   },
   updated: function() {
     console.log(fileName, ":updated-function(): In.");
