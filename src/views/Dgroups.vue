@@ -147,6 +147,14 @@ export default {
       console.log(fileName, ":beforeCreate-function():", "Before await axios.get():");
       response_api = await axios.get(url + userId);
       console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
+      dgroups = response_api.data;
+      for (let i = 0; i < dgroups.length; i++) {
+        dgroups[i].id = i;
+      }
+      console.log(fileName, ":beforeCreate-function():", ":getDgroups():", " dgroups ", dgroups);
+//        getDgroupsFinFlag = 1;
+      // this.$setを使ってリアクティブにする
+      this.$set(this.dgroups, 'dgroups', dgroups);
     }
     axiosGetLap();
     console.log(fileName, ":beforeCreate-function(): Out.");
