@@ -91,11 +91,11 @@ export default {
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
-    let response_gcu/* = { username, userId, signInDetails }*/; 
+    let userId/* = { username, userId, signInDetails }*/; 
     async () => {
       console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
-      response_gcu = await getCurrentUser();
-      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " response_gcu ", response_gcu);
+      userId = await getCurrentUser();
+      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userId ", userId);
     }
     let response_api;
     async () => {
