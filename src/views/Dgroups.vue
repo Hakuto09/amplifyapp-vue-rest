@@ -186,14 +186,14 @@ export default {
           dgroups[i].id = i;
         }
         console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", " dgroups ", dgroups);
-        getDgroupsFinFlag = 1;
+//        getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
         this.$set(this.dgroups, 'dgroups', dgroups);
         return response_api;
       }
       catch (error) {
         console.error(fileName, ":beforeUpdate-function():", ":getDgroups():", " error ", error);
-        getDgroupsFinFlag = 1;
+//        getDgroupsFinFlag = 1;
         return error;
       }
     }
