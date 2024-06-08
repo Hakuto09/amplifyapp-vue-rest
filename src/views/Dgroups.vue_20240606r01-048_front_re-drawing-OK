@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <DgroupList :properties="properties" />
-    <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
+    <button type="is-info" @click="listUpdate">listUpdate</button>
   </div>
 </template>
 
@@ -123,11 +123,10 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
-/*
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
-//      let userInfo/* = { username, userId, signInDetails }* /; 
+//      let userInfo/* = { username, userId, signInDetails }*/; 
       let response_api;
 //      const getCurrentUserlap = async () => {
       const axiosGetLap = async () => {
@@ -160,7 +159,6 @@ export default {
 
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
     }
-*/
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
