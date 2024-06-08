@@ -25,43 +25,6 @@ let userInfo/* = { username, userId, signInDetails }*/;
 
 //let currentInstance;
 
-function listUpdate(p) {
-//  console.log(fileName, ":listUpdate():", "In.", " this.properties ", this.properties);
-  console.log(fileName, ":listUpdate():", "In.", " p ", p);
-
-//      let userInfo/* = { username, userId, signInDetails }* /; 
-  let response_api;
-//      const getCurrentUserlap = async () => {
-  const axiosGetLap = async () => {
-    console.log(fileName, ":listUpdate():", "Before await getCurrentUser():");
-    userInfo = await getCurrentUser();
-    console.log(fileName, ":listUpdate():", "After await getCurrentUser():", " userInfo ", userInfo);
-//      }
-//      getCurrentUserlap();
-//      console.log(fileName, ":listUpdate():", "Mid.");
-//      const axiosGetLap = async () => {
-    console.log(fileName, ":listUpdate():", "Before await axios.get():", " url + userId ", url + userInfo.userId);
-    response_api = await axios.get(url + userInfo.userId);
-    console.log(fileName, ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
-    dgroups = response_api.data;
-    for (let i = 0; i < dgroups.length; i++) {
-      dgroups[i].id = i;
-    }
-    console.log(fileName, ":listUpdate():", ":getDgroups():", " dgroups ", dgroups);
-//        getDgroupsFinFlag = 1;
-    // this.$setを使ってリアクティブにする
-//        this.$set(this.dgroups, 'dgroups', dgroups);
-//        this.dgroups = dgroups2;
-//        this.dgroups = dgroups;
-    p.dgroups = dgroups;
-//        console.log(fileName, ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
-//        currentInstance.proxy.$forceUpdate();
-//        console.log(fileName, ":After instance.proxy.forceUpdate():");
-  }
-  axiosGetLap();
-
-  console.log(fileName, ":listUpdate():", "Out.");
-}
 
 export default {
   name: 'Dgroups',
@@ -224,12 +187,12 @@ export default {
     )
 */
 
-/*
 //    let userInfo/* = { username, userId, signInDetails }* /; 
     let response_api;
 //    const getCurrentUserlap = async () => {
-    const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", "In.");
+    const getUserAxiosGetLap = async () => {
+      const funcName = [beforeCreate, getUserAxiosGetLap];
+      console.log(fileName, ":", funcName[0], ":", funcName[1], ":", "In.");
 
       userInfo = await getCurrentUser();
       console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After await getCurrentUser():", " userInfo ", userInfo);
@@ -252,8 +215,7 @@ export default {
       this.properties.dgroups = dgroups;
       console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
     }
-    axiosGetLap();
-*/
+    getUserAxiosGetLap();
 
     listUpdate(this.properties);
 //    this.listUpdate();
