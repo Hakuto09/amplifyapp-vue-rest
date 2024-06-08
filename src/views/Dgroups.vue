@@ -23,6 +23,8 @@ const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgr
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 
+let currentInstance;
+
 export default {
   name: 'Dgroups',
 
@@ -146,10 +148,9 @@ export default {
 //        this.$set(this.dgroups, 'dgroups', dgroups);
         this.dgroups = dgroups2;
         this.dgroups = dgroups;
-        const instance = getCurrentInstance();
-        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate()():", " this.dgroups ", this.dgroups, " instance ", instance);
-        instance.proxy.forceUpdate();
-        console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate()():");
+        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
+        currentInstance.proxy.forceUpdate();
+        console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate():");
       }
       axiosGetLap();
 
@@ -158,6 +159,9 @@ export default {
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
+
+    currentInstance = getCurrentInstance();
+    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
 
     function myPromise() {
       return new Promise(function(resolve/*, reject*/) {
