@@ -26,7 +26,8 @@ let userInfo/* = { username, userId, signInDetails }*/;
 //let currentInstance;
 
 function listUpdate(p) {
-  console.log(fileName, ":listUpdate():", "In.", " this.properties ", this.properties);
+//  console.log(fileName, ":listUpdate():", "In.", " this.properties ", this.properties);
+  console.log(fileName, ":listUpdate():", "In.", " p ", p);
 
 //      let userInfo/* = { username, userId, signInDetails }* /; 
   let response_api;
