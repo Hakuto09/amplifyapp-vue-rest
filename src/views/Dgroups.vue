@@ -243,8 +243,8 @@ export default {
 //        getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
 //        this.$set(this.dgroups, 'dgroups', dgroups);
-        this.dgroups = dgroups;
-        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After this.dgroups = dgroups;", " dgroups ", dgroups);
+//        this.dgroups = dgroups;
+//        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After this.dgroups = dgroups;", " dgroups ", dgroups);
         return response_api;
       }
       catch (error) {
