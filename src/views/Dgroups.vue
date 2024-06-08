@@ -147,7 +147,7 @@ export default {
         this.dgroups = dgroups2;
         this.dgroups = dgroups;
         const instance = getCurrentInstance();
-        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate()():", " this.dgroups ", this.dgroups);
+        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate()():", " this.dgroups ", this.dgroups, " instance ", instance);
         instance.proxy.forceUpdate();
         console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate()():");
       }
