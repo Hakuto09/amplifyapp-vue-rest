@@ -26,40 +26,6 @@ console.log(fileName, ":After reg(prop):", " parentData.value ", parentData.valu
 let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 
-// 実際にデータを取得する getDevices 関数
-async function getDevices(dgroupId) {
-  console.log(fileName, ": getDevices(): In.", " dgroupId ", dgroupId);
-
-//  let authUser = await Amplify.Auth.getCurrentUser();
-//  let authUser = await getCurrentUser();
-//const { username, userId, signInDetails } = await getCurrentUser();
-//  console.log(fileName, ":getDevices():", " authUser ", authUser);
-//console.log(fileName, ":getDevices():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
-
-  let response_api;
-
-  try {
-//    response_api = await axios.get(url + properties.account_id);
-//    response_api = await axios.get(url + this.account_id);
-    response_api = await axios.get(url + dgroupId);
-    console.log(fileName, ":getDevices():", " response_api.status ", response_api.status)
-    console.log(fileName, ":getDevices():", " response_api.data ", response_api.data);
-    devices = response_api.data;
-    for (let i = 0; i < devices.length; i++) {
-      devices[i].id = i;
-    }
-    console.log(fileName, ":getDevices():", " devices ", devices);
-    return response_api;
-  }
-  catch (error) {
-    console.error(fileName, ":getDevices():", " error ", error);
-    return error;
-  }
-}
-
-// getDevices を呼び出してデータを読み込む
-//let ret = getDevices();
-//console.log(fileName, ":After getDevices():", " ret ", ret);
 
 export default {
   name: 'Devices',
@@ -69,7 +35,8 @@ export default {
     DeviceList
   },
   data: /*async*/ function() {
-    console.log(fileName, ": data-function(): In.");
+    const funcName = [":data:"];
+    console.log(fileName, funcName[0], "In.");
 
     const dgroupId = ref('');
     dgroupId.value = localStorage.getItem('dgroupId');
@@ -98,28 +65,66 @@ export default {
     console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
   },
   beforeCreate: function() {
-    console.log(fileName, ":beforeCreate-function(): In.");
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
+
+    async function getDevices(dgroupId) {
+      console.log(fileName, ": getDevices(): In.", " dgroupId ", dgroupId);
+
+    //  let authUser = await Amplify.Auth.getCurrentUser();
+    //  let authUser = await getCurrentUser();
+    //const { username, userId, signInDetails } = await getCurrentUser();
+    //  console.log(fileName, ":getDevices():", " authUser ", authUser);
+    //console.log(fileName, ":getDevices():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
+
+      let response_api;
+
+      try {
+    //    response_api = await axios.get(url + properties.account_id);
+    //    response_api = await axios.get(url + this.account_id);
+        response_api = await axios.get(url + dgroupId);
+        console.log(fileName, ":getDevices():", " response_api.status ", response_api.status)
+        console.log(fileName, ":getDevices():", " response_api.data ", response_api.data);
+        devices = response_api.data;
+        for (let i = 0; i < devices.length; i++) {
+          devices[i].id = i;
+        }
+        console.log(fileName, ":getDevices():", " devices ", devices);
+        return response_api;
+      }
+      catch (error) {
+        console.error(fileName, ":getDevices():", " error ", error);
+        return error;
+      }
+    }
   },
   created: function() {
-    console.log(fileName, ":created-function(): In.");
+    const funcName = [":created:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeMount: function() {
-    console.log(fileName, ":beforeMount-function(): In.");
+    const funcName = [":beforeMount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   mounted: function() {
-    console.log(fileName, ":mounted-function(): In.");
+    const funcName = [":mounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUpdate: function() {
-    console.log(fileName, ":beforeUpdate-function(): In.");
+    const funcName = [":beforeUpdate:"];
+    console.log(fileName, funcName[0], "In.");
   },
   updated: function() {
-    console.log(fileName, ":updated-function(): In.");
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
-    console.log(fileName, ":beforeUnmount-function(): In.");
+    const funcName = [":beforeUnmount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   unmounted: function() {
-    console.log(fileName, ":unmounted-function(): In.");
+    const funcName = [":unmounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
 }
 </script>

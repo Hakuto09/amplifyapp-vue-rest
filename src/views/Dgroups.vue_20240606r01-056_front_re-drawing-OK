@@ -34,8 +34,7 @@ export default {
     DgroupList
   },
   data: /*async*/ function() {
-    const funcName = [":data:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":data-function(): In.");
 /*
     let response_api;
     let getDgroupsFinFlag = 0;
@@ -165,8 +164,7 @@ export default {
 */
   },
   beforeCreate: function() {
-    const funcName = [":beforeCreate:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":beforeCreate-function(): In.");
 
 //    currentInstance = getCurrentInstance();
 //    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
@@ -226,20 +224,16 @@ export default {
     console.log(fileName, ":beforeCreate-function(): Out.");
   },
   created: function() {
-    const funcName = [":created:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":created-function(): In.");
   },
   beforeMount: function() {
-    const funcName = [":beforeMount:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":beforeMount-function(): In.");
   },
   mounted: function() {
-    const funcName = [":mounted:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":mounted-function(): In.");
   },
   beforeUpdate: function() {
-    const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":beforeUpdate-function(): In.");
 /*
     let response_api;
 
@@ -284,16 +278,13 @@ export default {
 */
   },
   updated: function() {
-    const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":updated-function(): In.");
   },
   beforeUnmount: function() {
-    const funcName = [":beforeUnmount:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":beforeUnmount-function(): In.");
   },
   unmounted: function() {
-    const funcName = [":unmounted:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":unmounted-function(): In.");
   },
 }
 </script>

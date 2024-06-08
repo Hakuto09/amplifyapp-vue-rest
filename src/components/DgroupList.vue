@@ -28,8 +28,8 @@
     <div :class="$style.showmore">
       <button
         type="is-info"
-        @click="showMoreInformation">
-        Show more selected...
+        @click="selectDgroup">
+        Select dgroup
       </button>
     </div>
   </div>
@@ -53,10 +53,13 @@ export default {
     }
   },
   data: function() {
-    console.log(fileName, ":data-function():", " this.properties ", this.properties);
-    console.log(fileName, ":data-function():", " toRaw(this.properties).dgroups ", toRaw(this.properties).dgroups);
+    const funcName = [":data:"];
+    console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, ":data-function():", "Before return():");
+//    console.log(fileName, funcName[0], " this.properties ", this.properties);
+//    console.log(fileName, funcName[0], " toRaw(this.properties).dgroups ", toRaw(this.properties).dgroups);
+
+    console.log(fileName, funcName[0], "Before return():");
     return {
       selected: null,
     }
@@ -70,29 +73,31 @@ export default {
         console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
-    showMoreInformation: function() {
-      console.log(fileName, ":showMoreInformation():", " this.properties ", this.properties);
+    selectDgroup: function() {
+      const funcName = [":methods:", "selectDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
 //      const msg = useStorage('msg', 'Hello World!')
 //      console.log(fileName, ":showMoreInformation():", " msg.value ", msg.value);
 
-      const dgroupId = ref('');
       const saveLocal = (dgroupId) => {
+        const funcName = [":methods:", "selectDgroup:", "saveLocal:"];
         localStorage.setItem('dgroupId', dgroupId);
-        console.log(fileName, ":saveLocal():", "After localStorage.setItem():", " dgroupId ", dgroupId);
+        console.log(fileName, funcName[0], funcName[1], funcName[2], "After localStorage.setItem():", " dgroupId ", dgroupId);
       }
 
       if (!this.selected) {
         alert('No data selected...')
         return false
       }
-      const selected = this.selected
-      console.log(fileName, ":showMoreInformation():", " this ", this);
-      console.log(fileName, ":showMoreInformation():", " selected ", selected);
 
-      saveLocal(selected['dgroup_id']);
-      dgroupId.value = localStorage.getItem('dgroupId');
-      console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+      saveLocal(this.selected['dgroup_id']);
+      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
+
+//      const dgroupId = ref('');
+//      dgroupId.value = localStorage.getItem('dgroupId');
+//      console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
 //      this.$localStorage.set('dgrouplist_id', selected['id'])
 //      console.log(fileName, ":After localStorage.set():", " selected['id'] ", selected['id']);
@@ -108,28 +113,36 @@ export default {
     }
   },
   beforeCreate: function() {
-    console.log(fileName, ":beforeCreate-function(): In.");
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
   },
   created: function() {
-    console.log(fileName, ":created-function(): In.");
+    const funcName = [":created:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeMount: function() {
-    console.log(fileName, ":beforeMount-function(): In.");
+    const funcName = [":beforeMount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   mounted: function() {
-    console.log(fileName, ":mounted-function(): In.");
+    const funcName = [":mounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUpdate: function() {
-    console.log(fileName, ":beforeUpdate-function(): In.");
+    const funcName = [":beforeUpdate:"];
+    console.log(fileName, funcName[0], "In.");
   },
   updated: function() {
-    console.log(fileName, ":updated-function(): In.");
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
-    console.log(fileName, ":beforeUnmount-function(): In.");
+    const funcName = [":beforeUnmount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   unmounted: function() {
-    console.log(fileName, ":unmounted-function(): In.");
+    const funcName = [":unmounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
 }
 </script>
