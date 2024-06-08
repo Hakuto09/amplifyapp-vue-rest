@@ -149,7 +149,7 @@ export default {
         this.dgroups = dgroups2;
         this.dgroups = dgroups;
         console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
-        currentInstance.proxy.forceUpdate();
+        currentInstance.proxy.$forceUpdate();
         console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate():");
       }
       axiosGetLap();
