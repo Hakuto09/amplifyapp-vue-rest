@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.component">
-    <h2>Device group list of account_id: {{ userId }}</h2>
+    <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
   </div>
@@ -23,6 +23,7 @@ let dgroups;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
 let userInfo/* = { username, userId, signInDetails }*/; 
+let userId = 0;
 
 //let currentInstance;
 
@@ -119,7 +120,7 @@ export default {
         dgroups: dgroups,
 //        account_id: this.account_id,
       },
-      userId: userInfo.userId,
+      account_id: userId,
     }
   },
 //  methods: function() {
@@ -203,9 +204,10 @@ export default {
 //    }
 //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
+      userId =userInfo.userId;
 //    const axiosGetLap = async () => {
       console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
-      response_api = await axios.get(url + userInfo.userId);
+      response_api = await axios.get(url + userId);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
