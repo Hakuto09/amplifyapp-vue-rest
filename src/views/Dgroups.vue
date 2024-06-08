@@ -146,8 +146,9 @@ export default {
   //        getDgroupsFinFlag = 1;
         // this.$setを使ってリアクティブにする
 //        this.$set(this.dgroups, 'dgroups', dgroups);
-        this.dgroups = dgroups2;
-        this.dgroups = dgroups;
+//        this.dgroups = dgroups2;
+//        this.dgroups = dgroups;
+        this.properties.dgroups = dgroups;
         console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
         currentInstance.proxy.$forceUpdate();
         console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate():");
