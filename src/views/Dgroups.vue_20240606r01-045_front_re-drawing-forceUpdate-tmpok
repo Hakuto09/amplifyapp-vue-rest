@@ -119,7 +119,7 @@ export default {
 //  methods: function() {
   methods: {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
-    console.log(fileName, ":methods:", "In");
+//    console.log(fileName, ":methods:", "In");
 
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
@@ -149,9 +149,9 @@ export default {
 //        this.dgroups = dgroups2;
 //        this.dgroups = dgroups;
         this.properties.dgroups = dgroups;
-//        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
-//        currentInstance.proxy.$forceUpdate();
-//        console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate():");
+        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
+        currentInstance.proxy.$forceUpdate();
+        console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate():");
       }
       axiosGetLap();
 
@@ -217,11 +217,11 @@ export default {
   },
   beforeUpdate: function() {
     console.log(fileName, ":beforeUpdate-function(): In.");
-/*
+
     let response_api;
 
     // 実際にデータを取得する getDgroups 関数
-    async function getDgroups() {
+    async function getDgroups(/*userId*/) {
       console.log(fileName, ":beforeUpdate-function():", ":getDgroups(): In.");
 
       console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "Before await getCurrentUser():");
@@ -256,9 +256,8 @@ export default {
     }
 
     //  if (userId) {
-    const ret = getDgroups();
+    const ret = getDgroups(/*userId*/);
     console.log(fileName, ":beforeUpdate-function():", "After getDgroups():", " ret ", ret);
-*/
   },
   updated: function() {
     console.log(fileName, ":updated-function(): In.");
