@@ -18,7 +18,7 @@ const fileName = "Dgroups.vue";
 console.log(fileName, ":After import: ");
 
 let dgroups;
-let dgroups2 = [];
+//let dgroups2 = [];
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 
 let userInfo/* = { username, userId, signInDetails }*/; 
