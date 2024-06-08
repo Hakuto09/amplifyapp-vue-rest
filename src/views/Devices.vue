@@ -38,12 +38,12 @@ export default {
     const funcName = [":data:"];
     console.log(fileName, funcName[0], "In.");
 
-    const dgroupId = ref('');
-    dgroupId.value = localStorage.getItem('dgroupId');
-    console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+//    const dgroupId = ref('');
+//    dgroupId.value = localStorage.getItem('dgroupId');
+//    console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
-    const ret = getDevices(dgroupId.value);
-    console.log(fileName, ":data-function():", "After getDevices():", " ret ", ret);
+//    const ret = getDevices(dgroupId.value);
+//    console.log(fileName, ":data-function():", "After getDevices():", " ret ", ret);
 
     // ここで返却するデータは子コンポーネント `DeviceList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
@@ -69,7 +69,8 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
     async function getDevices(dgroupId) {
-      console.log(fileName, ": getDevices(): In.", " dgroupId ", dgroupId);
+      const funcName = [":beforeCreate:", "getDevices:"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " dgroupId ", dgroupId);
 
     //  let authUser = await Amplify.Auth.getCurrentUser();
     //  let authUser = await getCurrentUser();
@@ -83,20 +84,29 @@ export default {
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
         response_api = await axios.get(url + dgroupId);
-        console.log(fileName, ":getDevices():", " response_api.status ", response_api.status)
-        console.log(fileName, ":getDevices():", " response_api.data ", response_api.data);
+//        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
+        console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.data ", response_api.data);
         devices = response_api.data;
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
         }
-        console.log(fileName, ":getDevices():", " devices ", devices);
+        console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
+        this.properties.devices = devices;
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties.devices ", this.properties.devices);
         return response_api;
       }
       catch (error) {
-        console.error(fileName, ":getDevices():", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], " error ", error);
         return error;
       }
     }
+
+    const dgroupId = ref('');
+    dgroupId.value = localStorage.getItem('dgroupId');
+    console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+
+    const ret = getDevices(dgroupId.value);
+    console.log(fileName, funcName[0], "After getDevices():", " ret ", ret);
   },
   created: function() {
     const funcName = [":created:"];

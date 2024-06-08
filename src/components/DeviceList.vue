@@ -70,26 +70,29 @@ export default {
       }
     },
     showMoreInformation: function() {
+      const funcName = [":methods:", "showMoreInformation:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
 //      const msg = useStorage('msg', 'Hello World!')
 //      console.log(fileName, ":showMoreInformation():", " msg.value ", msg.value);
 
-      const deviceId = ref('');
       const saveLocal = (deviceId) => {
+        const funcName = [":methods:", "showMoreInformation:", "saveLocal:"];
         localStorage.setItem('deviceId', deviceId);
-        console.log(fileName, ":saveLocal():", "After localStorage.setItem():", " deviceId ", deviceId);
+        console.log(fileName, funcName[0], funcName[1], funcName[2], "After localStorage.setItem():", " deviceId ", deviceId);
       }
 
       if (!this.selected) {
         alert('No data selected...')
         return false
       }
-      const selected = this.selected
-      console.log(fileName, ":showMoreInformation():", " this ", this);
-      console.log(fileName, ":showMoreInformation():", " selected ", selected);
 
-      saveLocal(selected['device_id']);
-      deviceId.value = localStorage.getItem('deviceId');
-      console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
+      saveLocal(this.selected['device_id']);
+      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
+
+//      const deviceId = ref('');
+//      deviceId.value = localStorage.getItem('deviceId');
+//      console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
 
 //      this.$localStorage.set('devicelist_id', selected['id'])
 //      console.log(fileName, ":After localStorage.set():", " selected['id'] ", selected['id']);

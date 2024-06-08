@@ -197,25 +197,25 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       userInfo = await getCurrentUser();
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After await getCurrentUser():", " userInfo ", userInfo);
+      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
 //    }
 //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
 //    const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "Before await axios.get():", " userInfo ", userInfo);
+      console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
       response_api = await axios.get(url + userInfo.userId);
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After await axios.get():", " response_api.status ", response_api.status);
+      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
         dgroups[i].id = i;
       }
 
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+      console.log(fileName, funcName[0], funcName[1], "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
 //        getDgroupsFinFlag = 1;
       // this.$setを使ってリアクティブにする
 //      this.$set(this.dgroups, 'dgroups', dgroups);
       this.properties.dgroups = dgroups;
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+      console.log(fileName, funcName[0], funcName[1], "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
     }
     getUserAxiosGetLap();
 
