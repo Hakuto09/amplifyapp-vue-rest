@@ -215,7 +215,8 @@ export default {
     axiosGetLap();
 */
 
-    this.listUpdate();
+//    this.listUpdate();
+    this.$listUpdate();
     console.log(fileName, ":beforeCreate-function(): Out.");
   },
   created: function() {
