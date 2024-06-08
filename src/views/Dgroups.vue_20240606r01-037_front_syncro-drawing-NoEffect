@@ -12,7 +12,6 @@ import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
-import { getCurrentInstance } from 'vue';
 const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
@@ -146,13 +145,8 @@ export default {
 //        this.$set(this.dgroups, 'dgroups', dgroups);
         this.dgroups = dgroups2;
         this.dgroups = dgroups;
-        const instance = getCurrentInstance();
-        console.log(fileName, ":methods:", ":Before instance.proxy.forceUpdate()():", " this.dgroups ", this.dgroups);
-        instance.proxy.forceUpdate();
-        console.log(fileName, ":methods:", ":After instance.proxy.forceUpdate()():");
       }
       axiosGetLap();
-
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
     }
   },
