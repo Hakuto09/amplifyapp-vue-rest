@@ -123,7 +123,6 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
-/*
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
@@ -160,7 +159,6 @@ export default {
 
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
     }
-*/
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
@@ -186,7 +184,8 @@ export default {
     )
 */
 
-//    let userInfo/* = { username, userId, signInDetails }*/; 
+/*
+//    let userInfo/* = { username, userId, signInDetails }* /; 
     let response_api;
 //    const getCurrentUserlap = async () => {
     const axiosGetLap = async () => {
@@ -214,6 +213,9 @@ export default {
       console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
     }
     axiosGetLap();
+*/
+
+    this.listUpdate();
     console.log(fileName, ":beforeCreate-function(): Out.");
   },
   created: function() {
