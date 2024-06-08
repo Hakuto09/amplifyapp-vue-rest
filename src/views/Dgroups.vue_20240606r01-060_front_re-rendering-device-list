@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.component">
-    <h2>Device group list of account_id: {{ userId }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
   </div>
@@ -118,8 +117,7 @@ export default {
         ],
         dgroups: dgroups,
 //        account_id: this.account_id,
-      },
-      userId: userInfo.userId,
+      }
     }
   },
 //  methods: function() {
