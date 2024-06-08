@@ -25,6 +25,43 @@ let userInfo/* = { username, userId, signInDetails }*/;
 
 //let currentInstance;
 
+function listUpdate() {
+  console.log(fileName, ":listUpdate():", "In.", " this.properties ", this.properties);
+
+//      let userInfo/* = { username, userId, signInDetails }* /; 
+  let response_api;
+//      const getCurrentUserlap = async () => {
+  const axiosGetLap = async () => {
+    console.log(fileName, ":listUpdate():", "Before await getCurrentUser():");
+    userInfo = await getCurrentUser();
+    console.log(fileName, ":listUpdate():", "After await getCurrentUser():", " userInfo ", userInfo);
+//      }
+//      getCurrentUserlap();
+//      console.log(fileName, ":listUpdate():", "Mid.");
+//      const axiosGetLap = async () => {
+    console.log(fileName, ":listUpdate():", "Before await axios.get():", " url + userId ", url + userInfo.userId);
+    response_api = await axios.get(url + userInfo.userId);
+    console.log(fileName, ":listUpdate():", "After await axios.get():", " response_api.status ", response_api.status);
+    dgroups = response_api.data;
+    for (let i = 0; i < dgroups.length; i++) {
+      dgroups[i].id = i;
+    }
+    console.log(fileName, ":listUpdate():", ":getDgroups():", " dgroups ", dgroups);
+//        getDgroupsFinFlag = 1;
+    // this.$setを使ってリアクティブにする
+//        this.$set(this.dgroups, 'dgroups', dgroups);
+//        this.dgroups = dgroups2;
+//        this.dgroups = dgroups;
+    this.properties.dgroups = dgroups;
+//        console.log(fileName, ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
+//        currentInstance.proxy.$forceUpdate();
+//        console.log(fileName, ":After instance.proxy.forceUpdate():");
+  }
+  axiosGetLap();
+
+  console.log(fileName, ":listUpdate():", "Out.");
+}
+
 export default {
   name: 'Dgroups',
 
@@ -123,6 +160,7 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
+/*
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
@@ -159,6 +197,7 @@ export default {
 
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
     }
+*/
   },
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
@@ -215,8 +254,10 @@ export default {
     axiosGetLap();
 */
 
+    listUpdate();
 //    this.listUpdate();
-    this.$listUpdate();
+//    this.$listUpdate();
+    console.log(fileName, ":beforeCreate-function():", "After listUpdate()");
     console.log(fileName, ":beforeCreate-function(): Out.");
   },
   created: function() {
