@@ -36,7 +36,7 @@
 
 <script>
 //import { useStorage } from '@vueuse/core';
-import { ref } from 'vue';
+//import { ref } from 'vue';
 import { toRaw } from 'vue';
 const fileName = "DeviceList.vue";
 
@@ -100,8 +100,8 @@ export default {
       this.$router.push({
         name: 'device-detail',
         params: {
-          id: selected['id'],
-          device_id: selected['device_id'],
+          id: this.selected['id'],
+          device_id: this.selected['device_id'],
         }
       })
     }
