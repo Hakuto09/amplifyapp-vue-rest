@@ -12,7 +12,7 @@ import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
-//import { getCurrentInstance } from 'vue';
+import { getCurrentInstance } from 'vue';
 const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
@@ -23,7 +23,7 @@ const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgr
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 
-//let currentInstance;
+let currentInstance;
 
 export default {
   name: 'Dgroups',
@@ -34,12 +34,12 @@ export default {
   },
   data: /*async*/ function() {
     console.log(fileName, ":data-function(): In.");
-/*
+
     let response_api;
     let getDgroupsFinFlag = 0;
 
     // 実際にデータを取得する getDgroups 関数
-    async function getDgroups() {
+    async function getDgroups(/*userId*/) {
       console.log(fileName, ":data-function():", ":getDgroups(): In.");
 
       console.log(fileName, ":data-function():", ":getDgroups():", "Before await getCurrentUser():");
@@ -72,16 +72,15 @@ export default {
     }
 
     //  if (userId) {
-    const ret = getDgroups();
+    const ret = getDgroups(/*userId*/);
     console.log(fileName, ":data-function():", "After getDgroups():", " ret ", ret);
 //  }
-*/
-/*
+
     function myPromise() {
-      return new Promise(function(resolve/*, reject* /) {
+      return new Promise(function(resolve/*, reject*/) {
 //        for (let i = 0; i < 10; i++) {
           setTimeout(function() {
-           /*if (getDgroupsFinFlag)* / resolve("Dgroups.vue: data-function(): 2nd")
+           /*if (getDgroupsFinFlag)*/ resolve("Dgroups.vue: data-function(): 2nd")
           }, 1000)
 //        }
       })
@@ -97,7 +96,6 @@ export default {
         }
       )
 //    }
-*/
 
     // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
@@ -163,12 +161,11 @@ export default {
   beforeCreate: function() {
     console.log(fileName, ":beforeCreate-function(): In.");
 
-//    currentInstance = getCurrentInstance();
-//    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
+    currentInstance = getCurrentInstance();
+    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
 
-/*
     function myPromise() {
-      return new Promise(function(resolve/*, reject* /) {
+      return new Promise(function(resolve/*, reject*/) {
         setTimeout(function() {
           resolve("Dgroups.vue:beforeCreate-function():2nd")
 //          resolve(fileName, ":beforeCreate-function():", "2nd")
@@ -182,34 +179,29 @@ export default {
         console.log(fileName, ":beforeCreate-function():", "3rd")
       }
     )
-*/
 
 //    let userInfo/* = { username, userId, signInDetails }*/; 
     let response_api;
 //    const getCurrentUserlap = async () => {
     const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", "In.");
-
+      console.log(fileName, ":beforeCreate-function():", "Before await getCurrentUser():");
       userInfo = await getCurrentUser();
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After await getCurrentUser():", " userInfo ", userInfo);
+      console.log(fileName, ":beforeCreate-function():", "After await getCurrentUser():", " userInfo ", userInfo);
 //    }
 //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
 //    const axiosGetLap = async () => {
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "Before await axios.get():", " userInfo ", userInfo);
+      console.log(fileName, ":beforeCreate-function():", "Before await axios.get():", " userInfo ", userInfo);
       response_api = await axios.get(url + userInfo.userId);
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After await axios.get():", " response_api.status ", response_api.status);
+      console.log(fileName, ":beforeCreate-function():", "After await axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
         dgroups[i].id = i;
       }
-
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+      console.log(fileName, ":beforeCreate-function():", ":getDgroups():", " dgroups ", dgroups);
 //        getDgroupsFinFlag = 1;
       // this.$setを使ってリアクティブにする
-//      this.$set(this.dgroups, 'dgroups', dgroups);
-      this.properties.dgroups = dgroups;
-      console.log(fileName, ":beforeCreate-function():", ":axiosGetLap():", "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+      this.$set(this.dgroups, 'dgroups', dgroups);
     }
     axiosGetLap();
     console.log(fileName, ":beforeCreate-function(): Out.");
