@@ -25,7 +25,7 @@ let userInfo/* = { username, userId, signInDetails }*/;
 
 //let currentInstance;
 
-function listUpdate() {
+function listUpdate(p) {
   console.log(fileName, ":listUpdate():", "In.", " this.properties ", this.properties);
 
 //      let userInfo/* = { username, userId, signInDetails }* /; 
@@ -52,7 +52,7 @@ function listUpdate() {
 //        this.$set(this.dgroups, 'dgroups', dgroups);
 //        this.dgroups = dgroups2;
 //        this.dgroups = dgroups;
-    this.properties.dgroups = dgroups;
+    p.dgroups = dgroups;
 //        console.log(fileName, ":Before instance.proxy.forceUpdate():", " this.dgroups ", this.dgroups, " currentInstance ", currentInstance);
 //        currentInstance.proxy.$forceUpdate();
 //        console.log(fileName, ":After instance.proxy.forceUpdate():");
@@ -254,7 +254,7 @@ export default {
     axiosGetLap();
 */
 
-    listUpdate();
+    listUpdate(this.properties);
 //    this.listUpdate();
 //    this.$listUpdate();
     console.log(fileName, ":beforeCreate-function():", "After listUpdate()");
