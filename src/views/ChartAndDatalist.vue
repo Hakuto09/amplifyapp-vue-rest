@@ -83,7 +83,20 @@ export default {
 
     console.log(fileName, ":data-function():", "Before return():");
     return {
-      data: null/*chartData*/,
+      data: {
+        labels: [],
+        datasets: [
+          {
+            data: [],
+          },
+          {
+            data: [],
+          },
+          {
+            data: [],
+          },
+        ],
+      },
       options: null/*chartOptions*/,
       device_id: "0",
     }
