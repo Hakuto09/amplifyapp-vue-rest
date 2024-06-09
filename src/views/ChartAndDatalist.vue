@@ -103,6 +103,131 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         ddata = response.data;
+
+//    let cnt = 0;
+//    while (ddata == null && cnt < 100000) {
+////      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+//      cnt++;
+//    }
+//    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
+
+        if (ddata != null) {
+          // Graph data reset.
+          labels = [];
+          data0s = [];
+          data1s = [];
+          data2s = [];
+
+          // add graph data.
+          let loops = ddata.length;
+          for(let i = 0; i < loops; ++i) {
+      //      let j = loops - i - 1;
+            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
+            let date_nt_jst = date_nt.substr(0, 23);
+            console.log(fileName, funcName[0], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+
+            labels.push(date_nt_jst);
+            data0s.push(ddata[i/*j*/].data0);
+            data1s.push(ddata[i/*j*/].data1);
+            data2s.push(ddata[i/*j*/].data2);
+          }
+          console.log(fileName, funcName[0], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
+        }
+
+        const chartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'data0',
+              yAxisID: "yleft",
+              backgroundColor: '#f87979',
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(2,63,138,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(2,63,138,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#1D5191",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data0s,
+            },
+            {
+              label: 'data1',
+              yAxisID: "yleft",
+    //          backgroundColor: '#f879f9',
+              backgroundColor: "#3A7AC9",
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(201,60,58,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(201,60,58,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#9A1B19",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data1s,
+            },
+            {
+              label: 'data2',
+              yAxisID: "yright",
+    //          backgroundColor: '#f8f979',
+              backgroundColor: "#DB514E",
+              data: data2s,
+            },
+          ]
+        }
+
+        const chartOptions = {
+          responsive: true,    // グラフのスクロール対応
+    //      responsive: false,    // グラフのスクロール対応
+          maintainAspectRatio: false,
+          spanGaps: true,   //点をつなげる場合
+          scales: {
+            x: {
+              type: 'time',
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '日付時刻'           // ★必須 タイトルの文字列
+              },
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'YYYY-MM-DD HH:mm'
+                }
+              },
+            },
+            yleft: {
+              stacked: false,
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '温度'           // ★必須 タイトルの文字列
+              },
+            },
+            /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+            yright: {
+              stacked: false,
+              position: "right",
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '湿度'           // ★必須 タイトルの文字列
+              },
+            },
+          },
+        };
+
+        this.data = chartData;
+        this.options = chartOptions;
+        this.device_id = deviceId.value;
+        console.log(fileName, funcName[0], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+
         return response;
       }
       catch (error) {
@@ -118,130 +243,6 @@ export default {
     // getDevices を呼び出してデータを読み込む
     let response_ga = getDeviceData(deviceId.value);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
-
-//    let cnt = 0;
-//    while (ddata == null && cnt < 100000) {
-////      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
-//      cnt++;
-//    }
-//    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
-
-    if (ddata != null) {
-      // Graph data reset.
-      labels = [];
-      data0s = [];
-      data1s = [];
-      data2s = [];
-
-      // add graph data.
-      let loops = ddata.length;
-      for(let i = 0; i < loops; ++i) {
-  //      let j = loops - i - 1;
-        let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
-        let date_nt_jst = date_nt.substr(0, 23);
-        console.log(fileName, funcName[0], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
-
-        labels.push(date_nt_jst);
-        data0s.push(ddata[i/*j*/].data0);
-        data1s.push(ddata[i/*j*/].data1);
-        data2s.push(ddata[i/*j*/].data2);
-      }
-      console.log(fileName, funcName[0], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
-    }
-
-    const chartData = {
-      labels: labels,
-      datasets: [
-        {
-          label: 'data0',
-          yAxisID: "yleft",
-          backgroundColor: '#f87979',
-          fill: false,
-          borderWidth: 2,
-          borderColor: "rgba(2,63,138,0.8)",
-          pointBorderColor: "#fff",
-          pointBackgroundColor: "rgba(2,63,138,0.8)",
-          pointBorderWidth: 2,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "#1D5191",
-          pointHoverBorderColor: "#fff",
-          pointHoverBorderWidth: 2,
-          tension: 0,
-          data: data0s,
-        },
-        {
-          label: 'data1',
-          yAxisID: "yleft",
-//          backgroundColor: '#f879f9',
-          backgroundColor: "#3A7AC9",
-          fill: false,
-          borderWidth: 2,
-          borderColor: "rgba(201,60,58,0.8)",
-          pointBorderColor: "#fff",
-          pointBackgroundColor: "rgba(201,60,58,0.8)",
-          pointBorderWidth: 2,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "#9A1B19",
-          pointHoverBorderColor: "#fff",
-          pointHoverBorderWidth: 2,
-          tension: 0,
-          data: data1s,
-        },
-        {
-          label: 'data2',
-          yAxisID: "yright",
-//          backgroundColor: '#f8f979',
-          backgroundColor: "#DB514E",
-          data: data2s,
-        },
-      ]
-    }
-
-    const chartOptions = {
-      responsive: true,    // グラフのスクロール対応
-//      responsive: false,    // グラフのスクロール対応
-      maintainAspectRatio: false,
-      spanGaps: true,   //点をつなげる場合
-      scales: {
-        x: {
-          type: 'time',
-          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須 表示設定 省略時は false
-            position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '日付時刻'           // ★必須 タイトルの文字列
-          },
-          time: {
-            unit: 'minute',
-            displayFormats: {
-              minute: 'YYYY-MM-DD HH:mm'
-            }
-          },
-        },
-        yleft: {
-          stacked: false,
-          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須 表示設定 省略時は false
-            position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '温度'           // ★必須 タイトルの文字列
-          },
-        },
-        /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
-        yright: {
-          stacked: false,
-          position: "right",
-          title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-            display: true,             // ★必須 表示設定 省略時は false
-            position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-            text: '湿度'           // ★必須 タイトルの文字列
-          },
-        },
-      },
-    };
-
-    this.data = chartData;
-    this.options = chartOptions;
-    this.device_id = deviceId.value;
-    console.log(fileName, funcName[0], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
   },
   created: function() {
     console.log(fileName, ":created-function(): In.");
