@@ -74,15 +74,6 @@ export default {
         this.devices = devices;
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties, " this.dgroup_id ", this.dgroup_id);
 
-/*
-        this.$router.push({
-          name: 'chart',
-          params: {
-            device_id: this.devices['device_id'],
-          }
-        })
-*/
-
         return response;
       }
       catch (error) {

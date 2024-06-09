@@ -216,7 +216,9 @@ export default {
               <router-link :to="{ name: 'device-detail', params: { id: 0, device_id: 0 } }">Device Detail</router-link>
             </li>
             <li>
-              <router-link to="/chart">Chart and data list</router-link>
+              <!-- router-link to="/chart">Chart and data list</router-link -->
+              <router-link to="/chart">Chart</router-link>
+              <!-- router-link :to="{ name: 'chart', params: { device_id: 0 } }">Chart</router-link -->
             </li>
           </ul>
         </div>

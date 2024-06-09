@@ -89,7 +89,9 @@ const routes = [
 //    meta: { requiresAuth: true},
   },
   {
-    path: '/devices/:id',
+//    path: '/devices/:id',
+//    path: '/devices/:device_id',
+    path: '/device-detail',
     name: 'device-detail',
     component: DeviceDetail,
 //    meta: { requiresAuth: true},

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <!-- h2>Device details with device_id: {{ $route.params.device_id }}</h2 -->
-    <h2>Chart and data list of device_id: {{ deviceId }}</h2>
+    <h2>Chart and data list of device_id: {{ device_id }}</h2>
     <div>
       <Line width="1280" height="720" :data="data" :options="options" />
     </div>
@@ -71,23 +71,6 @@ let data0s = [];
 let data1s = [];
 let data2s = [];
 
-// データを取得する関数
-async function getDeviceData(deviceId) {
-  console.log(fileName, ":getDeviceData(): In.", " deviceId ", deviceId);
-  let response;
-
-  try {
-    response = await axios.get(url + deviceId);
-    console.log(fileName, ":getDeviceData():", " response.status ", response.status)
-    console.log(fileName, ":getDeviceData():", " response.data ", response.data);
-    ddata = response.data;
-    return response;
-  }
-  catch (error) {
-    console.error(fileName, ":getDeviceData():", " error ", error);
-    return error;
-  }
-}
 
 export default {
   name: 'ChartAndDatalist',
@@ -97,13 +80,43 @@ export default {
   data: function() {
     console.log(fileName, ":data-function(): In.");
 
+    console.log(fileName, ":data-function():", "Before return():", " chartData ", chartData, " chartOptions ", chartOptions);
+    return {
+      data: null/*chartData*/,
+      options: null/*chartOptions*/,
+      device_id: "0",
+    }
+  },
+  beforeCreate: function() {
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
+
+//    async function getDeviceData(deviceId) {
+    const getDeviceData = async (deviceId) => {
+      const funcName = [":beforeCreate:", "getDeviceData():"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
+      let response;
+
+      try {
+        response = await axios.get(url + deviceId);
+        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
+        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
+        ddata = response.data;
+        return response;
+      }
+      catch (error) {
+        console.error(fileName, funcName[0], funcName[1], " error ", error);
+        return error;
+      }
+    }
+
     const deviceId = ref('');
     deviceId.value = localStorage.getItem('deviceId');
-    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
+    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
 
     // getDevices を呼び出してデータを読み込む
     let response_ga = getDeviceData(deviceId.value);
-    console.log(fileName, ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
+    console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
 //    let cnt = 0;
 //    while (ddata == null && cnt < 100000) {
@@ -125,14 +138,14 @@ export default {
   //      let j = loops - i - 1;
         let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
         let date_nt_jst = date_nt.substr(0, 23);
-        console.log(fileName, ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+        console.log(fileName, funcName[0], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
         labels.push(date_nt_jst);
         data0s.push(ddata[i/*j*/].data0);
         data1s.push(ddata[i/*j*/].data1);
         data2s.push(ddata[i/*j*/].data2);
       }
-      console.log(fileName, ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
+      console.log(fileName, funcName[0], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
     }
 
     const chartData = {
@@ -224,14 +237,10 @@ export default {
       },
     };
 
-    console.log(fileName, ":data-function():", "Before return():", " chartData ", chartData, " chartOptions ", chartOptions);
-    return {
-      data: chartData,
-      options: chartOptions,
-    }
-  },
-  beforeCreate: function() {
-    console.log(fileName, ":beforeCreate-function(): In.");
+    this.data = chartData;
+    this.options = chartOptions;
+    this.device_id = deviceId.value;
+    console.log(fileName, funcName[0], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
   },
   created: function() {
     console.log(fileName, ":created-function(): In.");
