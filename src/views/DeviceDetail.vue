@@ -56,7 +56,8 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
-    async function getDevices(dgroupId) {
+//    async function getDevices(dgroupId) {
+    const getDevices = async (dgroupId) => {
       const funcName = [":beforeCreate:", "getDevices():"];
       console.log(fileName, funcName[0], funcName[1], "In.", " dgroupId ", dgroupId);
       let response;
