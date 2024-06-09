@@ -74,9 +74,10 @@ export default {
         devices = response.data;
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
+          this.devices[i] = devices[i];
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
-        this.devices = devices;
+//        this.devices = devices;
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
 
 /*
