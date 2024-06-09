@@ -137,14 +137,14 @@ export default {
       //      let j = loops - i - 1;
             let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
             let date_nt_jst = date_nt.substr(0, 23);
-            console.log(fileName, funcName[0], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
             labels.push(date_nt_jst);
             data0s.push(ddata[i/*j*/].data0);
             data1s.push(ddata[i/*j*/].data1);
             data2s.push(ddata[i/*j*/].data2);
           }
-          console.log(fileName, funcName[0], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s, " data2s ", data2s);
         }
 
         const chartData = {
@@ -238,9 +238,9 @@ export default {
 
         this.data = chartData;
         this.options = chartOptions;
-        this.device_id = deviceId.value;
-        console.log(fileName, funcName[0], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
-
+        this.device_id = deviceId;
+//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         return response;
       }
       catch (error) {
@@ -258,25 +258,32 @@ export default {
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
   },
   created: function() {
-    console.log(fileName, ":created-function(): In.");
+    const funcName = [":created:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeMount: function() {
-    console.log(fileName, ":beforeMount-function(): In.");
+    const funcName = [":beforeMount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   mounted: function() {
-    console.log(fileName, ":mounted-function(): In.");
+    const funcName = [":mounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUpdate: function() {
-    console.log(fileName, ":beforeUpdate-function(): In.");
+    const funcName = [":beforeUpdate:"];
+    console.log(fileName, funcName[0], "In.");
   },
   updated: function() {
-    console.log(fileName, ":updated-function(): In.");
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
-    console.log(fileName, ":beforeUnmount-function(): In.");
+    const funcName = [":beforeUnmount:"];
+    console.log(fileName, funcName[0], "In.");
   },
   unmounted: function() {
-    console.log(fileName, ":unmounted-function(): In.");
+    const funcName = [":unmounted:"];
+    console.log(fileName, funcName[0], "In.");
   },
 }
 </script>
