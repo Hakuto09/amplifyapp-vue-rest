@@ -41,11 +41,11 @@ const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_de
 export default {
   name: 'DeviceDetail',
   data: function() {
-    console.log(fileName, ":data-function():", " devices ", devices);
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
     // 返却するオブジェクト devices は本コンポーネントで表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
-
-    console.log(fileName, ":data-function():", "Before return():", " devices ", devices, " dgroupId.value ", dgroupId.value, " deviceId.value ", deviceId.value);
+    console.log(fileName, funcName[0], "Before return():");
     return {
       devices: null/*devices*/,
 //      dgroupId: dgroupId.value,
