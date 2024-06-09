@@ -15,7 +15,7 @@
         </th>
         <!-- devices のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
         <tr
-          v-for="(value, name) in devices[$route.params.id/* - 1*/]"
+          v-for="(value, name) in properties.devices[$route.params.id/* - 1*/]"
           :key="name">
           <td :class="$style.item">
             {{ name }}
