@@ -101,7 +101,7 @@ export default {
         name: 'device-detail',
         params: {
           id: this.selected['id'],
-          device_id: this.selected['device_id'],
+//          device_id: this.selected['device_id'],
         }
       })
     }
