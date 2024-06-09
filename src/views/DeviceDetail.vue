@@ -120,7 +120,7 @@ export default {
 
     // getDevices を呼び出してデータを読み込む
     let response_ga = getDevices(dgroupId.value);
-    console.log(fileName, funcName[0], ":After getDevices()", " devices ", devices, " response_ga ", response_ga);
+    console.log(fileName, funcName[0], ":After getDevices():", " devices ", devices, " response_ga ", response_ga);
 
 //    const deviceId = ref('');
 //    deviceId.value = localStorage.getItem('deviceId');
