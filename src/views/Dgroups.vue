@@ -222,8 +222,10 @@ export default {
       this.account_id = userInfo.userId;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
     }
-    getUserAxiosGetLap();
-//    let ret = new getUserAxiosGetLap();
+
+    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this ", this);
+    //    getUserAxiosGetLap();
+    this.getUserAxiosGetLap();
 //    console.log(fileName, funcName[0], "After getUserAxiosGetLap()", " ret ", ret);
 
 //    listUpdate(this.properties);
