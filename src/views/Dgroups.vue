@@ -213,7 +213,8 @@ export default {
         dgroups[i].id = i;
       }
 
-      console.log(fileName, funcName[0], funcName[1], "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+//      console.log(fileName, funcName[0], funcName[1], "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
+      console.log(fileName, funcName[0], funcName[1], "Before this.properties.dgroups = dgroups", " dgroups ", dgroups, " this ", this);
 //        getDgroupsFinFlag = 1;
       // this.$setを使ってリアクティブにする
 //      this.$set(this.dgroups, 'dgroups', dgroups);
