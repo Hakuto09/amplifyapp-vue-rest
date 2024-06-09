@@ -172,7 +172,8 @@ export default {
 
 <template>
   <authenticator>
-    <template v-slot="{ user, signOut }">
+    <!-- template v-slot="{ user, signOut }" -->
+    <template v-slot="{ signOut }">
     <!-- template v-model="{ user, signOut }" -->
       <!-- h1>Hello {{ user.username }}!</h1 -->
       <button @click="signOut">Sign Out</button>
