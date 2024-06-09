@@ -37,23 +37,6 @@ console.log(fileName, ":After import:");
 let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 
-// 実際にデータを取得する getDevices 関数
-async function getDevices(dgroupId) {
-  console.log(fileName, ":getDevices(): In.", " dgroupId ", dgroupId);
-  let response;
-
-  try {
-    response = await axios.get(url + dgroupId);
-    console.log(fileName, ":getDevices():", " response.status ", response.status)
-    console.log(fileName, ":getDevices():", " response.data ", response.data);
-    devices = response.data;
-    return response;
-  }
-  catch (error) {
-    console.error(fileName, ":getDevices():", " error ", error);
-    return error;
-  }
-}
 
 export default {
   name: 'DeviceDetail',
@@ -62,28 +45,53 @@ export default {
     // 返却するオブジェクト devices は本コンポーネントで表示するユーザ情報
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
 
-    const dgroupId = ref('');
-    dgroupId.value = localStorage.getItem('dgroupId');
-    console.log(fileName, ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
-
-    // getDevices を呼び出してデータを読み込む
-    let response_ga = getDevices(dgroupId.value);
-    console.log(fileName, ":After getDevices()", " devices ", devices, " response_ga ", response_ga);
-
-    const deviceId = ref('');
-    deviceId.value = localStorage.getItem('deviceId');
-    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
-
     console.log(fileName, ":data-function():", "Before return():", " devices ", devices, " dgroupId.value ", dgroupId.value, " deviceId.value ", deviceId.value);
     return {
-      devices: devices,
-      dgroupId: dgroupId.value,
-      deviceId: deviceId.value,
+      devices: null/*devices*/,
+//      dgroupId: dgroupId.value,
+//      deviceId: deviceId.value,
     }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
+
+    async function getDevices(dgroupId) {
+      const funcName = [":beforeCreate:", "getDevices():"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " dgroupId ", dgroupId);
+      let response;
+
+      try {
+        response = await axios.get(url + dgroupId);
+        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
+        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
+        devices = response.data;
+        for (let i = 0; i < devices.length; i++) {
+          devices[i].id = i;
+        }
+        console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
+        this.devices = devices;
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties, " this.dgroup_id ", this.dgroup_id);
+
+        return response;
+      }
+      catch (error) {
+        console.error(fileName, ":getDevices():", " error ", error);
+        return error;
+      }
+    }
+
+    const dgroupId = ref('');
+    dgroupId.value = localStorage.getItem('dgroupId');
+    console.log(fileName, funcName[0], ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+
+    // getDevices を呼び出してデータを読み込む
+    let response_ga = getDevices(dgroupId.value);
+    console.log(fileName, funcName[0], ":After getDevices()", " devices ", devices, " response_ga ", response_ga);
+
+//    const deviceId = ref('');
+//    deviceId.value = localStorage.getItem('deviceId');
+//    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
   },
   created: function() {
     const funcName = [":created:"];
