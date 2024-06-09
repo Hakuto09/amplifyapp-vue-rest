@@ -55,12 +55,18 @@ export default {
 //      devices: null/*devices*/,
       properties: {
 //        headers: [
+//          'device_id',
+//          'device_name',
 //          'dgroup_id',
-//          'dgroup_name',
-//          'account_id',
 //        ],
 //        dgroups: null/*dgroups*/,
-        devices: null,
+//        devices: null,
+        devices: {
+          device_id: "0",
+          device_name: "0",
+          dgroup_id: "0",
+          id: 0,
+        }
       },
 //      dgroupId: dgroupId.value,
 //      deviceId: deviceId.value,
