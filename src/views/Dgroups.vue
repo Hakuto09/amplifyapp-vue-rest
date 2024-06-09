@@ -194,8 +194,8 @@ export default {
 
 //    let userInfo/* = { username, userId, signInDetails }* /; 
     let response_api;
-    async function getUserAxiosGetLap() {
-//    const getUserAxiosGetLap = async () => {
+//    async function getUserAxiosGetLap() {
+    const getUserAxiosGetLap = async () => {
       const funcName = [":beforeCreate:", "getUserAxiosGetLap:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
@@ -223,9 +223,10 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
     }
 
-    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this ", this);
-    //    getUserAxiosGetLap();
-    this.getUserAxiosGetLap();
+//    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this ", this);
+    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this.properties ", this.properties);
+    getUserAxiosGetLap();
+//    this.getUserAxiosGetLap();
 //    console.log(fileName, funcName[0], "After getUserAxiosGetLap()", " ret ", ret);
 
 //    listUpdate(this.properties);
