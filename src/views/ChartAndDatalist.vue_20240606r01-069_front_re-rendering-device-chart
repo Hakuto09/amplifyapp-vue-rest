@@ -78,8 +78,7 @@ export default {
     Line
   },
   data: function() {
-    const funcName = [":data:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, ":data-function(): In.");
 
     console.log(fileName, ":data-function():", "Before return():");
     return {
