@@ -52,7 +52,16 @@ export default {
     // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
     console.log(fileName, funcName[0], "Before return():");
     return {
-      devices: null/*devices*/,
+//      devices: null/*devices*/,
+      properties: {
+//        headers: [
+//          'dgroup_id',
+//          'dgroup_name',
+//          'account_id',
+//        ],
+//        dgroups: null/*dgroups*/,
+        devices: null,
+      },
 //      dgroupId: dgroupId.value,
 //      deviceId: deviceId.value,
     }
@@ -78,7 +87,9 @@ export default {
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
 //        this.devices = devices;
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
+        this.properties.devices = devices;
+//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
 
 /*
         this.$router.push({
@@ -92,7 +103,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, ":getDevices():", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], " error ", error);
         return error;
       }
     }
