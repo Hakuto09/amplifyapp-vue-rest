@@ -80,7 +80,7 @@ export default {
   data: function() {
     console.log(fileName, ":data-function(): In.");
 
-    console.log(fileName, ":data-function():", "Before return():", " chartData ", chartData, " chartOptions ", chartOptions);
+    console.log(fileName, ":data-function():", "Before return():");
     return {
       data: null/*chartData*/,
       options: null/*chartOptions*/,
