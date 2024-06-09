@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.component">
+    <h2>Device list of dgroup_id: {{ dgroup_id }}</h2>
     <DeviceList :properties="properties" />
   </div>
 </template>
@@ -55,8 +56,9 @@ export default {
           'device_name',
           'dgroup_id',
         ],
-        devices: devices,
-      }
+        devices: null/*devices*/,
+      },
+      dgroup_id: 0,
     }
   },
   methods: function() {
@@ -93,7 +95,8 @@ export default {
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
         this.properties.devices = devices;
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties.devices ", this.properties.devices);
+        this.dgroup_id = dgroupId;
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties, " this.dgroup_id ", this.dgroup_id);
         return response_api;
       }
       catch (error) {

@@ -219,7 +219,7 @@ export default {
 //      this.$set(this.dgroups, 'dgroups', dgroups);
       this.properties.dgroups = dgroups;
       this.account_id = userInfo.userId;
-      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
+      console.log(fileName, funcName[0], funcName[1], "After this.properties.dgroups = dgroups", " dgroups ", dgroups, " this.properties.dgroups ", this.properties.dgroups);
     }
     getUserAxiosGetLap();
 
