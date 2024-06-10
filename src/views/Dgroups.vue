@@ -140,7 +140,7 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
-    regsiterDgroup: function() {
+    registerDgroup: function() {
       const funcName = [":methods:", "regsiterDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
