@@ -31,7 +31,8 @@ console.log(fileName, ":After import: ");
 
 let dgroups;
 //let dgroups2 = [];
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
+//const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
+const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 //let userId = 0;
@@ -145,7 +146,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
-      axios.post('/dgroup',
+      axios.post(url_base + '/dgroup',
         {
           dgroup_name: this.properties.message,
           account_id: userInfo.userId,
@@ -242,7 +243,7 @@ export default {
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
 //    const axiosGetLap = async () => {
       console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
-      response_api = await axios.get(url + userInfo.userId);
+      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
