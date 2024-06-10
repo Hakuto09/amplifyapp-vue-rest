@@ -246,8 +246,8 @@ export default {
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
 //    const axiosGetLap = async () => {
       console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
-//      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
-
+      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+/*
       axios.get(url_base + 'dgroups' + userInfo.userId)
         .then(function(response) {
           response_api = response;
@@ -256,7 +256,7 @@ export default {
         .catch(function(error) {
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
         })
-
+*/
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
