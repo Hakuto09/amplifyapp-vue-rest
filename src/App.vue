@@ -223,11 +223,11 @@ export default {
               <!-- router-link :to="{ name: 'chart', params: { device_id: 0 } }">Chart</router-link -->
             </li>
           </ul>
+          <div>
+            <h1>Test</h1>
+          </div>
         </div>
         <router-view />
-        <div>
-          <h1>Test</h1>
-        </div>
       </div>
     </template>
   </authenticator>
