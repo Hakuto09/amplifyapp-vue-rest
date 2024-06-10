@@ -154,9 +154,9 @@ export default {
         .then(function(response) {
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
         })
-        .catch(error) {
+        .catch(function(error) {
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
-        }
+        })
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
     }
@@ -252,9 +252,9 @@ export default {
           response_api = response;
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
         })
-        .catch(error) {
+        .catch(function(error) {
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
-        }
+        })
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.status ", response_api.status);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
