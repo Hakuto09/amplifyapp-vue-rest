@@ -159,7 +159,7 @@ export default {
 
 <style module>
 .component {
-  margin-top: 50px;
+  margin-top: /*50*/100px;
   height: 500px;
   width: 100%;
 }

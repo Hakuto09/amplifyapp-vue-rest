@@ -223,9 +223,9 @@ export default {
               <!-- router-link :to="{ name: 'chart', params: { device_id: 0 } }">Chart</router-link -->
             </li>
           </ul>
-          <div>
+          <!-- div>
             <h1>Test</h1>
-          </div>
+          </div -->
         </div>
         <router-view />
       </div>
