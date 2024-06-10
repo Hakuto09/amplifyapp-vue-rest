@@ -154,10 +154,21 @@ export default {
   width: 100%;
   /* 子要素を中央に配置する */
   display: flex;
-  /*justify-content: center;*/
+  justify-content: center;
   /*justify-content: space-between;*/
-  justify-content: space-around;
+  /*justify-content: space-around;*/
+  /*justify-content: space-evenly;*/
   align-items: center;
+}
+
+.dgrouplist li {
+    padding: 8px 25px;
+    border-bottom: 1px solid #000000;
+}
+
+.dgrouplist td {
+    padding: 8px 25px;
+    border-bottom: 1px solid #000000;
 }
 
 .dgrouptable {
