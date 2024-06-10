@@ -3,11 +3,11 @@
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
-    <input
+    <!-- input
       v-model="properties.message"/
       :class="$style.message"
       placeholder="edit me">
-    <p>Message is: {{ properties.message }}</p>
+    <p>Message is: {{ properties.message }}</p -->
   </div>
 </template>
 
