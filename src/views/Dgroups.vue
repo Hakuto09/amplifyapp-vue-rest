@@ -143,16 +143,16 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
-    registerDgroup: function() {
-//    registerDgroup: async function() {
+//    registerDgroup: function() {
+    registerDgroup: async function() {
 //    const :registerDgroup = async () => {
       const funcName = [":methods:", "regsiterDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
       let res = 0;
-      axios.post(url_base + '/dgroup',
-//      await axios.post(url_base + '/dgroup',
+//      axios.post(url_base + '/dgroup',
+      await axios.post(url_base + '/dgroup',
         {
           dgroup_name: this.properties.message,
           account_id: userInfo.userId,
