@@ -227,7 +227,7 @@ export default {
         <router-view />
       </div>
       <div>
-        <br><br><br><br><br><br>
+        <h1></h1>
       </div>
     </template>
   </authenticator>
