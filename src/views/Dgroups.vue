@@ -8,6 +8,7 @@
       :class="$style.message"
       placeholder="edit me">
     <!-- p>Message is: {{ properties.message }}</p -->
+    <br><br>
     <button
         type="is-info"
         @click="registerDgroup">
