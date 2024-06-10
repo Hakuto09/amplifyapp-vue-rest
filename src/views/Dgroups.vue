@@ -7,13 +7,14 @@
     <input
       v-model="properties.message"
       :class="$style.message"
-      placeholder="edit me">
+      placeholder="New device-group name">
     <!-- p>Message is: {{ properties.message }}</p -->
     <button
         type="is-info"
         @click="registerDgroup">
         Register
     </button>
+    <p>{{ properties.message_result }}</p>
 </div>
 </template>
 
@@ -131,7 +132,8 @@ export default {
         ],
         dgroups: null/*dgroups*/,
 //        account_id: this.account_id,
-        message: 'default value.',
+        message: '',
+        message_result: '',
       },
       account_id: 0/*userId*/,
     }
@@ -152,9 +154,11 @@ export default {
           account_id: userInfo.userId,
         })
         .then(function(response) {
+          this.properties.message_result = 'Success';
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
         })
         .catch(function(error) {
+          this.properties.message_result = 'Error';
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
         })
 
@@ -289,9 +293,10 @@ export default {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
 
-    this.properties.message = 'Please input a new device-group name';
+    this.properties.message_result = 'Please input a new device-group name';
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
@@ -299,6 +304,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   mounted: function() {
     const funcName = [":mounted:"];
@@ -306,6 +312,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
@@ -313,6 +320,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   updated: function() {
     const funcName = [":updated:"];
@@ -320,6 +328,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
@@ -327,6 +336,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
@@ -334,6 +344,7 @@ export default {
 
     console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
     console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+    console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
 }
 </script>
@@ -341,5 +352,21 @@ export default {
 <style module>
 .component {
   margin-top: /*50*/100px;
+}
+
+.message {
+  font-size: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p {
+  font-size: 12px;
 }
 </style>
