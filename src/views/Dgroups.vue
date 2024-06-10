@@ -247,7 +247,7 @@ export default {
 //    const axiosGetLap = async () => {
       console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
 //      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
-      axios.get(url_base + '/dgroups')
+      axios.get(url_base + 'dgroups')
         .then(function(response) {
           response_api = response;
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
