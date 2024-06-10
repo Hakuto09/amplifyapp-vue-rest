@@ -7,7 +7,7 @@
     <img 
       alt="Hakuto logo" 
       src="../assets/Hakuto_logo_small.jpg">
-    <h1>Welcome to Your Vue.js App</h1>
+    <h2>Welcome to Your Vue.js App</h2>
   </div>
 </template>
 
@@ -32,5 +32,9 @@ export default {
 
 h1 {
   font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
 }
 </style>
