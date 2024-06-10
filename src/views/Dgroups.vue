@@ -143,6 +143,7 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
+//    registerDgroup: function() {
     registerDgroup: async function() {
 //    const :registerDgroup = async () => {
       const funcName = [":methods:", "regsiterDgroup:"];
@@ -160,7 +161,7 @@ export default {
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
         })
         .catch(function(error) {
-          this.properties.message_result = 'Error';
+//          this.properties.message_result = 'Error';
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
         })
 
