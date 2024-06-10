@@ -255,7 +255,7 @@ export default {
         .catch(function(error) {
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
         })
-      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.status ", response_api.status);
+      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
         dgroups[i].id = i;
