@@ -175,6 +175,15 @@ export default {
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
+      let response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
+      dgroups = response_api.data;
+      for (let i = 0; i < dgroups.length; i++) {
+        dgroups[i].id = i;
+      }
+      this.properties.dgroups = dgroups;
+      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
+
       console.log(fileName, funcName[0], funcName[1], "Out.");
     }
 /*
@@ -258,8 +267,9 @@ export default {
 
       userInfo = await getCurrentUser();
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
-//    }
-//    getCurrentUserlap();
+      this.account_id = userInfo.userId;
+
+      //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
 //    const axiosGetLap = async () => {
       console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
@@ -286,7 +296,6 @@ export default {
       // this.$setを使ってリアクティブにする
 //      this.$set(this.dgroups, 'dgroups', dgroups);
       this.properties.dgroups = dgroups;
-      this.account_id = userInfo.userId;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
     }
 
