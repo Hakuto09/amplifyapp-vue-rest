@@ -150,12 +150,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
-      let response_api;
       let res = 0;
-
-      // Dgroupリストの登録
-//      axios.post(url_base + 'dgroup',
-      await axios.post(url_base + 'dgroup',
+//      axios.post(url_base + '/dgroup',
+      await axios.post(url_base + '/dgroup',
         {
           dgroup_name: this.properties.message,
           account_id: userInfo.userId,
@@ -178,8 +175,7 @@ export default {
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
-      // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      let response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
