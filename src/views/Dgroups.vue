@@ -150,6 +150,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
+      let res = 0;
 //      axios.post(url_base + '/dgroup',
       await axios.post(url_base + '/dgroup',
         {
@@ -157,14 +158,17 @@ export default {
           account_id: userInfo.userId,
         })
         .then(function(response) {
-          this.properties.message_result = 'Success';
+//          this.properties.message_result = 'Success';
+          res = 1;
           console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
         })
         .catch(function(error) {
 //          this.properties.message_result = 'Error';
+          res = -1;
           console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
         })
 
+      console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res);
       console.log(fileName, funcName[0], funcName[1], "Out.");
     }
 /*
