@@ -3,12 +3,12 @@
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
+    <br><br>
     <input
       v-model="properties.message"
       :class="$style.message"
       placeholder="edit me">
     <!-- p>Message is: {{ properties.message }}</p -->
-    <br><br>
     <button
         type="is-info"
         @click="registerDgroup">
@@ -140,6 +140,22 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
+    regsiterDgroup: function() {
+      const funcName = [":methods:", "regsiterDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
+
+      axios.post('/dgroup',
+        {
+          dgroup_name: this.properties.message,
+          account_id: userInfo.userId,
+        })
+        .then(function(response) {
+          console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
+        })
+
+      console.log(fileName, funcName[0], funcName[1], "Out.");
+    }
 /*
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
