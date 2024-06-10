@@ -154,7 +154,8 @@ export default {
   width: 100%;
   /* 子要素を中央に配置する */
   display: flex;
-  justify-content: center;
+  /*justify-content: center; */
+  justify-content: space-between;
   align-items: center;
 }
 

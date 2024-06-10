@@ -128,7 +128,7 @@ export default {
         headers: [
           'dgroup_id',
           'dgroup_name',
-          'account_id',
+//          'account_id',
         ],
         dgroups: null/*dgroups*/,
 //        account_id: this.account_id,
