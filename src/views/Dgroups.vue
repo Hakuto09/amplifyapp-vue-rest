@@ -183,12 +183,12 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
 //    try {
-      this.properties.message = 'Please input a new device-group name';
+//      this.properties.message = 'Please input a new device-group name';
 //      console.log(`message is ${this.properties.message}`)
 //    } catch (e) {
 //      console.log(e)
 //    }
-    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
+//    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
 
 //    currentInstance = getCurrentInstance();
 //    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
