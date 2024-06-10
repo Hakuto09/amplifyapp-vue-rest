@@ -13,13 +13,15 @@
 
 <script>
 // @ を指定することで `/src` の代替となる
-import HelloWorld from '@/components/HelloWorld.vue'
+//import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomePage',
+/*
   components: {
     HelloWorld
-  }
+  },
+*/
 }
 </script>
 
