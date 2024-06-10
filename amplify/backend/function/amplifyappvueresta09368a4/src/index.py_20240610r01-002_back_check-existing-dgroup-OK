@@ -372,26 +372,19 @@ def post_dgroup(_in: Request_PostDGroup):
 
     ### IoT Core access.
     dgroup_name = create_dgroup_dict.get('dgroup_name')
-    account_id = create_dgroup_dict.get('account_id')
-    account_id_dgroup_name = account_id + '_' + dgroup_name
-    account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
-    print('After create_dgroup_dict.get():', ' dgroup_name ', dgroup_name, ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
     check_existing_flag = create_dgroup_dict.get('check_existing_flag')
     del create_dgroup_dict['check_existing_flag']
 
     if check_existing_flag == 1:
         # Chect dgroup_name existing.
         response_iot_dgroup = client_iot.describe_thing_group(
-#            thingGroupName = dgroup_name,
-            thingGroupName = account_id_dgroup_name,
+            thingGroupName = dgroup_name,
         )
         print('After client_iot.describe_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
         return Response_PostDGroup.parse_obj(response_iot_dgroup)
 
-    # Create thingGroup
     response_iot_dgroup = client_iot.create_thing_group(
-#        thingGroupName = dgroup_name,
-        thingGroupName = account_id_dgroup_name,
+        thingGroupName = dgroup_name,
     )
     print('After client_iot.create_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
 
@@ -399,13 +392,10 @@ def post_dgroup(_in: Request_PostDGroup):
     create_dgroup_dict['dgroup_id'] = dgroup_id
     print('After response_iot.get(\'thingGroupId\'):', ' create_dgroup_dict ', create_dgroup_dict)
 
-    # Create topic rule
-#    ruleName = 'Hkt_aws_iot_rule_to_dynamodb_' + dgroup_name
-    ruleName = 'Hkt_' + account_id_dgroup_name
-#    topicName = "'" + dgroup_name + "/+'"
-    topicName = "'" + account_id_dgroup_name + "/+'"
+    ruleName = 'Hkt_aws_iot_rule_to_dynamodb_' + dgroup_name
+    topicName = "'" + dgroup_name + "/+'"
     roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
-    print('After set:', ' dgroup_name ', dgroup_name, ' ruleName ', ruleName, ' topicName ', topicName, ' roleArn ', roleArn)
+    print('After set:', ' dgroup_name ', dgroup_name, ' ruleName ', ruleName, ' roleArn ', roleArn, ' topicName ', topicName)
     response_iot_rule = client_iot.create_topic_rule(
         ruleName = ruleName,
         topicRulePayload = {
@@ -425,13 +415,12 @@ def post_dgroup(_in: Request_PostDGroup):
     )
     print('After client_iot.create_topic_rule():', ' response_iot_rule ', response_iot_rule)
 
-    # Enable topic rule
     response_iot_rule2 = client_iot.enable_topic_rule(
         ruleName = ruleName,
     )
     print('After client_iot.enable_topic_rule():', ' response_iot_rule2 ', response_iot_rule2)
 
-    ### DynamoDB access
+    # Dynamo DB
 #    response_ddb = client_ddb.put_item(
     response_ddb = ddb_table_dgroups.put_item(
 #        TableName = STORAGE_DB_DGROUPS,
