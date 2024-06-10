@@ -143,8 +143,8 @@ export default {
 //    console.log(fileName, ":methods-function():", " this.account_id ", this.account_id);
 //    console.log(fileName, ":methods:", "In");
 
-//    registerDgroup: function() {
-    const :registerDgroup = async () => {
+    registerDgroup: async function() {
+//    const :registerDgroup = async () => {
       const funcName = [":methods:", "regsiterDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
