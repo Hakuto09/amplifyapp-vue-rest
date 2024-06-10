@@ -3,12 +3,17 @@
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
-    <!-- input
-      v-model="properties.message"/
+    <input
+      v-model="properties.message"
       :class="$style.message"
       placeholder="edit me">
-    <p>Message is: {{ properties.message }}</p -->
-  </div>
+    <!-- p>Message is: {{ properties.message }}</p -->
+    <button
+        type="is-info"
+        @click="registerDgroup">
+        Register
+    </button>
+</div>
 </template>
 
 <script>
@@ -124,6 +129,7 @@ export default {
         ],
         dgroups: null/*dgroups*/,
 //        account_id: this.account_id,
+        message: 'default value.',
       },
       account_id: 0/*userId*/,
     }
@@ -175,6 +181,13 @@ export default {
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
+
+    try {
+      this.properties.message = 'Please input a new device-group name'
+      console.log(`message is ${this.properties.message}`)
+    } catch (e) {
+      console.log(e)
+    }
 
 //    currentInstance = getCurrentInstance();
 //    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
@@ -243,72 +256,51 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   mounted: function() {
     const funcName = [":mounted:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
-/*
-    let response_api;
 
-    // 実際にデータを取得する getDgroups 関数
-    async function getDgroups() {
-      console.log(fileName, ":beforeUpdate-function():", ":getDgroups(): In.");
-
-      console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "Before await getCurrentUser():");
-      const { username, userId, signInDetails } = await getCurrentUser();
-    //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
-      console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
-
-//      let response_api;
-
-      try {
-        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "Before await axios.get()");
-        response_api = await axios.get(url + userId);
-        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
-        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", " response_api.data ", response_api.data);
-        dgroups = response_api.data;
-        for (let i = 0; i < dgroups.length; i++) {
-          dgroups[i].id = i;
-        }
-        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", " dgroups ", dgroups);
-//        getDgroupsFinFlag = 1;
-        // this.$setを使ってリアクティブにする
-//        this.$set(this.dgroups, 'dgroups', dgroups);
-//        this.dgroups = dgroups;
-//        console.log(fileName, ":beforeUpdate-function():", ":getDgroups():", "After this.dgroups = dgroups;", " dgroups ", dgroups);
-        return response_api;
-      }
-      catch (error) {
-        console.error(fileName, ":beforeUpdate-function():", ":getDgroups():", " error ", error);
-//        getDgroupsFinFlag = 1;
-        return error;
-      }
-    }
-
-    //  if (userId) {
-    const ret = getDgroups();
-    console.log(fileName, ":beforeUpdate-function():", "After getDgroups():", " ret ", ret);
-*/
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
   },
 }
 </script>
