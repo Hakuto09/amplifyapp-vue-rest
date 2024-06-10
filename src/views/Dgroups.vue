@@ -152,24 +152,35 @@ export default {
 
       let response_api;
       let res = 0;
+      let check_existing_flag; 
 
       // Dgroupリストの登録
-//      axios.post(url_base + 'dgroup',
-      await axios.post(url_base + 'dgroup',
-        {
-          dgroup_name: this.properties.message,
-          account_id: userInfo.userId,
-        })
-        .then(function(response) {
-//          this.properties.message_result = 'Success';
-          res = 1;
-          console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
-        })
-        .catch(function(error) {
-//          this.properties.message_result = 'Error';
-          res = -1;
-          console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
-        })
+      for (let i = 0; i < 2; i++) {
+        check_existing_flag = !i;
+        console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
+  //      axios.post(url_base + 'dgroup',
+        await axios.post(url_base + 'dgroup',
+          {
+            dgroup_name: this.properties.message,
+            account_id: userInfo.userId,
+            check_existing_flag: check_existing_flag,
+          })
+          .then(function(response) {
+  //          this.properties.message_result = 'Success';
+            res = 1;
+            console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
+          })
+          .catch(function(error) {
+  //          this.properties.message_result = 'Error';
+            res = -1;
+            console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
+          })
+        
+        if (check_existing_flag && res == 1) {
+          this.properties.message_result = 'Duplicattion error';
+          return;
+        }
+      }
 
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res);
 

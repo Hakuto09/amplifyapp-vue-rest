@@ -378,10 +378,9 @@ def post_dgroup(_in: Request_PostDGroup):
     if check_existing_flag == 1:
         # Chect dgroup_name existing.
         response_iot_dgroup = client_iot.describe_thing_group(
-            thingGroupName = dgroup_name,
+                thingGroupName = dgroup_name,
         )
         print('After client_iot.describe_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
-        return Response_PostDGroup.parse_obj(response_iot_dgroup)
 
     response_iot_dgroup = client_iot.create_thing_group(
         thingGroupName = dgroup_name,
