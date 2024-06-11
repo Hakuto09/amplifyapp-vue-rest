@@ -9,11 +9,20 @@
       :class="$style.message"
       placeholder="New device-group name">
     <!-- p>Message is: {{ properties.message }}</p -->
-    <button
+    <div :class="$style.delete_dgroup">
+      <button
+        type="is-info"
+        @click="deleteDgroup">
+        Delete
+      </button>
+    </div>
+    <div :class="$style.register_dgroup">
+      <button
         type="is-info"
         @click="registerDgroup">
         Register
-    </button>
+      </button>
+    </div>
     <p>{{ properties.message_result }}</p>
 </div>
 </template>
@@ -393,6 +402,10 @@ export default {
 
 .message {
   font-size: 10px;
+}
+
+.delete_dgroup {
+  margin: 0 0 0 auto;
 }
 
 h1 {

@@ -25,7 +25,7 @@
         </tbody>
       </table>
     </div>
-    <div :class="$style.select_dgroup">
+    <div :class="$style.showmore">
       <button
         type="is-info"
         @click="selectDgroup">
