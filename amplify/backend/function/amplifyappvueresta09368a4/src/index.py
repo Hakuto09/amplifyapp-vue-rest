@@ -79,7 +79,7 @@ class Response_Item(BaseModel):
 
 class Request_PostAccount(BaseModel):
     """
-    アカウント用リクエストスキーマ
+    アカウント登録用リクエストスキーマ
     """
     account_id: str
     account_name: str
@@ -88,7 +88,7 @@ class Request_PostAccount(BaseModel):
 
 class Response_PostAccount(BaseModel):
     """
-    アカウント用レスポンススキーマ
+    アカウント登録用レスポンススキーマ
     """
     account_name: str
     email: str
@@ -96,7 +96,7 @@ class Response_PostAccount(BaseModel):
 
 class Request_PostDGroup(BaseModel):
     """
-    デバイスグループ用リクエストスキーマ
+    デバイスグループ登録用リクエストスキーマ
     """
 #    dgroup_id: str
     dgroup_name: str
@@ -105,15 +105,31 @@ class Request_PostDGroup(BaseModel):
 
 class Response_PostDGroup(BaseModel):
     """
-    デバイスグループ用レスポンススキーマ
+    デバイスグループ登録用レスポンススキーマ
     """
 #    dgroup_name: str
     thingGroupName: str
     thingGroupId: str
 
+class Request_DeleteDGroup(BaseModel):
+    """
+    デバイスグループ削除用リクエストスキーマ
+    """
+#    dgroup_id: str
+    dgroup_name: str
+    account_id: str
+
+class Response_DeleteDGroup(BaseModel):
+    """
+    デバイスグループ削除用レスポンススキーマ
+    """
+#    dgroup_name: str
+    thingGroupName: str
+#    thingGroupId: str
+
 class Request_PostDevice(BaseModel):
     """
-    デバイス用リクエストスキーマ
+    デバイス登録用リクエストスキーマ
     """
 #    device_id: str
     device_name: str
@@ -122,7 +138,7 @@ class Request_PostDevice(BaseModel):
 
 class Response_PostDevice(BaseModel):
     """
-    デバイス用レスポンススキーマ
+    デバイス登録用レスポンススキーマ
     """
 #    thingName: str
 #    thingId: str
@@ -443,7 +459,7 @@ def post_dgroup(_in: Request_PostDGroup):
     return Response_PostDGroup.parse_obj(response_iot_dgroup)
 
 #@app.post("/device", response_model=Response_PostDevice)
-@app.post("/__device", response_model=Response_PostDevice)
+@app.post("/_device", response_model=Response_PostDevice)
 def post_device(_in: Request_PostDevice):
     """
     デバイスを登録する
@@ -545,5 +561,87 @@ def delete_item(id: str):
         "createdAt": "2000-04-25T12:00:01+09:00"
     }
 
+@app.delete("/dgroup", response_model=Response_DeleteDGroup)
+def delete_dgroup(_in: Request_DeleteDGroup):
+    """
+    デバイスグループを削除する
+    """
+    print('delete_dgroup(): In')
+
+    delete_dgroup_dict = _in.dict()
+    print('delete_dgroup_dict ', delete_dgroup_dict)
+
+    delete_dgroup_json = json.dumps(delete_dgroup_dict)     # for debug only.
+    print('delete_dgroup_json ', delete_dgroup_json)
+
+    ### IoT Core access.
+    dgroup_name = delete_dgroup_json.get('dgroup_name')
+    account_id = delete_dgroup_json.get('account_id')
+    account_id_dgroup_name = account_id + '_' + dgroup_name
+    account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
+    print('After delete_dgroup_json.get():', ' dgroup_name ', dgroup_name, ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
+
+    if check_existing_flag == 1:
+        # Chect dgroup_name existing.
+        response_iot_dgroup = client_iot.describe_thing_group(
+#            thingGroupName = dgroup_name,
+            thingGroupName = account_id_dgroup_name,
+        )
+        print('After client_iot.describe_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
+        return Response_PostDGroup.parse_obj(response_iot_dgroup)
+
+    # Create thingGroup
+    response_iot_dgroup = client_iot.create_thing_group(
+#        thingGroupName = dgroup_name,
+        thingGroupName = account_id_dgroup_name,
+    )
+    print('After client_iot.create_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
+
+    dgroup_id = response_iot_dgroup.get('thingGroupId')
+    create_dgroup_dict['dgroup_id'] = dgroup_id
+    print('After response_iot.get(\'thingGroupId\'):', ' create_dgroup_dict ', create_dgroup_dict)
+
+    # Create topic rule
+#    ruleName = 'Hkt_aws_iot_rule_to_dynamodb_' + dgroup_name
+    ruleName = 'Hkt_' + account_id_dgroup_name
+#    topicName = "'" + dgroup_name + "/+'"
+    topicName = "'" + account_id_dgroup_name + "/+'"
+    roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
+    print('After set:', ' dgroup_name ', dgroup_name, ' ruleName ', ruleName, ' topicName ', topicName, ' roleArn ', roleArn)
+    response_iot_rule = client_iot.create_topic_rule(
+        ruleName = ruleName,
+        topicRulePayload = {
+#            'sql': "SELECT * from " + topicName,
+            'sql': "SELECT device_name AS device_name, createdAt as createdAt, createdAt as createdAt_c, data0 as data0, data1 as data1, data2 as data2 FROM " + topicName,
+            'actions': [
+                {
+                    'dynamoDBv2': {
+                        'roleArn': roleArn,
+                        'putItem': {
+                            'tableName': STORAGE_DB_DDATA,
+                        }
+                    }
+                }
+            ]
+        }
+    )
+    print('After client_iot.create_topic_rule():', ' response_iot_rule ', response_iot_rule)
+
+    # Enable topic rule
+    response_iot_rule2 = client_iot.enable_topic_rule(
+        ruleName = ruleName,
+    )
+    print('After client_iot.enable_topic_rule():', ' response_iot_rule2 ', response_iot_rule2)
+
+    ### DynamoDB access
+#    response_ddb = client_ddb.put_item(
+    response_ddb = ddb_table_dgroups.put_item(
+#        TableName = STORAGE_DB_DGROUPS,
+        Item = create_dgroup_dict,
+    )
+#    print('After client_ddb.put_item():', ' response_ddb ', response_ddb)
+    print('After ddb_table_dgroups.put_item():', ' response_ddb ', response_ddb)
+
+    return Response_PostDGroup.parse_obj(response_iot_dgroup)
 
 handler = Mangum(app)
