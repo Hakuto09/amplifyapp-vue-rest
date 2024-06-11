@@ -130,7 +130,7 @@ export default {
 //      const execEmit = () => {
         emit('eventDeleteDgroup', { 'selected': this.selected });
 //      }
-//    },
+    },
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
