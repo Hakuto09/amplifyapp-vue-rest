@@ -103,7 +103,7 @@ export default {
 //      console.log(fileName, ":After localStorage.set():", " selected['id'] ", selected['id']);
 
       this.$router.push({
-        name: '/devices',
+        name: 'devices',
 //        params: {
 //          id: this.selected['id'],
 //        }
