@@ -11,12 +11,12 @@
       </button>
     </div>
     <br><br>
-    <input
-      v-model="properties.message"
-      :class="$style.message"
-      placeholder="New device-group name">
-    <!-- p>Message is: {{ properties.message }}</p -->
     <div :class="$style.register_dgroup">
+      <input
+        v-model="properties.message"
+        :class="$style.message"
+        placeholder="New device-group name">
+      <!-- p>Message is: {{ properties.message }}</p -->
       <button
         type="is-info"
         @click="registerDgroup">
@@ -405,6 +405,7 @@ export default {
 }
 
 .delete_dgroup {
+  font-size: 16px;
 	display: flex;
 	align-items: flex-start; /*ここは任意の値でOK*/
 	justify-content: flex-end;
