@@ -7,7 +7,7 @@
       <button
         type="is-info"
         @click="deleteDgroup">
-        Delete
+        Select Delete
       </button>
     </div>
     <br><br>
