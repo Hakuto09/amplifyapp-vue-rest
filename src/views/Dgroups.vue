@@ -408,6 +408,7 @@ export default {
 	display: flex;
 	align-items: flex-start; /*ここは任意の値でOK*/
 	justify-content: flex-end;
+  margin-right: 100px;
 }
 
 h1 {
