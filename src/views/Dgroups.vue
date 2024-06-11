@@ -3,12 +3,6 @@
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
-    <br><br>
-    <input
-      v-model="properties.message"
-      :class="$style.message"
-      placeholder="New device-group name">
-    <!-- p>Message is: {{ properties.message }}</p -->
     <div :class="$style.delete_dgroup">
       <button
         type="is-info"
@@ -16,6 +10,12 @@
         Delete
       </button>
     </div>
+    <br><br>
+    <input
+      v-model="properties.message"
+      :class="$style.message"
+      placeholder="New device-group name">
+    <!-- p>Message is: {{ properties.message }}</p -->
     <div :class="$style.register_dgroup">
       <button
         type="is-info"
@@ -405,7 +405,9 @@ export default {
 }
 
 .delete_dgroup {
-  margin: 0 0 0 auto;
+	display: flex;
+	align-items: flex-start; /*ここは任意の値でOK*/
+	justify-content: flex-end;
 }
 
 h1 {
