@@ -126,11 +126,11 @@ export default {
         return false;
       }
 
-      const emit = defineEmits(['eventDeleteDgroup']);
+//      const emit = defineEmits(['eventDeleteDgroup']);
 //      const execEmit = () => {
         emit('eventDeleteDgroup', { 'selected': this.selected });
 //      }
-    },
+//    },
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
