@@ -32,6 +32,13 @@
         Select dgroup
       </button>
     </div>
+    <div :class="$style.delete_dgroup">
+      <button
+        type="is-info"
+        @click="selectDeleteDgroup">
+        Select Delete
+      </button>
+    </div>
   </div>
 </template>
 
@@ -88,8 +95,8 @@ export default {
       }
 
       if (!this.selected) {
-        alert('No data selected...')
-        return false
+        alert('No data selected...');
+        return false;
       }
 
       saveLocal(this.selected['dgroup_id']);
@@ -108,7 +115,22 @@ export default {
 //          id: this.selected['id'],
 //        }
       })
-    }
+    },
+    selectDeleteDgroup: function() {
+      const funcName = [":methods:", "eventDeleteDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
+
+      if (!this.selected) {
+        alert('No data selected...');
+        return false;
+      }
+
+      const emit = defineEmits(['eventDeleteDgroup']);
+//      const execEmit = () => {
+        emit('eventDeleteDgroup', { 'selected': this.selected });
+//      }
+    },
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
@@ -180,6 +202,14 @@ export default {
 
 .headerRadio {
   opacity:0;
+}
+
+.delete_dgroup {
+  font-size: 16px;
+	display: flex;
+	align-items: flex-start; /*ここは任意の値でOK*/
+	justify-content: flex-end;
+  margin-right: 100px;
 }
 </style>
 

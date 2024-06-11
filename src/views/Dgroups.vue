@@ -2,14 +2,15 @@
   <div :class="$style.component">
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <DgroupList :properties="properties" />
+    <DgroupList @eventDeleteDgroup="deleteDgroup" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
-    <div :class="$style.delete_dgroup">
+    <!--div :class="$style.delete_dgroup">
       <button
         type="is-info"
         @click="deleteDgroup">
         Select Delete
       </button>
-    </div>
+    </div -->
     <br><br>
     <div :class="$style.register_dgroup">
       <input
@@ -163,7 +164,7 @@ export default {
       let res = 0;
       let check_existing_flag; 
 
-      // Dgroupリストの登録
+      // Dgroup関連リソースの登録
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
@@ -209,8 +210,56 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
+    },
+
+//    deleteDgroup: async function() {
+    deleteDgroup: async function(childData) {
+        const funcName = [":methods:", "deleteDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
+      console.log(fileName, funcName[0], funcName[1], " childData ", childData);
+
+      let response_api;
+      let res = 0;
+
+      // Dgroup関連リソースの削除
+      console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():");
+      await axios.delete(url_base + 'dgroup',
+        {
+          dgroup_id: childData.selected.dgroup_id,
+          dgroup_name: childData.selected.dgroup_name,
+          account_id: childData.selected.account_id,
+        })
+        .then(function(response) {
+          res = 1;
+          console.log(funcName[0], funcName[1], "axios.delete().then", " response.data ", response.data);
+        })
+        .catch(function(error) {
+          res = -1;
+          console.log(funcName[0], funcName[1], "axios.delete().catch", " error ", error);
+        })
+      
+      console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
+
+      if (res == 1)        { this.properties.message_result = 'Success';  }
+      else if (res == -1)  { this.properties.message_result = 'Error';    }
+      else                 { this.properties.message_result = '';         }
+      console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
+
+      // Dgroupリストの更新
+      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
+      dgroups = response_api.data;
+      for (let i = 0; i < dgroups.length; i++) {
+        dgroups[i].id = i;
+      }
+      this.properties.dgroups = dgroups;
+      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
+
+      console.log(fileName, funcName[0], funcName[1], "Out.");
     }
-/*
+
+    /*
     listUpdate: function() {
       console.log(fileName, ":methods:", ":listUpdate():", "In.", " this.properties ", this.properties);
 
