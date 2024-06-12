@@ -170,7 +170,6 @@ export default {
 </script>
 
 <style module>
-
 .dgrouplist {
   margin: auto;
   width: 100%;

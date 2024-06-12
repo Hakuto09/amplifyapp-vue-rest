@@ -29,6 +29,14 @@
         </tr>
       </table>
     </div>
+    <br><br>
+    <div :class="$style.show_chart">
+      <button
+        type="is-info"
+        @click="showChart">
+        Show chart
+      </button>
+    </div>
   </div>
 </template>
 
@@ -70,6 +78,16 @@ export default {
       },
 //      dgroupId: dgroupId.value,
 //      deviceId: deviceId.value,
+    }
+  },
+  methods: {
+    showChart: function() {
+      const funcName = [":methods:", "showChart:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      this.$router.push({
+        name: 'chart',
+      })
     }
   },
   beforeCreate: function() {

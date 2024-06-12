@@ -162,7 +162,6 @@ export default {
 </script>
 
 <style module>
-
 .devicelist {
   margin: auto;
   width: 100%;
@@ -170,6 +169,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.devicelist li {
+    padding: 8px 25px;
+    border-bottom: 1px solid #000000;
+}
+
+.devicelist td {
+    padding: 8px 25px;
+    border-bottom: 1px solid #000000;
 }
 
 .devicetable {
