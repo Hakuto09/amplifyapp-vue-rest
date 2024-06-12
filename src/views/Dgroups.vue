@@ -222,14 +222,17 @@ export default {
 
       let response_api;
       let res = 0;
+      const payload = {
+        dgroup_id: childData.selected.dgroup_id,
+        dgroup_name: childData.selected.dgroup_name,
+        account_id: childData.selected.account_id,
+      }
 
       // Dgroup関連リソースの削除
-      console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():");
+      console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
       await axios.delete(url_base + 'dgroup',
         {
-          'dgroup_id': childData.selected.dgroup_id,
-          'dgroup_name': childData.selected.dgroup_name,
-          'account_id': childData.selected.account_id,
+          data: payload,
         })
         .then(function(response) {
           res = 1;
