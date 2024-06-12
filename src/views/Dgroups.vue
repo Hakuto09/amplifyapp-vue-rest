@@ -24,7 +24,8 @@
         Register
       </button>
     </div>
-    <p>{{ properties.message_result }}</p>
+    <br><br>
+    <p>Result: {{ properties.message_result }}</p>
 </div>
 </template>
 
@@ -194,8 +195,8 @@ export default {
 
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res);
 
-      if (res == 1)        { this.properties.message_result = 'Success';  }
-      else if (res == -1)  { this.properties.message_result = 'Error';    }
+      if (res == 1)        { this.properties.message_result = 'Register Success';  }
+      else if (res == -1)  { this.properties.message_result = 'Register Error';    }
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
@@ -213,11 +214,11 @@ export default {
     },
 
 //    deleteDgroup: async function() {
-    deleteDgroup: async function(childSelected) {
+    deleteDgroup: async function(childData) {
       const funcName = [":methods:", "deleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
-      console.log(fileName, funcName[0], funcName[1], " childSelected ", childSelected);
+      console.log(fileName, funcName[0], funcName[1], " childData ", childData);
 
       let response_api;
       let res = 0;
@@ -226,9 +227,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():");
       await axios.delete(url_base + 'dgroup',
         {
-          dgroup_id: childSelected.dgroup_id,
-          dgroup_name: childSelected.dgroup_name,
-          account_id: childSelected.account_id,
+          'dgroup_id': childData.selected.dgroup_id,
+          'dgroup_name': childData.selected.dgroup_name,
+          'account_id': childData.selected.account_id,
         })
         .then(function(response) {
           res = 1;
@@ -241,8 +242,8 @@ export default {
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
 
-      if (res == 1)        { this.properties.message_result = 'Success';  }
-      else if (res == -1)  { this.properties.message_result = 'Error';    }
+      if (res == 1)        { this.properties.message_result = 'Delete Success';  }
+      else if (res == -1)  { this.properties.message_result = 'Delete Error';    }
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
