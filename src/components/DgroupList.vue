@@ -129,8 +129,9 @@ export default {
 //      const emit = defineEmits(['eventDeleteDgroup']);
 //      const execEmit = () => {
 //        emit('eventDeleteDgroup', { 'selected': this.selected });
-        this.$emit('eventDeleteDgroup', { 'selected': this.selected });
-//      }
+      this.$emit('eventDeleteDgroup', { 'selected': this.selected });
+      console.log(fileName, funcName[0], funcName[1], "After $emit()", " this.selected ", this.selected);
+        //      }
     },
   },
   beforeCreate: function() {

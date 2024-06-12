@@ -214,7 +214,7 @@ export default {
 
 //    deleteDgroup: async function() {
     deleteDgroup: async function(childData) {
-        const funcName = [":methods:", "deleteDgroup:"];
+      const funcName = [":methods:", "deleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
       console.log(fileName, funcName[0], funcName[1], " childData ", childData);
