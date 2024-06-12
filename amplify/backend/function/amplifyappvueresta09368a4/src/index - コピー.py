@@ -115,7 +115,7 @@ class Request_DeleteDGroup(BaseModel):
     """
     デバイスグループ削除用リクエストスキーマ
     """
-#    dgroup_id: str
+    dgroup_id: str
     dgroup_name: str
     account_id: str
 
@@ -137,9 +137,7 @@ class Request_PostDevice(BaseModel):
 #    device_id: str
     device_name: str
     dgroup_id: str
-    account_id: str
     csr: str
-    check_existing_flag: int
 
 class Response_PostDevice(BaseModel):
     """
@@ -153,7 +151,7 @@ class Request_DeleteDevice(BaseModel):
     """
     デバイス削除用リクエストスキーマ
     """
-#    device_id: str
+    device_id: str
     device_name: str
     dgroup_id: str
 
@@ -495,13 +493,9 @@ def post_device(_in: Request_PostDevice):
     dgroup_id = create_device_dict.get('dgroup_id')
     dgroup_id_device_name = dgroup_id + '_' + device_name
     dgroup_id_device_name = dgroup_id_device_name.replace('-', '')
-    account_id = create_device_dict.get('account_id')
-    del create_device_dict['account_id']
-    csr = create_device_dict.get('csr')
-    del create_device_dict['csr']
     check_existing_flag = create_device_dict.get('check_existing_flag')
     del create_device_dict['check_existing_flag']
-    print('After create_device_dict.get():', ' create_device_dict ', create_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name, ' csr ', csr, ' check_existing_flag ', check_existing_flag)
+    print('After create_device_dict.get():', ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name, " check_existing_flag ", check_existing_flag)
 
     if check_existing_flag == 1:
         # Check dgroup_name existing.
@@ -510,7 +504,7 @@ def post_device(_in: Request_PostDevice):
             thingName = dgroup_id_device_name,
         )
         print('After client_iot.describe_thing():', ' response_iot_device ', response_iot_device)
-        return {'certificatePem': '0'}
+        return Response_PostDGroup.parse_obj(response_iot_device)
 
     # Create thing
     response_iot_device = client_iot.create_thing(
@@ -525,30 +519,24 @@ def post_device(_in: Request_PostDevice):
 
     # Get dgroup_name with dgroup_id.
     response_ddb = ddb_table_dgroups.query(
-        KeyConditionExpression = Key("dgroup_id").eq(dgroup_id), # 取得するKey情報
+        KeyConditionExpression = Key("dgroup_id").eq(create_device_dict.get('dgroup_id')), # 取得するKey情報
         ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
     )
     print('After ddb_table_groups.query():', ' response_ddb ', response_ddb, ' response_ddb[\'Items\'][0] ', response_ddb['Items'][0])
     dgroup_name = response_ddb['Items'][0].get('dgroup_name')
     print('After response_ddb.get():', ' dgroup_name ', dgroup_name)
 
-    account_id_dgroup_name = account_id + '_' + dgroup_name
-    account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
-    print('After create_device_dict.get() 2:', ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
-
-    # Add device to dgroup
-    response_iot_dgroup = client_iot.add_thing_to_thing_group(
-#        thingGroupName = dgroup_name,
-        thingGroupName = account_id_dgroup_name,
+    response_iot_group = client_iot.add_thing_to_thing_group(
+        thingGroupName = dgroup_name,/account_id
 #        thingGroupArn='string',
         thingName = create_device_dict.get('device_name'),
 #        thingArn='string',
 #        overrideDynamicGroups=True|False
     )
-    print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
+    print('After client_iot.add_thing_to_thing_group():', ' response_iot_group ', response_iot_group)
 
     response_iot_csr = client_iot.create_certificate_from_csr(
-        certificateSigningRequest = csr,
+        certificateSigningRequest = create_device_dict.get('csr'),
         setAsActive = True,
     )
     print('After client_iot.create_certificate_from_csr():', ' response_iot_csr ', response_iot_csr)
@@ -563,13 +551,15 @@ def post_device(_in: Request_PostDevice):
     print('After client_iot.attach_policy():', ' response_iot_policy ', response_iot_policy)
 
     response_iot_thing_cert = client_iot.attach_thing_principal(
-#        thingName = create_device_dict.get('device_name'),
-        thingName = dgroup_id_device_name,
+        thingName = create_device_dict.get('device_name'),
         principal = certificateArn,
     )
     print('After client_iot.attach_thing_principal():', ' response_iot_thing_cert ', response_iot_thing_cert)
 
-    # Dynamo DB Access
+    # Dynamo DB
+    print('Before del create_device_dict[\'csr\']:', ' create_device_dict ', create_device_dict)
+    del create_device_dict['csr']
+    print('After del create_device_dict[\'csr\']:', ' create_device_dict ', create_device_dict)
 #    response_ddb = client_ddb.put_item(
     response_ddb = ddb_table_devices.put_item(
 #       TableName = STORAGE_DB_DEVICES,
@@ -623,12 +613,12 @@ def delete_dgroup(_in: Request_DeleteDGroup):
     print('delete_dgroup_json ', delete_dgroup_json)
 
     ### IoT Core access.
-#    dgroup_id = delete_dgroup_dict.get('dgroup_id')
+    dgroup_id = delete_dgroup_dict.get('dgroup_id')
     dgroup_name = delete_dgroup_dict.get('dgroup_name')
     account_id = delete_dgroup_dict.get('account_id')
     account_id_dgroup_name = account_id + '_' + dgroup_name
     account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
-    print('After delete_dgroup_dict.get():', ' dgroup_name ', dgroup_name, ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
+    print('After delete_dgroup_dict.get():', ' dgroup_id ', dgroup_id, ' dgroup_name ', dgroup_name, ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
 
     # Check dgroup_name existing.
     response_iot_dgroup = client_iot.describe_thing_group(
@@ -667,80 +657,50 @@ def delete_dgroup(_in: Request_DeleteDGroup):
 
     return Response_DeleteDGroup.parse_obj(response_iot_dgroup)
 
-@app.delete("/_device", response_model=Response_DeleteDevice)
-def delete_device(_in: Request_DeleteDevice):
+@app.post("/_device", response_model=Response_PostDevice)
+def post_device(_in: Request_PostDevice):
     """
-    デバイス関連リソースを削除する
+    デバイス関連リソースを登録する
     """
-    print('delete_device(): In')
+    print('post_device(): In')
 
-    delete_device_dict = _in.dict()
-    print('delete_device_dict ', delete_device_dict)
+    create_device_dict = _in.dict()
+    print('create_device_dict ', create_device_dict)
 
     ### IoT Core access.
-    device_name = delete_device_dict.get('device_name')
-    dgroup_id = delete_device_dict.get('dgroup_id')
-    dgroup_id_device_name = dgroup_id + '_' + device_name
-    dgroup_id_device_name = dgroup_id_device_name.replace('-', '')
-    account_id = delete_device_dict.get('account_id')
-    del delete_device_dict['account_id']
-    print('After delete_device_dict.get():', ' delete_device_dict ', delete_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name)
-
-    # Check device existing.
-    response_iot_device = client_iot.describe_thing(
-        thingName = dgroup_id_device_name,
+/
+    response_iot_thing = client_iot.create_thing(
+        thingName = create_device_dict.get('device_name'),
     )
-    print('After client_iot.describe_thing():', ' response_iot_device ', response_iot_device)
+    print('After client_iot.create_thing():', ' response_iot_thing ', response_iot_thing)
 
-    # Specify device_id for delete.
-    device_id = response_iot_device.get('thingId')
-    print('After response_iot_device.get(\'thingId\'):', ' device_id ', device_id)
-
-    # Specify device version.
-    version = response_iot_device.get('version')
-    print('After response_iot_dgroup.get(\'version\'):', ' version ', version)
-
-    # delete device
-    response_iot_device = client_iot.delete_thing(
-#        thingName = delete_device_dict.get('device_name'),
-        thingName = dgroup_id_device_name,
-        version = version,
-    )
-    print('After client_iot.delete_thing():', ' response_iot_device ', response_iot_device)
-
-    device_id = response_iot_device.get('thingId')/
-    delete_device_dict['device_id'] = device_id
-    print('After response_iot_thing.get(\'thingId\'):', ' delete_device_dict ', delete_device_dict)
+    device_id = response_iot_thing.get('thingId')
+    create_device_dict['device_id'] = device_id
+    print('After response_iot_thing.get(\'thingId\'):', ' create_device_dict ', create_device_dict)
 
     # Get dgroup_name with dgroup_id.
     response_ddb = ddb_table_dgroups.query(
-        KeyConditionExpression = Key("dgroup_id").eq(dgroup_id), # 取得するKey情報
+        KeyConditionExpression = Key("dgroup_id").eq(create_device_dict.get('dgroup_id')), # 取得するKey情報
         ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
     )
     print('After ddb_table_groups.query():', ' response_ddb ', response_ddb, ' response_ddb[\'Items\'][0] ', response_ddb['Items'][0])
     dgroup_name = response_ddb['Items'][0].get('dgroup_name')
     print('After response_ddb.get():', ' dgroup_name ', dgroup_name)
 
-    account_id_dgroup_name = account_id + '_' + dgroup_name
-    account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
-    print('After delete_device_dict.get() 2:', ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
-
-    # Add device to dgroup
-    response_iot_dgroup = client_iot.add_thing_to_thing_group(
-#        thingGroupName = dgroup_name,
-        thingGroupName = account_id_dgroup_name,
+    response_iot_group = client_iot.add_thing_to_thing_group(
+        thingGroupName = dgroup_name,
 #        thingGroupArn='string',
-        thingName = delete_device_dict.get('device_name'),
+        thingName = create_device_dict.get('device_name'),
 #        thingArn='string',
 #        overrideDynamicGroups=True|False
     )
-    print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
+    print('After client_iot.add_thing_to_thing_group():', ' response_iot_group ', response_iot_group)
 
-    response_iot_csr = client_iot.delete_certificate_from_csr(
-        certificateSigningRequest = csr,
+    response_iot_csr = client_iot.create_certificate_from_csr(
+        certificateSigningRequest = create_device_dict.get('csr'),
         setAsActive = True,
     )
-    print('After client_iot.delete_certificate_from_csr():', ' response_iot_csr ', response_iot_csr)
+    print('After client_iot.create_certificate_from_csr():', ' response_iot_csr ', response_iot_csr)
 
     certificateArn = response_iot_csr['certificateArn']
     certificatePem = response_iot_csr['certificatePem']
@@ -752,17 +712,19 @@ def delete_device(_in: Request_DeleteDevice):
     print('After client_iot.attach_policy():', ' response_iot_policy ', response_iot_policy)
 
     response_iot_thing_cert = client_iot.attach_thing_principal(
-#        thingName = delete_device_dict.get('device_name'),
-        thingName = dgroup_id_device_name,
+        thingName = create_device_dict.get('device_name'),
         principal = certificateArn,
     )
     print('After client_iot.attach_thing_principal():', ' response_iot_thing_cert ', response_iot_thing_cert)
 
-    # Dynamo DB Access
+    # Dynamo DB
+    print('Before del create_device_dict[\'csr\']:', ' create_device_dict ', create_device_dict)
+    del create_device_dict['csr']
+    print('After del create_device_dict[\'csr\']:', ' create_device_dict ', create_device_dict)
 #    response_ddb = client_ddb.put_item(
     response_ddb = ddb_table_devices.put_item(
 #       TableName = STORAGE_DB_DEVICES,
-       Item = delete_device_dict,
+       Item = create_device_dict,
     )
 #    print('After client_ddb.put_item():', ' response_ddb ', response_ddb)
     print('After ddb_table_devices.put_item():', ' response_ddb ', response_ddb)

@@ -13,10 +13,9 @@
     </div -->
     <br><br>
     <div :class="$style.register_dgroup">
-      <p>a-z, A-Z, 0-9, _ is possible.</p>
       <input
-        v-model="properties.dgroup_name_input"
-        :class="$style.dgroup_name_input"
+        v-model="properties.message"
+        :class="$style.message"
         placeholder="New device-group name">
       <!-- p>Message is: {{ properties.message }}</p -->
       <button
@@ -26,10 +25,8 @@
       </button>
     </div>
     <br><br>
-    <div :class="$style.message_result">
-      <p>Result: {{ properties.message_result }}</p>
-    </div>
-  </div>
+    <p>Result: {{ properties.message_result }}</p>
+</div>
 </template>
 
 <script>
@@ -146,7 +143,7 @@ export default {
         ],
         dgroups: null/*dgroups*/,
 //        account_id: this.account_id,
-        dgroup_name_input: '',
+        message: '',
         message_result: '',
       },
       account_id: 0/*userId*/,
@@ -175,7 +172,7 @@ export default {
   //      axios.post(url_base + 'dgroup',
         await axios.post(url_base + 'dgroup',
           {
-            dgroup_name: this.properties.dgroup_name_input,
+            dgroup_name: this.properties.message,
             account_id: userInfo.userId,
             check_existing_flag: check_existing_flag,
           })
@@ -226,7 +223,7 @@ export default {
       let response_api;
       let res = 0;
       const payload = {
-//        dgroup_id: childData.selected.dgroup_id,
+        dgroup_id: childData.selected.dgroup_id,
         dgroup_name: childData.selected.dgroup_name,
         account_id: childData.selected.account_id,
       }
@@ -310,12 +307,12 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
 //    try {
-//      this.properties.dgroup_name_input = 'Please input a new device-group name';
+//      this.properties.message = 'Please input a new device-group name';
 //      console.log(`message is ${this.properties.message}`)
 //    } catch (e) {
 //      console.log(e)
 //    }
-//    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+//    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
 
 //    currentInstance = getCurrentInstance();
 //    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
@@ -340,9 +337,9 @@ export default {
 
 //    let userInfo/* = { username, userId, signInDetails }* /; 
     let response_api;
-//    async function getUserAndDgroups() {
-    const getUserAndDgroups = async () => {
-      const funcName = [":beforeCreate:", "getUserAndDgroups:"];
+//    async function getUserAxiosGetLap() {
+    const getUserAxiosGetLap = async () => {
+      const funcName = [":beforeCreate:", "getUserAxiosGetLap:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       userInfo = await getCurrentUser();
@@ -379,11 +376,11 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
     }
 
-//    console.log(fileName, funcName[0], "Before getUserAndDgroups()", " this ", this);
-    console.log(fileName, funcName[0], "Before getUserAndDgroups()", " this.properties ", this.properties);
-    getUserAndDgroups();
-//    this.getUserAndDgroups();
-//    console.log(fileName, funcName[0], "After getUserAndDgroups()", " ret ", ret);
+//    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this ", this);
+    console.log(fileName, funcName[0], "Before getUserAxiosGetLap()", " this.properties ", this.properties);
+    getUserAxiosGetLap();
+//    this.getUserAxiosGetLap();
+//    console.log(fileName, funcName[0], "After getUserAxiosGetLap()", " ret ", ret);
 
 //    listUpdate(this.properties);
 //    this.listUpdate();
@@ -396,50 +393,56 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
     this.properties.message_result = 'Please input a new device-group name';
-    console.log(fileName, funcName[0], `this.properties.dgroup_name_input = ${this.properties.dgroup_name_input}`)
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   mounted: function() {
     const funcName = [":mounted:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
+    console.log(fileName, funcName[0], `this.properties.message = ${this.properties.message}`)
+    console.log(fileName, funcName[0], " this.properties.message ", this.properties.message)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
   },
 }
@@ -450,11 +453,7 @@ export default {
   margin-top: /*50*/100px;
 }
 
-.dgroup_name_input {
-  font-size: 10px;
-}
-
-.message_reslt {
+.message {
   font-size: 10px;
 }
 

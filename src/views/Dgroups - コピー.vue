@@ -226,7 +226,7 @@ export default {
       let response_api;
       let res = 0;
       const payload = {
-//        dgroup_id: childData.selected.dgroup_id,
+        dgroup_id: childData.selected.dgroup_id,
         dgroup_name: childData.selected.dgroup_name,
         account_id: childData.selected.account_id,
       }
