@@ -31,7 +31,7 @@
         Show device info
       </button>
     </div>
-    <div :class="$style.device_dgroup">
+    <div :class="$style.delete_device">
       <button
         type="is-info"
         @click="selectDeleteDevice">
