@@ -128,7 +128,8 @@ export default {
 
 //      const emit = defineEmits(['eventDeleteDgroup']);
 //      const execEmit = () => {
-        emit('eventDeleteDgroup', { 'selected': this.selected });
+//        emit('eventDeleteDgroup', { 'selected': this.selected });
+        this.$emit('eventDeleteDgroup', { 'selected': this.selected });
 //      }
     },
   },
