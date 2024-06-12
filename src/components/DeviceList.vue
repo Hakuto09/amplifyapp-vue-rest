@@ -19,12 +19,12 @@
             <td><input type="radio" :value="device" v-model="selected"></td>
             <td>{{device.device_id}}</td>
             <td>{{device.device_name}}</td>
-            <td>{{device.dgroup_id}}</td>/
+            <!-- td>{{device.dgroup_id}}</td -->/
           </tr>
         </tbody>
       </table>
     </div>
-    <div :class="$style.showmore">
+    <div :class="$style.show_device_info">
       <button
         type="is-info"
         @click="showDeviceInfo">
@@ -183,6 +183,14 @@ export default {
 
 .headerRadio {
   opacity:0;
+}
+
+.delete_device {
+  font-size: 16px;
+	display: flex;
+	align-items: flex-start; /*ここは任意の値でOK*/
+	justify-content: flex-end;
+  margin-right: 100px;
 }
 </style>
 

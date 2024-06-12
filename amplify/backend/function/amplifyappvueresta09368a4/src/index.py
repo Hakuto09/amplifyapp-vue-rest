@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+#from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware    # no effect
 from mangum import Mangum
 from aws_lambda_powertools import Logger
 from pydantic import BaseModel
@@ -708,69 +709,13 @@ def delete_device(_in: Request_DeleteDevice):
     )
     print('After client_iot.delete_thing():', ' response_iot_device ', response_iot_device)
 
-    device_id = response_iot_device.get('thingId')/
-    delete_device_dict['device_id'] = device_id
-    print('After response_iot_thing.get(\'thingId\'):', ' delete_device_dict ', delete_device_dict)
-
-    # Get dgroup_name with dgroup_id.
-    response_ddb = ddb_table_dgroups.query(
-        KeyConditionExpression = Key("dgroup_id").eq(dgroup_id), # 取得するKey情報
-        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
-    )
-    print('After ddb_table_groups.query():', ' response_ddb ', response_ddb, ' response_ddb[\'Items\'][0] ', response_ddb['Items'][0])
-    dgroup_name = response_ddb['Items'][0].get('dgroup_name')
-    print('After response_ddb.get():', ' dgroup_name ', dgroup_name)
-
-    account_id_dgroup_name = account_id + '_' + dgroup_name
-    account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
-    print('After delete_device_dict.get() 2:', ' account_id ', account_id, ' account_id_dgroup_name ', account_id_dgroup_name)
-
-    # Add device to dgroup
-    response_iot_dgroup = client_iot.add_thing_to_thing_group(
-#        thingGroupName = dgroup_name,
-        thingGroupName = account_id_dgroup_name,
-#        thingGroupArn='string',
-        thingName = delete_device_dict.get('device_name'),
-#        thingArn='string',
-#        overrideDynamicGroups=True|False
-    )
-    print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
-
-    response_iot_csr = client_iot.delete_certificate_from_csr(
-        certificateSigningRequest = csr,
-        setAsActive = True,
-    )
-    print('After client_iot.delete_certificate_from_csr():', ' response_iot_csr ', response_iot_csr)
-
-    certificateArn = response_iot_csr['certificateArn']
-    certificatePem = response_iot_csr['certificatePem']
-
-    response_iot_policy = client_iot.attach_policy(
-        policyName = 'iotDataAccess',
-        target = certificateArn,
-    )
-    print('After client_iot.attach_policy():', ' response_iot_policy ', response_iot_policy)
-
-    response_iot_thing_cert = client_iot.attach_thing_principal(
-#        thingName = delete_device_dict.get('device_name'),
-        thingName = dgroup_id_device_name,
-        principal = certificateArn,
-    )
-    print('After client_iot.attach_thing_principal():', ' response_iot_thing_cert ', response_iot_thing_cert)
-
     # Dynamo DB Access
-#    response_ddb = client_ddb.put_item(
-    response_ddb = ddb_table_devices.put_item(
-#       TableName = STORAGE_DB_DEVICES,
-       Item = delete_device_dict,
+    response_ddb = ddb_table_devices.delete_item(
+        Key = { 'device_id': device_id }
     )
-#    print('After client_ddb.put_item():', ' response_ddb ', response_ddb)
-    print('After ddb_table_devices.put_item():', ' response_ddb ', response_ddb)
+    print('After ddb_table_devices.delete_item():', ' response_ddb ', response_ddb)
 
-#    return Response_PostDevice.parse_obj(response_iot)
-    return {
-        'certificatePem': certificatePem
-    }
+    return Response_DeleteDevice.parse_obj(response_iot_dgroup)
 
 
 handler = Mangum(app)

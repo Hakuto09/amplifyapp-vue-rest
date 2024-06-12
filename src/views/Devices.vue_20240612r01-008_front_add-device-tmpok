@@ -75,7 +75,7 @@ export default {
         headers: [
           'device_id',
           'device_name',
-//          'dgroup_id',
+          'dgroup_id',
         ],
         devices: null/*devices*/,
         dgroup_name_input: '',
