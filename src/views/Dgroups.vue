@@ -2,7 +2,6 @@
   <div :class="$style.component">
     <h2>Device group list of account_id: {{ account_id }}</h2>
     <!-- DgroupList :properties="properties" / -->
-    <!-- DgroupList @eventDeleteDgroup="deleteDgroup" / -->
     <DgroupList :properties="properties" @eventDeleteDgroup="deleteDgroup" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
     <!--div :class="$style.delete_dgroup">
@@ -214,11 +213,11 @@ export default {
     },
 
 //    deleteDgroup: async function() {
-    deleteDgroup: async function(childData) {
+    deleteDgroup: async function(childSelected) {
       const funcName = [":methods:", "deleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
-      console.log(fileName, funcName[0], funcName[1], " childData ", childData);
+      console.log(fileName, funcName[0], funcName[1], " childSelected ", childSelected);
 
       let response_api;
       let res = 0;
@@ -227,9 +226,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():");
       await axios.delete(url_base + 'dgroup',
         {
-          dgroup_id: childData.selected.dgroup_id,
-          dgroup_name: childData.selected.dgroup_name,
-          account_id: childData.selected.account_id,
+          dgroup_id: childSelected.dgroup_id,
+          dgroup_name: childSelected.dgroup_name,
+          account_id: childSelected.account_id,
         })
         .then(function(response) {
           res = 1;
