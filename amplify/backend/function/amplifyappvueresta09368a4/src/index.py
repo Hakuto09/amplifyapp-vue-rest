@@ -166,6 +166,7 @@ class Response_DeleteDevice(BaseModel):
 #    thingId: str
     ResponseMetadata: object
 
+
 @app.get("/items")
 def get_items_list():
     """
@@ -542,7 +543,7 @@ def post_device(_in: Request_PostDevice):
 #        thingGroupName = dgroup_name,
         thingGroupName = account_id_dgroup_name,
 #        thingGroupArn='string',
-        thingName = create_device_dict.get('device_name'),
+        thingName = dgroup_id_device_name,
 #        thingArn='string',
 #        overrideDynamicGroups=True|False
     )
@@ -556,6 +557,7 @@ def post_device(_in: Request_PostDevice):
 
     certificateArn = response_iot_csr['certificateArn']
     certificatePem = response_iot_csr['certificatePem']
+    print('After specify certificateArn and certificatePem:', ' certificateArn ', certificateArn, ' certificatePem ', certificatePem)
 
     response_iot_policy = client_iot.attach_policy(
         policyName = 'iotDataAccess',
@@ -683,8 +685,6 @@ def delete_device(_in: Request_DeleteDevice):
     dgroup_id = delete_device_dict.get('dgroup_id')
     dgroup_id_device_name = dgroup_id + '_' + device_name
     dgroup_id_device_name = dgroup_id_device_name.replace('-', '')
-    account_id = delete_device_dict.get('account_id')
-    del delete_device_dict['account_id']
     print('After delete_device_dict.get():', ' delete_device_dict ', delete_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name)
 
     # Check device existing.
@@ -701,11 +701,32 @@ def delete_device(_in: Request_DeleteDevice):
     version = response_iot_device.get('version')
     print('After response_iot_dgroup.get(\'version\'):', ' version ', version)
 
-    # delete device
+    # Specify thingArn for delete.
+#    thingArn = response_iot_device.get('thingArn')
+#    print('After response_iot_device.get(\'thingArn\'):', ' thingArn ', thingArn)
+
+    # Get principals related device.
+    response_iot_device = client_iot.list_thing_principals(
+        thingName = dgroup_id_device_name,
+    )
+    print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
+
+    # Specify principals.
+    principals = response_iot_device.get('principals')
+    print('After response_iot_device.get(\'principals\'):', ' principals ', principals)
+
+    for i in range(0, len(principals), 1):
+        response_iot_device = client_iot.detach_thing_principal(
+            thingName = dgroup_id_device_name,
+            principal = principals[i],
+        )
+        print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
+
+    # Delete device
     response_iot_device = client_iot.delete_thing(
 #        thingName = delete_device_dict.get('device_name'),
         thingName = dgroup_id_device_name,
-        version = version,
+        expectedVersion = version,
     )
     print('After client_iot.delete_thing():', ' response_iot_device ', response_iot_device)
 

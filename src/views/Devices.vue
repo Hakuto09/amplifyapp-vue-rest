@@ -4,7 +4,7 @@
     <DeviceList :properties="properties" @eventDeleteDevice="deleteDevice" />
     <br><br>
     <div :class="$style.register_device">
-      <p>a-z, A-Z, 0-9, _ is possible.</p>
+      <p>a-z, A-Z, 0-9, _ is possible for device name.</p>
       <input
         v-model="properties.device_name_input"
         :class="$style.device_name_input"

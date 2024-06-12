@@ -19,7 +19,7 @@
             <td><input type="radio" :value="device" v-model="selected"></td>
             <td>{{device.device_id}}</td>
             <td>{{device.device_name}}</td>
-            <!-- td>{{device.dgroup_id}}</td -->/
+            <!-- td>{{device.dgroup_id}}</td -->
           </tr>
         </tbody>
       </table>
