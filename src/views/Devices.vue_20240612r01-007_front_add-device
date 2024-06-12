@@ -129,7 +129,7 @@ export default {
           })
         
         if (check_existing_flag && res == 1) {
-          this.properties.message_result = 'Duplicattion or Dgroup not exist error';
+          this.properties.message_result = 'Duplicattion error';
           return;
         }
       }
@@ -141,15 +141,15 @@ export default {
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
-      // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      // Deviceリストの更新
+      response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
-      dgroups = response_api.data;
-      for (let i = 0; i < dgroups.length; i++) {
-        dgroups[i].id = i;
+      devices = response_api.data;
+      for (let i = 0; i < devices.length; i++) {
+        devices[i].id = i;
       }
-      this.properties.dgroups = dgroups;
-      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
+      this.properties.devices = devices;
+      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
     },
@@ -162,15 +162,15 @@ export default {
 
       let response_api;
       let res = 0;
+      let dgroup_id = childData.selected.dgroup_id;
       const payload = {
-        dgroup_id: childData.selected.dgroup_id,
-        dgroup_name: childData.selected.dgroup_name,
-        account_id: childData.selected.account_id,
+        device_name: childData.selected.device_name,
+        dgroup_id: dgroup_id,
       }
 
       // Dgroup関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
-      await axios.delete(url_base + 'dgroup',
+      await axios.delete(url_base + '_device',
         {
           data: payload,
         })
@@ -191,14 +191,14 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      response_api = await axios.get(url_base + '_devices/' + dgroup_id);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
-      dgroups = response_api.data;
-      for (let i = 0; i < dgroups.length; i++) {
-        dgroups[i].id = i;
+      devices = response_api.data;
+      for (let i = 0; i < devices.length; i++) {
+        devices[i].id = i;
       }
-      this.properties.dgroups = dgroups;
-      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
+      this.properties.devices = devices;
+      console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
     }

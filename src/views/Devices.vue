@@ -30,7 +30,7 @@ import DeviceList from '@/components/DeviceList.vue'
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
-//import { getCurrentUser } from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
@@ -104,11 +104,10 @@ export default {
       dgroupId.value = localStorage.getItem('dgroupId');
       console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
 
-      // Dgroup関連リソースの登録
+      // Device関連リソースの登録
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
-  //      axios.post(url_base + 'dgroup',
         await axios.post(url_base + '_device',
           {
             device_name: this.properties.device_name_input,
@@ -168,7 +167,7 @@ export default {
         dgroup_id: dgroup_id,
       }
 
-      // Dgroup関連リソースの削除
+      // Device関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
       await axios.delete(url_base + '_device',
         {
@@ -190,7 +189,7 @@ export default {
       else                 { this.properties.message_result = '';         }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
-      // Dgroupリストの更新
+      // Deviceリストの更新
       response_api = await axios.get(url_base + '_devices/' + dgroup_id);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       devices = response_api.data;
@@ -221,7 +220,8 @@ export default {
       try {
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
-        response_api = await axios.get(url + dgroupId);
+//        response_api = await axios.get(url + dgroupId);
+        response_api = await axios.get(url_base + '_devices/' + dgroupId);
 //        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
         console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.data ", response_api.data);
         devices = response_api.data;
