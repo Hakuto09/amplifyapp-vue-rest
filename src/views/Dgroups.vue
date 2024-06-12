@@ -1,8 +1,9 @@
 <template>
   <div :class="$style.component">
     <h2>Device group list of account_id: {{ account_id }}</h2>
-    <DgroupList :properties="properties" />
-    <DgroupList @eventDeleteDgroup="deleteDgroup" />
+    <!-- DgroupList :properties="properties" / -->
+    <!-- DgroupList @eventDeleteDgroup="deleteDgroup" / -->
+    <DgroupList :properties="properties" @eventDeleteDgroup="deleteDgroup" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
     <!--div :class="$style.delete_dgroup">
       <button
