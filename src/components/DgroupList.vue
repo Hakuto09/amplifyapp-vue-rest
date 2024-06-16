@@ -168,8 +168,8 @@ export default {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
 
-    this.selected = 0;
-    console.log(fileName, funcName[0], "After this.selected = 0:", " this.selected ", this.selected);
+//    this.selected = 0;
+//    console.log(fileName, funcName[0], "After this.selected = 0:", " this.selected ", this.selected);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
