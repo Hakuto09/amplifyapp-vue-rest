@@ -112,7 +112,7 @@ export default {
       saveDgroupInfo(toRaw(this.selected));
 //      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
 //      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
-      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' toRaW(this.selected ', toRaW(this.selected);
+      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' toRaW(this.selected ', toRaw(this.selected));
 
 //      const dgroupId = ref('');
 //      dgroupId.value = localStorage.getItem('dgroupId');
