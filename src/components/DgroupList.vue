@@ -107,12 +107,13 @@ export default {
         return false;
       }
 
+      const dgroupInfo = toRaw(this.selected);
 //      saveLocal(this.selected['dgroup_id']);
 //      saveDgroupInfo(this.selected);
-      saveDgroupInfo(toRaw(this.selected));
+      saveDgroupInfo(dgroupInfo);
 //      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
 //      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
-      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' toRaW(this.selected ', toRaw(this.selected));
+      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' dgroupInfo ', dgroupInfo);
 
 //      const dgroupId = ref('');
 //      dgroupId.value = localStorage.getItem('dgroupId');
