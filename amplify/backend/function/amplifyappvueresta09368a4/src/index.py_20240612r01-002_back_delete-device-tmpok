@@ -453,8 +453,7 @@ def post_dgroup(_in: Request_PostDGroup):
         ruleName = ruleName,
         topicRulePayload = {
 #            'sql': "SELECT * from " + topicName,
-#            'sql': "SELECT device_name AS device_name, createdAt as createdAt, createdAt as createdAt_c, data0 as data0, data1 as data1, data2 as data2 FROM " + topicName,
-            'sql': "SELECT device_id AS device_id, createdAt as createdAt, createdAt as createdAt_c, data0 as data0, data1 as data1, data2 as data2 FROM " + topicName,
+            'sql': "SELECT device_name AS device_name, createdAt as createdAt, createdAt as createdAt_c, data0 as data0, data1 as data1, data2 as data2 FROM " + topicName,
             'actions': [
                 {
                     'dynamoDBv2': {

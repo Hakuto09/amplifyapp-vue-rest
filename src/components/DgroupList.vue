@@ -18,8 +18,8 @@
         <tbody>
           <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id">
             <td><input type="radio" :value="dgroup" v-model="selected"></td>
-            <td>{{dgroup.dgroup_id}}</td>
             <td>{{dgroup.dgroup_name}}</td>
+            <td>{{dgroup.dgroup_id}}</td>
             <!-- td>{{dgroup.account_id}}</td -->
           </tr>
         </tbody>

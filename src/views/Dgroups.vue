@@ -13,7 +13,7 @@
     </div -->
     <br><br>
     <div :class="$style.register_dgroup">
-      <p>a-z, A-Z, 0-9, _ is possible.</p>
+      <p>a-z, A-Z, 0-9, _ is possible for device-group name.</p>
       <input
         v-model="properties.dgroup_name_input"
         :class="$style.dgroup_name_input"
@@ -140,9 +140,9 @@ export default {
     return {
       properties: {
         headers: [
-          'dgroup_id',
-          'dgroup_name',
-//          'account_id',
+          'dgroup name',
+          'dgroup id',
+//          'account id',
         ],
         dgroups: null/*dgroups*/,
 //        account_id: this.account_id,
