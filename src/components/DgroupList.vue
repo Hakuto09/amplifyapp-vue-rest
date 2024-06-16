@@ -88,10 +88,18 @@ export default {
 //      const msg = useStorage('msg', 'Hello World!')
 //      console.log(fileName, ":showMoreInformation():", " msg.value ", msg.value);
 
+/*
       const saveLocal = (dgroupId) => {
         const funcName = [":methods:", "selectDgroup:", "saveLocal:"];
         localStorage.setItem('dgroupId', dgroupId);
         console.log(fileName, funcName[0], funcName[1], funcName[2], "After localStorage.setItem():", " dgroupId ", dgroupId);
+      }
+*/
+
+      const saveDgroupInfo = (dgroupInfo) => {
+        const funcName = [":methods:", "selectDgroup:", "saveDgroupInfo:"];
+        localStorage.setItem('dgroupInfo', dgroupInfo);
+        console.log(fileName, funcName[0], funcName[1], funcName[2], "After localStorage.setItem():", " dgroupInfo ", dgroupInfo);
       }
 
       if (!this.selected) {
@@ -99,8 +107,10 @@ export default {
         return false;
       }
 
-      saveLocal(this.selected['dgroup_id']);
-      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
+//      saveLocal(this.selected['dgroup_id']);
+      saveDgroupInfo(this.selected);
+//      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
+      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
 
 //      const dgroupId = ref('');
 //      dgroupId.value = localStorage.getItem('dgroupId');

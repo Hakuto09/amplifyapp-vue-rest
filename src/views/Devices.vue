@@ -100,9 +100,13 @@ export default {
       let res = 0;
       let check_existing_flag; 
 
+      const dgroupInfo = ref('');
       const dgroupId = ref('');
-      dgroupId.value = localStorage.getItem('dgroupId');
-      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+//      dgroupId.value = localStorage.getItem('dgroupId');
+      dgroupInfo.value = localStorage.getItem('dgroupInfo');
+      dgroupId.value = dgroupInfo.value['dgroup_id'];
+//      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
       // Device関連リソースの登録
       for (let i = 0; i < 2; i++) {
@@ -240,9 +244,13 @@ export default {
       }
     }
 
+    const dgroupInfo = ref('');
     const dgroupId = ref('');
-    dgroupId.value = localStorage.getItem('dgroupId');
-    console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+//    dgroupId.value = localStorage.getItem('dgroupId');
+    dgroupInfo.value = localStorage.getItem('dgroupInfo');
+    dgroupId.value = dgroupInfo.value['dgroup_id'];
+//    console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+    console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
     const ret = getUserAndDevices(dgroupId.value);
     console.log(fileName, funcName[0], "After getDevices():", " ret ", ret);

@@ -132,9 +132,13 @@ export default {
       }
     }
 
+    const dgroupInfo = ref('');
     const dgroupId = ref('');
-    dgroupId.value = localStorage.getItem('dgroupId');
-    console.log(fileName, funcName[0], ":After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+//    dgroupId.value = localStorage.getItem('dgroupId');
+    dgroupInfo.value = localStorage.getItem('dgroupInfo');
+    dgroupId.value = dgroupInfo.value['dgroup_id'];
+//    console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
+    console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
     // getDevices を呼び出してデータを読み込む
     let response_ga = getDevices(dgroupId.value);
