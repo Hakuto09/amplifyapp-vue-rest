@@ -141,9 +141,6 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
-
-    this.selected = 0;
-    console.log(fileName, funcName[0], "After this.selected = 0:", " this.selected ", this.selected);
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
@@ -160,6 +157,9 @@ export default {
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
+
+    this.selected = 0;
+    console.log(fileName, funcName[0], "After this.selected = 0:", " this.selected ", this.selected);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
