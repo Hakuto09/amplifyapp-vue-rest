@@ -109,7 +109,7 @@ export default {
 
 //      saveLocal(this.selected['dgroup_id']);
 //      saveDgroupInfo(this.selected);
-      saveDgroupInfo(toRaW(this.selected));
+      saveDgroupInfo(toRaw(this.selected));
 //      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
 //      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
       console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' toRaW(this.selected ', toRaW(this.selected);
