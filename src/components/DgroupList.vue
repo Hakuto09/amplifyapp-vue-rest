@@ -45,7 +45,7 @@
 <script>
 //import { useStorage } from '@vueuse/core';
 //import { ref } from 'vue';
-//import { toRaw } from 'vue';
+import { toRaw } from 'vue';
 const fileName = "DgroupList.vue";
 
 console.log(fileName, ":After import:");
@@ -108,9 +108,11 @@ export default {
       }
 
 //      saveLocal(this.selected['dgroup_id']);
-      saveDgroupInfo(this.selected);
+//      saveDgroupInfo(this.selected);
+      saveDgroupInfo(toRaW(this.selected));
 //      console.log(fileName, funcName[0], funcName[1], "After saveLocal():", " this.selected ", this.selected);
-      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
+//      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected);
+      console.log(fileName, funcName[0], funcName[1], "After saveDgroupInfo():", " this.selected ", this.selected, ' toRaW(this.selected ', toRaW(this.selected);
 
 //      const dgroupId = ref('');
 //      dgroupId.value = localStorage.getItem('dgroupId');
