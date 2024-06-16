@@ -135,7 +135,8 @@ export default {
     const dgroupInfo = ref('');
     const dgroupId = ref('');
 //    dgroupId.value = localStorage.getItem('dgroupId');
-    dgroupInfo.value = localStorage.getItem('dgroupInfo');
+//    dgroupInfo.value = localStorage.getItem('dgroupInfo');
+    dgroupInfo.value = JSON.parse(localStorage.getItem('dgroupInfo'));
     dgroupId.value = dgroupInfo.value['dgroup_id'];
 //    console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
     console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
