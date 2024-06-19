@@ -130,8 +130,8 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
 */
 //        this.devices = devices;
-//        this.properties.devices = devices;
-        this.properties.devices = orderChangedDevices;
+        this.properties.devices = devices;
+//        this.properties.devices = orderChangedDevices;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
 
