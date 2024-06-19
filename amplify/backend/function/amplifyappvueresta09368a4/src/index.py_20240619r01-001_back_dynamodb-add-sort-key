@@ -222,14 +222,13 @@ def get_dgroups_list(account_id: str):
 
 #    response_ddb = client_ddb.scan(
     response_ddb = ddb_table_dgroups.scan(
-#    response_ddb = ddb_table_dgroups.query(
-#        TableName = STORAGE_DB_DGROUPS,
-#        KeyConditionExpression = Key("account_id").eq(account_id), # 取得するKey情報
+#      TableName = STORAGE_DB_DGROUPS,
+#      KeyConditionExpression = Key("account_id").eq(account_id), # 取得するKey情報
         FilterExpression = Attr('account_id').eq(account_id),
-#        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+#        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
         Limit = 100 # 取得するデータ件数
     )
-    print('After ddb_table_dgroups.scan():', ' response_ddb ', response_ddb)
+    print('get_dgroups_list():', ' response_ddb ', response_ddb)
 
     return response_ddb["Items"]
 
@@ -242,14 +241,12 @@ def get_devices_list(dgroup_id: str):
     print('get_devices_list(): In')
 
     response_ddb = ddb_table_devices.scan(
-#    response_ddb = ddb_table_devices.query(
-#        TableName = STORAGE_DB_DEVICES,
-#        KeyConditionExpression = Key("dgroup_id").eq(dgroup_id), # 取得するKey情報
+#      TableName = STORAGE_DB_DEVICES,
         FilterExpression = Attr('dgroup_id').eq(dgroup_id),
-#        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+#        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
         Limit = 100 # 取得するデータ件数
     )
-    print('After ddb_table_devices.scan():', ' response_ddb ', response_ddb)
+    print('get_devices_list():', ' response_ddb ', response_ddb)
 
     return response_ddb["Items"]
 
@@ -260,15 +257,13 @@ def get_ddata_list(device_id: str):
     """
     print('get_ddata_list(): In')
 
-#    response_ddb = ddb_table_ddata.scan(
-    response_ddb = ddb_table_ddata.query(
-#        TableName = STORAGE_DB_DDATA,
-        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-#        FilterExpression = Attr('device_id').eq(device_id),
-        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
-        Limit = 1000 # 取得するデータ件数
+    response_ddb = ddb_table_ddata.scan(
+#      TableName = STORAGE_DB_DDATA,
+        FilterExpression = Attr('device_id').eq(device_id),
+#        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
+        Limit = 100 # 取得するデータ件数
     )
-    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
+    print('get_ddata_list():', ' response_ddb ', response_ddb)
 
     return response_ddb["Items"]
 
