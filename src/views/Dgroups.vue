@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.component">
-    <h2>Device group list of account_id: {{ account_id }}</h2>
+    <!-- h2>Device group list of account_id: {{ account_id }}</h2 -->
+    <h2>Device group list of loginId: {{ loginId }}</h2>
     <!-- DgroupList :properties="properties" / -->
     <DgroupList :properties="properties" @eventDeleteDgroup="deleteDgroup" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
@@ -49,8 +50,9 @@ let dgroups;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
-let userInfo/* = { username, userId, signInDetails }*/; 
-//let userId = 0;
+//let userInfo/* = { username, userId, signInDetails }*/; 
+let userId;
+let loginId;
 
 //let currentInstance;
 
@@ -176,7 +178,7 @@ export default {
         await axios.post(url_base + 'dgroup',
           {
             dgroup_name: this.properties.dgroup_name_input,
-            account_id: userInfo.userId,
+            account_id: /*userInfo.*/userId,
             check_existing_flag: check_existing_flag,
           })
           .then(function(response) {
@@ -204,7 +206,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
@@ -258,7 +260,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+      response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       dgroups = response_api.data;
       for (let i = 0; i < dgroups.length; i++) {
@@ -353,9 +355,13 @@ export default {
       const funcName = [":beforeCreate:", "getUserAndDgroups:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      userInfo = await getCurrentUser();
-      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
+//      userInfo = await getCurrentUser();
+      const { signInDetails, userInfo } = await getCurrentUser();
+//      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
+      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails);
       this.account_id = userInfo.userId;
+      loginId = signInDetails.loginId;
+      userId = userInfo.userId;
 
       //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
