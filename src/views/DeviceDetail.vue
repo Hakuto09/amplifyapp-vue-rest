@@ -43,6 +43,7 @@
 <script>
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
+import { useRoute } from 'vue-router'
 const fileName = "DeviceDetail.vue";
 
 console.log(fileName, ":After import:");
@@ -122,7 +123,10 @@ export default {
 //          }))
           orderChangedDevices.push(order.map(key => [key.toString(), devices[i][key]]));
         }
+        const route = useRoute();
+        const id = route.params.id;
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
+        console.log(fileName, funcName[0], funcName[1], "After order change:", " route.params.id ", route.params.id);
 //        this.devices = devices;
 //        this.properties.devices = devices;
         this.properties.devices = orderChangedDevices;
