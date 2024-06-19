@@ -117,9 +117,10 @@ export default {
         const order = ['device_name', 'device_id', 'dgroup_id', 'id'];
         const orderChangedDevices = [];
         for (let i = 0; i < devices.length; i++) {
-          orderChangedDevices.push(order.map(x => {
-            return order[x] + ":" + devices[i][x];
-          }))
+//          orderChangedDevices.push(order.map(x => {
+//            return order[x] + ":" + devices[i][x];
+//          }))
+          orderChangedDevices.push(order.map(key => [key.toString(), devices[i][key]]));
         }
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
 //        this.devices = devices;
