@@ -5,6 +5,30 @@
     <div>
       <Line width="1280" height="720" :data="data" :options="options" />
     </div>
+    <section>
+        <div class="form-group">
+            <label>Select a date</label>
+            <div class="input-group">
+                <flat-pickr
+                    v-model="date"
+                    :config="config"
+                    class="form-control"
+                    placeholder="Select date"
+                    name="date"/>
+                <div class="input-group-append">
+                    <button class="btn btn-default" type="button" title="Toggle" data-toggle>
+                        <i class="fa fa-calendar"/>
+                        <span aria-hidden="true" class="sr-only">Toggle</span>
+                    </button>
+                    <button class="btn btn-default" type="button" title="Clear" data-clear>
+                        <i class="fa fa-times"/>
+                        <span aria-hidden="true" class="sr-only">Clear</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <pre>Selected date is - {{date}}</pre>
+    </section>
     <div
       :class="$style.deviceinfo">
       <table>
@@ -47,6 +71,24 @@ import {
 import { Line } from 'vue-chartjs'
 import 'chartjs-adapter-moment';
 //import moment from "moment";
+
+import 'bootstrap/dist/css/bootstrap.css';
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+import 'flatpickr/dist/themes/material_blue.css';
+import {Hindi} from 'flatpickr/dist/l10n/hi.js';
+
+const date = ref('2022-10-28');
+
+// Read more at https://flatpickr.js.org/options/
+const config = ref({
+    wrap: true, // set wrap to true only when using 'input-group'
+    altFormat: 'M j, Y',
+    altInput: true,
+    dateFormat: 'Y-m-d',
+    locale: Hindi, // locale for this instance only          
+});
+
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
