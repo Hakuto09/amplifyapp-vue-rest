@@ -73,10 +73,11 @@ import 'chartjs-adapter-moment';
 //import moment from "moment";
 
 import 'bootstrap/dist/css/bootstrap.css';
-//import flatPickr from 'vue-flatpickr-component';
+import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 import 'flatpickr/dist/themes/material_blue.css';
-import {Hindi} from 'flatpickr/dist/l10n/hi.js';
+//import {Hindi} from 'flatpickr/dist/l10n/hi.js';
+import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 
 const date = ref('2022-10-28');
 
@@ -86,7 +87,7 @@ const config = ref({
     altFormat: 'M j, Y',
     altInput: true,
     dateFormat: 'Y-m-d',
-    locale: Hindi, // locale for this instance only          
+    locale: Japanese,         
 });
 
 const fileName = "ChartAndDatalist.vue";
@@ -117,7 +118,8 @@ let data2s = [];
 export default {
   name: 'ChartAndDatalist',
   components: {
-    Line
+    Line,
+    flatPickr,
   },
   data: function() {
     const funcName = [":data:"];
