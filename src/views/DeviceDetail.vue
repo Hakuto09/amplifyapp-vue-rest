@@ -126,7 +126,7 @@ export default {
         const route = useRoute();
         const id = route.params.id;
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
-        console.log(fileName, funcName[0], funcName[1], "After order change:", " route.params.id ", route.params.id);
+        console.log(fileName, funcName[0], funcName[1], "After order change:", " id ", id, " route.params.id ", route.params.id);
 //        this.devices = devices;
 //        this.properties.devices = devices;
         this.properties.devices = orderChangedDevices;
