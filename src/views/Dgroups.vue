@@ -50,7 +50,7 @@ let dgroups;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
-//let userInfo/* = { username, userId, signInDetails }*/; 
+let userInfo/* = { username, userId, signInDetails }*/; 
 let userId;
 let loginId;
 
@@ -355,10 +355,10 @@ export default {
       const funcName = [":beforeCreate:", "getUserAndDgroups:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-//      userInfo = await getCurrentUser();
-      const { signInDetails, userInfo } = await getCurrentUser();
+      userInfo = await getCurrentUser();
+//      const { signInDetails, userInfo } = await getCurrentUser();
       this.account_id = userInfo.userId;
-      loginId = signInDetails.loginId;
+      loginId = userInfo.signInDetails.loginId;
       userId = userInfo.userId;
 //      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails, " loginId ", loginId, " userId ", userId);
