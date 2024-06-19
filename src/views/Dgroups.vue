@@ -52,7 +52,7 @@ const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/de
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 let userId;
-let loginId;
+//let loginId;
 
 //let currentInstance;
 
@@ -152,6 +152,7 @@ export default {
         message_result: '',
       },
       account_id: 0/*userId*/,
+      loginId: 0,
     }
   },
 //  methods: function() {
@@ -358,11 +359,11 @@ export default {
       userInfo = await getCurrentUser();
 //      const { signInDetails, userInfo } = await getCurrentUser();
       this.account_id = userInfo.userId;
-      loginId = userInfo.signInDetails.loginId;
+      this.loginId = userInfo.signInDetails.loginId;
       userId = userInfo.userId;
 //      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
 //      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails, " loginId ", loginId, " userId ", userId);
-      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " loginId ", loginId, " userId ", userId);
+      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId, " userId ", userId);
 
       //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
