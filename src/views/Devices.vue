@@ -45,6 +45,7 @@ console.log(fileName, ":After reg(prop):", " parentData.value ", parentData.valu
 */
 
 let userInfo;
+const dgroupInfo = ref('');
 let devices;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
@@ -250,7 +251,8 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
         this.properties.devices = devices;
         this.dgroup_id = dgroupId;
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties, " this.dgroup_id ", this.dgroup_id);
+        this.dgroup_name = dgroupInfo.value['dgroup_name'];
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties, " this.dgroup_id ", this.dgroup_id, " this.dgroup_name ", this.dgroup_name);
         return response_api;
       }
       catch (error) {
@@ -259,13 +261,12 @@ export default {
       }
     }
 
-    const dgroupInfo = ref('');
+//    const dgroupInfo = ref('');
     const dgroupId = ref('');
 //    dgroupId.value = localStorage.getItem('dgroupId');
 //    dgroupInfo.value = localStorage.getItem('dgroupInfo');
     dgroupInfo.value = JSON.parse(localStorage.getItem('dgroupInfo'));
     dgroupId.value = dgroupInfo.value['dgroup_id'];
-    this.dgroup_name = dgroupInfo.value['dgroup_name'];
     //    console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
     console.log(fileName, funcName[0], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
