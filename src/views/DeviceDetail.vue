@@ -118,7 +118,7 @@ export default {
         const orderChangedDevices = [];
         for (let i = 0; i < devices.length; i++) {
           orderChangedDevices.push(order.map(x => {
-            return devices[i][x]
+            return order[x] + ":" + devices[i][x];
           }))
         }
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
