@@ -298,6 +298,7 @@ ul.tab-menu-base li.current {
 }
 
 .active-link {
-  font-size: 30px;
+  /*font-size: 30px;*/
+  font-weight: bold;
 }
 </style>
