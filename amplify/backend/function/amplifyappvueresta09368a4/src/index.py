@@ -378,27 +378,23 @@ def post_item(item_in: Request_Item):
 
     return Response_Item.parse_obj(create_item)
 
-@app.post("/account", response_model=Response_PostAccount)
-def post_account(_in: Request_PostAccount):
-    """
-    アカウントを登録する
-    """
-    print('post_account(): In')
-
-    create_account = _in.dict()
-    print('create_account ', create_account)
-
-#    response_ddb = client_ddb.put_item(
-    response_ddb = ddb_table_accounts.put_item(
-#        TableName = STORAGE_DB_ACCOUNTS,
-#       Item = create_account['account_id'],
-#       Item = _in['account_id'],
-        Item = create_account,
-    )
-    print('post_account():', ' response_ddb ', response_ddb)
-
-#    return Response_Account.parse_obj(create_account)
-    return Response_PostAccount
+# Temporary comment out for security.
+#@app.post("/account", response_model=Response_PostAccount)
+#def post_account(_in: Request_PostAccount):
+#    """
+#    アカウントを登録する
+#    """
+#    print('post_account(): In')
+#
+#    create_account = _in.dict()
+#    print('create_account ', create_account)
+#
+#    response_ddb = ddb_table_accounts.put_item(
+#        Item = create_account,
+#    )
+#    print('post_account():', ' response_ddb ', response_ddb)
+#
+#    return Response_PostAccount
 
 @app.post("/dgroup", response_model=Response_PostDGroup)
 def post_dgroup(_in: Request_PostDGroup):
@@ -413,9 +409,21 @@ def post_dgroup(_in: Request_PostDGroup):
     create_dgroup_json = json.dumps(create_dgroup_dict)     # degug only.
     print('create_dgroup_json ', create_dgroup_json)
 
+    # Check allowed user with DynamoDB.
+    account_id = create_dgroup_dict.get('account_id')
+    response_ddb = ddb_table_accounts.get_item(
+        Key = { 'account_id': account_id },
+    )
+    print('After ddb_table_accounts.get_item():', ' response_ddb ', response_ddb)
+
+    accountInfo = response_ddb['Item']
+    print('After accountInfo = response_ddb[\'Item\']:', ' accountInfo ', accountInfo)
+#    if (accountInfo == '') :
+#        print('Before return -1')
+#        return -1
+
     ### IoT Core access.
     dgroup_name = create_dgroup_dict.get('dgroup_name')
-    account_id = create_dgroup_dict.get('account_id')
     account_id_dgroup_name = account_id + '_' + dgroup_name
     account_id_dgroup_name = account_id_dgroup_name.replace('-', '')
     check_existing_flag = create_dgroup_dict.get('check_existing_flag')

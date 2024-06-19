@@ -190,36 +190,36 @@ export default {
           class="tab-area-base">
           <ul class="tab-menu-base">
             <li>
-              <router-link to="/">Home</router-link>
+              <router-link to="/" exact active-class="active-link">Home</router-link>
             </li>
             <li>
-              <router-link to="/routing">Rounting Test</router-link>
+              <router-link to="/routing" exact active-class="active-link">Rounting Test</router-link>
             </li>
             <li>
-              <router-link to="/life-cycle">Life Cycle</router-link>
+              <router-link to="/life-cycle" exact active-class="active-link">Life Cycle</router-link>
             </li>
             <li>
-              <router-link to="/life-cycle2">Life Cycle2</router-link>
+              <router-link to="/life-cycle2" exact active-class="active-link">Life Cycle2</router-link>
             </li>
             <li>
-              <router-link to="/users">User List</router-link>
+              <router-link to="/users" exact active-class="active-link">User List</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'user-detail', params: {id: 0} }">User Detail</router-link>
+              <router-link :to="{ name: 'user-detail', params: {id: 0} }" exact active-class="active-link">User Detail</router-link>
             </li>
             <li>
-              <router-link to="/dgroups">Dgroup List</router-link>
+              <router-link to="/dgroups" exact active-class="active-link">Dgroup List</router-link>
             </li>
             <li>
-              <router-link to="/devices">Device List</router-link>
+              <router-link to="/devices" exact active-class="active-link">Device List</router-link>
             </li>
             <li>
-              <router-link :to="{ name: 'device-detail', params: { id: 0 } }">Device Detail</router-link>
+              <router-link :to="{ name: 'device-detail', params: { id: 0 } }" exact active-class="active-link">Device Detail</router-link>
               <!-- router-link :to="{ name: 'device-detail', params: { id: 0, device_id: 0 } }">Device Detail</router-link -->
             </li>
             <li>
               <!-- router-link to="/chart">Chart and data list</router-link -->
-              <router-link to="/chart">Chart</router-link>
+              <router-link to="/chart" exact active-class="active-link">Chart</router-link>
               <!-- router-link :to="{ name: 'chart', params: { device_id: 0 } }">Chart</router-link -->
             </li>
           </ul>
@@ -295,5 +295,9 @@ ul.tab-menu-base li {
 
 ul.tab-menu-base li.current {
   background: rgb(240, 240, 240);
+}
+
+.active-link {
+  font-size: 30px;
 }
 </style>
