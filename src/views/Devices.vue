@@ -152,6 +152,10 @@ export default {
       for (let i = 0; i < devices.length; i++) {
         devices[i].id = i;
       }
+      console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
+      devices.sort( function(a, b) {
+        return a.device_name > b.device_name ? 1 : -1;
+      });
       this.properties.devices = devices;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
@@ -201,6 +205,10 @@ export default {
       for (let i = 0; i < devices.length; i++) {
         devices[i].id = i;
       }
+      console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
+      devices.sort( function(a, b) {
+        return a.device_name > b.device_name ? 1 : -1;
+      });
       this.properties.devices = devices;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
@@ -233,6 +241,10 @@ export default {
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
         }
+        console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
+        devices.sort( function(a, b) {
+          return a.device_name > b.device_name ? 1 : -1;
+        });
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
         this.properties.devices = devices;
         this.dgroup_id = dgroupId;
