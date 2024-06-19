@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.component">
-    <h2>Device list of dgroup_id: {{ dgroup_id }}</h2>
+    <!-- h2>Device list of dgroup_id: {{ dgroup_id }}</h2 -->
+    <h2>Device list of dgroup_name: {{ dgroup_name }}</h2>
     <DeviceList :properties="properties" @eventDeleteDevice="deleteDevice" />
     <br><br>
     <div :class="$style.register_device">
@@ -83,6 +84,7 @@ export default {
         message_result: '',
       },
       dgroup_id: 0,
+      dgroup_name: '',
     }
   },
 //  methods: function() {
@@ -149,13 +151,13 @@ export default {
       response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       devices = response_api.data;
-      for (let i = 0; i < devices.length; i++) {
-        devices[i].id = i;
-      }
-      console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
       devices.sort( function(a, b) {
         return a.device_name > b.device_name ? 1 : -1;
       });
+      console.log(fileName, funcName[0], funcName[1], "After devices.sort():", " devices ", devices);
+      for (let i = 0; i < devices.length; i++) {
+        devices[i].id = i;
+      }
       this.properties.devices = devices;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
@@ -202,13 +204,13 @@ export default {
       response_api = await axios.get(url_base + '_devices/' + dgroup_id);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       devices = response_api.data;
-      for (let i = 0; i < devices.length; i++) {
-        devices[i].id = i;
-      }
-      console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
       devices.sort( function(a, b) {
         return a.device_name > b.device_name ? 1 : -1;
       });
+      console.log(fileName, funcName[0], funcName[1], "After devices.sort():", " devices ", devices);
+      for (let i = 0; i < devices.length; i++) {
+        devices[i].id = i;
+      }
       this.properties.devices = devices;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
@@ -238,13 +240,13 @@ export default {
 //        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
         console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.data ", response_api.data);
         devices = response_api.data;
+        devices.sort( function(a, b) {
+          return a.device_name > b.device_name ? 1 : -1;
+       });
+        console.log(fileName, funcName[0], funcName[1], "After devices.sort():", " devices ", devices);
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
         }
-        console.log(fileName, funcName[0], funcName[1], "Before devices.sort():", " devices ", devices);
-        devices.sort( function(a, b) {
-          return a.device_name > b.device_name ? 1 : -1;
-        });
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
         this.properties.devices = devices;
         this.dgroup_id = dgroupId;

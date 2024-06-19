@@ -105,13 +105,26 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         devices = response.data;
+        devices.sort( function(a, b) {
+          return a.device_name > b.device_name ? 1 : -1;
+        });
+        console.log(fileName, funcName[0], funcName[1], "After devices.sort():", " devices ", devices);
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
 //          this.devices[i] = devices[i];
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
+        const order = ['device_name', 'device_id', 'dgroup_id', 'id'];
+        const sortedDevices = [];
+        for (let i = 0; i < devices.length; i++) {
+          sortedDevices.push(order.map(x => {
+            return devices[i][x]
+          }))
+        }
+        console.log(fileName, funcName[0], funcName[1], "After sort:", " devices ", devices), " sortedDevices ", sortedDevices;
 //        this.devices = devices;
-        this.properties.devices = devices;
+//        this.properties.devices = devices;
+        this.properties.devices = sortedDevices;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
 
