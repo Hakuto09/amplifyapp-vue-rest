@@ -210,8 +210,9 @@ export default {
       for (let i = 0; i < dgroups.length; i++) {
         dgroups[i].id = i;
       }
+      console.log(fileName, funcName[0], funcName[1], "Before dgroups.sort():", " dgroups ", dgroups);
       dgroups.sort( function(a, b) {
-        return a.dgroup_name < b.dgroup_name ? -1 : 1;
+        return a.dgroup_name > b.dgroup_name ? 1 : -1;
       });
       this.properties.dgroups = dgroups;
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
