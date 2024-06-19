@@ -357,11 +357,11 @@ export default {
 
 //      userInfo = await getCurrentUser();
       const { signInDetails, userInfo } = await getCurrentUser();
-//      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
-      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails);
       this.account_id = userInfo.userId;
       loginId = signInDetails.loginId;
       userId = userInfo.userId;
+//      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo);
+      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails, " loginId ", loginId, " userId ", userId);
 
       //    getCurrentUserlap();
 //    console.log(fileName, ":beforeCreate-function(): Mid.");
