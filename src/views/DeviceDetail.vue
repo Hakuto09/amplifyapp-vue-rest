@@ -115,13 +115,13 @@ export default {
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
         const order = ['device_name', 'device_id', 'dgroup_id', 'id'];
-        const sortedDevices = [];
+        const orderChangedDevices = [];
         for (let i = 0; i < devices.length; i++) {
-          sortedDevices.push(order.map(x => {
+          orderChangedDevices.push(order.map(x => {
             return devices[i][x]
           }))
         }
-        console.log(fileName, funcName[0], funcName[1], "After sort:", " devices ", devices), " sortedDevices ", sortedDevices;
+        console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices), " sortedDevices ", sortedDevices;
 //        this.devices = devices;
 //        this.properties.devices = devices;
         this.properties.devices = sortedDevices;
