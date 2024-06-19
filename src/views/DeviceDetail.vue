@@ -7,14 +7,10 @@
     <div
       :class="$style.deviceinfo">
       <table>
-        <th :class="$style.item">
-          ITEM
-        </th>
-        <th :class="$style.value">
-          VALUE
-        </th>
+        <th :class="$style.item">ITEM</th>
+        <th :class="$style.value">VALUE</th>
         <!-- devices のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
-        <tr
+        <!-- tr
           v-for="(value, name) in properties.devices[$route.params.id/* - 1*/]"
           :key="name">
           <td :class="$style.item">
@@ -23,9 +19,14 @@
           <td :class="$style.value">
             {{ value }}
           </td>
-          <!-- td :class="$style.value">
-            {{ $route.params.id }}
-          </td -->
+        </tr -->
+        <tr>
+          <td :class="$style.item">device_name</td>
+          <td :class="$style.value">{{ device_name }}</td>
+        </tr>
+        <tr>
+          <td :class="$style.item">device_id</td>
+          <td :class="$style.value">{{ device_id }}</td>
         </tr>
       </table>
     </div>
@@ -79,6 +80,8 @@ export default {
       },
 //      dgroupId: dgroupId.value,
 //      deviceId: deviceId.value,
+      device_name: '',
+      device_id: '',
     }
   },
   methods: {
@@ -115,6 +118,7 @@ export default {
 //          this.devices[i] = devices[i];
         }
         console.log(fileName, funcName[0], funcName[1], "After add id:", " devices ", devices);
+/*
         const order = ['device_name', 'device_id', 'dgroup_id', 'id'];
         const orderChangedDevices = [];
         for (let i = 0; i < devices.length; i++) {
@@ -124,6 +128,7 @@ export default {
           orderChangedDevices.push(order.map(key => [key.toString(), devices[i][key]]));
         }
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
+*/
 //        this.devices = devices;
 //        this.properties.devices = devices;
         this.properties.devices = orderChangedDevices;
@@ -172,6 +177,9 @@ export default {
     console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
     const id = route.params.id;
     console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
+
+    this.device_name = devices[id].device_name;
+    this.device_id = devices[id].device_id;
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
