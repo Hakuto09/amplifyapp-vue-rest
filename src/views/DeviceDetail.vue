@@ -45,12 +45,15 @@
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 import { useRoute } from 'vue-router'
+import { getCurrentInstance } from 'vue';
 const fileName = "DeviceDetail.vue";
 
 console.log(fileName, ":After import:");
 
+let currentInstance;
 let devices;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
+
 
 
 export default {
@@ -98,6 +101,9 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
+    currentInstance = getCurrentInstance();
+    console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
+
 //    async function getDevices(dgroupId) {
     const getDevices = async (dgroupId) => {
       const funcName = [":beforeCreate:", "getDevices():"];
@@ -134,6 +140,9 @@ export default {
 //        this.properties.devices = orderChangedDevices;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
+
+        currentInstance.proxy.$forceUpdate();
+        console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
 
 /*
         this.$router.push({
@@ -172,14 +181,6 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
-
-    const route = useRoute();
-    console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
-    const id = route.params.id;
-    console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
-
-    this.device_name = devices[id].device_name;
-    this.device_id = devices[id].device_id;
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
@@ -192,6 +193,14 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
+
+    const route = useRoute();
+    console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
+    const id = route.params.id;
+    console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
+
+    this.device_name = devices[id].device_name;
+    this.device_id = devices[id].device_id;
   },
   updated: function() {
     const funcName = [":updated:"];
