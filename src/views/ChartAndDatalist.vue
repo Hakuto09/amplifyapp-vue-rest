@@ -73,7 +73,7 @@ import 'chartjs-adapter-moment';
 //import moment from "moment";
 
 import 'bootstrap/dist/css/bootstrap.css';
-import flatPickr from 'vue-flatpickr-component';
+//import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 import 'flatpickr/dist/themes/material_blue.css';
 import {Hindi} from 'flatpickr/dist/l10n/hi.js';
@@ -141,6 +141,8 @@ export default {
       },
       options: null/*chartOptions*/,
       device_id: "0",
+      date: date,
+      config: config,
     }
   },
   beforeCreate: function() {
