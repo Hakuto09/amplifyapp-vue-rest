@@ -124,10 +124,6 @@ export default {
           orderChangedDevices.push(order.map(key => [key.toString(), devices[i][key]]));
         }
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
-        const route = useRoute();
-        console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
-        const id = route.params.id;
-        console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
 //        this.devices = devices;
 //        this.properties.devices = devices;
         this.properties.devices = orderChangedDevices;
@@ -171,6 +167,11 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
+
+    const route = useRoute();
+    console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
+    const id = route.params.id;
+    console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
