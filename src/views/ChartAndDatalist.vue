@@ -1,7 +1,8 @@
 <template>
   <div :class="$style.component">
     <!-- h2>Device details with device_id: {{ $route.params.device_id }}</h2 -->
-    <h2>Chart and data list of device_id: {{ device_id }}</h2>
+    <!-- h2>Chart and data list of device_id: {{ device_id }}</h2 -->
+    <h2>Chart of device_name: {{ device_name }}</h2>
     <div>
       <Line width="1280" height="720" :data="data" :options="options" />
     </div>
@@ -167,7 +168,8 @@ export default {
         ],
       },
       options: null/*chartOptions*/,
-      device_id: "0",
+      device_id: '',
+      device_name: '',
       date: date,
       config: config,
 //      date: new Date(),
