@@ -99,6 +99,11 @@ import 'flatpickr/dist/flatpickr.css';
 import 'flatpickr/dist/themes/material_blue.css';
 //import {Hindi} from 'flatpickr/dist/l10n/hi.js';
 import {Japanese} from 'flatpickr/dist/l10n/ja.js';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+const fileName = "ChartAndDatalist.vue";
+
+console.log(fileName, ":After import:");
 
 const date = ref('2022-10-28');
 
@@ -111,10 +116,6 @@ const config = ref({
     dateFormat: 'YYYY-MM-DD HH:mm',
     locale: Japanese,         
 });
-
-const fileName = "ChartAndDatalist.vue";
-
-console.log(fileName, ":After import:");
 
 ChartJS.register(
   CategoryScale,
