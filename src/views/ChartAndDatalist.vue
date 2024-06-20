@@ -29,6 +29,27 @@
         </div>
         <pre>Selected date is - {{date}}</pre>
     </section>
+    <div id="box">
+      <datepicker v-model="date" 
+              :format="format"
+              :enable-time-picker="true"
+              week-start="0"
+              locale="jp" 
+              placeholder="日付を選択"
+              select-text="選択"
+              cancel-text="ｷｬﾝｾﾙ"
+              :show-now-button="true"
+              now-button-label="現在を選択"
+              ></datepicker>
+    </div>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- bootstrap end -->
+    <!-- Vue 3.2.26 -->
+    <script src="https://unpkg.com/vue@3.2.26/dist/vue.global.js"></script>
+    <!-- Vue 3.2.26 end -->
+    <script src="https://unpkg.com/@vuepic/vue-datepicker@3.6.5/dist/vue-datepicker.iife.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@3.6.5/dist/main.css">
     <div
       :class="$style.deviceinfo">
       <table>
@@ -121,6 +142,7 @@ export default {
   components: {
     Line,
     flatPickr,
+    datepicker: VueDatePicker,
   },
   data: function() {
     const funcName = [":data:"];
@@ -146,6 +168,8 @@ export default {
       device_id: "0",
       date: date,
       config: config,
+      date: new Date(),
+      format: 'yyyy-MM-dd HH:mm', 
     }
   },
   beforeCreate: function() {
@@ -356,5 +380,12 @@ export default {
 
 .value {
   width: 400px;
+}
+
+#box {
+  max-width: 550px;
+  margin: auto;
+  padding: 15px;
+  border: 2px solid #dcdcdc;
 }
 </style>
