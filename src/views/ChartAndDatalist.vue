@@ -151,7 +151,7 @@ export default {
     const funcName = [":data:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, ":data-function():", "Before return():");
+    console.log(fileName, funcName[0], "Before return():");
     return {
       data: {
         labels: [],
@@ -320,7 +320,7 @@ export default {
         this.device_id = deviceInfo.device_id;
         this.device_name = deviceInfo.device_name;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name);
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
         return response;
       }
       catch (error) {
