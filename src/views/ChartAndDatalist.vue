@@ -105,7 +105,8 @@ const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
 
-const date = ref('2022-10-28');
+//const date = ref('2022-10-28');
+let date = new Date();
 
 // Read more at https://flatpickr.js.org/options/
 const config = ref({
@@ -169,7 +170,7 @@ export default {
       device_id: "0",
       date: date,
       config: config,
-      date: new Date(),
+//      date: new Date(),
       format: 'yyyy-MM-dd HH:mm', 
     }
   },
