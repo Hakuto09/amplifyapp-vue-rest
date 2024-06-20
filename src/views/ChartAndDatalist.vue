@@ -182,11 +182,13 @@ export default {
 //    const getDeviceData = async (deviceId) => {
     const getDeviceData = async (deviceInfo) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
+//      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo);
       let response;
 
       try {
-        response = await axios.get(url + deviceId);
+//        response = await axios.get(url + deviceId);
+        response = await axios.get(url + deviceInfo.device_id);
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         ddata = response.data;
