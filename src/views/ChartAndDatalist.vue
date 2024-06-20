@@ -228,7 +228,7 @@ export default {
 //            let date_nt_jst = date_nt.substr(0, 23);
 //            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
-            dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
+            const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
