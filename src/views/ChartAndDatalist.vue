@@ -378,8 +378,8 @@ export default {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
 
-    console.log(fileName, funcName[0], " date_start ", date_start);
-    console.log(fileName, funcName[0], " date_end ", date_end);
+    console.log(fileName, funcName[0], " this.date_start ", this.date_start);
+    console.log(fileName, funcName[0], " this.date_end ", this.date_end);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
