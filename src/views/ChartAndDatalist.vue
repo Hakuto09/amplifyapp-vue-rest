@@ -317,8 +317,10 @@ export default {
         this.data = chartData;
         this.options = chartOptions;
 //        this.device_id = deviceId;
-        this.device_id = deviceInfo.device_id;
-        this.device_name = deviceInfo.device_name;
+//        this.device_id = deviceInfo.device_id;
+        this.device_id = deviceInfo['device_id'];
+//        this.device_name = deviceInfo.device_name;
+        this.device_name = deviceInfo['device_name'];
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
         return response;
