@@ -30,6 +30,7 @@
         </div>
         <pre>Selected date is - {{date}}</pre>
     </section -->
+    <br><br>
     <p>開始日時</p>
     <div id="box">
       <datepicker v-model="date_start" 
@@ -68,28 +69,6 @@
     <!-- Vue 3.2.26 end -->
     <script src="https://unpkg.com/@vuepic/vue-datepicker@3.6.5/dist/vue-datepicker.iife.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@3.6.5/dist/main.css">
-    <div
-      :class="$style.deviceinfo">
-      <table>
-        <th :class="$style.item">
-          ITEM
-        </th>
-        <th :class="$style.value">
-          VALUE
-        </th>
-        <!-- devices のリストにアクセスする際、インデックスは 0 からなので受け取った id の値から `-1` する -->
-        <!-- tr
-          v-for="(value, name) in devices[$route.params.id/* - 1*/]"
-          :key="name">
-          <td :class="$style.item">
-            {{ name }}
-          </td>
-          <td :class="$style.value">
-            {{ value }}
-          </td>
-        </tr -->
-      </table>
-    </div>
   </div>
 </template>
 
@@ -341,7 +320,12 @@ export default {
 
         this.data = chartData;
         this.options = chartOptions;
-//        this.device_id = deviceId;
+
+        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:");
+        this.data.labels = chartData.labels;
+        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:", " this.data ", this.data, " this.data.labels ", this.data.labels, " chartData.labels ", chartData.labels);
+
+        //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
 //        this.device_name = deviceInfo.device_name;
