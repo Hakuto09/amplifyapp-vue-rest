@@ -323,7 +323,8 @@ export default {
         this.device_name = deviceInfo['device_name'];
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
-        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
+//        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
+        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
         return response;
       }
       catch (error) {
@@ -335,7 +336,7 @@ export default {
 //    const deviceId = ref('');
     const deviceInfo = ref('');
 //    deviceId.value = localStorage.getItem('deviceId');
-    deviceInfo.value = localStorage.getItem('deviceInfo');
+    deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
 //    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
