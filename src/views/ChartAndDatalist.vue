@@ -324,7 +324,8 @@ export default {
         this.data = chartData;
         this.options = chartOptions;
 
-        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:");
+        this.data.labels = [];
+        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:", " this.data.labels ", this.data.labels);
         this.data.labels = chartData.labels;
         console.log(fileName, funcName[0], funcName[1], "Before this.data copy:", " this.data ", this.data, " this.data.labels ", this.data.labels, " chartData.labels ", chartData.labels);
 
