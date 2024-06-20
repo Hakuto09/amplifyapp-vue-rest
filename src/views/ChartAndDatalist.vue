@@ -211,7 +211,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start + '&date_end=', date_end);
+        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start + '&date_end=' + date_end);
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
