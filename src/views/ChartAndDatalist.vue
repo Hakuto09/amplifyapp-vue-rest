@@ -179,8 +179,9 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
 //    async function getDeviceData(deviceId) {
-    const getDeviceData = async (deviceId) => {
-      const funcName = [":beforeCreate:", "getDeviceData():"];
+//    const getDeviceData = async (deviceId) => {
+    const getDeviceData = async (deviceInfo) => {
+        const funcName = [":beforeCreate:", "getDeviceData():"];
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       let response;
 
@@ -311,9 +312,11 @@ export default {
 
         this.data = chartData;
         this.options = chartOptions;
-        this.device_id = deviceId;
+//        this.device_id = deviceId;
+        this.device_id = deviceInfo.device_id;
+        this.device_name = deviceInfo.device_name;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," device_name ", device_name);
         return response;
       }
       catch (error) {
@@ -322,12 +325,16 @@ export default {
       }
     }
 
-    const deviceId = ref('');
-    deviceId.value = localStorage.getItem('deviceId');
-    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
+//    const deviceId = ref('');
+    const deviceInfo = ref('');
+//    deviceId.value = localStorage.getItem('deviceId');
+    deviceInfo.value = localStorage.getItem('deviceInfo');
+//    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
+    console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
     // getDevices を呼び出してデータを読み込む
-    let response_ga = getDeviceData(deviceId.value);
+//    let response_ga = getDeviceData(deviceId.value);
+    let response_ga = getDeviceData(deviceInfo.value);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
   },
   created: function() {
