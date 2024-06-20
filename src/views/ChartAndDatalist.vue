@@ -382,6 +382,28 @@ export default {
 
     console.log(fileName, funcName[0], " this.date_start ", this.date_start);
     console.log(fileName, funcName[0], " this.date_end ", this.date_end);
+
+//    function dateTimeToISOString(dateTime){
+      /* ISO形式かつ日本時間へ変換していく */
+      let dateTimeJstTmp = new Date(this.date_start);
+      // UTCとローカルタイムゾーンとの差を取得し、分からミリ秒に変換
+      //const startDT_diff = startDateTime.getTimezoneOffset() * 60 * 1000    // -540 * 60 * 1000 = -32400000
+      // toISOString()で、UTC時間になってしまう（-9時間されてしまう）ので、あえて事前に日本時間に9時間足しておく！！
+      console.log(fileName, funcName[0], "After new Date():", " dateTimeJstTmp ", dateTimeJstTmp);
+      dateTimeJstTmp.setHours(dateTimeJstTmp.getHours() + 9);
+      //const startDT_plusLocal = new Date(startDateTime + startDT_diff)    // Thu Apr 23 2020 07:39:03 GMT+0900 (Japan Standard Time)
+      // ISO形式に変換（UTCタイムゾーンで日本時間、というよくない状態）
+      //startDateTime = startDT_plusLocal.toISOString()   // "2020-04-22T22:39:03.397Z"
+      console.log(fileName, funcName[0], "After setHours():", " dateTimeJstTmp ", dateTimeJstTmp);
+      let dateTimeJstIso = dateTimeJstTmp.toISOString();   // "2020-04-22T22:39:03.397Z"
+      // UTCタイムゾーン部分は消して、日本のタイムゾーンの表記を足す
+      console.log(fileName, funcName[0], "After toISOString():", " dateTimeJstIso ", dateTimeJstIso);
+      dateTimeJstIso = dateTimeJstIso.slice(0, 23) + '+09:00'    // "2020-04-22T22:39:03+09:00"
+      console.log(fileName, funcName[0], "After slice():", " dateTimeJstIso ", dateTimeJstIso);
+
+//      return dateTimeJstIso;
+//    }
+
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
