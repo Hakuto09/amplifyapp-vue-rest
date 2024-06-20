@@ -35,6 +35,7 @@
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
+                  dateFormat='yy年mm月dd日'
                   :enable-time-picker="true"
                   week-start="0"
                   locale="jp" 
@@ -51,6 +52,7 @@
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
+                  dateFormat="yyyy-MM-dd HH:mm"
                   :enable-time-picker="true"
                   week-start="0"
                   locale="jp" 
