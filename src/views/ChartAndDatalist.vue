@@ -143,10 +143,12 @@ let data1s = [];
 //let data2s = [];
 
 function dateTimeToISOString(dateTime){
-  let dateTimeIso = dateTime.toISOString();
-  dateTimeIso = dateTimeIso.slice(0, 23) + '+09:00';
-
-  return dateTimeIso;
+  // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
+  let dateTimeJstTmp = new Date(dateTime);
+  dateTimeJstTmp.setHours(dateTimeJstTmp.getHours() + 9);
+  let dateTimeJstIso = dateTimeJstTmp.toISOString();
+  dateTimeJstIso = dateTimeJstIso.slice(0, 23) + '+09:00';
+  return dateTimeJstIso;
 }
 
 function dateTimeToNtJst(dateTime){
