@@ -46,6 +46,7 @@
                   >
       </datepicker>
     </div>
+    <br><br>
     <p>終了日時</p>
     <div id="box">
       <datepicker v-model="date_end" 
@@ -61,6 +62,8 @@
               >
       </datepicker>
     </div>
+    <br><br>
+    <br><br>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- bootstrap end -->
