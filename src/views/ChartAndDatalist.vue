@@ -142,6 +142,19 @@ let data0s = [];
 let data1s = [];
 //let data2s = [];
 
+function dateTimeToISOString(dateTime){
+  let dateTimeIso = dateTime.toISOString();
+  dateTimeIso = dateTimeIso.slice(0, 23) + '+09:00';
+
+  return dateTimeIso;
+}
+
+function dateTimeToNtJst(dateTime){
+  const dateTimeNt = dateTime.replace('T', ' ');
+  const dateTimeNtJst = dateTimeNt.substr(0, 23);
+//  console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+  return dateTimeNtJst;
+}
 
 export default {
   name: 'ChartAndDatalist',
@@ -189,25 +202,16 @@ export default {
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
-    const getDeviceData = async (deviceInfo) => {
+    const getDeviceData = async (deviceInfo, date_start, date_end) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start ", date_start, " date_end ", date_end);
       let response;
 
       try {
-//        response = await axios.get(url + deviceId);
-        response = await axios.get(url + deviceInfo.device_id);
-        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
-        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
+        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start + '&date_end=', date_end);
+        console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
-
-//    let cnt = 0;
-//    while (ddata == null && cnt < 100000) {
-////      console.log(fileName, ":In while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
-//      cnt++;
-//    }
-//    console.log(fileName, ":Out while loop for ddata null check:", " ddata ", ddata, " cnt ", cnt);
 
         if (ddata != null) {
           // Graph data reset.
@@ -220,13 +224,16 @@ export default {
           let loops = ddata.length;
           for(let i = 0; i < loops; ++i) {
       //      let j = loops - i - 1;
-            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
-            let date_nt_jst = date_nt.substr(0, 23);
-            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+//            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
+//            let date_nt_jst = date_nt.substr(0, 23);
+//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
-            labels.push(date_nt_jst);
-            data0s.push(ddata[i/*j*/].data0);
-            data1s.push(ddata[i/*j*/].data1);
+            dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
+            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
+
+            labels.push(dateTimeNtJst);
+            data0s.push(ddata[i].data0);
+            data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
@@ -326,11 +333,6 @@ export default {
         this.data = chartData;
         this.options = chartOptions;
 
-        this.data.labels = [];
-        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:", " this.data.labels ", this.data.labels);
-        this.data.labels = chartData.labels;
-        console.log(fileName, funcName[0], funcName[1], "Before this.data copy:", " this.data ", this.data, " this.data.labels ", this.data.labels, " chartData.labels ", chartData.labels);
-
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
@@ -355,9 +357,12 @@ export default {
 //    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
+    let date_start = localStorage.getItem('date_start');
+    let date_end = localStorage.getItem('date_end');
+
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
-    let response_ga = getDeviceData(deviceInfo.value);
+    let response_ga = getDeviceData(deviceInfo.value, date_start, date_end);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
   },
   created: function() {
@@ -383,26 +388,12 @@ export default {
     console.log(fileName, funcName[0], " this.date_start ", this.date_start);
     console.log(fileName, funcName[0], " this.date_end ", this.date_end);
 
-//    function dateTimeToISOString(dateTime){
-      /* ISO形式かつ日本時間へ変換していく */
-      let dateTimeJstTmp = new Date(this.date_start);
-      // UTCとローカルタイムゾーンとの差を取得し、分からミリ秒に変換
-      //const startDT_diff = startDateTime.getTimezoneOffset() * 60 * 1000    // -540 * 60 * 1000 = -32400000
-      // toISOString()で、UTC時間になってしまう（-9時間されてしまう）ので、あえて事前に日本時間に9時間足しておく！！
-      console.log(fileName, funcName[0], "After new Date():", " dateTimeJstTmp ", dateTimeJstTmp);
-      dateTimeJstTmp.setHours(dateTimeJstTmp.getHours() + 9);
-      //const startDT_plusLocal = new Date(startDateTime + startDT_diff)    // Thu Apr 23 2020 07:39:03 GMT+0900 (Japan Standard Time)
-      // ISO形式に変換（UTCタイムゾーンで日本時間、というよくない状態）
-      //startDateTime = startDT_plusLocal.toISOString()   // "2020-04-22T22:39:03.397Z"
-      console.log(fileName, funcName[0], "After setHours():", " dateTimeJstTmp ", dateTimeJstTmp);
-      let dateTimeJstIso = dateTimeJstTmp.toISOString();   // "2020-04-22T22:39:03.397Z"
-      // UTCタイムゾーン部分は消して、日本のタイムゾーンの表記を足す
-      console.log(fileName, funcName[0], "After toISOString():", " dateTimeJstIso ", dateTimeJstIso);
-      dateTimeJstIso = dateTimeJstIso.slice(0, 23) + '+09:00'    // "2020-04-22T22:39:03+09:00"
-      console.log(fileName, funcName[0], "After slice():", " dateTimeJstIso ", dateTimeJstIso);
+    const date_start = dateTimeToISOString(this.date_start);
+    const date_end = dateTimeToISOString(this.date_end);
 
-//      return dateTimeJstIso;
-//    }
+    localStorage.setItem('date_start', date_start);
+    localStorage.setItem('date_end', date_end);
+    console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", date_start, " date_end ", date_end);
 
   },
   beforeUnmount: function() {
