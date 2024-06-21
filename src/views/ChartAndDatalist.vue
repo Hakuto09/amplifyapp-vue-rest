@@ -366,6 +366,7 @@ export default {
       /*this.*/date_start = localStorage.getItem('date_start');
       if (!/*this.*/date_start) {
         /*this.*/date_start = new Date();
+        /*this.*/date_start.setMonth(/*this.*/date_start.getMonth() - 1);
         localStorage.setItem('date_start', /*this.*/date_start)
       }
     }
@@ -374,7 +375,6 @@ export default {
       /*this.*/date_end = localStorage.getItem('date_end');
       if (!/*this.*/date_end) {
         /*this.*/date_end = new Date();
-        /*this.*/date_end.setMonth(/*this.*/date_end.getMonth() - 1);
         localStorage.setItem('date_end', /*this.*/date_end)
       }
     }
