@@ -193,8 +193,8 @@ export default {
 //      date: date,
 //      config: config,
 //      date: new Date(),
-      date_start: '',
-      date_end: '',
+      date_start/*: ''*/,
+      date_end/*: ''*/,
       format: 'yyyy-MM-dd HH:mm', 
     }
   },
@@ -359,11 +359,25 @@ export default {
 //    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
-    let date_start_iso = localStorage.getItem('date_start_iso');
-    let date_end_iso = localStorage.getItem('date_end_iso');
+    if (!this.date_start) {
+      this.date_start = localStorage.getItem('date_start');
+      if (!this.date_start) {
+        this.date_start = new Date();
+        localStorage.setItem('date_start', this.date_start)
+      }
+    }
 
-    let date_now = new Date();
-    console.log(fileName, funcName[0], ":After new Date()", " date_now ", date_now);
+    if (!this.date_end) {
+      this.date_end = localStorage.getItem('date_end');
+      if (!this.date_end) {
+        this.date_end = new Date();
+        this.date_end.setMonth(this.date_end.getMonth() - 1);
+        localStorage.setItem('date_end', this.date_end)
+      }
+    }
+
+    let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
+    let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
 
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
@@ -396,8 +410,8 @@ export default {
     const date_start_iso = dateTimeToISOString(this.date_start);
     const date_end_iso = dateTimeToISOString(this.date_end);
 
-    localStorage.setItem('date_start_iso', date_start_iso);
-    localStorage.setItem('date_end_iso', date_end_iso);
+    localStorage.setItem('date_start', this.date_start);
+    localStorage.setItem('date_end', this.date_end);
     console.log(fileName, funcName[0], "After localStorage.setItem():", " this.date_start ", this.date_start, " this.date_end ", this.date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
 
   },
