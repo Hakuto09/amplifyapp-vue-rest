@@ -204,14 +204,14 @@ export default {
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
-    const getDeviceData = async (deviceInfo, date_start, date_end) => {
+    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start ", date_start, " date_end ", date_end);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
 
       try {
-        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start + '&date_end=' + date_end);
+        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
@@ -359,12 +359,15 @@ export default {
 //    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
-    let date_start = localStorage.getItem('date_start');
-    let date_end = localStorage.getItem('date_end');
+    let date_start_iso = localStorage.getItem('date_start_iso');
+    let date_end_iso = localStorage.getItem('date_end_iso');
+
+    let date_now = new Date();
+    console.log(fileName, funcName[0], ":After new Date()", " date_now ", date_now);
 
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
-    let response_ga = getDeviceData(deviceInfo.value, date_start, date_end);
+    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
   },
   created: function() {
@@ -390,12 +393,12 @@ export default {
     console.log(fileName, funcName[0], " this.date_start ", this.date_start);
     console.log(fileName, funcName[0], " this.date_end ", this.date_end);
 
-    const date_start = dateTimeToISOString(this.date_start);
-    const date_end = dateTimeToISOString(this.date_end);
+    const date_start_iso = dateTimeToISOString(this.date_start);
+    const date_end_iso = dateTimeToISOString(this.date_end);
 
-    localStorage.setItem('date_start', date_start);
-    localStorage.setItem('date_end', date_end);
-    console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", date_start, " date_end ", date_end);
+    localStorage.setItem('date_start_iso', date_start_iso);
+    localStorage.setItem('date_end_iso', date_end_iso);
+    console.log(fileName, funcName[0], "After localStorage.setItem():", " this.date_start ", this.date_start, " this.date_end ", this.date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
 
   },
   beforeUnmount: function() {
