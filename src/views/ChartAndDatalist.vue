@@ -347,7 +347,7 @@ export default {
 
         const chartDataLocal = chartData;
         const chartOptionsLocal = chartOptions;
-        console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartDataLocal ", chartDataLocal, " chartOptionsLocal ", chartOptionsLocal);
+        console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartData ", chartData, " chartDataLocal ", chartDataLocal, " chartOptions ", chartOptions, " chartOptionsLocal ", chartOptionsLocal);
         
 //        this.data = chartData;
         this.data = chartDataLocal;
