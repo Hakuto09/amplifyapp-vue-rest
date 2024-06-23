@@ -407,6 +407,11 @@ export default {
     this.data.datasets[0].data = null;
     this.data.datasets[1].data = null;
     console.log(fileName, funcName[0], "After data.labels and datasets set null.");
+
+    this.data.labels = labels;
+    this.data.datasets[0].data = data0s;
+    this.data.datasets[1].data = data1s;
+    console.log(fileName, funcName[0], "After data.labels and datasets set labels, data0s, data1s.");
   },
   updated: function() {
     const funcName = [":updated:"];
@@ -446,7 +451,7 @@ export default {
 
         this.data.labels = labels;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].data = data0s;
+        this.data.datasets[1].data = data1s;
 
         this.device_id = deviceInfo['device_id'];
         this.device_name = deviceInfo['device_name'];
