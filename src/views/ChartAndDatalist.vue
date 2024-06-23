@@ -269,7 +269,7 @@ export default {
 
     console.log(fileName, funcName[0], "Before return():");
     return {
-      data: null,
+//      data: null,
 /*
       data: {
 //        labels: [],
@@ -286,9 +286,9 @@ export default {
         ],
       },
 */
-//      data: chartData,
-      options: null,
-//      options: chartOptions,
+      data: chartData,
+//      options: null,
+      options: chartOptions,
       device_id: '',
       device_name: '',
 //      date: date,
