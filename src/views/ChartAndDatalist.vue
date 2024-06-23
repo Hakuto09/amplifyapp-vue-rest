@@ -408,15 +408,6 @@ export default {
     this.data.datasets[1].data = null;
     console.log(fileName, funcName[0], "After data.labels and datasets set null.");
 
-    this.data.labels = labels;
-    this.data.datasets[0].data = data0s;
-    this.data.datasets[1].data = data1s;
-    console.log(fileName, funcName[0], "After data.labels and datasets set labels, data0s, data1s.");
-  },
-  updated: function() {
-    const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
-
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
         const funcName = [":updated:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
@@ -485,6 +476,10 @@ export default {
     localStorage.setItem('date_start', this.date_start);
     localStorage.setItem('date_end', this.date_end);
     console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", this.date_start, " this.date_end ", this.date_end, " date_start ", date_start, " date_end ", date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+  },
+  updated: function() {
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
