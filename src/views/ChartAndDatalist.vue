@@ -409,7 +409,7 @@ export default {
     console.log(fileName, funcName[0], "After data.labels and datasets set null.");
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
-        const funcName = [":updated:", "getDeviceData():"];
+        const funcName = [":beforeUpdate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
