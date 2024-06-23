@@ -103,6 +103,7 @@ import 'flatpickr/dist/themes/material_blue.css';
 //import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { getCurrentInstance } from 'vue';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
@@ -132,6 +133,8 @@ ChartJS.register(
   Legend,
   TimeScale,
 )
+
+let currentInstance;
 
 let ddata;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
@@ -299,6 +302,9 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
+    currentInstance = getCurrentInstance();
+    console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
+
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
@@ -354,6 +360,10 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
+
+        currentInstance.proxy.$forceUpdate();
+        console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
+
         return response;
       }
       catch (error) {
