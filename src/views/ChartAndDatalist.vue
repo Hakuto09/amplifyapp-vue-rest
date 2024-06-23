@@ -103,7 +103,6 @@ import 'flatpickr/dist/themes/material_blue.css';
 //import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { getCurrentInstance } from 'vue';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
@@ -134,8 +133,6 @@ ChartJS.register(
   TimeScale,
 )
 
-let currentInstance;
-
 let ddata;
 const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
 
@@ -147,98 +144,6 @@ let data1s = [];
 
 let date_start;
 let date_end;
-
-/*
-const chartData = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'data0',
-      yAxisID: "yleft",
-      backgroundColor: '#f87979',
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(2,63,138,0.8)",
-      pointBorderColor: "#fff",
-      pointBackgroundColor: "rgba(2,63,138,0.8)",
-      pointBorderWidth: 2,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#1D5191",
-      pointHoverBorderColor: "#fff",
-      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: data0s,
-    },
-    {
-      label: 'data1',
-      yAxisID: "yright",
-//          backgroundColor: '#f879f9',
-      backgroundColor: "#3A7AC9",
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(201,60,58,0.8)",
-      pointBorderColor: "#fff",
-      pointBackgroundColor: "rgba(201,60,58,0.8)",
-      pointBorderWidth: 2,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#9A1B19",
-      pointHoverBorderColor: "#fff",
-      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: data1s,
-    },
-//    {
-//      label: 'data2',
-//      yAxisID: "yright",
-////          backgroundColor: '#f8f979',
-//      backgroundColor: "#DB514E",
-//      data: data2s,
-//    },
-  ]
-};
-*/
-
-const chartOptions = {
-  responsive: true,    // グラフのスクロール対応
-//      responsive: false,    // グラフのスクロール対応
-  maintainAspectRatio: false,
-  spanGaps: true,   //点をつなげる場合
-  scales: {
-    x: {
-      type: 'time',
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: '日付時刻'           // ★必須 タイトルの文字列
-      },
-      time: {
-        unit: 'minute',
-        displayFormats: {
-          minute: 'YYYY-MM-DD HH:mm'
-        }
-      },
-    },
-    yleft: {
-      stacked: false,
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: 'data0'           // ★必須 タイトルの文字列
-      },
-    },
-    /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
-    yright: {
-      stacked: false,
-      position: "right",
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: 'data1'           // ★必須 タイトルの文字列
-      },
-    },
-  },
-};
-
 
 function dateTimeToISOString(dateTime){
   // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
@@ -269,68 +174,23 @@ export default {
 
     console.log(fileName, funcName[0], "Before return():");
     return {
-      data: null,
-/*
       data: {
-//        labels: [],
-        labels: labels,
+        labels: labels/*[]*/,
         datasets: [
           {
-//            data: [],
-            data: data0s,
+            data: data0s/*[]*/,
           },
           {
-//            data: [],
-            data: data1s,
+            data: data1s/*[]*/,
           },
+/*
+          {
+            data: [],
+          },
+*/
         ],
       },
-*/
-//      data: chartData,
-/*
-      data: {
-        labels: [],
-        datasets: [
-          {
-            label: 'data0',
-            yAxisID: "yleft",
-            backgroundColor: '#f87979',
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(2,63,138,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(2,63,138,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#1D5191",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: [],
-          },
-          {
-            label: 'data1',
-            yAxisID: "yright",
-      //          backgroundColor: '#f879f9',
-            backgroundColor: "#3A7AC9",
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(201,60,58,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(201,60,58,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#9A1B19",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: [],
-          },
-        ]
-      },
-*/
-//      options: null,
-      options: chartOptions,
+      options: null/*chartOptions*/,
       device_id: '',
       device_name: '',
 //      date: date,
@@ -345,9 +205,6 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
-    currentInstance = getCurrentInstance();
-    console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
-
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
@@ -355,47 +212,6 @@ export default {
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
-
-      const chartDataLocal = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'data0',
-            yAxisID: "yleft",
-            backgroundColor: '#f87979',
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(2,63,138,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(2,63,138,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#1D5191",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: data0s,
-          },
-          {
-            label: 'data1',
-            yAxisID: "yright",
-      //          backgroundColor: '#f879f9',
-            backgroundColor: "#3A7AC9",
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(201,60,58,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(201,60,58,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#9A1B19",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: data1s,
-          },
-        ]
-      };
 
       try {
         response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
@@ -405,11 +221,8 @@ export default {
         if (ddata != null) {
           // Graph data reset.
           labels = [];
-//          this.data.labels = [];
           data0s = [];
-//          this.data.datasets[0].data = [];
           data1s = [];
-//          this.data.datasets[1].data = [];
 //          data2s = [];
 
           // add graph data.
@@ -424,27 +237,106 @@ export default {
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
-//            this.data.labels.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
-//            this.data.datasets[0].data.push(ddata[i].data0);
             data1s.push(ddata[i].data1);
-//            this.data.datasets[1].data.push(ddata[i].data1);
-//            data2s.push(ddata[i].data2);
+//            data2s.push(ddata[i/*j*/].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-//        const chartDataLocal = chartData;
-//        const chartOptionsLocal = chartOptions;
-//        console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartData ", chartData, " chartDataLocal ", chartDataLocal, " chartOptions ", chartOptions, " chartOptionsLocal ", chartOptionsLocal);
-        
-//        this.data = chartData;
-        this.data = chartDataLocal;
-//        this.data.labels = labels;
-//        this.data.datasets[0].data = data0s;
-//        this.data.datasets[1].data = data1s;
-//        this.options = chartOptions;
-//        this.options = chartOptionsLocal;
+        const chartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'data0',
+              yAxisID: "yleft",
+              backgroundColor: '#f87979',
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(2,63,138,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(2,63,138,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#1D5191",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data0s,
+            },
+            {
+              label: 'data1',
+              yAxisID: "yright",
+    //          backgroundColor: '#f879f9',
+              backgroundColor: "#3A7AC9",
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(201,60,58,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(201,60,58,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#9A1B19",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data1s,
+            },
+/*
+            {
+              label: 'data2',
+              yAxisID: "yright",
+    //          backgroundColor: '#f8f979',
+              backgroundColor: "#DB514E",
+              data: data2s,
+            },
+*/
+          ]
+        }
+
+        const chartOptions = {
+          responsive: true,    // グラフのスクロール対応
+    //      responsive: false,    // グラフのスクロール対応
+          maintainAspectRatio: false,
+          spanGaps: true,   //点をつなげる場合
+          scales: {
+            x: {
+              type: 'time',
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '日付時刻'           // ★必須 タイトルの文字列
+              },
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'YYYY-MM-DD HH:mm'
+                }
+              },
+            },
+            yleft: {
+              stacked: false,
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data0'           // ★必須 タイトルの文字列
+              },
+            },
+            /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+            yright: {
+              stacked: false,
+              position: "right",
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data1'           // ★必須 タイトルの文字列
+              },
+            },
+          },
+        };
+
+        this.data = chartData;
+        this.options = chartOptions;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
@@ -455,10 +347,6 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
-
-        currentInstance.proxy.$forceUpdate();
-        console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
-
         return response;
       }
       catch (error) {
@@ -513,60 +401,19 @@ export default {
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.", " this.data ", this.data);
-
-//    this.data.labels = null;
-//    this.data.datasets[0].data = null;
-//    this.data.datasets[1].data = null;
-//    console.log(fileName, funcName[0], "After data.labels and datasets set null.");
+    console.log(fileName, funcName[0], "In.");
 
 /*
+    this.data.labels = null;
+    this.data.datasets[0].data = null;
+    this.data.datasets[1].data = null;
+    console.log(fileName, funcName[0], "After data.labels and datasets set null.");
+
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
         const funcName = [":beforeUpdate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
-
-      const chartDataLocal = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'data0',
-            yAxisID: "yleft",
-            backgroundColor: '#f87979',
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(2,63,138,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(2,63,138,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#1D5191",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: data0s,
-          },
-          {
-            label: 'data1',
-            yAxisID: "yright",
-      //          backgroundColor: '#f879f9',
-            backgroundColor: "#3A7AC9",
-            fill: false,
-            borderWidth: 2,
-            borderColor: "rgba(201,60,58,0.8)",
-            pointBorderColor: "#fff",
-            pointBackgroundColor: "rgba(201,60,58,0.8)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "#9A1B19",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 2,
-            tension: 0,
-            data: data1s,
-          },
-        ]
-      };
 
       try {
         response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
@@ -597,7 +444,6 @@ export default {
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s);
         }
 
-        this.data = chartDataLocal;
 //        this.data.labels = labels;
 //        this.data.datasets[0].data = data0s;
 //        this.data.datasets[1].data = data1s;
@@ -635,7 +481,7 @@ export default {
   },
   updated: function() {
     const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.", " this.data ", this.data);
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
