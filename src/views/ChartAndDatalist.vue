@@ -175,13 +175,13 @@ export default {
     console.log(fileName, funcName[0], "Before return():");
     return {
       data: {
-        labels: [],
+        labels: labels/*[]*/,
         datasets: [
           {
-            data: [],
+            data: data0s/*[]*/,
           },
           {
-            data: [],
+            data: data1s/*[]*/,
           },
 /*
           {
@@ -443,9 +443,9 @@ export default {
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-        this.data.labels = labels;
-        this.data.datasets[0].data = data0s;
-        this.data.datasets[1].data = data1s;
+//        this.data.labels = labels;
+//        this.data.datasets[0].data = data0s;
+//        this.data.datasets[1].data = data1s;
 
         this.device_id = deviceInfo['device_id'];
         this.device_name = deviceInfo['device_name'];
