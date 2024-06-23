@@ -403,6 +403,7 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
+/*
     this.data.labels = null;
     this.data.datasets[0].data = null;
     this.data.datasets[1].data = null;
@@ -438,9 +439,9 @@ export default {
 //            this.data.datasets[0].data.push(ddata[i].data0);
             data1s.push(ddata[i].data1);
 //            this.data.datasets[1].data.push(ddata[i].data1);
-//            data2s.push(ddata[i/*j*/].data2);
+//            data2s.push(ddata[i].data2);
           }
-          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s);
         }
 
 //        this.data.labels = labels;
@@ -476,6 +477,7 @@ export default {
     localStorage.setItem('date_start', this.date_start);
     localStorage.setItem('date_end', this.date_end);
     console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", this.date_start, " this.date_end ", this.date_end, " date_start ", date_start, " date_end ", date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+*/
   },
   updated: function() {
     const funcName = [":updated:"];
