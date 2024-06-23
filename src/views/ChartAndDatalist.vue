@@ -432,20 +432,20 @@ export default {
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
-//            labels.push(dateTimeNtJst);
-            this.data.labels.push(dateTimeNtJst);
-//            data0s.push(ddata[i].data0);
-            this.data.datasets[0].data.push(ddata[i].data0);
-//            data1s.push(ddata[i].data1);
-            this.data.datasets[1].data.push(ddata[i].data1);
+            labels.push(dateTimeNtJst);
+//            this.data.labels.push(dateTimeNtJst);
+            data0s.push(ddata[i].data0);
+//            this.data.datasets[0].data.push(ddata[i].data0);
+            data1s.push(ddata[i].data1);
+//            this.data.datasets[1].data.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-//        this.data.labels = labels;
-//        this.data.datasets[0].data = data0s;
-//        this.data.datasets[1].data = data1s;
+        this.data.labels = labels;
+        this.data.datasets[0].data = data0s;
+        this.data.datasets[1].data = data1s;
 
         this.device_id = deviceInfo['device_id'];
         this.device_name = deviceInfo['device_name'];
