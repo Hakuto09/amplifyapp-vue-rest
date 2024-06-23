@@ -402,6 +402,11 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
+
+    this.data.labels = null;
+    this.data.datasets[0].data = null;
+    this.data.datasets[1].data = null;
+    console.log(fileName, funcName[0], "After data.labels and datasets set null.");
   },
   updated: function() {
     const funcName = [":updated:"];
