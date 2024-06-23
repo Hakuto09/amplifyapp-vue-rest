@@ -221,8 +221,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       date_start = new Date();
-      date_start.setMonth(date_start.getMonth() - 1);
-      localStorage.setItem('date_start', date_start);
+//      localStorage.setItem('date_start', date_start);
       this.date_start = date_start;
       console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
     },
@@ -231,8 +230,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       date_end = new Date();
-      date_end.setMonth(date_end.getMonth() - 1);
-      localStorage.setItem('date_end', date_end);
+//      localStorage.setItem('date_end', date_end);
       this.date_end = date_end;
       console.log(fileName, funcName[0], funcName[1], "In.", " date_end ", date_end, " this.date_end ", this.date_end);
     },
