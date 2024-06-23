@@ -403,17 +403,10 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-/*
-    this.data.labels = null;
-    this.data.datasets[0].data = null;
-    this.data.datasets[1].data = null;
-    console.log(fileName, funcName[0], "After data.labels and datasets set null.");
-
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
-        const funcName = [":beforeUpdate:", "getDeviceData():"];
-//      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
-      let response;
+    const funcName = [":beforeUpdate:", "getDeviceData():"];
+    console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+    let response;
 
       try {
         response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
@@ -430,27 +423,124 @@ export default {
           // add graph data.
           let loops = ddata.length;
           for(let i = 0; i < loops; ++i) {
+      //      let j = loops - i - 1;
+//            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
+//            let date_nt_jst = date_nt.substr(0, 23);
+//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
+
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
-//            this.data.labels.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
-//            this.data.datasets[0].data.push(ddata[i].data0);
             data1s.push(ddata[i].data1);
-//            this.data.datasets[1].data.push(ddata[i].data1);
-//            data2s.push(ddata[i].data2);
+//            data2s.push(ddata[i/*j*/].data2);
           }
-          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-//        this.data.labels = labels;
-//        this.data.datasets[0].data = data0s;
-//        this.data.datasets[1].data = data1s;
+        const chartData = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'data0',
+              yAxisID: "yleft",
+              backgroundColor: '#f87979',
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(2,63,138,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(2,63,138,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#1D5191",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data0s,
+            },
+            {
+              label: 'data1',
+              yAxisID: "yright",
+    //          backgroundColor: '#f879f9',
+              backgroundColor: "#3A7AC9",
+              fill: false,
+              borderWidth: 2,
+              borderColor: "rgba(201,60,58,0.8)",
+              pointBorderColor: "#fff",
+              pointBackgroundColor: "rgba(201,60,58,0.8)",
+              pointBorderWidth: 2,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "#9A1B19",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 2,
+              tension: 0,
+              data: data1s,
+            },
+/*
+            {
+              label: 'data2',
+              yAxisID: "yright",
+    //          backgroundColor: '#f8f979',
+              backgroundColor: "#DB514E",
+              data: data2s,
+            },
+*/
+          ]
+        }
 
+        const chartOptions = {
+          responsive: true,    // グラフのスクロール対応
+    //      responsive: false,    // グラフのスクロール対応
+          maintainAspectRatio: false,
+          spanGaps: true,   //点をつなげる場合
+          scales: {
+            x: {
+              type: 'time',
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '日付時刻'           // ★必須 タイトルの文字列
+              },
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'YYYY-MM-DD HH:mm'
+                }
+              },
+            },
+            yleft: {
+              stacked: false,
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data0'           // ★必須 タイトルの文字列
+              },
+            },
+            /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+            yright: {
+              stacked: false,
+              position: "right",
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data1'           // ★必須 タイトルの文字列
+              },
+            },
+          },
+        };
+
+        this.data = chartData;
+        this.options = chartOptions;
+
+        //        this.device_id = deviceId;
+//        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
+//        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
+//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
+//        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
         return response;
       }
@@ -460,24 +550,37 @@ export default {
       }
     }
 
+//    const deviceId = ref('');
     const deviceInfo = ref('');
+//    deviceId.value = localStorage.getItem('deviceId');
     deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
+//    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
-    date_start = this.date_start;
-    date_end = this.date_end;
+    if (!/*this.*/date_start) {
+      /*this.*/date_start = localStorage.getItem('date_start');
+      if (!/*this.*/date_start) {
+        /*this.*/date_start = new Date();
+        /*this.*/date_start.setMonth(/*this.*/date_start.getMonth() - 1);
+        localStorage.setItem('date_start', /*this.*/date_start)
+      }
+    }
 
-    let date_start_iso = dateTimeToISOString(date_start);
-    let date_end_iso = dateTimeToISOString(date_end);
+    if (!/*this.*/date_end) {
+      /*this.*/date_end = localStorage.getItem('date_end');
+      if (!/*this.*/date_end) {
+        /*this.*/date_end = new Date();
+        localStorage.setItem('date_end', /*this.*/date_end)
+      }
+    }
+
+    let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
+    let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
 
     // getDevices を呼び出してデータを読み込む
+//    let response_ga = getDeviceData(deviceId.value);
     let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
-
-    localStorage.setItem('date_start', this.date_start);
-    localStorage.setItem('date_end', this.date_end);
-    console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", this.date_start, " this.date_end ", this.date_end, " date_start ", date_start, " date_end ", date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
-*/
   },
   updated: function() {
     const funcName = [":updated:"];
