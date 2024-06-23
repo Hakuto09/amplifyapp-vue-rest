@@ -148,55 +148,6 @@ let data1s = [];
 let date_start;
 let date_end;
 
-const chartData = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'data0',
-      yAxisID: "yleft",
-      backgroundColor: '#f87979',
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(2,63,138,0.8)",
-      pointBorderColor: "#fff",
-      pointBackgroundColor: "rgba(2,63,138,0.8)",
-      pointBorderWidth: 2,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#1D5191",
-      pointHoverBorderColor: "#fff",
-      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: data0s,
-    },
-    {
-      label: 'data1',
-      yAxisID: "yright",
-//          backgroundColor: '#f879f9',
-      backgroundColor: "#3A7AC9",
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(201,60,58,0.8)",
-      pointBorderColor: "#fff",
-      pointBackgroundColor: "rgba(201,60,58,0.8)",
-      pointBorderWidth: 2,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "#9A1B19",
-      pointHoverBorderColor: "#fff",
-      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: data1s,
-    },
-/*
-    {
-      label: 'data2',
-      yAxisID: "yright",
-//          backgroundColor: '#f8f979',
-      backgroundColor: "#DB514E",
-      data: data2s,
-    },
-*/
-  ]
-}
 
 const chartOptions = {
   responsive: true,    // グラフのスクロール対応
@@ -269,7 +220,7 @@ export default {
 
     console.log(fileName, funcName[0], "Before return():");
     return {
-/*
+
       data: {
 //        labels: [],
         labels: labels,
@@ -284,8 +235,8 @@ export default {
           },
         ],
       },
-*/
-      data: chartData,
+
+//      data: chartData,
 //      options: null,
       options: chartOptions,
       device_id: '',
@@ -304,6 +255,56 @@ export default {
 
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
+
+    const chartData = {
+  labels: labels,
+  datasets: [
+    {
+      label: 'data0',
+      yAxisID: "yleft",
+      backgroundColor: '#f87979',
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(2,63,138,0.8)",
+      pointBorderColor: "#fff",
+      pointBackgroundColor: "rgba(2,63,138,0.8)",
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#1D5191",
+      pointHoverBorderColor: "#fff",
+      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: data0s,
+    },
+    {
+      label: 'data1',
+      yAxisID: "yright",
+//          backgroundColor: '#f879f9',
+      backgroundColor: "#3A7AC9",
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(201,60,58,0.8)",
+      pointBorderColor: "#fff",
+      pointBackgroundColor: "rgba(201,60,58,0.8)",
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "#9A1B19",
+      pointHoverBorderColor: "#fff",
+      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: data1s,
+    },
+/*
+    {
+      label: 'data2',
+      yAxisID: "yright",
+//          backgroundColor: '#f8f979',
+      backgroundColor: "#DB514E",
+      data: data2s,
+    },
+*/
+  ]
+}
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
