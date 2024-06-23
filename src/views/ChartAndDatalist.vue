@@ -288,7 +288,7 @@ export default {
 */
 //      data: chartData,
       data: {
-        labels: labels,
+        labels: [],
         datasets: [
           {
             label: 'data0',
@@ -305,7 +305,7 @@ export default {
             pointHoverBorderColor: "#fff",
             pointHoverBorderWidth: 2,
             tension: 0,
-            data: data0s,
+            data: [],
           },
           {
             label: 'data1',
@@ -323,17 +323,8 @@ export default {
             pointHoverBorderColor: "#fff",
             pointHoverBorderWidth: 2,
             tension: 0,
-            data: data1s,
+            data: [],
           },
-      /*
-          {
-            label: 'data2',
-            yAxisID: "yright",
-      //          backgroundColor: '#f8f979',
-            backgroundColor: "#DB514E",
-            data: data2s,
-          },
-      */
         ]
       },
 //      options: null,
