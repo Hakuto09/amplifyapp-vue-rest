@@ -269,7 +269,7 @@ export default {
 
     console.log(fileName, funcName[0], "Before return():");
     return {
-//      data: null,
+      data: null,
 /*
       data: {
 //        labels: [],
@@ -287,6 +287,7 @@ export default {
       },
 */
 //      data: chartData,
+/*
       data: {
         labels: [],
         datasets: [
@@ -327,6 +328,7 @@ export default {
           },
         ]
       },
+*/
 //      options: null,
       options: chartOptions,
       device_id: '',
