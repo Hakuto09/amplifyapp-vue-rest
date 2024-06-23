@@ -266,23 +266,25 @@ export default {
 
     console.log(fileName, funcName[0], "Before return():");
     return {
+/*
       data: {
-        labels: labels/*[]*/,
+//        labels: [],
+        labels: labels,
         datasets: [
           {
-            data: data0s/*[]*/,
+//            data: [],
+            data: data0s,
           },
           {
-            data: data1s/*[]*/,
+//            data: [],
+            data: data1s,
           },
-/*
-          {
-            data: [],
-          },
-*/
         ],
       },
-      options: null/*chartOptions*/,
+*/
+      data: chartData,
+//      options: null,
+      options: chartOptions,
       device_id: '',
       device_name: '',
 //      date: date,
@@ -310,6 +312,9 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
+//        this.data = chartData;
+//        this.options = chartOptions;
+
         if (ddata != null) {
           // Graph data reset.
           labels = [];
@@ -335,9 +340,10 @@ export default {
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
-
-        this.data = chartData;
-        this.options = chartOptions;
+        
+        this.data.labels = labels;
+        this.data.datasets[0].data = data0s;
+        this.data.datasets[1].data = data1s;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
