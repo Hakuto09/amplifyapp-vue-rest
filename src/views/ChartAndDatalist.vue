@@ -256,7 +256,7 @@ export default {
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
-    const chartData = {
+const chartData = {
   labels: labels,
   datasets: [
     {
@@ -319,9 +319,6 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
-//        this.data = chartData;
-//        this.options = chartOptions;
-
         if (ddata != null) {
           // Graph data reset.
           labels = [];
@@ -348,9 +345,11 @@ export default {
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
         
-        this.data.labels = labels;
-        this.data.datasets[0].data = data0s;
-        this.data.datasets[1].data = data1s;
+        this.data = chartData;
+//        this.data.labels = labels;
+//        this.data.datasets[0].data = data0s;
+//        this.data.datasets[1].data = data1s;
+//        this.options = chartOptions;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
