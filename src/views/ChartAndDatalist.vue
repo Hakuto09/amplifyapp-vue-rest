@@ -574,7 +574,7 @@ export default {
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
 
-      let date_start_iso = dateTimeToISOString(this.date_end);
+      let date_start_iso = dateTimeToISOString(this.date_start);
       let date_end_iso = dateTimeToISOString(this.date_end);
 
       // getDevices を呼び出してデータを読み込む
