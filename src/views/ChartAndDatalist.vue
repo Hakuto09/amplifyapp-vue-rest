@@ -354,6 +354,47 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
 
+      const chartDataLocal = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'data0',
+            yAxisID: "yleft",
+            backgroundColor: '#f87979',
+            fill: false,
+            borderWidth: 2,
+            borderColor: "rgba(2,63,138,0.8)",
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(2,63,138,0.8)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#1D5191",
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 2,
+            tension: 0,
+            data: data0s,
+          },
+          {
+            label: 'data1',
+            yAxisID: "yright",
+      //          backgroundColor: '#f879f9',
+            backgroundColor: "#3A7AC9",
+            fill: false,
+            borderWidth: 2,
+            borderColor: "rgba(201,60,58,0.8)",
+            pointBorderColor: "#fff",
+            pointBackgroundColor: "rgba(201,60,58,0.8)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#9A1B19",
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 2,
+            tension: 0,
+            data: data1s,
+          },
+        ]
+      };
+
       try {
         response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         console.log(fileName, funcName[0], funcName[1], " response ", response)
@@ -361,12 +402,12 @@ export default {
 
         if (ddata != null) {
           // Graph data reset.
-//          labels = [];
-          this.data.labels = [];
-//          data0s = [];
-          this.data.datasets[0].data = [];
-//          data1s = [];
-          this.data.datasets[1].data = [];
+          labels = [];
+//          this.data.labels = [];
+          data0s = [];
+//          this.data.datasets[0].data = [];
+          data1s = [];
+//          this.data.datasets[1].data = [];
 //          data2s = [];
 
           // add graph data.
@@ -380,23 +421,23 @@ export default {
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
-//            labels.push(dateTimeNtJst);
-            this.data.labels.push(dateTimeNtJst);
-//            data0s.push(ddata[i].data0);
-            this.data.datasets[0].data.push(ddata[i].data0);
-//            data1s.push(ddata[i].data1);
-            this.data.datasets[1].data.push(ddata[i].data1);
+            labels.push(dateTimeNtJst);
+//            this.data.labels.push(dateTimeNtJst);
+            data0s.push(ddata[i].data0);
+//            this.data.datasets[0].data.push(ddata[i].data0);
+            data1s.push(ddata[i].data1);
+//            this.data.datasets[1].data.push(ddata[i].data1);
 //            data2s.push(ddata[i].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-        const chartDataLocal = chartData;
-        const chartOptionsLocal = chartOptions;
-        console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartData ", chartData, " chartDataLocal ", chartDataLocal, " chartOptions ", chartOptions, " chartOptionsLocal ", chartOptionsLocal);
+//        const chartDataLocal = chartData;
+//        const chartOptionsLocal = chartOptions;
+//        console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartData ", chartData, " chartDataLocal ", chartDataLocal, " chartOptions ", chartOptions, " chartOptionsLocal ", chartOptionsLocal);
         
 //        this.data = chartData;
-//        this.data = chartDataLocal;
+        this.data = chartDataLocal;
 //        this.data.labels = labels;
 //        this.data.datasets[0].data = data0s;
 //        this.data.datasets[1].data = data1s;
@@ -472,7 +513,6 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.", " this.data ", this.data);
 
-/*
     this.data.labels = null;
     this.data.datasets[0].data = null;
     this.data.datasets[1].data = null;
@@ -546,7 +586,6 @@ export default {
     localStorage.setItem('date_start', this.date_start);
     localStorage.setItem('date_end', this.date_end);
     console.log(fileName, funcName[0], "After localStorage.setItem():", " date_start ", this.date_start, " this.date_end ", this.date_end, " date_start ", date_start, " date_end ", date_end, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
-*/
   },
   updated: function() {
     const funcName = [":updated:"];
