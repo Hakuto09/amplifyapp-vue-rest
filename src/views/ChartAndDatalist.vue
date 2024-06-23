@@ -321,9 +321,12 @@ export default {
 
         if (ddata != null) {
           // Graph data reset.
-          labels = [];
-          data0s = [];
-          data1s = [];
+//          labels = [];
+          this.data.labels = [];
+//          data0s = [];
+          this.data.datasets[0].data = [];
+//          data1s = [];
+          this.data.datasets[1].data = [];
 //          data2s = [];
 
           // add graph data.
@@ -337,10 +340,13 @@ export default {
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
-            labels.push(dateTimeNtJst);
-            data0s.push(ddata[i].data0);
-            data1s.push(ddata[i].data1);
-//            data2s.push(ddata[i/*j*/].data2);
+//            labels.push(dateTimeNtJst);
+            this.data.labels.push(dateTimeNtJst);
+//            data0s.push(ddata[i].data0);
+            this.data.datasets[0].data.push(ddata[i].data0);
+//            data1s.push(ddata[i].data1);
+            this.data.datasets[1].data.push(ddata[i].data1);
+//            data2s.push(ddata[i].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
@@ -350,12 +356,12 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After chartDataLocal and chartOptionsLocal", " chartData ", chartData, " chartDataLocal ", chartDataLocal, " chartOptions ", chartOptions, " chartOptionsLocal ", chartOptionsLocal);
         
 //        this.data = chartData;
-        this.data = chartDataLocal;
+//        this.data = chartDataLocal;
 //        this.data.labels = labels;
 //        this.data.datasets[0].data = data0s;
 //        this.data.datasets[1].data = data1s;
 //        this.options = chartOptions;
-        this.options = chartOptionsLocal;
+//        this.options = chartOptionsLocal;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
