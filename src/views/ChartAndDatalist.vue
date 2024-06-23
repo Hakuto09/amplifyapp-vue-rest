@@ -402,9 +402,13 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
+  },
+  updated: function() {
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
-    const funcName = [":beforeUpdate:", "getDeviceData():"];
+    const funcName = [":updated:", "getDeviceData():"];
     console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
     let response;
 
@@ -581,10 +585,6 @@ export default {
 //    let response_ga = getDeviceData(deviceId.value);
     let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
-  },
-  updated: function() {
-    const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
