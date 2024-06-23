@@ -418,7 +418,7 @@ export default {
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this.data ", this.data);
 
 /*
     this.data.labels = null;
@@ -498,7 +498,7 @@ export default {
   },
   updated: function() {
     const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this.data ", this.data);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
