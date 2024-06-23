@@ -362,25 +362,29 @@ export default {
 //    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
-    if (!/*this.*/date_start) {
-      /*this.*/date_start = localStorage.getItem('date_start');
-      if (!/*this.*/date_start) {
-        /*this.*/date_start = new Date();
-        /*this.*/date_start.setMonth(/*this.*/date_start.getMonth() - 1);
-        localStorage.setItem('date_start', /*this.*/date_start);
+    if (!date_start) {
+      date_start = localStorage.getItem('date_start');
+      this.date_start = date_start;
+      if (!date_start) {
+        date_start = new Date();
+        date_start.setMonth(date_start.getMonth() - 1);
+        localStorage.setItem('date_start', date_start);
+        this.date_start = date_start;
       }
     }
 
-    if (!/*this.*/date_end) {
-      /*this.*/date_end = localStorage.getItem('date_end');
-      if (!/*this.*/date_end) {
-        /*this.*/date_end = new Date();
-        localStorage.setItem('date_end', /*this.*/date_end);
+    if (!date_end) {
+      date_end = localStorage.getItem('date_end');
+      this.date_end = date_end;
+      if (!date_end) {
+        date_end = new Date();
+        localStorage.setItem('date_end', date_end);
+        this.date_end = date_end;
       }
     }
 
-    let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
-    let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
+    let date_start_iso = dateTimeToISOString(date_start);
+    let date_end_iso = dateTimeToISOString(date_end);
 
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
@@ -551,14 +555,16 @@ export default {
     }
 
     let reRenderFlag = false;
-    if (date_start != localStorage.getItem('date_start')) {
+    if (this.date_start != localStorage.getItem('date_start')) {
       reRenderFlag = true;
-      localStorage.setItem('date_start', date_start);
+      date_start = this.date_start;
+      localStorage.setItem('date_start', this.date_start);
     }
 
-    if (date_end != localStorage.getItem('date_end')) {
+    if (this.date_end != localStorage.getItem('date_end')) {
       reRenderFlag = true;
-      localStorage.setItem('date_end', date_end);
+      date_end = this.date_end;
+      localStorage.setItem('date_end', this.date_end);
     }
 
     console.log(fileName, funcName[0], ":Before if (reRenderFlag):", " reRenderFlag ", reRenderFlag);
@@ -568,8 +574,8 @@ export default {
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
 
-      let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
-      let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
+      let date_start_iso = dateTimeToISOString(this.date_end);
+      let date_end_iso = dateTimeToISOString(this.date_end);
 
       // getDevices を呼び出してデータを読み込む
       let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
