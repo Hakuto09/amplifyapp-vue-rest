@@ -402,15 +402,11 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
-  },
-  updated: function() {
-    const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
-    const funcName = [":updated:", "getDeviceData():"];
-    console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
-    let response;
+      const funcName = [":updated:", "getDeviceData():"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+      let response;
 
       try {
         response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
@@ -554,37 +550,33 @@ export default {
       }
     }
 
-//    const deviceId = ref('');
-    const deviceInfo = ref('');
-//    deviceId.value = localStorage.getItem('deviceId');
-    deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
-//    console.log(fileName, funcName[0], " deviceId.value ", deviceId.value);
-    console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
-
-    if (!/*this.*/date_start) {
-      /*this.*/date_start = localStorage.getItem('date_start');
-      if (!/*this.*/date_start) {
-        /*this.*/date_start = new Date();
-        /*this.*/date_start.setMonth(/*this.*/date_start.getMonth() - 1);
-        localStorage.setItem('date_start', /*this.*/date_start)
-      }
+    let reRenderFlag = Flase;
+    if (date_start != localStorage.getItem('date_start')) {
+      reRenderFlag = True;
     }
 
-    if (!/*this.*/date_end) {
-      /*this.*/date_end = localStorage.getItem('date_end');
-      if (!/*this.*/date_end) {
-        /*this.*/date_end = new Date();
-        localStorage.setItem('date_end', /*this.*/date_end)
-      }
+    if (date_end != localStorage.getItem('date_end')) {
+      reRenderFlag = True;
     }
 
-    let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
-    let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
+    console.log(fileName, funcName[0], ":Before if (reRenderFlag):", " reRenderFlag ", reRenderFlag);
+    if (reRenderFlag) {
+      const deviceInfo = ref('');
+      deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
+      console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
 
-    // getDevices を呼び出してデータを読み込む
-//    let response_ga = getDeviceData(deviceId.value);
-    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
-    console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
+
+      let date_start_iso = dateTimeToISOString(localStorage.getItem('date_start'));
+      let date_end_iso = dateTimeToISOString(localStorage.getItem('date_end'));
+
+      // getDevices を呼び出してデータを読み込む
+      let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
+      console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
+    }
+  },
+  updated: function() {
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
