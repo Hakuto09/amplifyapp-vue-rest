@@ -36,7 +36,7 @@
       <button
         type="is-info"
         @click="sedDateStartNow">
-        現在日時を設定
+        現在日時 (-1分) を設定
       </button>
     </div>
     <div id="box">
@@ -221,6 +221,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       date_start = new Date();
+      date_start.setMinutes(date_start.getMinutes() - 1);
 //      localStorage.setItem('date_start', date_start);
       this.date_start = date_start;
       console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
