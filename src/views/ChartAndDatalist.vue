@@ -367,7 +367,7 @@ export default {
       if (!/*this.*/date_start) {
         /*this.*/date_start = new Date();
         /*this.*/date_start.setMonth(/*this.*/date_start.getMonth() - 1);
-        localStorage.setItem('date_start', /*this.*/date_start)
+        localStorage.setItem('date_start', /*this.*/date_start);
       }
     }
 
@@ -375,7 +375,7 @@ export default {
       /*this.*/date_end = localStorage.getItem('date_end');
       if (!/*this.*/date_end) {
         /*this.*/date_end = new Date();
-        localStorage.setItem('date_end', /*this.*/date_end)
+        localStorage.setItem('date_end', /*this.*/date_end);
       }
     }
 
@@ -553,10 +553,12 @@ export default {
     let reRenderFlag = false;
     if (date_start != localStorage.getItem('date_start')) {
       reRenderFlag = true;
+      localStorage.setItem('date_start', date_start);
     }
 
     if (date_end != localStorage.getItem('date_end')) {
       reRenderFlag = true;
+      localStorage.setItem('date_end', date_end);
     }
 
     console.log(fileName, funcName[0], ":Before if (reRenderFlag):", " reRenderFlag ", reRenderFlag);
