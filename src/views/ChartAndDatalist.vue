@@ -550,13 +550,13 @@ export default {
       }
     }
 
-    let reRenderFlag = Flase;
+    let reRenderFlag = false;
     if (date_start != localStorage.getItem('date_start')) {
-      reRenderFlag = True;
+      reRenderFlag = true;
     }
 
     if (date_end != localStorage.getItem('date_end')) {
-      reRenderFlag = True;
+      reRenderFlag = true;
     }
 
     console.log(fileName, funcName[0], ":Before if (reRenderFlag):", " reRenderFlag ", reRenderFlag);
