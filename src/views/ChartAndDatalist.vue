@@ -303,7 +303,7 @@ export default {
 
       return csvStr;
     },
-    writeCSV: async function(event) {
+    writeCSV: async function(/*event*/) {
       const funcName = [":methods:", "writeCSV:"];
       console.log(fileName, funcName[0], funcName[1], "In:");
 
