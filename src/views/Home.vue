@@ -37,8 +37,9 @@ export default {
 
       const userInfo = await getCurrentUser();
       this.loginId = userInfo.signInDetails.loginId;
+      console.log(fileName, funcName[0], funcName[1], "After getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId);
     }
-    getUserAndDgroups();
+    getUserInfo();
   }
 }
 </script>
