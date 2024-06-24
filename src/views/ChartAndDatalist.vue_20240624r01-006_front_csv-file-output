@@ -304,10 +304,7 @@ export default {
       return csvStr;
     },
     writeCSV: async function(event) {
-      const funcName = [":methods:", "writeCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:");
-
-//      setDisableButtons(true);
+      setDisableButtons(true);
       event.preventDefault();
 
       console_logger.warn("writeCSV() In:");
@@ -323,7 +320,7 @@ export default {
       const writable = await handle.createWritable();
       const csv = convertJSONtoCSV(/*notes*/);
     
-      console.log(fileName, funcName[0], funcName[1], "Before csv write:", " opts ", opts, " handle ", handle, ' writable ', writable, ' csv ', csv);
+      console_logger.warn('writeCSV() For csv output: ', " opts ", opts, " handle ", handle, ' writable ', writable, ' csv ', csv);
     
       await writable.write(csv);
       await writable.close();
@@ -350,9 +347,8 @@ export default {
       }
       */
 
-//      setDisableButtons(false);
+      setDisableButtons(false);
       event.target.reset();
-      console.log(fileName, funcName[0], funcName[1], "Out:");
     }
   },
   beforeCreate: function() {
