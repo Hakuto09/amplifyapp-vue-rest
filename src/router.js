@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home.vue'
-import Users from './views/Users.vue'
-import LifeCycle from './views/LifeCycle.vue'
-import LifeCycle2 from './views/LifeCycle2.vue'
-import UserDetail from './views/UserDetail.vue'
-import Routing from './views/Routing.vue'
+//import Routing from './views/Routing.vue'
+//import LifeCycle from './views/LifeCycle.vue'
+//import LifeCycle2 from './views/LifeCycle2.vue'
+//import Users from './views/Users.vue'
+//import UserDetail from './views/UserDetail.vue'
 import Dgroups from './views/Dgroups.vue'
 import Devices from './views/Devices.vue'
 import DeviceDetail from './views/DeviceDetail.vue'
@@ -46,36 +46,46 @@ const routes = [
     component: Home,
 //    meta: { requiresAuth: true},
   },
+/*
   {
     path: '/routing',
     name: 'routing',
     component: Routing,
 //    meta: { requiresAuth: true},
   },
+*/
+/*
   {
     path: '/life-cycle',
     name: 'llfe-cycle',
     component: LifeCycle,
 //    meta: { requiresAuth: true},
   },
+*/
+/*
   {
     path: '/life-cycle2',
     name: 'llfe-cycle2',
     component: LifeCycle2,
 //    meta: { requiresAuth: true},
   },
+*/
+/*
   {
     path: '/users',
     name: 'users',
     component: Users,
 //    meta: { requiresAuth: true},
   },
+*/
+/*
   {
     path: '/users/:id',
     name: 'user-detail',
     component: UserDetail,
 //    meta: { requiresAuth: true},
   },
+*/
   {
     path: '/dgroups',
     name: 'dgroups',

@@ -192,21 +192,21 @@ export default {
             <li>
               <router-link to="/" exact active-class="active-link">Home</router-link>
             </li>
-            <li>
+            <!-- li>
               <router-link to="/routing" exact active-class="active-link">Rounting Test</router-link>
-            </li>
-            <li>
+            </li -->
+            <!-- li>
               <router-link to="/life-cycle" exact active-class="active-link">Life Cycle</router-link>
-            </li>
-            <li>
+            </li -->
+            <!-- li>
               <router-link to="/life-cycle2" exact active-class="active-link">Life Cycle2</router-link>
-            </li>
-            <li>
+            </li -->
+            <!-- li>
               <router-link to="/users" exact active-class="active-link">User List</router-link>
-            </li>
-            <li>
+            </li -->
+            <!-- li>
               <router-link :to="{ name: 'user-detail', params: {id: 0} }" exact active-class="active-link">User Detail</router-link>
-            </li>
+            </li -->
             <li>
               <router-link to="/dgroups" exact active-class="active-link">Dgroup List</router-link>
             </li>
