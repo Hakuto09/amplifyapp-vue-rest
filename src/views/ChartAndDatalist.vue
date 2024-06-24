@@ -32,10 +32,10 @@
     </section -->
     <br><br>
     <p>開始日時</p>
-    <div :class="$style.show_chart">
+    <div :class="$style.set_date">
       <button
         type="is-info"
-        @click="sedDateStartNow">
+        @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
     </div>
@@ -56,10 +56,10 @@
     </div>
     <br><br>
     <p>終了日時</p>
-    <div :class="$style.show_chart">
+    <div :class="$style.set_date">
       <button
         type="is-info"
-        @click="sedDateEndNow">
+        @click="setDateEndNow">
         現在日時を設定
       </button>
     </div>
@@ -216,7 +216,7 @@ export default {
     }
   },
   methods: {
-    sedDateStartNow: function() {
+    setDateStartNow: function() {
       const funcName = [":methods:", "sedDateStartNow:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
@@ -226,7 +226,7 @@ export default {
       this.date_start = date_start;
       console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
     },
-    sedDateEndNow: function() {
+    setDateEndNow: function() {
       const funcName = [":methods:", "sedDateEndNow:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
@@ -660,5 +660,9 @@ export default {
   margin: auto;
   padding: 15px;
   border: 2px solid #dcdcdc;
+}
+
+.set_date {
+  font-size: 12px;
 }
 </style>
