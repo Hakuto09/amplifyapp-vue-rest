@@ -294,7 +294,7 @@ export default {
       for(let i = 0; i < numOfRows; i++) {
         csvStr = csvStr.concat(this.device_name,", ");
         csvStr = csvStr.concat(ddata[i].device_id,", ");
-        csvStr = csvStr.concat(ddata[i].date,", ");
+        csvStr = csvStr.concat(ddata[i].createdAt,", ");
         csvStr = csvStr.concat(ddata[i].data0,", ");
         csvStr = csvStr.concat(ddata[i].data1,"\n");
       }
@@ -308,7 +308,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In:");
 
 //      setDisableButtons(true);
-      event.preventDefault();
+//      event.preventDefault();
 
       const opts = {
         suggestedName: 'example',
@@ -349,7 +349,7 @@ export default {
       */
 
 //      setDisableButtons(false);
-      event.target.reset();
+//      event.target.reset();
       console.log(fileName, funcName[0], funcName[1], "Out:");
     }
   },
