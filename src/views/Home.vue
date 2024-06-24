@@ -8,20 +8,38 @@
       alt="Hakuto logo" 
       src="../assets/Hakuto_logo_small.jpg">
     <h2>Welcome to Hakuto App</h2>
+    <br><br>
+    <h2>LoginId: {{ loginId }}</h2>
   </div>
 </template>
 
 <script>
-// @ を指定することで `/src` の代替となる
-//import HelloWorld from '@/components/HelloWorld.vue'
+import { getCurrentUser } from 'aws-amplify/auth';
+const fileName = "Home.vue";
+
 
 export default {
   name: 'HomePage',
-/*
-  components: {
-    HelloWorld
+  data: function() {
+    const funcName = [":data:"];
+    console.log(fileName, funcName[0], "In.");
+    return {
+      loginId: '',
+    }
   },
-*/
+  beforeCreate: function() {
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
+
+    const getUserInfo = async () => {
+      const funcName = [":beforeCreate:", "getUserInfo:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      const userInfo = await getCurrentUser();
+      this.loginId = userInfo.signInDetails.loginId;
+    }
+    getUserAndDgroups();
+  }
 }
 </script>
 

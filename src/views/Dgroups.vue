@@ -151,8 +151,8 @@ export default {
         dgroup_name_input: '',
         message_result: '',
       },
-      account_id: 0/*userId*/,
-      loginId: 0,
+      account_id: '',
+      loginId: '',
     }
   },
 //  methods: function() {
