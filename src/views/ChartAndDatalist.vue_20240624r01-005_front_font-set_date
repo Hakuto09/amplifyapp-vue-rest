@@ -30,13 +30,6 @@
         </div>
         <pre>Selected date is - {{date}}</pre>
     </section -->
-    <div :class="$style.write_csv">
-      <button
-        type="is-info"
-        @click="writeCSV">
-        CSVファイル出力
-      </button>
-    </div>
     <br><br>
     <p>開始日時</p>
     <div :class="$style.set_date">
@@ -242,114 +235,6 @@ export default {
       this.date_end = date_end;
       console.log(fileName, funcName[0], funcName[1], "In.", " date_end ", date_end, " this.date_end ", this.date_end);
     },
-    convertJSONtoCSV: function() {
-      const funcName = [":methods:", "convertJSONtoCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:");
-
-      let keys = ["device_name", "device_id", "date", "data0", "data1"];
-      let numOfColumns = keys.length;
-      let numOfRows = ddata.length;
-      let csvStr = "";
-
-      console.log(fileName, funcName[0], funcName[1], "In 2:", ' keys ', keys, ' numOfColumns ', numOfColumns, ' numOfRows ', numOfRows);
-
-      /*
-      JSON.parse(jsons[0], (key) => {
-        if(key) {
-          keys.push(key);   // keyの取得
-          count++;
-        }
-      })
-      */
-    
-      for(let i = 0; i < numOfColumns; i++) {
-        if(i == numOfColumns - 1) {   // 行末の処理
-          csvStr = csvStr.concat(keys[i],"\n");
-        }
-        else {
-          csvStr = csvStr.concat(keys[i],", ");
-        }
-      }
-
-      console.log(fileName, funcName[0], funcName[1], "After listup header with keys:", ' keys ', keys, " csvStr ", csvStr);
-
-      /*
-      let j = 0;
-      while(jsons[j] !== null) {
-        JSON.parse(jsons[j], (key, value) => {
-          if(key) { values.push(value); }
-        })
-    
-        console_logger.warn('convertJSONtoCSV() Before convert values: ', " values ", values);
-
-        for(let i = 0; i < count; i++) {
-          if(i == count - 1)  { csvStr = csvStr.concat(values[i],"\n"); }   // 行末の処理
-          else                { csvStr = csvStr.concat(values[i],", "); }
-        }
-
-        j++;
-      }
-      */
-
-      for(let i = 0; i < numOfRows; i++) {
-        csvStr = csvStr.concat(this.device_name,", ");
-        csvStr = csvStr.concat(ddata[i].device_id,", ");
-        csvStr = csvStr.concat(ddata[i].date,", ");
-        csvStr = csvStr.concat(ddata[i].data0,", ");
-        csvStr = csvStr.concat(ddata[i].data1,"\n");
-      }
-
-      console.log(fileName, funcName[0], funcName[1], "After write values:", " csvStr ", csvStr);
-
-      return csvStr;
-    },
-    writeCSV: async function(event) {
-      setDisableButtons(true);
-      event.preventDefault();
-
-      console_logger.warn("writeCSV() In:");
-
-      const opts = {
-        suggestedName: 'example',
-        types: [{
-          description: 'CSV file',
-          accept: {'text/csv': ['.csv']},
-        }],
-      };
-      const handle = await window.showSaveFilePicker(opts);
-      const writable = await handle.createWritable();
-      const csv = convertJSONtoCSV(/*notes*/);
-    
-      console_logger.warn('writeCSV() For csv output: ', " opts ", opts, " handle ", handle, ' writable ', writable, ' csv ', csv);
-    
-      await writable.write(csv);
-      await writable.close();
-
-      /*
-      if(csvStr == "") {
-        console_logger.warn("empty Text .")
-        return 
-      }
-    
-      // 既存ファイルの上書き "overwrite" / 既存ファイルの書き換え "rewrite"
-      const WRITE_CONFIG = "rewrite"
-    
-      if (WRITE_CONFIG == "rewrite") {
-        fse.writeFileSync(filename, csvStr)
-        console_logger.warn("Rewrite csv file.")
-      }
-  //    else if (WRITE_CONFIG == "overwrite") {
-  //      fs.appendFileSync("./test.csv",csvStr);
-  //      console.log("overwrite csv file .")
-  //    }
-      else {
-        console_logger.warn("Please check! cannot write csvfile.")
-      }
-      */
-
-      setDisableButtons(false);
-      event.target.reset();
-    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
@@ -775,12 +660,6 @@ export default {
   margin: auto;
   padding: 15px;
   border: 2px solid #dcdcdc;
-}
-
-.write_csv {
-  font-size: 12px;
-  display: flex;
-  justify-content: right;
 }
 
 .set_date {
