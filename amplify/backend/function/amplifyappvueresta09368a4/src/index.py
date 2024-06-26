@@ -153,6 +153,7 @@ class Response_PostDevice(BaseModel):
 #    thingName: str
 #    thingId: str
     certificatePem: str
+    PrivateKey: str
 
 class Request_DeleteDevice(BaseModel):
     """
@@ -572,15 +573,24 @@ def post_device(_in: Request_PostDevice):
     )
     print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
 
-    response_iot_csr = client_iot.create_certificate_from_csr(
-        certificateSigningRequest = csr,
-        setAsActive = True,
-    )
-    print('After client_iot.create_certificate_from_csr():', ' response_iot_csr ', response_iot_csr)
+    if csr == '' : 
+        useCsr = 0
+        response_iot_csr = client_iot.create_keys_and_certificate(
+            setAsActive = True,
+        )
+    else :
+        useCsr = 1
+        response_iot_csr = client_iot.create_certificate_from_csr(
+            certificateSigningRequest = csr,
+            setAsActive = True,
+        )
+    print('After client_iot.create_certificate_from_csr():', ' useCsr ', useCsr, ' response_iot_csr ', response_iot_csr)
 
     certificateArn = response_iot_csr['certificateArn']
     certificatePem = response_iot_csr['certificatePem']
-    print('After specify certificateArn and certificatePem:', ' certificateArn ', certificateArn, ' certificatePem ', certificatePem)
+    PublicKey = response_iot_csr['keyPair']['PublicKey']
+    PrivateKey = response_iot_csr['keyPair']['PrivateKey']
+    print('After specify certificateInfo:', ' certificateArn ', certificateArn, ' certificatePem ', certificatePem, ' PublicKey ', PublicKey, ' PrivateKey ', PrivateKey)
 
     response_iot_policy = client_iot.attach_policy(
         policyName = 'iotDataAccess',
@@ -604,10 +614,15 @@ def post_device(_in: Request_PostDevice):
 #    print('After client_ddb.put_item():', ' response_ddb ', response_ddb)
     print('After ddb_table_devices.put_item():', ' response_ddb ', response_ddb)
 
-#    return Response_PostDevice.parse_obj(response_iot)
-    return {
-        'certificatePem': certificatePem
-    }
+    if useCsr :
+        return {
+            'certificatePem': certificatePem
+        }
+    else :
+        return {
+            'certificatePem': certificatePem,
+            'PrivateKey': PrivateKey
+        }
 
 @app.put("/items/{id}", response_model=Response_Item)
 def update_item(id: str):

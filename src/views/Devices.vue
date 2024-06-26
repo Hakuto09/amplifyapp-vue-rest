@@ -13,12 +13,15 @@
       <input
         v-model="properties.csr_input"
         :class="$style.csr_input"
-        placeholder="csr for new device">
+        placeholder="CSR for new device">
       <button
         type="is-info"
         @click="registerDevice">
         Register
       </button>
+      <input type="checkbox" id="checkbox" v-model="useCsr">
+      <label for="checkbox">CSR使用</label>
+      <!-- pre>{{ $data }}</pre -->
     </div>
     <br><br>
     <p>Result: {{ properties.message_result }}</p>
@@ -86,6 +89,7 @@ export default {
       },
       dgroup_id: 0,
       dgroup_name: '',
+      useCsr: false,
     }
   },
 //  methods: function() {
@@ -112,6 +116,11 @@ export default {
 //      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value);
       console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
+      let csr = '';
+      if (useCsr) {
+        csr = this.properties.csr_input;
+      }
+
       // Device関連リソースの登録
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
@@ -121,7 +130,7 @@ export default {
             device_name: this.properties.device_name_input,
             dgroup_id: dgroupId.value,
             account_id: userInfo.userId,
-            csr: this.properties.csr_input,
+            csr: csr,
             check_existing_flag: check_existing_flag,
           })
           .then(function(response) {
