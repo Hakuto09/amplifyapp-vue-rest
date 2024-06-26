@@ -491,7 +491,7 @@ export default {
         this.data = chartData;
         this.data.labels = labels;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].data = data0s;
+        this.data.datasets[1].data = data1s;
         this.options = chartOptions;
 
         //        this.device_id = deviceId;
@@ -602,7 +602,7 @@ export default {
         this.data = chartData;
         this.data.labels = labels;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].data = data0s;
+        this.data.datasets[1].data = data1s;
         this.options = chartOptions;
 
         //        this.device_id = deviceId;
