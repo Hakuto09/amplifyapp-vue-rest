@@ -154,7 +154,7 @@ export default {
 
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res, ' responseData ', responseData);
 
-      if (res == 1)        { this.properties.message_result = 'Register Success: ' + responseData; }
+      if (res == 1)        { this.properties.message_result = 'Register Success: ' + JSON.parse(responseData); }
       else if (res == -1)  { this.properties.message_result = 'Register Error'; }
       else                 { this.properties.message_result = ''; }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
@@ -343,7 +343,7 @@ export default {
 }
 
 .checkbox {
-  margin: 20px;
+  margin-left: 20px;
 }
 
 
