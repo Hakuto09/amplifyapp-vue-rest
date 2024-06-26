@@ -117,7 +117,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " dgroupId.value ", dgroupId.value, ' dgroupInfo.value ', dgroupInfo.value);
 
       let csr = '';
-      if (useCsr) {
+      if (this.useCsr) {
         csr = this.properties.csr_input;
       }
 
