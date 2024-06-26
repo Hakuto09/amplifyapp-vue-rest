@@ -152,7 +152,7 @@ export default {
         }
       }
 
-      console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res);
+      console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res, ' responseData ', responseData);
 
       if (res == 1)        { this.properties.message_result = 'Register Success: ' + responseData; }
       else if (res == -1)  { this.properties.message_result = 'Register Error'; }
