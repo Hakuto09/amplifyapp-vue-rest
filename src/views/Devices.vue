@@ -19,12 +19,12 @@
         @click="registerDevice">
         Register
       </button>
-      <input type="checkbox" id="checkbox" v-model="useCsr">
+      <input :class="$style.checkbox" type="checkbox" id="checkbox" v-model="useCsr">
       <label for="checkbox">CSR使用</label>
       <!-- pre>{{ $data }}</pre -->
     </div>
     <br><br>
-    <p>Result: {{ properties.message_result }}</p>
+    <p>{{ properties.message_result }}</p>
   </div>
 </template>
 
@@ -53,6 +53,7 @@ let devices;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
+let responseData; 
 
 export default {
   name: 'Devices',
@@ -136,6 +137,7 @@ export default {
           .then(function(response) {
   //          this.properties.message_result = 'Success';
             res = 1;
+            responseData = response.data;
             console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
           })
           .catch(function(error) {
@@ -152,9 +154,9 @@ export default {
 
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res);
 
-      if (res == 1)        { this.properties.message_result = 'Register Success';  }
-      else if (res == -1)  { this.properties.message_result = 'Register Error';    }
-      else                 { this.properties.message_result = '';         }
+      if (res == 1)        { this.properties.message_result = 'Register Success: ' + responseData; }
+      else if (res == -1)  { this.properties.message_result = 'Register Error'; }
+      else                 { this.properties.message_result = ''; }
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Deviceリストの更新
@@ -285,6 +287,8 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
+
+    this.properties.message_result = 'Please input a new device name';
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
@@ -337,6 +341,11 @@ export default {
 	justify-content: flex-end;
   margin-right: 100px;
 }
+
+.checkbox {
+  margin: 20px;
+}
+
 
 h1 {
   font-size: 36px;

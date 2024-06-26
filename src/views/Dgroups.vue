@@ -28,7 +28,7 @@
     </div>
     <br><br>
     <div :class="$style.message_result">
-      <p>Result: {{ properties.message_result }}</p>
+      <p>{{ properties.message_result }}</p>
     </div>
   </div>
 </template>
