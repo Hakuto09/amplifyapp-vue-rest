@@ -576,6 +576,8 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
+        let chartData_L = chartData;
+
         // Graph data reset.
         let labels_L = [];
 //        data0s_l = [];
@@ -610,7 +612,8 @@ export default {
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data L", " labels_L ", labels_L,);
         }
 
-        this.data = chartData;
+//        this.data = chartData;
+        this.data = chartData_L;
 //        this.data.labels = labels;
         this.data.labels = labels_L;
         labels = labels_L;
