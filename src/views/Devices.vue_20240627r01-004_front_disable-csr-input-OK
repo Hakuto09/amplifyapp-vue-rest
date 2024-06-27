@@ -20,11 +20,7 @@
         @click="registerDevice">
         Register
       </button>
-      <input
-        :class="$style.checkbox"
-        type="checkbox"
-        id="checkbox"
-        v-model="useCsr">
+      <input :class="$style.checkbox" type="checkbox" id="checkbox" v-model="useCsr">
       <label for="checkbox">CSR使用</label>
       <!-- pre>{{ $data }}</pre -->
     </div>
@@ -33,13 +29,6 @@
     <p>{{ certificatePem }}</p>
     <p>{{ PrivateKey }}</p>
     <br><br>
-    <div :class="$style.save_cert_info">
-      <button
-        type="is-info"
-        @click="saveCertInfo">
-        認証情報をファイル保存
-      </button>
-    </div>
     <button
         type="is-info"
         @click="refreshDisplay">
@@ -55,8 +44,6 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
-//import * as fs from "fs-extra";
-import fs from "fs-extra";
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
@@ -264,18 +251,6 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "Out.");
     },
 
-    saveCertInfo: function() {
-      const funcName = [":methods:", "saveCertInfo:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
-
-      const filename = "test.txt";
-      fs.writeFile(filename, this.certificatePem, (err) => {
-        if (err) {
-          alert(err);
-        }
-      });
-    },
-
     refreshDisplay: function() {
       const funcName = [":methods:", "refreshDisplay:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
@@ -404,13 +379,6 @@ export default {
   margin-left: 20px;
 }
 
-.save_cert_info {
-  font-size: 16px;
-	display: flex;
-	align-items: flex-start; /*ここは任意の値でOK*/
-	justify-content: flex-end;
-  margin-right: 100px;
-}
 
 h1 {
   font-size: 36px;
