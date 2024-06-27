@@ -336,7 +336,7 @@ export default {
         this.device_name_input = ''; 
         this.csr_input = ''; 
       }
-      this.message_result = 'Please input a new device name';
+      this.message_result = '';
       this.message_caution = '';
       this.message_certificatePem = '';
       this.message_PrivateKey = '';
@@ -401,8 +401,7 @@ export default {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
 
-//    this.message_result = 'Please input a new device name';
-    this.refreshDisplay(true);
+    this.message_result = 'Please input a new device name';
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];

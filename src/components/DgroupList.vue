@@ -25,6 +25,7 @@
         </tbody>
       </table>
     </div>
+    <br><br>
     <div :class="$style.select_dgroup">
       <button
         type="is-info"

@@ -30,6 +30,12 @@
     <div :class="$style.message_result">
       <p>{{ properties.message_result }}</p>
     </div>
+    <br><br>
+    <button
+        type="is-info"
+        @click="refreshDisplay">
+        Refresh
+      </button>
   </div>
 </template>
 
@@ -167,6 +173,8 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
+      this.refreshDisplay();
+
       let response_api;
       let res = 0;
       let check_existing_flag; 
@@ -230,6 +238,8 @@ export default {
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
       console.log(fileName, funcName[0], funcName[1], " childData ", childData);
 
+      this.refreshDisplay();
+
       let response_api;
       let res = 0;
       const payload = {
@@ -275,7 +285,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties, " this.account_id ", this.account_id);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
-    }
+    },
 
     /*
     listUpdate: function() {
@@ -313,8 +323,14 @@ export default {
       axiosGetLap();
 
       console.log(fileName, ":methods:", ":listUpdate():", "Out.");
-    }
+    },
 */
+    refreshDisplay: function() {
+      const funcName = [":methods:", "refreshDisplay:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      this.message_result = 'Please input a new device-group name';
+    },
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
@@ -415,7 +431,9 @@ export default {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
 
-    this.properties.message_result = 'Please input a new device-group name';
+//    this.properties.message_result = 'Please input a new device-group name';
+    this.refreshDisplay();
+
     console.log(fileName, funcName[0], `this.properties.dgroup_name_input = ${this.properties.dgroup_name_input}`)
     console.log(fileName, funcName[0], " this.properties.dgroup_name_input ", this.properties.dgroup_name_input)
     console.log(fileName, funcName[0], " this.properties.message_result ", this.properties.message_result)
