@@ -32,7 +32,6 @@
     <p>{{ message_result }}</p>
     <p>{{ message_certificatePem }}</p>
     <p>{{ message_PrivateKey }}</p>
-    <br><br>
     <div :class="$style.save_cert_info">
       <button
         type="is-info"
@@ -41,6 +40,7 @@
         認証情報をファイル保存
       </button>
     </div>
+    <br><br>
     <button
         type="is-info"
         @click="refreshDisplay">
@@ -131,6 +131,8 @@ export default {
       const funcName = [":methods:", "registerDevice:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
+
+      this.refreshDisplay();
 
       let response_api;
       let res = 0;
@@ -226,6 +228,8 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
       console.log(fileName, funcName[0], funcName[1], " childData ", childData);
+
+      this.refreshDisplay();
 
       let response_api;
       let res = 0;
