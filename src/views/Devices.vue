@@ -13,6 +13,7 @@
       <input
         v-model="csr_input"
         :class="$style.csr_input"
+        :disabled=!useCsr
         placeholder="CSR for new device">
       <button
         type="is-info"
@@ -93,9 +94,10 @@ export default {
         ],
         devices: null/*devices*/,
       },
-      dgroup_id: 0,
+      dgroup_id: '',
       dgroup_name: '',
       useCsr: false,
+      device_name_input: '',
       csr_input: '',
       message_result: '',
       certificatePem: '',
@@ -253,6 +255,8 @@ export default {
       const funcName = [":methods:", "refreshDisplay:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
+      this.device_name_input = ''; 
+      this.csr_input = ''; 
       this.message_result = '';
       this.certificatePem = '';
       this.PrivateKey = '';
