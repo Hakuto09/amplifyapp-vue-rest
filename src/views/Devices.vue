@@ -30,12 +30,13 @@
     </div>
     <br><br>
     <p>{{ message_result }}</p>
-    <p>{{ certificatePem }}</p>
-    <p>{{ PrivateKey }}</p>
+    <p>{{ message_certificatePem }}</p>
+    <p>{{ message_PrivateKey }}</p>
     <br><br>
     <div :class="$style.save_cert_info">
       <button
         type="is-info"
+        :disabled=enSaveCertInfo
         @click="saveCertInfo">
         認証情報をファイル保存
       </button>
@@ -74,7 +75,10 @@ let devices;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
-let responseData; 
+let responseData;
+let certificatePem = '';
+let PrivateKey = '';
+
 
 export default {
   name: 'Devices',
@@ -111,9 +115,10 @@ export default {
       useCsr: false,
       device_name_input: '',
       csr_input: '',
+      enSaveCertInfo: false,
       message_result: '',
-      certificatePem: '',
-      PrivateKey: '',
+      message_certificatePem: '',
+      message_PrivateKey: '',
     }
   },
 //  methods: function() {
@@ -178,11 +183,17 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res, ' responseData ', responseData);
 
       if (res == 1) {
+        certificatePem = responseData.certificatePem;
+        PrivateKey = responseData.PrivateKey;
 //        this.message_result = 'Register Success: ' + JSON.stringify(responseData);
         this.message_result = 'Register Success';
-        this.certificatePem = 'certificatePem: ' + responseData.certificatePem;
+        this.message_certificatePem = 'certificatePem: ' + certificatePem;
         if (!this.useCsr) {
-          this.PrivateKey = 'PrivateKey: ' + responseData.PrivateKey;
+          this.message_PrivateKey = 'PrivateKey: ' + PrivateKey;
+          this.enSaveCertInfo = (PrivateKey != '');
+        }
+        else {
+          this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
         }
       }
       else if (res == -1)  {
@@ -278,20 +289,20 @@ export default {
 
       // write file for certificatePem.
 //      let write_json = JSON.stringify(block_id);
-      let write_text = this.certificatePem;
+      let write_text = certificatePem;
 //      let blob = new Blob([write_json], {type: 'application/json'});
       let blob = new Blob([write_text], {type: 'application/text'});
       let a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
 //      document.body.appendChild(a); // Firefoxで必要
-      a.download = 'certificate.pem';
+      a.download = 'deviceCert.pem';
       a.click();
 //      document.body.removeChild(a); // Firefoxで必要
       console.log(fileName, funcName[0], funcName[1], "After a.click for certificatePem", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
       URL.revokeObjectURL(a.href);
 
       // write file for PrivateKey.
-      write_text = this.PrivateKey;
+      write_text = PrivateKey;
       blob = new Blob([write_text], {type: 'application/text'});
       a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
@@ -307,11 +318,15 @@ export default {
       const funcName = [":methods:", "refreshDisplay:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
+      certificatePem = '';
+      PrivateKey = '';
+      this.enSaveCertInfo = false;
+
       this.device_name_input = ''; 
       this.csr_input = ''; 
       this.message_result = '';
-      this.certificatePem = '';
-      this.PrivateKey = '';
+      this.message_certificatePem = '';
+      this.message_PrivateKey = '';
     },
   },
   beforeCreate: function() {
@@ -432,7 +447,7 @@ export default {
 }
 
 .save_cert_info {
-  font-size: 16px;
+  /*font-size: 16px;*/
 	display: flex;
 	align-items: flex-start; /*ここは任意の値でOK*/
 	justify-content: flex-end;
