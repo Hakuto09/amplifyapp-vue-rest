@@ -24,6 +24,7 @@
         </tbody>
       </table>
     </div>
+    <br><br>
     <div :class="$style.show_device_info">
       <button
         type="is-info"

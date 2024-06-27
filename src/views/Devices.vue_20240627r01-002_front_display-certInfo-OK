@@ -27,12 +27,6 @@
     <p>{{ message_result }}</p>
     <p>{{ certificatePem }}</p>
     <p>{{ PrivateKey }}</p>
-    <br><br>
-    <button
-        type="is-info"
-        @click="refreshDisplay">
-        Refresh
-      </button>
   </div>
 </template>
 
@@ -247,16 +241,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
-    },
-
-    refreshDisplay: function() {
-      const funcName = [":methods:", "refreshDisplay:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
-
-      this.message_result = '';
-      this.certificatePem = '';
-      this.PrivateKey = '';
-    },
+    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
