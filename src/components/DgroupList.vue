@@ -9,7 +9,8 @@
       <table>
         <thead>
           <tr>
-            <th><input :class="$style.headerRadio" type="radio" @click="selectRadio"></th>
+            <!-- th><input :class="$style.headerRadio" type="radio" @click="selectRadio"></th -->
+            <th><input :class="$style.headerRadio" type="radio" @change="changeRadio"></th>
             <th v-for="(header, index) in properties.headers" v-bind:key="index">
               {{header}}
             </th>
@@ -17,7 +18,8 @@
         </thead>
         <tbody>
           <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id">
-            <td><input type="radio" :value="dgroup" v-model="selected"></td>
+            <!-- td><input type="radio" :value="dgroup" v-model="selected"></td -->
+            <td><input type="radio" :value="dgroup" v-model="selected" @click="selectRadio"></td>
             <td>{{dgroup.dgroup_name}}</td>
             <td>{{dgroup.dgroup_id}}</td>
             <!-- td>{{dgroup.account_id}}</td -->
@@ -84,6 +86,12 @@ export default {
       }
 */
     },
+
+    changeRadio: function() {
+      const funcName = [":methods:", "changeRadio:"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+    },
+
     selectDgroup: function() {
       const funcName = [":methods:", "selectDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
