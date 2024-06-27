@@ -36,7 +36,7 @@
     <div :class="$style.save_cert_info">
       <button
         type="is-info"
-        :disabled=enSaveCertInfo
+        :disabled=!enSaveCertInfo
         @click="saveCertInfo">
         認証情報をファイル保存
       </button>
@@ -190,10 +190,10 @@ export default {
         this.message_certificatePem = 'certificatePem: ' + certificatePem;
         if (!this.useCsr) {
           this.message_PrivateKey = 'PrivateKey: ' + PrivateKey;
-          this.enSaveCertInfo = (PrivateKey != '');
+          this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
         }
         else {
-          this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
+          this.enSaveCertInfo = (PrivateKey != '');
         }
       }
       else if (res == -1)  {
@@ -301,17 +301,19 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After a.click for certificatePem", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
       URL.revokeObjectURL(a.href);
 
-      // write file for PrivateKey.
-      write_text = PrivateKey;
-      blob = new Blob([write_text], {type: 'application/text'});
-      a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-//      document.body.appendChild(a); // Firefoxで必要
-      a.download = 'private.key';
-      a.click();
-//      document.body.removeChild(a); // Firefoxで必要
-      console.log(fileName, funcName[0], funcName[1], "After a.click for PrivateKey", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
-      URL.revokeObjectURL(a.href);
+      if (!this.useCsr) {
+        // write file for PrivateKey.
+        write_text = PrivateKey;
+        blob = new Blob([write_text], {type: 'application/text'});
+        a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+//        document.body.appendChild(a); // Firefoxで必要
+        a.download = 'private.key';
+        a.click();
+//        document.body.removeChild(a); // Firefoxで必要
+        console.log(fileName, funcName[0], funcName[1], "After a.click for PrivateKey", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
+        URL.revokeObjectURL(a.href);
+      }
     },
 
     refreshDisplay: function() {
