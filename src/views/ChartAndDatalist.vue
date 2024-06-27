@@ -30,8 +30,22 @@
         </div>
         <pre>Selected date is - {{date}}</pre>
     </section -->
+    <div :class="$style.write_csv">
+      <button
+        type="is-info"
+        @click="writeCSV">
+        CSVファイル出力
+      </button>
+    </div>
     <br><br>
     <p>開始日時</p>
+    <div :class="$style.set_date">
+      <button
+        type="is-info"
+        @click="setDateStartNow">
+        現在日時 (-1分) を設定
+      </button>
+    </div>
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
@@ -49,6 +63,13 @@
     </div>
     <br><br>
     <p>終了日時</p>
+    <div :class="$style.set_date">
+      <button
+        type="is-info"
+        @click="setDateEndNow">
+        現在日時を設定
+      </button>
+    </div>
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
@@ -144,6 +165,56 @@ let data1s = [];
 
 let date_start;
 let date_end;
+
+/*
+const chartData = {
+  labels: [],
+  datasets: [
+    {
+      label: 'data0',
+      yAxisID: "yleft",
+      backgroundColor: "rgba(2,63,138,0.8)",
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(2,63,138,0.8)",
+//      pointBorderColor: "#fff",
+//      pointBackgroundColor: "rgba(2,63,138,0.8)",
+//      pointBorderWidth: 2,
+//      pointHoverRadius: 5,
+//      pointHoverBackgroundColor: "#1D5191",
+//      pointHoverBorderColor: "#fff",
+//      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: [],
+    },
+    {
+      label: 'data1',
+      yAxisID: "yright",
+//          backgroundColor: '#f879f9',
+      backgroundColor: "rgba(201,60,58,0.8)",
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(201,60,58,0.8)",
+//      pointBorderColor: "#fff",
+//      pointBackgroundColor: "rgba(201,60,58,0.8)",
+//      pointBorderWidth: 2,
+//      pointHoverRadius: 5,
+//      pointHoverBackgroundColor: "#9A1B19",
+//      pointHoverBorderColor: "#fff",
+//      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: [],
+    },
+//    {
+//      label: 'data2',
+//      yAxisID: "yright",
+////          backgroundColor: '#f8f979',
+//      backgroundColor: "#DB514E",
+//      data: data2s,
+//    },
+  ]
+}
+*/
 
 const chartOptions = {
   responsive: true,    // グラフのスクロール対応
@@ -243,6 +314,140 @@ export default {
       format: 'yyyy-MM-dd HH:mm', 
     }
   },
+  methods: {
+    setDateStartNow: function() {
+      const funcName = [":methods:", "sedDateStartNow:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      date_start = new Date();
+      date_start.setMinutes(date_start.getMinutes() - 1);
+//      localStorage.setItem('date_start', date_start);
+      this.date_start = date_start;
+      console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
+    },
+
+    setDateEndNow: function() {
+      const funcName = [":methods:", "sedDateEndNow:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      date_end = new Date();
+//      localStorage.setItem('date_end', date_end);
+      this.date_end = date_end;
+      console.log(fileName, funcName[0], funcName[1], "In.", " date_end ", date_end, " this.date_end ", this.date_end);
+    },
+
+    convertJSONtoCSV: function() {
+      const funcName = [":methods:", "convertJSONtoCSV:"];
+      console.log(fileName, funcName[0], funcName[1], "In:");
+
+      let keys = ["device_name", "device_id", "date", "data0", "data1"];
+      let numOfColumns = keys.length;
+      let numOfRows = ddata.length;
+      let csvStr = "";
+
+      console.log(fileName, funcName[0], funcName[1], "In 2:", ' keys ', keys, ' numOfColumns ', numOfColumns, ' numOfRows ', numOfRows);
+
+      /*
+      JSON.parse(jsons[0], (key) => {
+        if(key) {
+          keys.push(key);   // keyの取得
+          count++;
+        }
+      })
+      */
+    
+      for(let i = 0; i < numOfColumns; i++) {
+        if(i == numOfColumns - 1) {   // 行末の処理
+          csvStr = csvStr.concat(keys[i],"\n");
+        }
+        else {
+          csvStr = csvStr.concat(keys[i],", ");
+        }
+      }
+
+      console.log(fileName, funcName[0], funcName[1], "After listup header with keys:", ' keys ', keys, " csvStr ", csvStr);
+
+      /*
+      let j = 0;
+      while(jsons[j] !== null) {
+        JSON.parse(jsons[j], (key, value) => {
+          if(key) { values.push(value); }
+        })
+    
+        console_logger.warn('convertJSONtoCSV() Before convert values: ', " values ", values);
+
+        for(let i = 0; i < count; i++) {
+          if(i == count - 1)  { csvStr = csvStr.concat(values[i],"\n"); }   // 行末の処理
+          else                { csvStr = csvStr.concat(values[i],", "); }
+        }
+
+        j++;
+      }
+      */
+
+      for(let i = 0; i < numOfRows; i++) {
+        csvStr = csvStr.concat(this.device_name,", ");
+        csvStr = csvStr.concat(ddata[i].device_id,", ");
+        csvStr = csvStr.concat(ddata[i].createdAt,", ");
+        csvStr = csvStr.concat(ddata[i].data0,", ");
+        csvStr = csvStr.concat(ddata[i].data1,"\n");
+      }
+
+      console.log(fileName, funcName[0], funcName[1], "After write values:", " csvStr ", csvStr);
+
+      return csvStr;
+    },
+
+    writeCSV: async function(/*event*/) {
+      const funcName = [":methods:", "writeCSV:"];
+      console.log(fileName, funcName[0], funcName[1], "In:");
+
+//      setDisableButtons(true);
+//      event.preventDefault();
+
+      const opts = {
+        suggestedName: 'example',
+        types: [{
+          description: 'CSV file',
+          accept: {'text/csv': ['.csv']},
+        }],
+      };
+      const handle = await window.showSaveFilePicker(opts);
+      const writable = await handle.createWritable();
+      const csv = this.convertJSONtoCSV(/*notes*/);
+    
+      console.log(fileName, funcName[0], funcName[1], "Before csv write:", " opts ", opts, " handle ", handle, ' writable ', writable, ' csv ', csv);
+    
+      await writable.write(csv);
+      await writable.close();
+
+      /*
+      if(csvStr == "") {
+        console_logger.warn("empty Text .")
+        return 
+      }
+    
+      // 既存ファイルの上書き "overwrite" / 既存ファイルの書き換え "rewrite"
+      const WRITE_CONFIG = "rewrite"
+    
+      if (WRITE_CONFIG == "rewrite") {
+        fse.writeFileSync(filename, csvStr)
+        console_logger.warn("Rewrite csv file.")
+      }
+  //    else if (WRITE_CONFIG == "overwrite") {
+  //      fs.appendFileSync("./test.csv",csvStr);
+  //      console.log("overwrite csv file .")
+  //    }
+      else {
+        console_logger.warn("Please check! cannot write csvfile.")
+      }
+      */
+
+//      setDisableButtons(false);
+//      event.target.reset();
+      console.log(fileName, funcName[0], funcName[1], "Out:");
+    }
+  },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
@@ -286,57 +491,37 @@ export default {
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
-        const chartData = {
-          labels: labels,
+        const chartData_L = {
+          labels: [],
           datasets: [
             {
               label: 'data0',
               yAxisID: "yleft",
-              backgroundColor: '#f87979',
+              backgroundColor: "rgba(2,63,138,0.8)",
               fill: false,
               borderWidth: 2,
               borderColor: "rgba(2,63,138,0.8)",
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "rgba(2,63,138,0.8)",
-              pointBorderWidth: 2,
-              pointHoverRadius: 5,
-              pointHoverBackgroundColor: "#1D5191",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 2,
               tension: 0,
-              data: data0s,
+              data: [],
             },
             {
               label: 'data1',
               yAxisID: "yright",
-    //          backgroundColor: '#f879f9',
-              backgroundColor: "#3A7AC9",
+              backgroundColor: "rgba(201,60,58,0.8)",
               fill: false,
               borderWidth: 2,
               borderColor: "rgba(201,60,58,0.8)",
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "rgba(201,60,58,0.8)",
-              pointBorderWidth: 2,
-              pointHoverRadius: 5,
-              pointHoverBackgroundColor: "#9A1B19",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 2,
               tension: 0,
-              data: data1s,
+              data: [],
             },
-/*
-            {
-              label: 'data2',
-              yAxisID: "yright",
-    //          backgroundColor: '#f8f979',
-              backgroundColor: "#DB514E",
-              data: data2s,
-            },
-*/
           ]
         }
 
-        this.data = chartData;
+//        this.data = chartData;
+        this.data = chartData_L;
+        this.data.labels = labels;
+        this.data.datasets[0].data = data0s;
+        this.data.datasets[1].data = data1s;
         this.options = chartOptions;
 
         //        this.device_id = deviceId;
@@ -437,65 +622,50 @@ export default {
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
+//            labels_L.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
             data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+//          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data L", " labels_L ", labels_L,);
         }
 
-        const chartData = {
-          labels: labels,
+        const chartData_L = {
+          labels: [],
           datasets: [
             {
               label: 'data0',
               yAxisID: "yleft",
-              backgroundColor: '#f87979',
+              backgroundColor: "rgba(2,63,138,0.8)",
               fill: false,
               borderWidth: 2,
               borderColor: "rgba(2,63,138,0.8)",
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "rgba(2,63,138,0.8)",
-              pointBorderWidth: 2,
-              pointHoverRadius: 5,
-              pointHoverBackgroundColor: "#1D5191",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 2,
               tension: 0,
-              data: data0s,
+              data: [],
             },
             {
               label: 'data1',
               yAxisID: "yright",
-    //          backgroundColor: '#f879f9',
-              backgroundColor: "#3A7AC9",
+              backgroundColor: "rgba(201,60,58,0.8)",
               fill: false,
               borderWidth: 2,
               borderColor: "rgba(201,60,58,0.8)",
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "rgba(201,60,58,0.8)",
-              pointBorderWidth: 2,
-              pointHoverRadius: 5,
-              pointHoverBackgroundColor: "#9A1B19",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 2,
               tension: 0,
-              data: data1s,
+              data: [],
             },
-/*
-            {
-              label: 'data2',
-              yAxisID: "yright",
-    //          backgroundColor: '#f8f979',
-              backgroundColor: "#DB514E",
-              data: data2s,
-            },
-*/
           ]
         }
 
-        this.data = chartData;
+//        this.data = chartData;
+        this.data = chartData_L;
+        this.data.labels = labels;
+//        this.data.labels = labels_L;
+//        labels = labels_L;
+        this.data.datasets[0].data = data0s;
+        this.data.datasets[1].data = data1s;
         this.options = chartOptions;
+//        this.options = chartOptions_L;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
@@ -532,7 +702,6 @@ export default {
       const deviceInfo = ref('');
       deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
-
 
       let date_start_iso = dateTimeToISOString(this.date_start);
       let date_end_iso = dateTimeToISOString(this.date_end);
@@ -585,5 +754,15 @@ export default {
   margin: auto;
   padding: 15px;
   border: 2px solid #dcdcdc;
+}
+
+.write_csv {
+  font-size: 12px;
+  display: flex;
+  justify-content: right;
+}
+
+.set_date {
+  font-size: 12px;
 }
 </style>
