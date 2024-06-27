@@ -19,8 +19,8 @@
         </thead>
         <tbody>
           <tr v-for="dgroup in properties.dgroups" v-bind:key="dgroup.id">
-            <!-- td><input type="radio" :value="dgroup" v-model="selected"></td -->
-            <td><input type="radio" :value="dgroup" v-model="selected" @click="selectRadio"></td>
+            <td><input type="radio" :value="dgroup" v-model="selected"></td>
+            <!-- td><input type="radio" :value="dgroup" v-model="selected" @click="selectRadio"></td -->
             <td>{{dgroup.dgroup_name}}</td>
             <td>{{dgroup.dgroup_id}}</td>
             <!-- td>{{dgroup.account_id}}</td -->
@@ -32,6 +32,7 @@
     <div :class="$style.select_dgroup">
       <button
         type="is-info"
+        :disabled=!enSelect
         @click="selectDgroup">
         Select dgroup
       </button>
@@ -39,6 +40,7 @@
     <div :class="$style.delete_dgroup">
       <button
         type="is-info"
+        :disabled=!enSelect
         @click="selectDeleteDgroup">
         Select Delete
       </button>
@@ -73,22 +75,25 @@ export default {
     console.log(fileName, funcName[0], "Before return():");
     return {
       selected: null,
+      enSelect: false,
     }
   },
   methods: {
+/*
+    // templateのリストのところで記述して呼ばれはするが、なぜか一つ前のthis.selectedしか取得できないため、使わない。
     selectRadio: function() {
       const funcName = [":methods:", "selectRadio:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
-/*
-      this.selected = []
-      for (let i in this.item) {
-        this.selected.push(this.items[i].id)
-        console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
-      }
-*/
-    },
 
+//      this.selected = []
+//      for (let i in this.item) {
+//        this.selected.push(this.items[i].id)
+//        console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
+//      }
+    },
+*/
 /*
+    // templateのheaderのところで記述しているせいか、呼ばれないため、使わない。
     changeRadio: function() {
       const funcName = [":methods:", "changeRadio:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
@@ -184,6 +189,7 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
+    enSelect = !(this.selected == null);
     console.log(fileName, funcName[0], " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
   },
   updated: function() {
