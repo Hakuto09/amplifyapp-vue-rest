@@ -43,7 +43,7 @@
     <br><br>
     <button
         type="is-info"
-        @click="refreshDisplay">
+        @click="refreshDisplay(true)">
         Refresh
       </button>
   </div>
@@ -132,7 +132,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
 
-      this.refreshDisplay();
+      this.refreshDisplay(false);
 
       let response_api;
       let res = 0;
@@ -229,7 +229,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
       console.log(fileName, funcName[0], funcName[1], " childData ", childData);
 
-      this.refreshDisplay();
+      this.refreshDisplay(true);
 
       let response_api;
       let res = 0;
@@ -320,7 +320,7 @@ export default {
       }
     },
 
-    refreshDisplay: function() {
+    refreshDisplay: function(creanInput) {
       const funcName = [":methods:", "refreshDisplay:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
@@ -328,8 +328,10 @@ export default {
       PrivateKey = '';
       this.enSaveCertInfo = false;
 
-      this.device_name_input = ''; 
-      this.csr_input = ''; 
+      if (creanInput) {
+        this.device_name_input = ''; 
+        this.csr_input = ''; 
+      }
       this.message_result = '';
       this.message_certificatePem = '';
       this.message_PrivateKey = '';
