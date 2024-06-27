@@ -7,11 +7,11 @@
     <div :class="$style.register_device">
       <p>a-z, A-Z, 0-9, _ is possible for device name.</p>
       <input
-        v-model="device_name_input"
+        v-model="properties.device_name_input"
         :class="$style.device_name_input"
         placeholder="New device name">
       <input
-        v-model="csr_input"
+        v-model="properties.csr_input"
         :class="$style.csr_input"
         placeholder="CSR for new device">
       <button
@@ -24,9 +24,7 @@
       <!-- pre>{{ $data }}</pre -->
     </div>
     <br><br>
-    <p>{{ message_result }}</p>
-    <p>certificatePem: {{ certificatePem }}</p>
-    <p>PrivateKey: {{ PrivateKey }}</p>
+    <p>{{ properties.message_result }}</p>
   </div>
 </template>
 
@@ -86,14 +84,13 @@ export default {
 //          'dgroup_id',
         ],
         devices: null/*devices*/,
+        dgroup_name_input: '',
+        csr_input: '',
+        message_result: '',
       },
       dgroup_id: 0,
       dgroup_name: '',
       useCsr: false,
-      csr_input: '',
-      message_result: '',
-      certificatePem: '',
-      PrivateKey: '',
     }
   },
 //  methods: function() {
@@ -122,7 +119,7 @@ export default {
 
       let csr = '';
       if (this.useCsr) {
-        csr = this.csr_input;
+        csr = this.properties.csr_input;
       }
 
       // Device関連リソースの登録
@@ -131,47 +128,36 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
         await axios.post(url_base + '_device',
           {
-            device_name: this.device_name_input,
+            device_name: this.properties.device_name_input,
             dgroup_id: dgroupId.value,
             account_id: userInfo.userId,
             csr: csr,
             check_existing_flag: check_existing_flag,
           })
           .then(function(response) {
-  //          this.message_result = 'Success';
+  //          this.properties.message_result = 'Success';
             res = 1;
             responseData = response.data;
             console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
           })
           .catch(function(error) {
-  //          this.message_result = 'Error';
+  //          this.properties.message_result = 'Error';
             res = -1;
             console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
           })
         
         if (check_existing_flag && res == 1) {
-          this.message_result = 'Duplicattion error';
+          this.properties.message_result = 'Duplicattion error';
           return;
         }
       }
 
       console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res, ' responseData ', responseData);
 
-      if (res == 1) {
-//        this.message_result = 'Register Success: ' + JSON.stringify(responseData);
-        this.message_result = 'Register Success';
-        this.certificatePem = responseData.certificatePem;
-        if (this.useCsr) {
-          this.PrivateKey = responseData.PrivateKey;
-        }
-      }
-      else if (res == -1)  {
-        this.message_result = 'Register Error';
-      }
-      else {
-        this.message_result = '';
-      }
-      console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
+      if (res == 1)        { this.properties.message_result = 'Register Success: ' + JSON.stringify(responseData); }
+      else if (res == -1)  { this.properties.message_result = 'Register Error'; }
+      else                 { this.properties.message_result = ''; }
+      console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Deviceリストの更新
       response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
@@ -221,10 +207,10 @@ export default {
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
 
-      if (res == 1)        { this.message_result = 'Delete Success';  }
-      else if (res == -1)  { this.message_result = 'Delete Error';    }
-      else                 { this.message_result = '';         }
-      console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
+      if (res == 1)        { this.properties.message_result = 'Delete Success';  }
+      else if (res == -1)  { this.properties.message_result = 'Delete Error';    }
+      else                 { this.properties.message_result = '';         }
+      console.log(fileName, funcName[0], funcName[1], "After if res:", " this.properties.message_result ", this.properties.message_result);
 
       // Deviceリストの更新
       response_api = await axios.get(url_base + '_devices/' + dgroup_id);
@@ -302,7 +288,7 @@ export default {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
 
-    this.message_result = 'Please input a new device name';
+    this.properties.message_result = 'Please input a new device name';
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
