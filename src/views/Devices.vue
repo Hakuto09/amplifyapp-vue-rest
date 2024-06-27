@@ -25,8 +25,8 @@
     </div>
     <br><br>
     <p>{{ message_result }}</p>
-    <p>certificatePem: {{ certificatePem }}</p>
-    <p>PrivateKey: {{ PrivateKey }}</p>
+    <p>{{ certificatePem }}</p>
+    <p>{{ PrivateKey }}</p>
   </div>
 </template>
 
@@ -160,9 +160,9 @@ export default {
       if (res == 1) {
 //        this.message_result = 'Register Success: ' + JSON.stringify(responseData);
         this.message_result = 'Register Success';
-        this.certificatePem = responseData.certificatePem;
-        if (this.useCsr) {
-          this.PrivateKey = responseData.PrivateKey;
+        this.certificatePem = 'certificatePem: ' + responseData.certificatePem;
+        if (!this.useCsr) {
+          this.PrivateKey = 'PrivateKey: ' + responseData.PrivateKey;
         }
       }
       else if (res == -1)  {
