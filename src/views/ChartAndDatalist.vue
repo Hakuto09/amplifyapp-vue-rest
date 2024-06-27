@@ -145,6 +145,48 @@ let data1s = [];
 let date_start;
 let date_end;
 
+const chartOptions = {
+  responsive: true,    // グラフのスクロール対応
+//      responsive: false,    // グラフのスクロール対応
+  maintainAspectRatio: false,
+  spanGaps: true,   //点をつなげる場合
+  scales: {
+    x: {
+      type: 'time',
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: '日付時刻'           // ★必須 タイトルの文字列
+      },
+      time: {
+        unit: 'minute',
+        displayFormats: {
+          minute: 'YYYY-MM-DD HH:mm'
+        }
+      },
+    },
+    yleft: {
+      stacked: false,
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: 'data0'           // ★必須 タイトルの文字列
+      },
+    },
+    /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+    yright: {
+      stacked: false,
+      position: "right",
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: 'data1'           // ★必須 タイトルの文字列
+      },
+    },
+  },
+};
+
+
 function dateTimeToISOString(dateTime){
   // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
   let dateTimeJstTmp = new Date(dateTime);
@@ -293,47 +335,6 @@ export default {
 */
           ]
         }
-
-        const chartOptions = {
-          responsive: true,    // グラフのスクロール対応
-    //      responsive: false,    // グラフのスクロール対応
-          maintainAspectRatio: false,
-          spanGaps: true,   //点をつなげる場合
-          scales: {
-            x: {
-              type: 'time',
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: '日付時刻'           // ★必須 タイトルの文字列
-              },
-              time: {
-                unit: 'minute',
-                displayFormats: {
-                  minute: 'YYYY-MM-DD HH:mm'
-                }
-              },
-            },
-            yleft: {
-              stacked: false,
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: 'data0'           // ★必須 タイトルの文字列
-              },
-            },
-            /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
-            yright: {
-              stacked: false,
-              position: "right",
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: 'data1'           // ★必須 タイトルの文字列
-              },
-            },
-          },
-        };
 
         this.data = chartData;
         this.options = chartOptions;
@@ -492,47 +493,6 @@ export default {
 */
           ]
         }
-
-        const chartOptions = {
-          responsive: true,    // グラフのスクロール対応
-    //      responsive: false,    // グラフのスクロール対応
-          maintainAspectRatio: false,
-          spanGaps: true,   //点をつなげる場合
-          scales: {
-            x: {
-              type: 'time',
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: '日付時刻'           // ★必須 タイトルの文字列
-              },
-              time: {
-                unit: 'minute',
-                displayFormats: {
-                  minute: 'YYYY-MM-DD HH:mm'
-                }
-              },
-            },
-            yleft: {
-              stacked: false,
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: 'data0'           // ★必須 タイトルの文字列
-              },
-            },
-            /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
-            yright: {
-              stacked: false,
-              position: "right",
-              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-                display: true,             // ★必須 表示設定 省略時は false
-                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-                text: 'data1'           // ★必須 タイトルの文字列
-              },
-            },
-          },
-        };
 
         this.data = chartData;
         this.options = chartOptions;
