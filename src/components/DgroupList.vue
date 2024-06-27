@@ -10,7 +10,8 @@
         <thead>
           <tr>
             <!-- th><input :class="$style.headerRadio" type="radio" @click="selectRadio"></th -->
-            <th><input :class="$style.headerRadio" type="radio" @change="changeRadio"></th>
+            <!-- th><input :class="$style.headerRadio" type="radio" @change="changeRadio"></th -->
+            <th><input :class="$style.headerRadio" type="radio"></th>
             <th v-for="(header, index) in properties.headers" v-bind:key="index">
               {{header}}
             </th>
@@ -87,10 +88,12 @@ export default {
 */
     },
 
+/*
     changeRadio: function() {
       const funcName = [":methods:", "changeRadio:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
     },
+*/
 
     selectDgroup: function() {
       const funcName = [":methods:", "selectDgroup:"];
@@ -180,12 +183,16 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
   },
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
 
-//    this.selected = 0;
+    console.log(fileName, funcName[0], " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
+
+    //    this.selected = 0;
 //    console.log(fileName, funcName[0], "After this.selected = 0:", " this.selected ", this.selected);
   },
   beforeUnmount: function() {
