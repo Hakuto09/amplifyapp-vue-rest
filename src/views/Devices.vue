@@ -30,6 +30,7 @@
     </div>
     <br><br>
     <p>{{ message_result }}</p>
+    <p>{{ message_caution }}</p>
     <p>{{ message_certificatePem }}</p>
     <p>{{ message_PrivateKey }}</p>
     <div :class="$style.save_cert_info">
@@ -117,6 +118,7 @@ export default {
       csr_input: '',
       enSaveCertInfo: false,
       message_result: '',
+      message_caution: '',
       message_certificatePem: '',
       message_PrivateKey: '',
     }
@@ -187,6 +189,8 @@ export default {
       if (res == 1) {
         certificatePem = responseData.certificatePem;
         PrivateKey = responseData.PrivateKey;
+
+        this.message_caution = 'セキュリティの観点より、以下認証情報は再表示しませんので、必ず保存しておくようにしてください。';
 //        this.message_result = 'Register Success: ' + JSON.stringify(responseData);
         this.message_result = 'Register Success';
         this.message_certificatePem = 'certificatePem: ' + certificatePem;
@@ -333,6 +337,7 @@ export default {
         this.csr_input = ''; 
       }
       this.message_result = '';
+      this.message_caution = '';
       this.message_certificatePem = '';
       this.message_PrivateKey = '';
     },
