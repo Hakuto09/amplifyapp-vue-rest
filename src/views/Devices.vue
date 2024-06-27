@@ -55,8 +55,7 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
-//import * as fs from "fs-extra";
-import fs from "fs-extra";
+import * as fs from "fs-extra";
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
