@@ -189,7 +189,7 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-    enSelect = !(this.selected == null);
+    this.enSelect = !(this.selected == null);
     console.log(fileName, funcName[0], " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
   },
   updated: function() {
