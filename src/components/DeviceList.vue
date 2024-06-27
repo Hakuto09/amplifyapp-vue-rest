@@ -8,7 +8,8 @@
           <tr>
             <!-- th><input :class="$style.headerRadio" type="radio" @click="select"></th -->
             <!-- th><input :class="$style.headerRadio" type="radio" v-on:click="select"></th -->
-            <th><input :class="$style.headerRadio" type="radio" v-on:change="select"></th>
+            <!-- th><input :class="$style.headerRadio" type="radio" v-on:change="select"></th -->
+            <th><input :class="$style.headerRadio" type="radio"></th>
             <th v-for="(header, index) in properties.headers" v-bind:key="index">
               {{header}}
             </th>
@@ -28,6 +29,7 @@
     <div :class="$style.show_device_info">
       <button
         type="is-info"
+        :disabled=!enSelect
         @click="showDeviceInfo">
         Show device info
       </button>
@@ -35,6 +37,7 @@
     <div :class="$style.delete_device">
       <button
         type="is-info"
+        :disabled=!enSelect
         @click="selectDeleteDevice">
         Select Delete
       </button>
@@ -66,9 +69,12 @@ export default {
     console.log(fileName, ":data-function():", "Before return():");
     return {
       selected: null,
+      enSelect: false,
     }
   },
   methods: {
+/*
+    // templateのheaderのところで記述しているせいか、呼ばれないため、使わない。
     select: function() {
       this.selected = []
       console.log(fileName, ":select-function(): In:", " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
@@ -77,6 +83,8 @@ export default {
         console.log(fileName, ":select-function(): for loop:", " this.selected ", this.selected, " this.items[i] ", this.items[i]);
       }
     },
+*/
+
     showDeviceInfo: function() {
       const funcName = [":methods:", "showDeviceInfo:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
@@ -120,6 +128,7 @@ export default {
         }
       })
     },
+
     selectDeleteDevice: function() {
       const funcName = [":methods:", "selectDeleteDevice:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
@@ -153,6 +162,9 @@ export default {
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
+
+    this.enSelect = !(this.selected == null);
+    console.log(fileName, funcName[0], " this.selected ", this.selected, " this.items ", this.items, " this.item ", this.item);
   },
   updated: function() {
     const funcName = [":updated:"];
