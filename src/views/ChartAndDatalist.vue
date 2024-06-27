@@ -577,6 +577,8 @@ export default {
         ddata = response.data;
 
         let chartData_L = chartData;
+        let chartOptions_L = chartOptions;
+        console.log(fileName, funcName[0], funcName[1], ":After chartData_L, chartOptions_L input", " chartData_L ", chartData_L, " chartData ", chartData, " chartOptions_L ", chartOptions_L, " chartOptions ", chartOptions);
 
         // Graph data reset.
         let labels_L = [];
@@ -619,7 +621,8 @@ export default {
         labels = labels_L;
         this.data.datasets[0].data = data0s;
         this.data.datasets[1].data = data1s;
-        this.options = chartOptions;
+//        this.options = chartOptions;
+        this.options = chartOptions_L;
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
