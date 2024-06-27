@@ -55,7 +55,7 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
-import * as fs from "fs-extra";
+//import * as fs from "fs-extra";
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
@@ -267,12 +267,40 @@ export default {
       const funcName = [":methods:", "saveCertInfo:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      const filename = "test.txt";
-      fs.writeFile(filename, this.certificatePem, (err) => {
+/*
+      const saveFileName = "test.txt";
+      fs.writeFile(saveFileName, this.certificatePem, (err) => {
         if (err) {
           alert(err);
         }
       });
+*/
+
+      // write file for certificatePem.
+//      let write_json = JSON.stringify(block_id);
+      let write_text = this.certificatePem;
+//      let blob = new Blob([write_json], {type: 'application/json'});
+      let blob = new Blob([write_text], {type: 'application/text'});
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+//      document.body.appendChild(a); // Firefoxで必要
+      a.download = 'certificate.pem';
+      a.click();
+//      document.body.removeChild(a); // Firefoxで必要
+      console.log(fileName, funcName[0], funcName[1], "After a.click for certificatePem", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
+      URL.revokeObjectURL(a.href);
+
+      // write file for PrivateKey.
+      write_text = this.PrivateKey;
+      blob = new Blob([write_text], {type: 'application/text'});
+      a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+//      document.body.appendChild(a); // Firefoxで必要
+      a.download = 'private.key';
+      a.click();
+//      document.body.removeChild(a); // Firefoxで必要
+      console.log(fileName, funcName[0], funcName[1], "After a.click for PrivateKey", ' write_text ', write_text, ' blob ', blob, ' a.href ', a.href, ' a.download ', a.download);
+      URL.revokeObjectURL(a.href);
     },
 
     refreshDisplay: function() {
