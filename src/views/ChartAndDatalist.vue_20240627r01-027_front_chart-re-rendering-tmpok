@@ -757,12 +757,9 @@ export default {
 }
 
 .write_csv {
-  /*font-size: 12px;*/
+  font-size: 12px;
   display: flex;
-	align-items: flex-start; /*ここは任意の値でOK*/
   justify-content: right;
-	/*justify-content: flex-end*/;
-  margin-right: 100px;
 }
 
 .set_date {
