@@ -173,6 +173,9 @@ export default {
 <template>
   <!-- authenticator -->
   <authenticator hideSignUp={true}>
+    <template v-slot:footer>
+      <div></div>
+    </template>
     <!-- template v-slot="{ user, signOut }" -->
     <template v-slot="{ signOut }">
     <!-- template v-model="{ user, signOut }" -->
