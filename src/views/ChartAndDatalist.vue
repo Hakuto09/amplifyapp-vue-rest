@@ -576,9 +576,15 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
+        // Graph data reset.
+        let labels_L = [];
+//        data0s_l = [];
+//        data1s_l = [];
+//        data2s = [];
+
         if (ddata != null) {
           // Graph data reset.
-          labels = [];
+//          labels = [];
           data0s = [];
           data1s = [];
 //          data2s = [];
@@ -594,16 +600,20 @@ export default {
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
             console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
-            labels.push(dateTimeNtJst);
+//            labels.push(dateTimeNtJst);
+            labels_L.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
             data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
           console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data L", " labels_L ", labels_L,);
         }
 
         this.data = chartData;
-        this.data.labels = labels;
+//        this.data.labels = labels;
+        this.data.labels = labels_L;
+        labels = labels_L;
         this.data.datasets[0].data = data0s;
         this.data.datasets[1].data = data1s;
         this.options = chartOptions;
