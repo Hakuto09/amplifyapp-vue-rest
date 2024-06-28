@@ -7,7 +7,7 @@
     <img 
       alt="Hakuto logo" 
       src="../assets/Hakuto_logo_small.jpg">
-    <h2>Welcome to Hakuto App</h2>
+    <h2>Welcome to Hakuto Cloud.  Ver {{ Version }}</h2>
     <br><br>
     <h2>LoginId: {{ loginId }}</h2>
   </div>
@@ -25,6 +25,7 @@ export default {
     console.log(fileName, funcName[0], "In.");
     return {
       loginId: '',
+      Version: '1.00',
     }
   },
   beforeCreate: function() {
