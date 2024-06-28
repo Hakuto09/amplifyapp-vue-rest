@@ -9,6 +9,8 @@
       src="../assets/Hakuto_logo_small.jpg">
     <h2>Welcome to Hakuto Cloud.</h2>
     <h3>Ver {{ Version }}</h3>
+    <h4>Ver {{ Version }}</h4>
+    <h5>Ver {{ Version }}</h5>
     <br><br>
     <h2>LoginId: {{ loginId }}</h2>
   </div>
