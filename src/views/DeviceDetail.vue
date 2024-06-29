@@ -156,7 +156,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(dgroupId):", " error ", error);
         return error;
       }
     }

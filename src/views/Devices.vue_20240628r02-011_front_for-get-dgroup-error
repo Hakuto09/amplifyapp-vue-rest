@@ -158,7 +158,7 @@ export default {
       // Device関連リソースの登録
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
-        console.log(fileName, funcName[0], funcName[1], "Before await axios.post_device):", " check_existing_flag ", check_existing_flag);
+        console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
         await axios.post(url_base + '_device',
           {
             device_name: this.device_name_input,
@@ -171,12 +171,12 @@ export default {
   //          this.message_result = 'Success';
             res = 1;
             responseData = response.data;
-            console.log(funcName[0], funcName[1], "axios.post(_device).then:", " response.data ", response.data);
+            console.log(funcName[0], funcName[1], "axios.post().then:", " response.data ", response.data);
           })
           .catch(function(error) {
   //          this.message_result = 'Error';
             res = -1;
-            console.log(funcName[0], funcName[1], "axios.post(_device).catch:", " error ", error);
+            console.log(funcName[0], funcName[1], "axios.post().catch:", " error ", error);
           })
         
         if (check_existing_flag && res == 1) {
@@ -185,7 +185,7 @@ export default {
         }
       }
 
-      console.log(fileName, funcName[0], funcName[1], "After await axios.post(_device):", " res ", res, ' responseData ', responseData);
+      console.log(fileName, funcName[0], funcName[1], "After await axios.post():", " res ", res, ' responseData ', responseData);
 
       if (res == 1) {
         certificatePem = responseData.certificatePem;
@@ -212,16 +212,8 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
 
       // Deviceリストの更新
-      try {
-        response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
-      }
-      catch (error) {
-        this.message_result = 'Delete Error';
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(_devices):", " error ", error);
-        return error;
-      }
-      console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api ", response_api);
+      response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
+      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       devices = response_api.data;
       devices.sort( function(a, b) {
         return a.device_name > b.device_name ? 1 : -1;
@@ -254,12 +246,12 @@ export default {
 
       try {
         response = await axios.get(url_base + 'ddata/' + device_id_selected);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata)", " response ", response);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response);
         ddata = response.data;
       }
       catch (error) {
         this.message_result = 'Delete Error';
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata:", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
 
@@ -268,11 +260,11 @@ export default {
         for(let i = 0; i < loops; ++i) {
           try {
             response = await axios.delete(url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt);
-            console.log(fileName, funcName[0], funcName[1], "After axios.delete(ddata):", " response ", response)
+            console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
           }
           catch (error) {
             this.message_result = 'Delete Error';
-            console.error(fileName, funcName[0], funcName[1], "catch for axios.delete(ddata):", " error ", error);
+            console.error(fileName, funcName[0], funcName[1], "catch for axios.delete():", " error ", error);
             return error;
           }
         }
@@ -294,14 +286,14 @@ export default {
         })
         .then(function(response) {
           res = 1;
-          console.log(funcName[0], funcName[1], "axios.delete(_device).then:", " response.data ", response.data);
+          console.log(funcName[0], funcName[1], "axios.delete().then:", " response.data ", response.data);
         })
         .catch(function(error) {
           res = -1;
-          console.log(funcName[0], funcName[1], "axios.delete(_device).catch:", " error ", error);
+          console.log(funcName[0], funcName[1], "axios.delete().catch:", " error ", error);
         })
       
-      console.log(fileName, funcName[0], funcName[1], "After await axios.delete(_device):", " res ", res);
+      console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
 
       if (res == 1)        { this.message_result = 'Delete Success';  }
       else if (res == -1)  { this.message_result = 'Delete Error'; }
@@ -309,14 +301,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res of axios.delete(_device):", " this.message_result ", this.message_result);
 
       // Deviceリストの更新
-      try {
-        response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
-      }
-      catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(_devices):", " error ", error);
-        return error;
-      }
+      response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
       console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api ", response_api);
       devices = response_api.data;
       devices.sort( function(a, b) {
@@ -413,12 +398,12 @@ export default {
 //        response_api = await axios.get(url + dgroupId);
         response_api = await axios.get(url_base + '_devices/' + dgroupId);
 //        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
-        console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api.data ", response_api.data);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api.data ", response_api.data);
         devices = response_api.data;
         devices.sort( function(a, b) {
           return a.device_name > b.device_name ? 1 : -1;
-        });
-        console.log(fileName, funcName[0], funcName[1], "After devices.sort(_devices):", " devices ", devices);
+       });
+        console.log(fileName, funcName[0], funcName[1], "After devices.sort():", " devices ", devices);
         for (let i = 0; i < devices.length; i++) {
           devices[i].id = i;
         }
@@ -430,7 +415,7 @@ export default {
         return response_api;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(_devices):", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
     }

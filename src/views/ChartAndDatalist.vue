@@ -464,7 +464,7 @@ export default {
       try {
 //        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response)
+        console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata_between)", " response ", response)
         ddata = response.data;
 
         if (ddata != null) {
@@ -538,7 +538,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
         return error;
       }
     }
@@ -602,7 +602,7 @@ export default {
 
       try {
         response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
-        console.log(fileName, funcName[0], funcName[1], " response ", response)
+        console.log(fileName, funcName[0], funcName[1], "After await axios.get(ddata_between):", " response ", response)
         ddata = response.data;
 
         if (ddata != null) {
@@ -681,7 +681,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
         return error;
       }
     }
