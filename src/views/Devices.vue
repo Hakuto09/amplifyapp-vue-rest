@@ -245,7 +245,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url_base + 'ddata/' + device_id);
+        response = await axios.get(url_base + 'ddata/' + device_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response);
         ddata = response.data;
       }
@@ -258,7 +258,7 @@ export default {
         let loops = ddata.length;
         for(let i = 0; i < loops; ++i) {
           try {
-            response = await axios.delete(url_base + 'ddata/' + device_id + '//' + ddata[i].createdAt);
+            response = await axios.delete(url_base + 'ddata/' + device_id_selected + '//' + ddata[i].createdAt);
             console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
           }
           catch (error) {
