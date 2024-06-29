@@ -242,31 +242,12 @@ export default {
       let device_name_selected = childData.selected.device_name;
       let dgroup_id_selected = childData.selected.dgroup_id;
 
-      let response;
+      res = this.deleteDdata(device_id_selected);
+      console.log(fileName, funcName[0], funcName[1], "After this.deleteDdata():", " res ", res, " device_id_selected ", device_id_selected);
 
-      try {
-        response = await axios.get(url_base + 'ddata/' + device_id);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response);
-        ddata = response.data;
-      }
-      catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
-        return error;
-      }
-
-      if (ddata != null) {
-        let loops = ddata.length;
-        for(let i = 0; i < loops; ++i) {
-          try {
-            response = await axios.delete(url_base + 'ddata/' + device_id + '//' + ddata[i].createdAt);
-            console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
-          }
-          catch (error) {
-            console.error(fileName, funcName[0], funcName[1], "catch for axios.delete():", " error ", error);
-            return error;
-          }
-        }
-        console.log(fileName, funcName[0], funcName[1], ":After loop for ddata:", " loops ", loops);
+      if (res == -1) {
+        this.message_result = 'Delete Error';
+        return;
       }
 
       const payload = {
@@ -313,6 +294,47 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After this.properties update:", " this.properties ", this.properties);
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
+    },
+
+    deleteDdata: async function(device_id) {
+      const funcName = [":methods:", "deleteDdata:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      const getDeviceData = async (device_id) => {
+        const funcName = [":beforeUpdate:", "getDeviceData():"];
+        console.log(fileName, funcName[0], funcName[1], "In.", " device_id ", device_id);
+        let response;
+
+        try {
+          response = await axios.get(url_base + 'ddata/' + device_id);
+          console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response);
+          ddata = response.data;
+
+          if (ddata != null) {
+            let loops = ddata.length;
+            for(let i = 0; i < loops; ++i) {
+              try {
+                response = await axios.delete(url_base + 'ddata/' + device_id + '//' + ddata[i].createdAt);
+                console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
+              }
+              catch (error) {
+                console.error(fileName, funcName[0], funcName[1], "catch for axios.delete():", " error ", error);
+                return error;
+              }
+            }
+            console.log(fileName, funcName[0], funcName[1], ":After loop for ddata:", " loops ", loops);
+          }
+
+          return response;
+        }
+        catch (error) {
+          console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
+          return error;
+        }
+      }
+      // getDevices を呼び出してデータを読み込む
+      let response = getDeviceData(device_id);
+      console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response ", response);
     },
     
     saveCertInfo: function() {
