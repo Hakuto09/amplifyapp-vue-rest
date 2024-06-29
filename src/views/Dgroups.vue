@@ -193,12 +193,12 @@ export default {
           .then(function(response) {
   //          this.message_result = 'Success';
             res = 1;
-            console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
+            console.log(funcName[0], funcName[1], "axios.post().then:", " response.data ", response.data);
           })
           .catch(function(error) {
   //          this.message_result = 'Error';
             res = -1;
-            console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
+            console.log(funcName[0], funcName[1], "axios.post().catch:", " error ", error);
           })
         
         if (check_existing_flag && res == 1) {
@@ -256,11 +256,11 @@ export default {
         })
         .then(function(response) {
           res = 1;
-          console.log(funcName[0], funcName[1], "axios.delete().then", " response.data ", response.data);
+          console.log(funcName[0], funcName[1], "axios.delete().then:", " response.data ", response.data);
         })
         .catch(function(error) {
           res = -1;
-          console.log(funcName[0], funcName[1], "axios.delete().catch", " error ", error);
+          console.log(funcName[0], funcName[1], "axios.delete().catch:", " error ", error);
         })
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);

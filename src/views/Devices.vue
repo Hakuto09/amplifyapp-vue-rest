@@ -73,6 +73,7 @@ console.log(fileName, ":After reg(prop):", " parentData.value ", parentData.valu
 let userInfo;
 const dgroupInfo = ref('');
 let devices;
+let ddata;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
@@ -170,12 +171,12 @@ export default {
   //          this.message_result = 'Success';
             res = 1;
             responseData = response.data;
-            console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
+            console.log(funcName[0], funcName[1], "axios.post().then:", " response.data ", response.data);
           })
           .catch(function(error) {
   //          this.message_result = 'Error';
             res = -1;
-            console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
+            console.log(funcName[0], funcName[1], "axios.post().catch:", " error ", error);
           })
         
         if (check_existing_flag && res == 1) {
@@ -237,11 +238,19 @@ export default {
 
       let response_api;
       let res = 0;
-      let dgroup_id = childData.selected.dgroup_id;
+      let device_id_selected = childData.selected.device_id;
+      let device_name_selected = childData.selected.device_name;
+      let dgroup_id_selected = childData.selected.dgroup_id;
+
+      this.deleteDdata(device_id_selected);
+      console.log(fileName, funcName[0], funcName[1], "After this.deleteDdata():", " res ", res, " device_id_selected ", device_id_selected);
+
       const payload = {
-        device_name: childData.selected.device_name,
-        dgroup_id: dgroup_id,
+        device_name: device_name_selected,
+        dgroup_id: dgroup_id_selected,
       }
+
+      res = 0;
 
       // Device関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
@@ -251,11 +260,11 @@ export default {
         })
         .then(function(response) {
           res = 1;
-          console.log(funcName[0], funcName[1], "axios.delete().then", " response.data ", response.data);
+          console.log(funcName[0], funcName[1], "axios.delete().then:", " response.data ", response.data);
         })
         .catch(function(error) {
           res = -1;
-          console.log(funcName[0], funcName[1], "axios.delete().catch", " error ", error);
+          console.log(funcName[0], funcName[1], "axios.delete().catch:", " error ", error);
         })
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
@@ -266,7 +275,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
 
       // Deviceリストの更新
-      response_api = await axios.get(url_base + '_devices/' + dgroup_id);
+      response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
       console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
       devices = response_api.data;
       devices.sort( function(a, b) {
@@ -281,6 +290,47 @@ export default {
 
       console.log(fileName, funcName[0], funcName[1], "Out.");
     },
+
+    deleteDdata: async function(device_id) {
+      const funcName = [":methods:", "deleteDdata:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      const getDeviceData = async (device_id) => {
+        const funcName = [":beforeUpdate:", "getDeviceData():"];
+        console.log(fileName, funcName[0], funcName[1], "In.", " device_id ", device_id);
+        let response;
+
+        try {
+          response = await axios.get(url_base + 'ddata/' + device_id);
+          console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response)
+          ddata = response.data;
+
+          if (ddata != null) {
+            let loops = ddata.length;
+            for(let i = 0; i < loops; ++i) {
+              try {
+                response = await axios.delete(url_base + 'ddata/' + device_id + ddata[i].createdAt);
+                console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
+              }
+              catch (error) {
+                console.error(fileName, funcName[0], funcName[1], "catch for axios.delete():", " error ", error);
+                return error;
+              }
+            }
+            console.log(fileName, funcName[0], funcName[1], ":After loop for ddata:", " loops ", loops);
+          }
+
+          return response;
+        }
+        catch (error) {
+          console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
+          return error;
+        }
+      }
+      // getDevices を呼び出してデータを読み込む
+      let response = getDeviceData(device_id);
+      console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response ", response);
+    }.
 
     saveCertInfo: function() {
       const funcName = [":methods:", "saveCertInfo:"];
@@ -380,7 +430,7 @@ export default {
         return response_api;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
     }

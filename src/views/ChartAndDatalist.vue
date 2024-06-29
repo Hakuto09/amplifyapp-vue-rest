@@ -155,7 +155,8 @@ ChartJS.register(
 )
 
 let ddata;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
+//const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
+const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 
 // Graph data reset.
 let labels = [];
@@ -461,8 +462,9 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
-        console.log(fileName, funcName[0], funcName[1], " response ", response)
+//        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
+        response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get()", " response ", response)
         ddata = response.data;
 
         if (ddata != null) {
@@ -488,7 +490,7 @@ export default {
             data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
-          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data:", " loops ", loops, " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
         const chartData_L = {
@@ -536,7 +538,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
     }
@@ -599,7 +601,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
+        response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         console.log(fileName, funcName[0], funcName[1], " response ", response)
         ddata = response.data;
 
@@ -679,7 +681,7 @@ export default {
         return response;
       }
       catch (error) {
-        console.error(fileName, funcName[0], funcName[1], " error ", error);
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
     }

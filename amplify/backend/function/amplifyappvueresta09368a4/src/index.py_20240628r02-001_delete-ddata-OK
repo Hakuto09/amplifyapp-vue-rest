@@ -264,33 +264,11 @@ def get_devices_list(dgroup_id: str):
     return response_ddb["Items"]
 
 @app.get("/ddata/{device_id}")
-def get_ddata_list_all(device_id: str):
+def get_ddata_list(device_id: str, date_start: str, date_end: str):
     """
-    デバイスに紐付くデバイスデータの一覧を取得する (日時期間なし)
+    デバイスに紐付くデバイスデータの一覧を取得する
     """
-    print('get_ddata_list_all(): In')
-
-    print('device_id ', device_id)
-
-#    response_ddb = ddb_table_ddata.scan(
-    response_ddb = ddb_table_ddata.query(
-#        TableName = STORAGE_DB_DDATA,
-        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-#        FilterExpression = Attr('device_id').eq(device_id),
-#        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
-        Limit = 1000 # 取得するデータ件数
-    )
-    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
-
-    return response_ddb["Items"]
-
-@app.get("/ddata_between/{device_id}")
-def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
-    """
-    デバイスに紐付くデバイスデータの一覧を取得する (日時期間あり)
-    """
-    print('get_ddata_list_between(): In')
+    print('get_ddata_list(): In')
 
     print('device_id ', device_id)
     print('date_start ', date_start)
