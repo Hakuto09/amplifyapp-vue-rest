@@ -250,7 +250,6 @@ export default {
         ddata = response.data;
       }
       catch (error) {
-        this.message_result = 'Delete Error';
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get():", " error ", error);
         return error;
       }
@@ -263,7 +262,6 @@ export default {
             console.log(fileName, funcName[0], funcName[1], "After axios.delete():", " response ", response)
           }
           catch (error) {
-            this.message_result = 'Delete Error';
             console.error(fileName, funcName[0], funcName[1], "catch for axios.delete():", " error ", error);
             return error;
           }

@@ -73,76 +73,6 @@ export default {
   data: /*async*/ function() {
     const funcName = [":data:"];
     console.log(fileName, funcName[0], "In.");
-/*
-    let response_api;
-    let getDgroupsFinFlag = 0;
-
-    // 実際にデータを取得する getDgroups 関数
-    async function getDgroups() {
-      console.log(fileName, ":data-function():", ":getDgroups(): In.");
-
-      console.log(fileName, ":data-function():", ":getDgroups():", "Before await getCurrentUser():");
-      const { username, userId, signInDetails } = await getCurrentUser();
-    //  console.log(fileName, ":getDgroups():", " authUser ", authUser);
-      console.log(fileName, ":data-function():", ":getDgroups():", "After await getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);
-
-//      let response_api;
-
-      try {
-        console.log(fileName, ":data-function():", ":getDgroups():", "Before await axios.get()");
-        response_api = await axios.get(url + userId);
-        console.log(fileName, ":data-function():", ":getDgroups():", "After await axios.get()", " response_api.status ", response_api.status);
-        console.log(fileName, ":data-function():", ":getDgroups():", " response_api.data ", response_api.data);
-        dgroups = response_api.data;
-        for (let i = 0; i < dgroups.length; i++) {
-          dgroups[i].id = i;
-        }
-        console.log(fileName, ":data-function():", ":getDgroups():", " dgroups ", dgroups);
-        getDgroupsFinFlag = 1;
-        // this.$setを使ってリアクティブにする
-//        this.$set(this.dgroups, 'dgroups', dgroups);
-        return response_api;
-      }
-      catch (error) {
-        console.error(fileName, ":data-function():", ":getDgroups():", " error ", error);
-        getDgroupsFinFlag = 1;
-        return error;
-      }
-    }
-
-    //  if (userId) {
-    const ret = getDgroups();
-    console.log(fileName, ":data-function():", "After getDgroups():", " ret ", ret);
-//  }
-*/
-/*
-    function myPromise() {
-      return new Promise(function(resolve/*, reject* /) {
-//        for (let i = 0; i < 10; i++) {
-          setTimeout(function() {
-           /*if (getDgroupsFinFlag)* / resolve("Dgroups.vue: data-function(): 2nd")
-          }, 1000)
-//        }
-      })
-    }
-    console.log(fileName, ":data-function():", "1st");
-//    while (!getDgroupsFinFlag) {
-      let cnt = 0;
-      myPromise().then(
-        function(second) {
-          console.log(second)
-          console.log(fileName, ":data-function():", "3rd", " cnt ", cnt, " getDgroupsFinFlag ", getDgroupsFinFlag)
-          cnt++;
-        }
-      )
-//    }
-*/
-
-    // ここで返却するデータは子コンポーネント `DgroupList.vue` で表示するユーザ情報
-    // 本来ならば DB 等で保持するのだが、今回は記事用のサンプルコードということでリストで持たせている
-//    let account_id = ref('')
-//    console.log(fileName, ":data-function():", " account_id ", account_id);
-//    console.log(fileName, ":data-function():", " this.account_id ", this.account_id);
 
     console.log(fileName, ":data-function():", "Before return():", " dgroups ", dgroups);
     return {
@@ -215,8 +145,16 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
 
       // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
-      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
+      try {
+        response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
+      }
+      catch (error) {
+        this.message_result = 'Delete Error';
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(dgroups):", " error ", error);
+        return error;
+      }
+      console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups):", " response_api ", response_api);
       dgroups = response_api.data;
       dgroups.sort( function(a, b) {
         return a.dgroup_name > b.dgroup_name ? 1 : -1;
@@ -256,14 +194,14 @@ export default {
         })
         .then(function(response) {
           res = 1;
-          console.log(funcName[0], funcName[1], "axios.delete().then:", " response.data ", response.data);
+          console.log(funcName[0], funcName[1], "axios.delete(dgroup).then:", " response.data ", response.data);
         })
         .catch(function(error) {
           res = -1;
-          console.log(funcName[0], funcName[1], "axios.delete().catch:", " error ", error);
+          console.log(funcName[0], funcName[1], "axios.delete(dgroup).catch:", " error ", error);
         })
       
-      console.log(fileName, funcName[0], funcName[1], "After await axios.delete():", " res ", res);
+      console.log(fileName, funcName[0], funcName[1], "After await axios.delete(dgroup):", " res ", res);
 
       if (res == 1)        { this.message_result = 'Delete Success';  }
       else if (res == -1)  { this.message_result = 'Delete Error';    }
@@ -271,8 +209,16 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After if res:", " this.message_result ", this.message_result);
 
       // Dgroupリストの更新
-      response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
-      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
+      try {
+        response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
+      }
+      catch (error) {
+        this.message_result = 'Delete Error';
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(dgroups):", " error ", error);
+        return error;
+      }
+      console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroup):", " response_api ", response_api);
       dgroups = response_api.data;
       dgroups.sort( function(a, b) {
         return a.dgroup_name > b.dgroup_name ? 1 : -1;
@@ -336,35 +282,6 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
-//    try {
-//      this.dgroup_name_input = 'Please input a new device-group name';
-//      console.log(`message is ${this.properties.message}`)
-//    } catch (e) {
-//      console.log(e)
-//    }
-//    console.log(fileName, funcName[0], " this.dgroup_name_input ", this.dgroup_name_input)
-
-//    currentInstance = getCurrentInstance();
-//    console.log(fileName, ":beforeCreate-function():", " currentInstance ", currentInstance);
-
-/*
-    function myPromise() {
-      return new Promise(function(resolve/*, reject* /) {
-        setTimeout(function() {
-          resolve("Dgroups.vue:beforeCreate-function():2nd")
-//          resolve(fileName, ":beforeCreate-function():", "2nd")
-        }, 10000)
-      })
-    }
-    console.log(fileName, ":beforeCreate-function():", "1st");
-    myPromise().then(
-      function(second) {
-        console.log(second)
-        console.log(fileName, ":beforeCreate-function():", "3rd")
-      }
-    )
-*/
-
 //    let userInfo/* = { username, userId, signInDetails }* /; 
     let response_api;
 //    async function getUserAndDgroups() {
@@ -381,22 +298,16 @@ export default {
 //      console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " signInDetails ", signInDetails, " loginId ", loginId, " userId ", userId);
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId, " userId ", userId);
 
-      //    getCurrentUserlap();
-//    console.log(fileName, ":beforeCreate-function(): Mid.");
-//    const axiosGetLap = async () => {
-      console.log(fileName, funcName[0], funcName[1], "Before axios.get():", " userInfo ", userInfo);
-      response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
-/*
-      axios.get(url_base + 'dgroups' + userInfo.userId)
-        .then(function(response) {
-          response_api = response;
-          console.log(funcName[0], funcName[1], "axios.post().then", " response.data ", response.data);
-        })
-        .catch(function(error) {
-          console.log(funcName[0], funcName[1], "axios.post().catch", " error ", error);
-        })
-*/
-      console.log(fileName, funcName[0], funcName[1], "After axios.get():", " response_api ", response_api);
+      try {
+        response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+        console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
+      }
+      catch (error) {
+        this.message_result = 'Delete Error';
+        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(dgroups):", " error ", error);
+        return error;
+      }
+      console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups):", " response_api ", response_api);
       dgroups = response_api.data;
       dgroups.sort( function(a, b) {
         return a.dgroup_name > b.dgroup_name ? 1 : -1;
