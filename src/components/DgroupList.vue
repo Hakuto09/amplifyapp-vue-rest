@@ -108,6 +108,7 @@ const {
   confirm,
   cancel,
 } = useConfirmDialog()
+console.log(cancel);
 
 async function openDialog() {
   const { data, isCanceled } = await reveal()
@@ -120,7 +121,7 @@ async function openDialog() {
 //import { useStorage } from '@vueuse/core';
 //import { ref } from 'vue';
 //import { toRaw } from 'vue';
-import { useConfirmDialog } from '@vueuse/core';
+//import { useConfirmDialog } from '@vueuse/core';
 const fileName = "DgroupList.vue";
 
 console.log(fileName, ":After import:");
