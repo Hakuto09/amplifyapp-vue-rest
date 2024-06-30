@@ -196,9 +196,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After devices = response_api.data:", " devices ", devices);
 //      if (devices != null) {
 //      if (devices != []) {
-      if (!devices.length) {
+      if (devices.length) {
         this.message_result = 'Delete Error: 事前に紐付いているデバイスを削除してください。';
-        console.log(fileName, funcName[0], funcName[1], "if (!devices.length) In.:", " this.message_result ", this.message_result);
+        console.log(fileName, funcName[0], funcName[1], "if (devices.length) In.:", " this.message_result ", this.message_result);
         return /*error*/;
       }
 
