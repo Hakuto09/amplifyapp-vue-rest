@@ -60,7 +60,7 @@
       </div>
     </div -->
   </div>
-  <v-app>
+  <!-- v-app>
     <v-btn @click="my_dialog = true">開く</v-btn>
     <v-dialog v-model="my_dialog" max-width="400">
       <v-card>
@@ -78,13 +78,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-app>
+  </v-app -->
 
-  <button @click="openDialog">
+  <!-- button @click="openDialog">
     Show Modal
-  </button>
-
-  <teleport to="body">
+  </button -->
+  <!-- teleport to="body">
     <div v-if="isRevealed" class="modal-layout">
       <div class="modal">
         <h2>Confirm?</h2>
@@ -96,20 +95,39 @@
         </button>
       </div>
     </div>
+  </teleport -->
+
+  <button @click="reveal">
+    Reveal Modal
+  </button>
+  <teleport to="body">
+    <div v-if="isRevealed" class="modal-bg">
+      <div class="modal">
+        <h2>Confirm?</h2>
+        <button @click="confirm">
+          Yes
+        </button>
+        <button @click="cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
   </teleport>
 </template>
 
 <script setup>
 import { useConfirmDialog } from '@vueuse/core'
-
+/*
 const {
   isRevealed,
   reveal,
   confirm,
   cancel,
 } = useConfirmDialog()
-console.log("cancel: ", cancel);
-
+*/
+const { isRevealed, reveal, confirm, cancel/*, onReveal, onConfirm, onCancel*/ } = useConfirmDialog()
+console.log("after useConfirmDialog():", " isRevealed ", isRevealed, " reveal ", reveal, " confirm ", confirm, " cancel ", cancel);
+/*
 async function openDialog() {
   console.log("openDialog(): In.");
   const { data, isCanceled } = await reveal();
@@ -118,7 +136,9 @@ async function openDialog() {
     console.log(data)
   }
 }
+*/
 </script>
+
 
 <script>
 //import { useStorage } from '@vueuse/core';
