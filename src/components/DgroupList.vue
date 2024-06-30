@@ -59,6 +59,23 @@
         </button>
       </div>
     </div -->
+    <v-btn @click="my_dialog = true">開く</v-btn>
+    <v-dialog v-model="my_dialog" max-width="400">
+      <v-card>
+        <v-card-title>
+          <div>タイトル</div>
+        </v-card-title>
+        <v-card-text>
+          <p>本文</p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="my_dialog = false">閉じる</v-btn>
+          <v-btn @click="confirm">確認</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -94,6 +111,7 @@ export default {
       selected: null,
       enSelect: false,
 //      dialog: dialog,
+      my_dialog: false,
     }
   },
   methods: {
@@ -195,6 +213,11 @@ export default {
       this.emitDeleteDgroup();
     },
 
+    confirm() {
+      alert('確認しました')
+      this.my_dialog = false
+    },
+    
     emitDeleteDgroup: function() {
       const funcName = [":methods:", "emitDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.properties ", this.properties);
