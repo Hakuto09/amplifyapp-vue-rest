@@ -192,10 +192,10 @@ export default {
         return error;
       }
       console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api ", response_api);
-      devices = response_api.data;
+      const devices = response_api.data;
       if (devices != null) {
         this.message_result = 'Delete Error: 事前に紐付いているデバイスを削除してください。';
-        return error;
+        return /*error*/;
       }
 
       let res = 0;
