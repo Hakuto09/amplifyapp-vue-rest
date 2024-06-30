@@ -59,6 +59,8 @@
         </button>
       </div>
     </div -->
+  </div>
+  <v-app>
     <v-btn @click="my_dialog = true">開く</v-btn>
     <v-dialog v-model="my_dialog" max-width="400">
       <v-card>
@@ -76,8 +78,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
-</template>
+  </v-app></template>
 
 <script>
 //import { useStorage } from '@vueuse/core';
@@ -217,7 +218,7 @@ export default {
       alert('確認しました')
       this.my_dialog = false
     },
-    
+
     emitDeleteDgroup: function() {
       const funcName = [":methods:", "emitDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.properties ", this.properties);
