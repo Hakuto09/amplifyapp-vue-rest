@@ -45,7 +45,7 @@
         Select Delete
       </button>
     </div>
-    <div>
+    <!-- div>
       <button :disabled="dialog.isRevealed.value" @click="onClick">
         確認
       </button>
@@ -58,8 +58,7 @@
           Cancel
         </button>
       </div>
-    </div>
-
+    </div -->
   </div>
 </template>
 
@@ -94,7 +93,7 @@ export default {
     return {
       selected: null,
       enSelect: false,
-      dialog: dialog,
+//      dialog: dialog,
     }
   },
   methods: {
@@ -175,17 +174,30 @@ export default {
       const funcName = [":methods:", "selectDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
+/*
 //      dialog = useConfirmDialog();
+      console.log(fileName, funcName[0], funcName[1], "Before await dialog.reveal():", " dialog ", dialog);
       const { isCanceled } = await dialog.reveal();
+      console.log(fileName, funcName[0], funcName[1], "After await dialog.reveal():", " isCanceled ", isCanceled);
       if (isCanceled) return;
+*/
 
+      console.log(fileName, funcName[0], funcName[1], "Befreo dialog.confirm():");
+      if (await dialog.confirm("XXXしますか？")) {
+        // OKの時の処理
+        console.log(fileName, funcName[0], funcName[1], "OKが押されました");
+      }
+      else {
+        // Cancelの時の処理
+        console.log(fileName, funcName[0], funcName[1], "キャンセルが押されました");
+        await dialog.alert("キャンセルしました。")
+      }
       this.emitDeleteDgroup();
     },
 
     emitDeleteDgroup: function() {
-      const funcName = [":methods:", "eventDeleteDgroup:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
-      console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
+      const funcName = [":methods:", "emitDeleteDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " this.properties ", this.properties);
 
       if (!this.selected) {
         alert('No data selected...');
