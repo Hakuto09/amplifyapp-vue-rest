@@ -178,31 +178,11 @@ export default {
       this.refreshDisplay();
 
       let response_api;
-      const dgroup_id_selected = childData.selected.dgroup_id;
-      const dgroup_name_selected = childData.selected.dgroup_name;
-      const account_id_selected = childData.selected.account_id;
-
-      // Deviceリストの更新
-      try {
-        response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
-        console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
-      }
-      catch (error) {
-        console.error(fileName, funcName[0], funcName[1], "catch for axios.get(_devices):", " error ", error);
-        return error;
-      }
-      console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api ", response_api);
-      devices = response_api.data;
-      if (devices != null) {
-        this.message_result = 'Delete Error: 事前に紐付いているデバイスを削除してください。';
-        return error;
-      }
-
       let res = 0;
       const payload = {
-//        dgroup_id: dgroup_id_selected,
-        dgroup_name: dgroup_name_selected,
-        account_id: account_id_selected,
+//        dgroup_id: childData.selected.dgroup_id,
+        dgroup_name: childData.selected.dgroup_name,
+        account_id: childData.selected.account_id,
       }
 
       // Dgroup関連リソースの削除
