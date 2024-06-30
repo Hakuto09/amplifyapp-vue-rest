@@ -108,7 +108,7 @@ const {
   confirm,
   cancel,
 } = useConfirmDialog()
-console.log(cancel);
+console.log("cancel: ", cancel);
 
 async function openDialog() {
   const { data, isCanceled } = await reveal()
