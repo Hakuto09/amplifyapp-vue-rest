@@ -45,6 +45,9 @@
         Select Delete
       </button>
     </div>
+    <div :class="$style.delete_dgroup">
+      <p>削除前によくご確認ください。</p>
+    </div>
     <!-- div>
       <button :disabled="dialog.isRevealed.value" @click="onClick">
         確認
@@ -97,10 +100,10 @@
     </div>
   </teleport -->
 
-  <button @click="reveal">
+  <!-- button @click="reveal">
     Reveal Modal
-  </button>
-  <teleport to="body">
+  </button -->
+  <!-- teleport to="body">
     <div v-if="isRevealed" class="modal-bg">
       <div class="modal">
         <h2>Confirm?</h2>
@@ -112,11 +115,11 @@
         </button>
       </div>
     </div>
-  </teleport>
+  </teleport -->
 </template>
 
 <script setup>
-import { useConfirmDialog } from '@vueuse/core'
+//import { useConfirmDialog } from '@vueuse/core'
 /*
 const {
   isRevealed,
@@ -125,8 +128,10 @@ const {
   cancel,
 } = useConfirmDialog()
 */
-const { isRevealed, reveal, confirm, cancel/*, onReveal, onConfirm, onCancel*/ } = useConfirmDialog()
+/*
+const { isRevealed, reveal, confirm, cancel, onReveal, onConfirm, onCancel } = useConfirmDialog()
 console.log("after useConfirmDialog():", " isRevealed ", isRevealed, " reveal ", reveal, " confirm ", confirm, " cancel ", cancel);
+*/
 /*
 async function openDialog() {
   console.log("openDialog(): In.");
@@ -249,17 +254,16 @@ export default {
       })
     },
 
+/*
     selectDeleteDgroup: async function() {
       const funcName = [":methods:", "selectDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-/*
 //      dialog = useConfirmDialog();
-      console.log(fileName, funcName[0], funcName[1], "Before await dialog.reveal():", " dialog ", dialog);
-      const { isCanceled } = await dialog.reveal();
-      console.log(fileName, funcName[0], funcName[1], "After await dialog.reveal():", " isCanceled ", isCanceled);
-      if (isCanceled) return;
-*/
+//      console.log(fileName, funcName[0], funcName[1], "Before await dialog.reveal():", " dialog ", dialog);
+//      const { isCanceled } = await dialog.reveal();
+//      console.log(fileName, funcName[0], funcName[1], "After await dialog.reveal():", " isCanceled ", isCanceled);
+//      if (isCanceled) return;
 
       console.log(fileName, funcName[0], funcName[1], "Befreo dialog.confirm():");
       if (await dialog.confirm("XXXしますか？")) {
@@ -278,9 +282,12 @@ export default {
       alert('確認しました')
       this.my_dialog = false
     },
+*/
 
-    emitDeleteDgroup: function() {
-      const funcName = [":methods:", "emitDeleteDgroup:"];
+    selectDeleteDgroup: function() {
+//    emitDeleteDgroup: function() {
+      const funcName = [":methods:", "selectDeleteDgroup:"];
+//      const funcName = [":methods:", "emitDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this.properties ", this.properties);
 
       if (!this.selected) {
