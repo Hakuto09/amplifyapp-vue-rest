@@ -177,16 +177,12 @@ export default {
 
       this.refreshDisplay();
 
-      const dialog = useConfirmDialog();
-      const { isCanceled } = await dialog.reveal();
-      if (isCanceled) return;
-
       let response_api;
       const dgroup_id_selected = childData.selected.dgroup_id;
       const dgroup_name_selected = childData.selected.dgroup_name;
       const account_id_selected = childData.selected.account_id;
 
-      // Deviceリストの取得
+      // Deviceリストの更新
       try {
         response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
