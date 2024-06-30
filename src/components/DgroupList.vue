@@ -72,7 +72,8 @@ const fileName = "DgroupList.vue";
 
 console.log(fileName, ":After import:");
 
-let dialog;
+//let dialog;
+const dialog = useConfirmDialog();
 
 export default {
   name: 'DgroupList',
@@ -93,7 +94,7 @@ export default {
     return {
       selected: null,
       enSelect: false,
-      dialog,
+      dialog: dialog,
     }
   },
   methods: {
@@ -174,7 +175,7 @@ export default {
       const funcName = [":methods:", "selectDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      dialog = useConfirmDialog();
+//      dialog = useConfirmDialog();
       const { isCanceled } = await dialog.reveal();
       if (isCanceled) return;
 
