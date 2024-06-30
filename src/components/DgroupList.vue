@@ -111,9 +111,12 @@ const {
 console.log("cancel: ", cancel);
 
 async function openDialog() {
-  const { data, isCanceled } = await reveal()
-  if (!isCanceled)
+  console.log("openDialog(): In.");
+  const { data, isCanceled } = await reveal();
+  console.log("openDialog(): After reveal():", " data ", data, " isCanceled ", isCanceled);
+  if (!isCanceled) {
     console.log(data)
+  }
 }
 </script>
 
