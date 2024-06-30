@@ -155,7 +155,7 @@ const fileName = "DgroupList.vue";
 console.log(fileName, ":After import:");
 
 //let dialog;
-const dialog = useConfirmDialog();
+//const dialog = useConfirmDialog();
 
 export default {
   name: 'DgroupList',
@@ -177,7 +177,7 @@ export default {
       selected: null,
       enSelect: false,
 //      dialog: dialog,
-      my_dialog: false,
+//      my_dialog: false,
     }
   },
   methods: {
