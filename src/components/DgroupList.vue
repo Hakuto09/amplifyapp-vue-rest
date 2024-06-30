@@ -45,6 +45,21 @@
         Select Delete
       </button>
     </div>
+    <div>
+      <button :disabled="dialog.isRevealed.value" @click="onClick">
+        確認
+      </button>
+      <div v-if="dialog.isRevealed.value">
+        ダイアログ表示
+        <button @click="dialog.confirm">
+          OK
+        </button>
+        <button @click="dialog.cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -52,10 +67,12 @@
 //import { useStorage } from '@vueuse/core';
 //import { ref } from 'vue';
 //import { toRaw } from 'vue';
+import { useConfirmDialog } from '@vueuse/core';
 const fileName = "DgroupList.vue";
 
 console.log(fileName, ":After import:");
 
+let dialog;
 
 export default {
   name: 'DgroupList',
@@ -76,6 +93,7 @@ export default {
     return {
       selected: null,
       enSelect: false,
+      dialog,
     }
   },
   methods: {
@@ -151,7 +169,19 @@ export default {
 //        }
       })
     },
-    selectDeleteDgroup: function() {
+
+    selectDeleteDgroup: async function() {
+      const funcName = [":methods:", "selectDeleteDgroup:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      dialog = useConfirmDialog();
+      const { isCanceled } = await dialog.reveal();
+      if (isCanceled) return;
+
+      this.emitDeleteDgroup();
+    },
+
+    emitDeleteDgroup: function() {
       const funcName = [":methods:", "eventDeleteDgroup:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
       console.log(fileName, funcName[0], funcName[1], " this.properties ", this.properties);
