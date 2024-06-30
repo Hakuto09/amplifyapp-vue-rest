@@ -42,6 +42,9 @@
         Select Delete
       </button>
     </div>
+    <div :class="$style.delete_device">
+      <p>※注意：削除前によくご確認ください。</p>
+    </div>
   </div>
 </template>
 
