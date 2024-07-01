@@ -15,7 +15,16 @@ import { toRaw } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
 const fileName = "App.vue";
 
+const swConsoleLog = true;
+
+function swConsoleLog(word){
+  if (swConsoleLog) {
+    console.log(word);
+  }
+}
+
 console.log(fileName, ":<script>:", " After import: ");
+swConsoleLog(fileName, ":<script>:", " After import: ");
 
 /*
 const listener = (data) => {
