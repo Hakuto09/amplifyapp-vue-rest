@@ -4,11 +4,9 @@
     <!-- h2>Chart and data list of device_id: {{ device_id }}</h2 -->
     <h2>Chart of device_name: {{ device_name }}</h2>
     <div>
-      <p>data0 is </p>
+      <label for="input">  data0 is </label>
       <input v-model="data0_name_input">
-    </div>
-    <div>
-      <p>data0 is </p>
+      <label for="input">  data1 is </label>
       <input v-model="data1_name_input">
     </div>
     <div>
