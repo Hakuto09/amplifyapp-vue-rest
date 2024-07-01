@@ -15,16 +15,24 @@ import { toRaw } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
 const fileName = "App.vue";
 
-const swConsoleLog = true;
+const disConsoleLog = true;
 
+/*
 function swConsoleLog(word){
   if (swConsoleLog) {
     console.log(word);
   }
 }
+  */
+
+//if (import.meta.env.VITE_APP_ENV === 'prod') {
+if (disConsoleLog) {
+    // 本番環境の場合、コンソール出力を無効にする
+    console.log = console.info = console.debug = console.warn = console.error = () => {};
+}
 
 console.log(fileName, ":<script>:", " After import: ");
-swConsoleLog([fileName, ":<script>:", " After import: "]);
+//swConsoleLog([fileName, ":<script>:", " After import: "]);
 
 /*
 const listener = (data) => {
