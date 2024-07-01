@@ -39,11 +39,11 @@
     </div>
     <div>
       <label for="input">data0 is .</label>
-      <input v-model="data0_name_input">
+      <input v-model="data0_name">
     </div>
     <div>
       <label for="input">data1 is .</label>
-      <input v-model="data1_name_input">
+      <input v-model="data1_name">
     </div>
     <button
         type="is-info"
@@ -330,8 +330,8 @@ export default {
 //      date: date,
 //      config: config,
 //      date: new Date(),
-      date_start: date_start/*''*/,
-      date_end: date_end/*''*/,
+      date_start: date_start,
+      date_end: date_end,
       format: 'yyyy-MM-dd HH:mm', 
       data0_name: data0_name,
       data1_name: data1_name,
@@ -513,8 +513,7 @@ export default {
 //          data2s = [];
 
           // add graph data.
-          let loops = ddata.length;
-          for(let i = 0; i < loops; ++i) {
+          for(let i = 0; i < ddata.length; ++i) {
       //      let j = loops - i - 1;
 //            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
 //            let date_nt_jst = date_nt.substr(0, 23);
@@ -528,7 +527,7 @@ export default {
             data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
-          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data:", " loops ", loops, " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data:", " ddata.length ", ddata.length, " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
         }
 
         const chartData_L = {
@@ -710,8 +709,7 @@ export default {
 //          data2s = [];
 
           // add graph data.
-          let loops = ddata.length;
-          for(let i = 0; i < loops; ++i) {
+          for(let i = 0; i < ddata.length; ++i) {
       //      let j = loops - i - 1;
 //            let date_nt = ddata[i/*j*/].createdAt_c.replace('T', ' ');
 //            let date_nt_jst = date_nt.substr(0, 23);
@@ -726,7 +724,7 @@ export default {
             data1s.push(ddata[i].data1);
 //            data2s.push(ddata[i/*j*/].data2);
           }
-          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
+          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data", " ddata.length ", ddata.length, " labels ", labels, " data0s ", data0s, " data1s ", data1s/*, " data2s ", data2s*/);
 //          console.log(fileName, funcName[0], funcName[1], ":After loop for chart data L", " labels_L ", labels_L,);
         }
 
