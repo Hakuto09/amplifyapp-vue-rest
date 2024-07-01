@@ -4,14 +4,6 @@
     <!-- h2>Chart and data list of device_id: {{ device_id }}</h2 -->
     <h2>Chart of device_name: {{ device_name }}</h2>
     <div>
-      <label for="input">data0 is　</label>
-      <input v-model="data0_name_input">
-    </div>
-    <div>
-      <label for="input">data1 is　</label>
-      <input v-model="data1_name_input">
-    </div>
-    <div>
       <Line width="1280" height="720" :data="data" :options="options" />
     </div>
     <!-- section>
@@ -44,6 +36,14 @@
         @click="writeCSV">
         CSVファイル出力
       </button>
+    </div>
+    <div>
+      <label for="input">data0 is .</label>
+      <input v-model="data0_name_input">
+    </div>
+    <div>
+      <label for="input">data1 is .</label>
+      <input v-model="data1_name_input">
     </div>
     <br><br>
     <p>開始日時</p>
@@ -225,6 +225,7 @@ const chartData = {
 }
 */
 
+/*
 const chartOptions = {
   responsive: true,    // グラフのスクロール対応
 //      responsive: false,    // グラフのスクロール対応
@@ -253,7 +254,7 @@ const chartOptions = {
         text: 'data0'           // ★必須 タイトルの文字列
       },
     },
-    /** yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける */
+    // yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける
     yright: {
       stacked: false,
       position: "right",
@@ -265,7 +266,7 @@ const chartOptions = {
     },
   },
 };
-
+*/
 
 function dateTimeToISOString(dateTime){
   // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
@@ -529,6 +530,47 @@ export default {
           ]
         }
 
+        const chartOptions_L = {
+          responsive: true,    // グラフのスクロール対応
+        //      responsive: false,    // グラフのスクロール対応
+          maintainAspectRatio: false,
+          spanGaps: true,   //点をつなげる場合
+          scales: {
+            x: {
+              type: 'time',
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '日付時刻'           // ★必須 タイトルの文字列
+              },
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'YYYY-MM-DD HH:mm'
+                }
+              },
+            },
+            yleft: {
+              stacked: false,
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data0'           // ★必須 タイトルの文字列
+              },
+            },
+            // yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける
+            yright: {
+              stacked: false,
+              position: "right",
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data1'           // ★必須 タイトルの文字列
+              },
+            },
+          },
+        };
+
 //        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
@@ -536,7 +578,8 @@ export default {
         this.data.datasets[0].data = data0s;
         this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
-        this.options = chartOptions;
+//        this.options = chartOptions;
+        this.options = chartOptions_L;
         this.options.scales.yleft.title.text = this.data0_name_input; 
         this.options.scales.yright.title.text = this.data1_name_input; 
         //        this.device_id = deviceId;
@@ -672,6 +715,47 @@ export default {
           ]
         }
 
+        const chartOptions_L = {
+          responsive: true,    // グラフのスクロール対応
+        //      responsive: false,    // グラフのスクロール対応
+          maintainAspectRatio: false,
+          spanGaps: true,   //点をつなげる場合
+          scales: {
+            x: {
+              type: 'time',
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: '日付時刻'           // ★必須 タイトルの文字列
+              },
+              time: {
+                unit: 'minute',
+                displayFormats: {
+                  minute: 'YYYY-MM-DD HH:mm'
+                }
+              },
+            },
+            yleft: {
+              stacked: false,
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data0'           // ★必須 タイトルの文字列
+              },
+            },
+            // yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける
+            yright: {
+              stacked: false,
+              position: "right",
+              title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+                display: true,             // ★必須 表示設定 省略時は false
+                position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+                text: 'data1'           // ★必須 タイトルの文字列
+              },
+            },
+          },
+        };
+
 //        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
@@ -681,8 +765,8 @@ export default {
         this.data.datasets[0].data = data0s;
         this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
-        this.options = chartOptions;
-//        this.options = chartOptions_L;
+//        this.options = chartOptions;
+        this.options = chartOptions_L;
         this.options.scales.yleft.title.text = this.data0_name_input; 
         this.options.scales.yright.title.text = this.data1_name_input; 
 
