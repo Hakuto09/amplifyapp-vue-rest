@@ -37,6 +37,11 @@
         CSVファイル出力
       </button>
     </div>
+    <button
+        type="is-info"
+        @click="refreshDisplay">
+        Refresh
+      </button>
     <div>
       <label for="input">data0 is .</label>
       <input v-model="data0_name_input">
@@ -45,11 +50,6 @@
       <label for="input">data1 is .</label>
       <input v-model="data1_name_input">
     </div>
-    <button
-        type="is-info"
-        @click="updateLabel">
-        Label update
-      </button>
     <br><br>
     <p>開始日時</p>
     <div :class="$style.set_date">
@@ -181,8 +181,6 @@ let data1s = [];
 
 let date_start;
 let date_end;
-let data0_name;
-let data1_name;
 
 let reRenderFlag = false;
 
@@ -333,8 +331,8 @@ export default {
       date_start: date_start/*''*/,
       date_end: date_end/*''*/,
       format: 'yyyy-MM-dd HH:mm', 
-      data0_name: data0_name,
-      data1_name: data1_name,
+      data0_name_input: 'data0',
+      data1_name_input: 'data1',
     }
   },
   methods: {
@@ -471,12 +469,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "Out:");
     },
 
-    updateLabel: function() {
-      const funcName = [":methods:", "updateLabel:"];
+    refreshDisplay: function() {
+      const funcName = [":methods:", "refreshDisplay:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
-
-      localStorage.setItem('data0_name', this.data0_name);
-      localStorage.setItem('data1_name', this.data1_name);
 
       reRenderFlag = true;
 
@@ -598,31 +593,17 @@ export default {
           },
         };
 
-        data0_name = localStorage.getItem('data0_name');
-        if (!data0_name) {
-          data0_name = 'data0';
-          localStorage.setItem('data0_name', data0_name);
-        }
-        this.data0_name = data0_name;
-
-        data1_name = localStorage.getItem('data1_name');
-        if (!data1_name) {
-          data1_name = 'data1';
-          localStorage.setItem('data1_name', data1_name);
-        }
-        this.data1_name = data1_name;
-
-        //        this.data = chartData;
+//        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
-        this.data.datasets[0].label = this.data0_name;
+        this.data.datasets[0].label = this.data0_name_input;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].label = this.data1_name;
+        this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
 //        this.options = chartOptions;
         this.options = chartOptions_L;
-        this.options.scales.yleft.title.text = this.data0_name; 
-        this.options.scales.yright.title.text = this.data1_name; 
+        this.options.scales.yleft.title.text = this.data0_name_input; 
+        this.options.scales.yright.title.text = this.data1_name_input; 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
@@ -797,24 +778,19 @@ export default {
           },
         };
 
-        data0_name = localStorage.getItem('data0_name');
-        this.data0_name = data0_name;
-        data1_name = localStorage.getItem('data1_name');
-        this.data1_name = data1_name;
-
-        //        this.data = chartData;
+//        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
 //        this.data.labels = labels_L;
 //        labels = labels_L;
-        this.data.datasets[0].label = this.data0_name;
+        this.data.datasets[0].label = this.data0_name_input;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].label = this.data1_name;
+        this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
 //        this.options = chartOptions;
         this.options = chartOptions_L;
-        this.options.scales.yleft.title.text = this.data0_name; 
-        this.options.scales.yright.title.text = this.data1_name; 
+        this.options.scales.yleft.title.text = this.data0_name_input; 
+        this.options.scales.yright.title.text = this.data1_name_input; 
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
