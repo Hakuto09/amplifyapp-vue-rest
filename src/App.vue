@@ -24,7 +24,7 @@ function swConsoleLog(word){
 }
 
 console.log(fileName, ":<script>:", " After import: ");
-swConsoleLog(fileName, ":<script>:", " After import: ");
+swConsoleLog([fileName, ":<script>:", " After import: "]);
 
 /*
 const listener = (data) => {
