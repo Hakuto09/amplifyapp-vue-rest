@@ -37,11 +37,6 @@
         CSVファイル出力
       </button>
     </div>
-    <button
-        type="is-info"
-        @click="refreshDisplay">
-        Refresh
-      </button>
     <div>
       <label for="input">data0 is .</label>
       <input v-model="data0_name_input">
@@ -137,7 +132,6 @@ import 'flatpickr/dist/themes/material_blue.css';
 //import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { getCurrentInstance } from 'vue';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
@@ -168,7 +162,6 @@ ChartJS.register(
   TimeScale,
 )
 
-let currentInstance;
 let ddata;
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
 const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
@@ -181,8 +174,6 @@ let data1s = [];
 
 let date_start;
 let date_end;
-
-let reRenderFlag = false;
 
 /*
 const chartData = {
@@ -467,24 +458,11 @@ export default {
 //      setDisableButtons(false);
 //      event.target.reset();
       console.log(fileName, funcName[0], funcName[1], "Out:");
-    },
-
-    refreshDisplay: function() {
-      const funcName = [":methods:", "refreshDisplay:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
-
-      reRenderFlag = true;
-
-      currentInstance.proxy.$forceUpdate();
-      console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
-    },
+    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
-
-    currentInstance = getCurrentInstance();
-    console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
@@ -809,7 +787,7 @@ export default {
       }
     }
 
-//    let reRenderFlag = false;
+    let reRenderFlag = false;
     if (this.date_start != localStorage.getItem('date_start')) {
       reRenderFlag = true;
       date_start = this.date_start;
@@ -824,8 +802,6 @@ export default {
 
     console.log(fileName, funcName[0], ":Before if (reRenderFlag):", " reRenderFlag ", reRenderFlag);
     if (reRenderFlag) {
-      reRenderFlag = false;
-
       const deviceInfo = ref('');
       deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
