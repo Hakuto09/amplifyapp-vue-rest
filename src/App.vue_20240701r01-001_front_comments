@@ -212,7 +212,7 @@ export default {
               <router-link :to="{ name: 'user-detail', params: {id: 0} }" exact active-class="active-link">User Detail</router-link>
             </li -->
             <li>
-              <router-link to="/dgroups" exact active-class="active-link">Device group List</router-link>
+              <router-link to="/dgroups" exact active-class="active-link">Dgroup List</router-link>
             </li>
             <li>
               <router-link to="/devices" exact active-class="active-link">Device List</router-link>
