@@ -496,9 +496,10 @@ def post_dgroup(_in: Request_PostDGroup):
 #    ruleName = 'Hkt_aws_iot_rule_to_dynamodb_' + dgroup_name
     ruleName = 'Hkt_' + account_id_dgroup_name
 #    topicName = "'" + dgroup_name + "/+'"
-    topicName = "'" + account_id_dgroup_name + "/+'"
+#    topicName = "'" + account_id_dgroup_name + "/+'"
+    topicName = "'" + dgroup_id + "/+'"
     roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
-    print('Before client_iot.create_topic_rule():', ' dgroup_name ', dgroup_name, ' ruleName ', ruleName, ' topicName ', topicName, ' roleArn ', roleArn)
+    print('Before client_iot.create_topic_rule():', ' dgroup_id ', dgroup_id, ' dgroup_name ', dgroup_name, ' ruleName ', ruleName, ' topicName ', topicName, ' roleArn ', roleArn)
     response_iot_rule = client_iot.create_topic_rule(
         ruleName = ruleName,
         topicRulePayload = {

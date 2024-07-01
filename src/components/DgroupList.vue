@@ -46,7 +46,7 @@
       </button>
     </div>
     <div :class="$style.delete_dgroup">
-      <p>※注意：削除前によくご確認ください。</p>
+      <p>※注意：元に戻せませんので、削除前によくご確認ください。</p>
     </div>
     <!-- div>
       <button :disabled="dialog.isRevealed.value" @click="onClick">
