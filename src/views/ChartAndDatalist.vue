@@ -4,6 +4,14 @@
     <!-- h2>Chart and data list of device_id: {{ device_id }}</h2 -->
     <h2>Chart of device_name: {{ device_name }}</h2>
     <div>
+      <p>data0 is </p>
+      <input v-model="data0_name_input">
+    </div>
+    <div>
+      <p>data0 is </p>
+      <input v-model="data1_name_input">
+    </div>
+    <div>
       <Line width="1280" height="720" :data="data" :options="options" />
     </div>
     <!-- section>
@@ -313,6 +321,8 @@ export default {
       date_start: date_start/*''*/,
       date_end: date_end/*''*/,
       format: 'yyyy-MM-dd HH:mm', 
+      data0_name_input: 'data0',
+      data1_name_input: 'data1',
     }
   },
   methods: {
@@ -522,10 +532,13 @@ export default {
 //        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
+        this.data.datasets[0].label = data0_name_input;
         this.data.datasets[0].data = data0s;
+        this.data.datasets[1].label = data1_name_input;
         this.data.datasets[1].data = data1s;
         this.options = chartOptions;
-
+        this.options.scales.yleft.title.text = data0_name_input; 
+        this.options.scales.yright.title.text = data1_name_input; 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
@@ -664,10 +677,14 @@ export default {
         this.data.labels = labels;
 //        this.data.labels = labels_L;
 //        labels = labels_L;
+        this.data.datasets[0].label = data0_name_input;
         this.data.datasets[0].data = data0s;
+        this.data.datasets[1].label = data1_name_input;
         this.data.datasets[1].data = data1s;
         this.options = chartOptions;
 //        this.options = chartOptions_L;
+        this.options.scales.yleft.title.text = data0_name_input; 
+        this.options.scales.yright.title.text = data1_name_input; 
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
