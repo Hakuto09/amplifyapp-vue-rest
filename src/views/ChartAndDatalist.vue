@@ -532,13 +532,13 @@ export default {
 //        this.data = chartData;
         this.data = chartData_L;
         this.data.labels = labels;
-        this.data.datasets[0].label = data0_name_input;
+        this.data.datasets[0].label = this.data0_name_input;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].label = data1_name_input;
+        this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
         this.options = chartOptions;
-        this.options.scales.yleft.title.text = data0_name_input; 
-        this.options.scales.yright.title.text = data1_name_input; 
+        this.options.scales.yleft.title.text = this.data0_name_input; 
+        this.options.scales.yright.title.text = this.data1_name_input; 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
         this.device_id = deviceInfo['device_id'];
@@ -677,14 +677,14 @@ export default {
         this.data.labels = labels;
 //        this.data.labels = labels_L;
 //        labels = labels_L;
-        this.data.datasets[0].label = data0_name_input;
+        this.data.datasets[0].label = this.data0_name_input;
         this.data.datasets[0].data = data0s;
-        this.data.datasets[1].label = data1_name_input;
+        this.data.datasets[1].label = this.data1_name_input;
         this.data.datasets[1].data = data1s;
         this.options = chartOptions;
 //        this.options = chartOptions_L;
-        this.options.scales.yleft.title.text = data0_name_input; 
-        this.options.scales.yright.title.text = data1_name_input; 
+        this.options.scales.yleft.title.text = this.data0_name_input; 
+        this.options.scales.yright.title.text = this.data1_name_input; 
 
         //        this.device_id = deviceId;
 //        this.device_id = deviceInfo.device_id;
