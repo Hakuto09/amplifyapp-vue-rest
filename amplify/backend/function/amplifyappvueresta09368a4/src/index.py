@@ -561,6 +561,12 @@ def post_device(_in: Request_PostDevice):
     del create_device_dict['check_existing_flag']
     print('After create_device_dict.get():', ' create_device_dict ', create_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name, ' csr ', csr, ' check_existing_flag ', check_existing_flag)
 
+    if csr == '' :
+        useCsr = 0
+    else :
+        useCsr = 1
+    print('After set useCsr:', ' csr ', csr, ' useCsr ', useCsr)
+
     if check_existing_flag == 1:
         # Check dgroup_name existing.
         response_iot_device = client_iot.describe_thing(
@@ -568,7 +574,16 @@ def post_device(_in: Request_PostDevice):
             thingName = dgroup_id_device_name,
         )
         print('After client_iot.describe_thing():', ' response_iot_device ', response_iot_device)
-        return {'certificatePem': '0'}
+
+        if useCsr :
+            return {
+                'certificatePem': ''
+            }
+        else :
+            return {
+                'certificatePem': '',
+                'PrivateKey': '',
+            }
 
     # Create thing
     response_iot_device = client_iot.create_thing(
@@ -605,13 +620,13 @@ def post_device(_in: Request_PostDevice):
     )
     print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
 
-    if csr == '' : 
-        useCsr = 0
+    if csr == '' :
+#        useCsr = 0
         response_iot_csr = client_iot.create_keys_and_certificate(
             setAsActive = True,
         )
     else :
-        useCsr = 1
+#        useCsr = 1
         response_iot_csr = client_iot.create_certificate_from_csr(
             certificateSigningRequest = csr,
             setAsActive = True,

@@ -137,6 +137,12 @@ export default {
 
       this.refreshDisplay(false);
 
+      // 入力値の空欄チェック
+      if (this.device_name_input == '') {
+        this.message_result = '正しいデバイス名を入力してください。';
+        return;
+      }
+
       let response_api;
       let res = 0;
       let check_existing_flag; 

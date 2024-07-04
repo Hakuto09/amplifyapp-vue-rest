@@ -105,6 +105,12 @@ export default {
 
       this.refreshDisplay();
 
+      // 入力値の空欄チェック
+      if (this.dgroup_name_input == '') {
+        this.message_result = '正しいデバイスグループ名を入力してください。';
+        return;
+      }
+
       let response_api;
       let res = 0;
       let check_existing_flag; 
