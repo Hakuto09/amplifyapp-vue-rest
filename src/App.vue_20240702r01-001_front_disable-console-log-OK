@@ -15,8 +15,8 @@ import { toRaw } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
 const fileName = "App.vue";
 
-//const disConsoleLog = true;
-const disConsoleLog = false;
+const disConsoleLog = true;
+//const disConsoleLog = false;
 
 /*
 function swConsoleLog(word){
