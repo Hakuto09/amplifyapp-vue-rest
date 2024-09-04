@@ -19,23 +19,28 @@ ENV = os.environ['ENV']
 print('ENV ', ENV)
 
 #STORAGE_DB_NAME = os.environ.get("STORAGE_DB_NAME")
-STORAGE_DB_NAME = 'dynamo29652a67-dev'      # for debug only.
+#STORAGE_DB_NAME = 'dynamo29652a67-dev'      # for debug only.
+STORAGE_DB_NAME = 'dynamo29652a67-' + ENV      # for debug only.
 print('STORAGE_DB_NAME ', STORAGE_DB_NAME)
 
 #STORAGE_DB_ACCOUNTS = 'amplifyappvuerest_accounts'
-STORAGE_DB_ACCOUNTS = 'amplifyappvuerest-dev_accounts'
+#STORAGE_DB_ACCOUNTS = 'amplifyappvuerest-dev_accounts'
+STORAGE_DB_ACCOUNTS = 'amplifyappvuerest-' + ENV + '_accounts'
 print('STORAGE_DB_NAME ', STORAGE_DB_ACCOUNTS)
 
 #STORAGE_DB_DGROUPS = 'amplifyappvuerest_dgroups'
-STORAGE_DB_DGROUPS = 'amplifyappvuerest-dev_dgroups'
+#STORAGE_DB_DGROUPS = 'amplifyappvuerest-dev_dgroups'
+STORAGE_DB_DGROUPS = 'amplifyappvuerest-' + ENV + '_dgroups'
 print('STORAGE_DB_NAME ', STORAGE_DB_DGROUPS)
 
 #STORAGE_DB_DEVICES = 'amplifyappvuerest_devices'
-STORAGE_DB_DEVICES = 'amplifyappvuerest-dev_devices'
+#STORAGE_DB_DEVICES = 'amplifyappvuerest-dev_devices'
+STORAGE_DB_DEVICES = 'amplifyappvuerest-' + ENV + '_devices'
 print('STORAGE_DB_NAME ', STORAGE_DB_DEVICES)
 
 #STORAGE_DB_DDATA = 'amplifyappvuerest_ddata'
-STORAGE_DB_DDATA = 'amplifyappvuerest-dev_ddata'
+#STORAGE_DB_DDATA = 'amplifyappvuerest-dev_ddata'
+STORAGE_DB_DDATA = 'amplifyappvuerest-' + ENV + '_ddata'
 print('STORAGE_DB_NAME ', STORAGE_DB_DDATA)
 
 # boto3 IoT Core 初期化
@@ -64,7 +69,12 @@ app.logger = Logger(level="INFO", service=__name__)
 
 # CORS設定
 #allow_origins = ['http://localhost:8080']
-allow_origins = ['https://main.d2c5unubsoy5p6.amplifyapp.com']
+if ENV == 'dev':
+    allow_origins = ['https://main.d2c5unubsoy5p6.amplifyapp.com']
+elif ENV == 'staging':
+    allow_origins = ['https://feature.d2c5unubsoy5p6.amplifyapp.com']
+
+
 if 'ALLOW_ORIGIN' in os.environ.keys():
     allow_origins.append(os.environ['ALLOW_ORIGIN'])
 
