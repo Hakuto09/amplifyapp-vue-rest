@@ -52,6 +52,7 @@ const fileName = "Dgroups.vue";
 console.log(fileName, ":After import: ");
 
 const userBranch = process.env.USER_BRANCH;
+console.log(fileName, "userBranch ", userBranch);
 
 let dgroups;
 //let dgroups2 = [];
