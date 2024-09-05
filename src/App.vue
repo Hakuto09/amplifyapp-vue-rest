@@ -18,8 +18,8 @@ const fileName = "App.vue";
 //const disConsoleLog = true;
 const disConsoleLog = false;
 
-//userBranch = 'main';
-userBranch = 'feature';
+//const userBranch = 'main';
+const userBranch = 'feature';
 
 /*
 function swConsoleLog(word){
