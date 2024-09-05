@@ -189,7 +189,16 @@ class Response_DeleteDevice(BaseModel):
 #    thingName: str
 #    thingId: str
     ResponseMetadata: object
-
+    
+@app.get("/env")
+def get_env():
+    """
+    バックエンド環境名を取得する
+    """
+    print('get_env(): In')
+    return {
+        "env": ENV
+    }
 
 @app.get("/items")
 def get_items_list():

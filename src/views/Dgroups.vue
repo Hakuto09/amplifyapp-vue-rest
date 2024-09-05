@@ -51,10 +51,18 @@ const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
 
+const userBranch = process.env.USER_BRANCH;
+
 let dgroups;
 //let dgroups2 = [];
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
-const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+let url_base;
+if (userBranch == 'main')
+  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+else if (userBranch == 'feature')
+  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging';
+
+console.log(fileName, "url_base ", url_base);
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 let userId;
