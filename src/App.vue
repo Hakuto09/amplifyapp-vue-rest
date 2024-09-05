@@ -18,6 +18,9 @@ const fileName = "App.vue";
 //const disConsoleLog = true;
 const disConsoleLog = false;
 
+//userBranch = 'main';
+userBranch = 'feature';
+
 /*
 function swConsoleLog(word){
   if (swConsoleLog) {
@@ -34,6 +37,9 @@ if (disConsoleLog) {
 
 console.log(fileName, ":<script>:", " After import: ");
 //swConsoleLog([fileName, ":<script>:", " After import: "]);
+
+localStorage.setItem('userBranch', userBranch);
+console.log(fileName, " After setItem: ", 'userBranch ', userBranch);
 
 /*
 const listener = (data) => {
