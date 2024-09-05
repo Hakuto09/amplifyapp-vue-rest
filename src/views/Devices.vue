@@ -74,8 +74,19 @@ let userInfo;
 const dgroupInfo = ref('');
 let devices;
 let ddata;
+
+//const userBranch = process.env.USER_BRANCH;
+const userBranch = localStorage.getItem('userBranch');
+console.log(fileName, "userBranch ", userBranch);
+
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
-const url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+let url_base;
+if (userBranch == 'main')
+  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+else if (userBranch == 'feature')
+  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
+
+console.log(fileName, "url_base ", url_base);
 
 let responseData;
 let certificatePem = '';

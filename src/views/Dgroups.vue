@@ -62,7 +62,7 @@ let url_base;
 if (userBranch == 'main')
   url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 else if (userBranch == 'feature')
-  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging';
+  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
 console.log(fileName, "url_base ", url_base);
 
