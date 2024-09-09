@@ -143,10 +143,12 @@ export default {
     }
   },
   */
+  /*
   created() {
     const auth = ref(useAuthenticator());
     console.log(fileName, ":created():", " auth ", auth);
   },
+  */
   data: async function() {
 
 //    const auth2 = useAuthenticator();
@@ -190,6 +192,57 @@ export default {
 //      account_id: userId,
       userId,
     };
+  },
+  beforeCreate: function() {
+    const funcName = [":beforeCreate:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  created: function() {
+    const funcName = [":created:"];
+    console.log(fileName, funcName[0], "In.");
+
+    const auth = ref(useAuthenticator());
+    console.log(fileName, funcName[0], " auth ", auth);
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  beforeMount: function() {
+    const funcName = [":beforeMount:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  mounted: function() {
+    const funcName = [":mounted:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  beforeUpdate: function() {
+    const funcName = [":beforeUpdate:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  updated: function() {
+    const funcName = [":updated:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  beforeUnmount: function() {
+    const funcName = [":beforeUnmount:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
+  },
+  unmounted: function() {
+    const funcName = [":unmounted:"];
+    console.log(fileName, funcName[0], "In.");
+
+    console.log(fileName, funcName[0], "Out.");
   },
 }
 </script>
