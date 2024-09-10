@@ -47,13 +47,16 @@ export default {
       console.log(fileName, funcName[0], funcName[1], ":After getItem(): ", "preLoginId ", preLoginId);
       const detectUserChanged = this.loginId != preLoginId;
       if (detectUserChanged) {
-        console.log(fileName, funcName[0], funcName[1], ":Detect User changed!!:", " detectUserChanged ", detectUserChanged);
+        console.log(fileName, funcName[0], funcName[1], ":Detect user changed!!:", " detectUserChanged ", detectUserChanged);
         // Reset parameters
         localStorage.setItem('data0_name', '');
         localStorage.setItem('data1_name', '');
         localStorage.setItem('date_start', '');
         localStorage.setItem('date_end', '');
         localStorage.setItem('dgroupInfo', '');
+      }
+      else {
+        console.log(fileName, funcName[0], funcName[1], ":No user change.", " detectUserChanged ", detectUserChanged);
       }
       localStorage.setItem('loginId', this.loginId);
       console.log(fileName, funcName[0], funcName[1], ":After setItem(): ", "loginId ", this.loginId);
