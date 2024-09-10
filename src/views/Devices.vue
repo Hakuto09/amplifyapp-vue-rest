@@ -23,9 +23,16 @@
       <input
         :class="$style.checkbox"
         type="checkbox"
-        id="checkbox"
+        id="checkboxUseCsr"
         v-model="useCsr">
-      <label for="checkbox">CSR使用</label>
+      <label for="checkboxUseCsr">CSR使用</label>
+      <input
+        :class="$style.checkbox"
+        type="checkbox"
+        id="checkboxDisplayCert"
+        v-model="displayCert"
+        @change="changedDisplayCert">
+      <label for="checkbox">認証情報を表示する</label>
       <!-- pre>{{ $data }}</pre -->
     </div>
     <br><br>
@@ -126,6 +133,7 @@ export default {
       dgroup_id: '',
       dgroup_name: '',
       useCsr: false,
+      displayCert: true,
       device_name_input: '',
       csr_input: '',
       enSaveCertInfo: false,
@@ -407,6 +415,24 @@ export default {
       this.message_caution = '';
       this.message_certificatePem = '';
       this.message_PrivateKey = '';
+    },
+
+    changedDisplayCert: function() {
+      const funcName = [":methods:", "changedDisplayCert:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      if (this.displayCert) {
+        this.message_certificatePem = 'certificatePem: ' + certificatePem;
+        if (!this.useCsr) {
+          this.message_PrivateKey = 'PrivateKey: ' + PrivateKey;
+        }
+      }
+      else {
+        this.message_certificatePem = 'certificatePem: ' + '*****';
+        if (!this.useCsr) {
+          this.message_PrivateKey = 'PrivateKey: ' + '*****';
+        }
+      }
     },
   },
   beforeCreate: function() {
