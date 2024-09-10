@@ -162,6 +162,21 @@ export default {
     const { username, userId, signInDetails } = await getCurrentUser();
     console.log(fileName, funcName[0], ":After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
 
+    const preLoginId = localStorage.getItem('loginId');
+    console.log(fileName, funcName[0], ":After getItem(): ", "preLoginId ", preLoginId);
+    const detectUserChanged = signInDetails.loginId != preLoginId;
+    if (detectUserChanged) {
+      console.log(fileName, funcName[0], ":Detect User changed!!:", " detectUserChanged ", detectUserChanged);
+      // Reset parameters
+      localStorage.setItem('data0_name', '');
+      localStorage.setItem('data1_name', '');
+      localStorage.setItem('data_start', '');
+      localStorage.setItem('data_end', '');
+      localStorage.setItem('dgroupInfo', '');
+    }
+    localStorage.setItem('loginId', signInDetails.loginId);
+    console.log(fileName, funcName[0], ":After setItem(): ", "loginId ", signInDetails.loginId);
+
 //    const state = reactive({msg:'hello world'});
 //    console.log(fileName, ":data-function():", "After reactive():", " state ", state);     
 //    console.log(fileName, ":data-function():", "After reactive():", " {...state} ", {...state});     

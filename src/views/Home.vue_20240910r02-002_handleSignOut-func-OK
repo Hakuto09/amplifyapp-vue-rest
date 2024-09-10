@@ -35,31 +35,15 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
-    const getAndSetUserInfo = async () => {
+    const getUserInfo = async () => {
       const funcName = [":beforeCreate:", "getUserInfo:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       const userInfo = await getCurrentUser();
       this.loginId = userInfo.signInDetails.loginId;
       console.log(fileName, funcName[0], funcName[1], "After getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId);
-
-      const preLoginId = localStorage.getItem('loginId');
-      console.log(fileName, funcName[0], funcName[1], ":After getItem(): ", "preLoginId ", preLoginId);
-      const detectUserChanged = this.loginId != preLoginId;
-      if (detectUserChanged) {
-        console.log(fileName, funcName[0], funcName[1], ":Detect User changed!!:", " detectUserChanged ", detectUserChanged);
-        // Reset parameters
-        localStorage.setItem('data0_name', '');
-        localStorage.setItem('data1_name', '');
-        localStorage.setItem('data_start', '');
-        localStorage.setItem('data_end', '');
-        localStorage.setItem('dgroupInfo', '');
-      }
-      localStorage.setItem('loginId', this.loginId);
-      console.log(fileName, funcName[0], funcName[1], ":After setItem(): ", "loginId ", this.loginId);
     }
-
-    getAndSetUserInfo();
+    getUserInfo();
   }
 }
 </script>
