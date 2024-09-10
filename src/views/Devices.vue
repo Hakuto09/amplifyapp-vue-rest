@@ -233,6 +233,7 @@ export default {
           this.message_certificatePem = 'certificatePem: ' + '*****';
           if (!this.useCsr) {
             this.message_PrivateKey = 'PrivateKey: ' + '*****';
+            this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
           }
           else {
             this.enSaveCertInfo = (PrivateKey != '');
