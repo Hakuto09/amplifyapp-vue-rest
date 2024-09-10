@@ -150,8 +150,6 @@ export default {
   },
   */
   data: async function() {
-    const funcName = [":data:"];
-    console.log(fileName, funcName[0], "In.");
 
 //    const auth2 = useAuthenticator();
 //    console.log(fileName, ":data-function():", "After useA():", " auth2 ", auth2);
@@ -159,22 +157,7 @@ export default {
 //    let authUser = await getCurrentUser();
 //    let authUser = await Amplify.Auth.getCurrentUser();
     const { username, userId, signInDetails } = await getCurrentUser();
-    console.log(fileName, funcName[0], ":After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
-
-    const preLoginId = localStorage.getItem('loginId');
-    console.log(fileName, funcName[0], ":After getItem(): ", "preLoginId ", preLoginId);
-    const detectUserChanged = signInDetails.loginId != preLoginId;
-    if (detectUserChanged) {
-      console.log(fileName, funcName[0], ":Detect User changed!!:", " detectUserChanged ", detectUserChanged);
-      // Reset parameters
-      localStorage.setItem('data0_name', '');
-      localStorage.setItem('data1_name', '');
-      localStorage.setItem('data_start', '');
-      localStorage.setItem('data_end', '');
-      localStorage.setItem('dgroupInfo', '');
-    }
-    localStorage.setItem('loginId', signInDetails.loginId);
-    console.log(fileName, funcName[0], ":After setItem(): ", "loginId ", signInDetails.loginId);
+    console.log(fileName, ":data-function():", "After getCurrentUser():", " username ", username, " userId ", userId, " signInDetails ", signInDetails);     
 
 //    const state = reactive({msg:'hello world'});
 //    console.log(fileName, ":data-function():", "After reactive():", " state ", state);     
@@ -184,10 +167,10 @@ export default {
 //    console.log(fileName, ":data-function():", "After toRaw():", " state_raw.msg ", state_raw.msg);
 
     const auth = ref(useAuthenticator());
-    console.log(fileName, funcName[0], ":After ref(): ", "auth ", auth);
-    console.log(fileName, funcName[0], ":After ref(): ", "auth.value ", auth.value);
-    console.log(fileName, funcName[0], ":After ref(): ", "{...(auth.value)} ", {...(auth.value)});
-    console.log(fileName, funcName[0], ":After ref(): ", "toRaw(auth.value) ", toRaw(auth.value));
+    console.log(fileName, ":data-function():", "After ref():", " auth ", auth);
+    console.log(fileName, ":data-function():", "After ref():", " auth.value ", auth.value);
+    console.log(fileName, ":data-function():", "After ref():", " {...(auth.value)} ", {...(auth.value)});
+    console.log(fileName, ":data-function():", "After ref():", " toRaw(auth.value) ", toRaw(auth.value));
 //    const auth_value_raw = toRaw(auth.value);
 //    console.log(fileName, ":data-function():", "After ref():", " auth_value_raw.user ", auth_value_raw.user);
 //    console.log(fileName, ":data-function():", "After ref():", " auth_value_raw.authStatus ", auth_value_raw.authStatus);

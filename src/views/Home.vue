@@ -25,6 +25,7 @@ export default {
   data: function() {
     const funcName = [":data:"];
     console.log(fileName, funcName[0], "In.");
+
     return {
       loginId: '',
       Version: '1.00',
