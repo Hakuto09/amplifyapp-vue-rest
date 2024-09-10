@@ -51,8 +51,8 @@ export default {
         // Reset parameters
         localStorage.setItem('data0_name', '');
         localStorage.setItem('data1_name', '');
-        localStorage.setItem('data_start', '');
-        localStorage.setItem('data_end', '');
+        localStorage.setItem('date_start', '');
+        localStorage.setItem('date_end', '');
         localStorage.setItem('dgroupInfo', '');
       }
       localStorage.setItem('loginId', this.loginId);
