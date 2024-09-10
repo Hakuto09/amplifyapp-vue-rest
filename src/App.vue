@@ -13,6 +13,7 @@ import { /*Authenticator,*/ useAuthenticator } from "@aws-amplify/ui-vue";
 import { toRaw } from 'vue';
 //import { toRefs, reactive } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
+import router from './router'
 const fileName = "App.vue";
 
 //const disConsoleLog = true;
@@ -210,6 +211,20 @@ export default {
       userId,
     };
   },
+  methods: {
+
+    handleSignOut: async function(signOut) {
+      const funcName = [":methods:", "handleSignOut:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      // AmplifyのSignout処理
+      signOut();
+
+      // ブラウザのURL強制書き換え
+      router.replace('/');
+    },
+  },
+
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
@@ -274,7 +289,8 @@ export default {
     <template v-slot="{ signOut }">
     <!-- template v-model="{ user, signOut }" -->
       <!-- h1>Hello {{ user.username }}!</h1 -->
-      <button @click="signOut">Sign Out</button>
+      <!-- button @click="signOut">Sign Out</button -->
+      <button @click="handleSignOut(signOut)">Sign Out</button>
       <div id="app">
         <div>
           <!-- templete v-model="user" / -->
