@@ -219,13 +219,24 @@ export default {
         this.message_caution = 'セキュリティの観点より、以下認証情報は再表示しませんので、必ず保存しておくようにしてください。';
 //        this.message_result = 'Register Success: ' + JSON.stringify(responseData);
         this.message_result = 'Register Success';
-        this.message_certificatePem = 'certificatePem: ' + certificatePem;
-        if (!this.useCsr) {
-          this.message_PrivateKey = 'PrivateKey: ' + PrivateKey;
-          this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
+        if (this.displayCert) {
+          this.message_certificatePem = 'certificatePem: ' + certificatePem;
+          if (!this.useCsr) {
+            this.message_PrivateKey = 'PrivateKey: ' + PrivateKey;
+            this.enSaveCertInfo = (certificatePem != '') && (PrivateKey != '');
+          }
+          else {
+            this.enSaveCertInfo = (PrivateKey != '');
+          }
         }
         else {
-          this.enSaveCertInfo = (PrivateKey != '');
+          this.message_certificatePem = 'certificatePem: ' + '*****';
+          if (!this.useCsr) {
+            this.message_PrivateKey = 'PrivateKey: ' + '*****';
+          }
+          else {
+            this.enSaveCertInfo = (PrivateKey != '');
+          }
         }
       }
       else if (res == -1)  {
