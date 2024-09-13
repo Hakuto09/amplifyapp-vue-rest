@@ -23,6 +23,12 @@
       <input
         :class="$style.checkbox"
         type="checkbox"
+        id="checkboxVia1nceOs"
+        v-model="via1nceOs">
+      <label for="checkboxVia1nceOs">1NCE OS経由</label>
+      <input
+        :class="$style.checkbox"
+        type="checkbox"
         id="checkboxUseCsr"
         v-model="useCsr">
       <label for="checkboxUseCsr">CSR使用</label>
@@ -32,7 +38,7 @@
         id="checkboxDisplayCert"
         v-model="displayCert"
         @change="changedDisplayCert">
-      <label for="checkbox">認証情報を表示する</label>
+      <label for="checkboxDisplayCert">認証情報を表示する</label>
       <!-- pre>{{ $data }}</pre -->
     </div>
     <br><br>
@@ -126,6 +132,7 @@ export default {
         headers: [
           'device name',
           'device id',
+          'via_1nce_os',
 //          'dgroup_id',
         ],
         devices: null/*devices*/,
@@ -133,6 +140,7 @@ export default {
       dgroup_id: '',
       dgroup_name: '',
       useCsr: false,
+      via1nceOs: false,
       displayCert: true,
       device_name_input: '',
       csr_input: '',
@@ -188,6 +196,7 @@ export default {
           {
             device_name: this.device_name_input,
             dgroup_id: dgroupId.value,
+            via_1nce_os: this.via1nceOs,
             account_id: userInfo.userId,
             csr: csr,
             check_existing_flag: check_existing_flag,
@@ -286,6 +295,7 @@ export default {
       let device_id_selected = childData.selected.device_id;
       let device_name_selected = childData.selected.device_name;
       let dgroup_id_selected = childData.selected.dgroup_id;
+      let via_1nce_os_selected = childData.via_1nce_os_selected;
 
       let response;
 
@@ -319,6 +329,7 @@ export default {
       const payload = {
         device_name: device_name_selected,
         dgroup_id: dgroup_id_selected,
+        via_1nce_os: via_1nce_os_selected,
       }
 
       res = 0;
