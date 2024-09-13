@@ -295,7 +295,7 @@ export default {
       let device_id_selected = childData.selected.device_id;
       let device_name_selected = childData.selected.device_name;
       let dgroup_id_selected = childData.selected.dgroup_id;
-      let via_1nce_os_selected = childData.selected.via_1nce_os;
+      let via_1nce_os_selected = childData.via_1nce_os_selected;
 
       let response;
 

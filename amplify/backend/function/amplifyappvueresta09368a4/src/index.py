@@ -203,6 +203,7 @@ class Request_DeleteDevice(BaseModel):
 #    device_id: str
     device_name: str
     dgroup_id: str
+    via_1nce_os: bool
 
 class Response_DeleteDevice(BaseModel):
 #    thingName: str
@@ -598,7 +599,7 @@ def post_device(_in: Request_PostDevice):
     check_existing_flag = create_device_dict.get('check_existing_flag')
     del create_device_dict['check_existing_flag']
 
-    print('After create_device_dict.get():', ' create_device_dict ', create_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name, ' csr ', csr, ' check_existing_flag ', check_existing_flag)
+    print('After create_device_dict.get():', ' create_device_dict ', create_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' csr ', csr, ' check_existing_flag ', check_existing_flag)
 
     if (via_1nce_os) :
         thingName = device_name
@@ -701,7 +702,7 @@ def post_device(_in: Request_PostDevice):
 
     if (via_1nce_os == True) :
         ### IoT Core メッセージングルール (1NCE OS経由用) 登録 ###
-        ruleName = 'Hkt_' + '1nceOS_' + device_name
+        ruleName = 'Hkt_' + '1nceOs_' + device_name
         splitThingName = thingName.split('_')
         _1nce_iccid = splitThingName[0]
         topicName = "'" + _1nce_iccid + "/messages'"
@@ -871,13 +872,21 @@ def delete_device(_in: Request_DeleteDevice):
     ### IoT Core access.
     device_name = delete_device_dict.get('device_name')
     dgroup_id = delete_device_dict.get('dgroup_id')
-    dgroup_id_device_name = dgroup_id + '_' + device_name
-    dgroup_id_device_name = dgroup_id_device_name.replace('-', '')
-    print('After delete_device_dict.get():', ' delete_device_dict ', delete_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id, ' dgroup_id_device_name ', dgroup_id_device_name)
+    via_1nce_os = delete_device_dict.get('via_1nce_os')
+
+    print('After delete_device_dict.get():', ' delete_device_dict ', delete_device_dict, ' device_name ', device_name, ' dgroup_id ', dgroup_id)
+
+    if (via_1nce_os) :
+        thingName = device_name
+    else :
+        dgroup_id_device_name = dgroup_id + '_' + device_name
+        thingName = dgroup_id_device_name.replace('-', '')
+
+    print('After decide thingName:', ' thingName ', thingName, ' via_1nce_os ', via_1nce_os)
 
     # Check device existing.
     response_iot_device = client_iot.describe_thing(
-        thingName = dgroup_id_device_name,
+        thingName = thingName,
     )
     print('After client_iot.describe_thing():', ' response_iot_device ', response_iot_device)
 
@@ -895,7 +904,7 @@ def delete_device(_in: Request_DeleteDevice):
 
     # Get principals related device.
     response_iot_device = client_iot.list_thing_principals(
-        thingName = dgroup_id_device_name,
+        thingName = thingName,
     )
     print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
 
@@ -905,7 +914,7 @@ def delete_device(_in: Request_DeleteDevice):
 
     for i in range(0, len(principals), 1):
         response_iot_device = client_iot.detach_thing_principal(
-            thingName = dgroup_id_device_name,
+            thingName = thingName,
             principal = principals[i],
         )
         print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
@@ -913,10 +922,19 @@ def delete_device(_in: Request_DeleteDevice):
     # Delete device
     response_iot_device = client_iot.delete_thing(
 #        thingName = delete_device_dict.get('device_name'),
-        thingName = dgroup_id_device_name,
+        thingName = thingName,
         expectedVersion = version,
     )
     print('After client_iot.delete_thing():', ' response_iot_device ', response_iot_device)
+
+    if (via_1nce_os) :
+        # Delete topic rule
+        ruleName = 'Hkt_' + '1nceOs_' + device_name
+        print('Before client_iot.delete_topic_rule():', ' ruleName ', ruleName)
+        res_iot_rule = client_iot.delete_topic_rule(
+            ruleName = ruleName,
+        )
+        print('After client_iot.delete_topic_rule():', ' res_iot_rule ', res_iot_rule)
 
     # Dynamo DB Access
     response_ddb = ddb_table_devices.delete_item(
