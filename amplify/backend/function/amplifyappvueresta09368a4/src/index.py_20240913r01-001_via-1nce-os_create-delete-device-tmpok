@@ -668,10 +668,37 @@ def post_device(_in: Request_PostDevice):
     )
     print('After client_iot.add_thing_to_thing_group():', ' response_iot_dgroup ', response_iot_dgroup)
 
-#    certificateArn = ''
-    certificatePem = ''
-#    PublicKey = ''
-    PrivateKey = ''
+    if csr == '' :
+#        useCsr = 0
+        response_iot_csr = client_iot.create_keys_and_certificate(
+            setAsActive = True,
+        )
+    else :
+#        useCsr = 1
+        response_iot_csr = client_iot.create_certificate_from_csr(
+            certificateSigningRequest = csr,
+            setAsActive = True,
+        )
+    print('After client_iot.create_certificate_from_csr():', ' useCsr ', useCsr, ' response_iot_csr ', response_iot_csr)
+
+    certificateArn = response_iot_csr['certificateArn']
+    certificatePem = response_iot_csr['certificatePem']
+    PublicKey = response_iot_csr['keyPair']['PublicKey']
+    PrivateKey = response_iot_csr['keyPair']['PrivateKey']
+    print('After specify certificateInfo:', ' certificateArn ', certificateArn, ' certificatePem ', certificatePem, ' PublicKey ', PublicKey, ' PrivateKey ', PrivateKey)
+
+    response_iot_policy = client_iot.attach_policy(
+        policyName = 'iotDataAccess',
+        target = certificateArn,
+    )
+    print('After client_iot.attach_policy():', ' response_iot_policy ', response_iot_policy)
+
+    response_iot_thing_cert = client_iot.attach_thing_principal(
+#        thingName = create_device_dict.get('device_name'),
+        thingName = thingName,
+        principal = certificateArn,
+    )
+    print('After client_iot.attach_thing_principal():', ' response_iot_thing_cert ', response_iot_thing_cert)
 
     if (via_1nce_os == True) :
         ### IoT Core メッセージングルール (1NCE OS経由用) 登録 ###
@@ -702,39 +729,6 @@ def post_device(_in: Request_PostDevice):
             ruleName = ruleName,
         )
         print('After client_iot.enable_topic_rule():', ' res_iot_rule ', res_iot_rule)
-    else :
-        ### デバイス認証情報の作成と登録
-        if csr == '' :
-    #        useCsr = 0
-            response_iot_csr = client_iot.create_keys_and_certificate(
-                setAsActive = True,
-            )
-        else :
-    #        useCsr = 1
-            response_iot_csr = client_iot.create_certificate_from_csr(
-                certificateSigningRequest = csr,
-                setAsActive = True,
-            )
-        print('After client_iot.create_certificate_from_csr():', ' useCsr ', useCsr, ' response_iot_csr ', response_iot_csr)
-
-        certificateArn = response_iot_csr['certificateArn']
-        certificatePem = response_iot_csr['certificatePem']
-        PublicKey = response_iot_csr['keyPair']['PublicKey']
-        PrivateKey = response_iot_csr['keyPair']['PrivateKey']
-        print('After specify certificateInfo:', ' certificateArn ', certificateArn, ' certificatePem ', certificatePem, ' PublicKey ', PublicKey, ' PrivateKey ', PrivateKey)
-
-        response_iot_policy = client_iot.attach_policy(
-            policyName = 'iotDataAccess',
-            target = certificateArn,
-        )
-        print('After client_iot.attach_policy():', ' response_iot_policy ', response_iot_policy)
-
-        response_iot_thing_cert = client_iot.attach_thing_principal(
-    #        thingName = create_device_dict.get('device_name'),
-            thingName = thingName,
-            principal = certificateArn,
-        )
-        print('After client_iot.attach_thing_principal():', ' response_iot_thing_cert ', response_iot_thing_cert)
 
     # Dynamo DB Access
 #    response_ddb = client_ddb.put_item(
@@ -908,23 +902,22 @@ def delete_device(_in: Request_DeleteDevice):
 #    thingArn = response_iot_device.get('thingArn')
 #    print('After response_iot_device.get(\'thingArn\'):', ' thingArn ', thingArn)
 
-    if (via_1nce_os == False) :
-        # Get principals related device.
-        response_iot_device = client_iot.list_thing_principals(
+    # Get principals related device.
+    response_iot_device = client_iot.list_thing_principals(
+        thingName = thingName,
+    )
+    print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
+
+    # Specify principals.
+    principals = response_iot_device.get('principals')
+    print('After response_iot_device.get(\'principals\'):', ' principals ', principals)
+
+    for i in range(0, len(principals), 1):
+        response_iot_device = client_iot.detach_thing_principal(
             thingName = thingName,
+            principal = principals[i],
         )
-        print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
-
-        # Specify principals.
-        principals = response_iot_device.get('principals')
-        print('After response_iot_device.get(principals):', ' principals ', principals)
-
-        for i in range(0, len(principals), 1):
-            response_iot_device = client_iot.detach_thing_principal(
-                thingName = thingName,
-                principal = principals[i],
-            )
-            print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
+        print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
 
     # Delete device
     response_iot_device = client_iot.delete_thing(
@@ -934,7 +927,7 @@ def delete_device(_in: Request_DeleteDevice):
     )
     print('After client_iot.delete_thing():', ' response_iot_device ', response_iot_device)
 
-    if (via_1nce_os == True) :
+    if (via_1nce_os) :
         # Delete topic rule
         ruleName = 'Hkt_' + '1nceOs_' + device_name
         print('Before client_iot.delete_topic_rule():', ' ruleName ', ruleName)

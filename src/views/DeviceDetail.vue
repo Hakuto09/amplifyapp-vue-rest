@@ -52,8 +52,13 @@ console.log(fileName, ":After import:");
 
 let currentInstance;
 let devices;
-const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 
+//const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
+let url_base;
+if (userBranch == 'main')
+  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+else if (userBranch == 'feature')
+  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
 
 export default {
@@ -111,7 +116,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url + dgroupId);
+        response = await axios.get(url_base + dgroupId);
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         devices = response.data;

@@ -908,23 +908,23 @@ def delete_device(_in: Request_DeleteDevice):
 #    thingArn = response_iot_device.get('thingArn')
 #    print('After response_iot_device.get(\'thingArn\'):', ' thingArn ', thingArn)
 
-    if (via_1nce_os == False) :
-        # Get principals related device.
-        response_iot_device = client_iot.list_thing_principals(
+#   if (via_1nce_os == False) :
+    # Get principals related device.
+    response_iot_device = client_iot.list_thing_principals(
+        thingName = thingName,
+    )
+    print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
+
+    # Specify principals.
+    principals = response_iot_device.get('principals')
+    print('After response_iot_device.get(principals):', ' principals ', principals)
+
+    for i in range(0, len(principals), 1):
+        response_iot_device = client_iot.detach_thing_principal(
             thingName = thingName,
+            principal = principals[i],
         )
-        print('After client_iot.list_thing_principals():', ' response_iot_device ', response_iot_device)
-
-        # Specify principals.
-        principals = response_iot_device.get('principals')
-        print('After response_iot_device.get(principals):', ' principals ', principals)
-
-        for i in range(0, len(principals), 1):
-            response_iot_device = client_iot.detach_thing_principal(
-                thingName = thingName,
-                principal = principals[i],
-            )
-            print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
+        print('After client_iot.detach_thing_principal():', ' i ', i, ' response_iot_device ', response_iot_device)
 
     # Delete device
     response_iot_device = client_iot.delete_thing(
