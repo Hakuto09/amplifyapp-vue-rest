@@ -120,7 +120,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url_base + dgroupId);
+        response = await axios.get(url_base + '_devices/' + dgroupId);
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         devices = response.data;
