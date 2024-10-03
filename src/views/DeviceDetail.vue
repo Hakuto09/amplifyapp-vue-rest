@@ -253,9 +253,9 @@ export default {
 //    this.device_id = devices[id].device_id;
 //    this.via_1nce_os = devices[id].via_1nce_os;
 
-    this.device_name = deviceInfo.value[device_name];
-    this.device_id = deviceInfo.value[device_id];
-    this.via_1nce_os = deviceInfo.value[via_1nce_os];
+    this.device_name = deviceInfo.value['device_name'];
+    this.device_id = deviceInfo.value['device_id'];
+    this.via_1nce_os = deviceInfo.value['via_1nce_os'];
   },
   updated: function() {
     const funcName = [":updated:"];
