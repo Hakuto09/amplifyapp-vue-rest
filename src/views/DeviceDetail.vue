@@ -87,7 +87,7 @@ export default {
   components: {
     LMap,
     LTileLayer,
-//    LMarker,
+    LMarker,
   },
   data: function() {
     const funcName = [":data:"];
