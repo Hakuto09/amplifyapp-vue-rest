@@ -28,6 +28,10 @@
           <td :class="$style.item">device_id</td>
           <td :class="$style.value">{{ device_id }}</td>
         </tr>
+        <tr>
+          <td :class="$style.item">via_1nce_os</td>
+          <td :class="$style.value">{{ via_1nce_os }}</td>
+        </tr>
       </table>
     </div>
     <br><br>
@@ -100,25 +104,26 @@ export default {
     console.log(fileName, funcName[0], "Before return():");
     return {
 //      devices: null/*devices*/,
-      properties: {
-//        headers: [
-//          'device_id',
-//          'device_name',
-//          'dgroup_id',
-//        ],
-//        dgroups: null/*dgroups*/,
-//        devices: null,
-        devices: {
-          device_id: "0",
-          device_name: "0",
-          dgroup_id: "0",
-          id: 0,
-        }
-      },
+//      properties: {
+////        headers: [
+////          'device_id',
+////          'device_name',
+////          'dgroup_id',
+////        ],
+////        dgroups: null/*dgroups*/,
+////        devices: null,
+//        devices: {
+//          device_id: "0",
+//          device_name: "0",
+//          dgroup_id: "0",
+//          id: 0,
+//        }
+//      },
 //      dgroupId: dgroupId.value,
 //      deviceId: deviceId.value,
       device_name: '',
       device_id: '',
+      via_1nce_os: '',
 //      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       map_zoom: 15,
       map_marker_position: [35.6769883, 139.7588499],
@@ -173,10 +178,10 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After order change:", " devices ", devices, " orderChangedDevices ", orderChangedDevices);
 */
 //        this.devices = devices;
-        this.properties.devices = devices;
+//        this.properties.devices = devices;
 //        this.properties.devices = orderChangedDevices;
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.devices ", this.devices);
-        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
+//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.properties ", this.properties);
 
         currentInstance.proxy.$forceUpdate();
         console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
@@ -238,6 +243,7 @@ export default {
 
     this.device_name = devices[id].device_name;
     this.device_id = devices[id].device_id;
+    this.via_1nce_os = devices[id].via_1nce_os;
   },
   updated: function() {
     const funcName = [":updated:"];
