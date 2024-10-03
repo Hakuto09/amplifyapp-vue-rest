@@ -45,7 +45,8 @@
         <l-marker :lat-lng="[35.686541, 139.698851]"></l-marker>
       </l-map>
     </div -->
-    <div style="height:600px; width:800px">
+    <!-- div style="height:600px; width:800px" -->
+    <div>
       <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="map_marker_position">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
