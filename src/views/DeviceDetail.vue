@@ -60,6 +60,8 @@
         <l-marker :lat-lng="map_marker_position"></l-marker>
       </l-map>
     </div>
+    <br><br>
+    <br><br>
   </div>
 </template>
 
