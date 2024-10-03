@@ -285,8 +285,7 @@ export default {
 
 .map {
   overflow: hidden;
-  /*width: 800px;*/
-  width: 80%;
+  width: 800px;
   height: 600px;
   /*display: flex;*/
   /*justify-content: center;*/
