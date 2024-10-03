@@ -46,7 +46,7 @@
       </l-map>
     </div -->
     <!-- div style="height:600px; width:800px" -->
-    <div>
+    <div :class="$style.map">
       <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="map_marker_position">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -275,5 +275,13 @@ export default {
 
 .value {
   width: 400px;
+}
+
+.map {
+  overflow: hidden;
+  width: 800px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
 }
 </style>
