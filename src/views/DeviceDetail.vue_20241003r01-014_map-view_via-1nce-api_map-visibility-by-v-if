@@ -238,24 +238,14 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-    // Just for debug only.
     const route = useRoute();
-    console.log(fileName, funcName[0], "After useRoute():", " route ", route);
+    console.log(fileName, funcName[0], funcName[1], "After useRoute():", " route ", route);
     const id = route.params.id;
-    console.log(fileName, funcName[0], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
+    console.log(fileName, funcName[0], funcName[1], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
 
-    // To follow updatad deviceInfo.
-    const deviceInfo = ref('');
-    deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
-    console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
-
-//    this.device_name = devices[id].device_name;
-//    this.device_id = devices[id].device_id;
-//    this.via_1nce_os = devices[id].via_1nce_os;
-
-    this.device_name = deviceInfo.value[device_name];
-    this.device_id = deviceInfo.value[device_id];
-    this.via_1nce_os = deviceInfo.value[via_1nce_os];
+    this.device_name = devices[id].device_name;
+    this.device_id = devices[id].device_id;
+    this.via_1nce_os = devices[id].via_1nce_os;
   },
   updated: function() {
     const funcName = [":updated:"];
