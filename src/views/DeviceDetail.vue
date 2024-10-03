@@ -290,6 +290,8 @@ export default {
   height: 600px;
   /*display: flex;*/
   /*justify-content: center;*/
-  margin: 0 auto;
+  /*margin: 0 auto;*/
+  margin: 0 auto 100 auto;
+  /*margin-bottom: 100px;*/
 }
 </style>
