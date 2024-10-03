@@ -39,10 +39,19 @@
       </button>
     </div>
   </div>
-  <div id="map-container">
+  <!-- div id="map-container">
     <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
       <l-tile-layer :url="url"></l-tile-layer>
       <l-marker :lat-lng="[35.686541, 139.698851]"></l-marker>
+    </l-map>
+  </div -->
+  <div style="height:600px; width:800px">
+    <l-map ref="map" v-model:zoom="zoom" :use-global-leaflet="false" :center="center">
+      <l-tile-layer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        layer-type="base"
+        name="OpenStreetMap"
+      ></l-tile-layer>
     </l-map>
   </div>
 </template>
@@ -77,8 +86,8 @@ export default {
   name: 'DeviceDetail',
   components: {
     LMap,
-    LTileLayer, 
-    LMarker
+    LTileLayer,
+//    LMarker,
   },
   data: function() {
     const funcName = [":data:"];
@@ -107,8 +116,9 @@ export default {
 //      deviceId: deviceId.value,
       device_name: '',
       device_id: '',
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    }
+//      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      zoom: 15,
+      center: [35.6769883, 139.7588499],    }
   },
   methods: {
     showChart: function() {
