@@ -281,7 +281,8 @@ export default {
   overflow: hidden;
   width: 800px;
   height: 600px;
-  display: flex;
-  justify-content: center;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  margin: 0 auto;
 }
 </style>
