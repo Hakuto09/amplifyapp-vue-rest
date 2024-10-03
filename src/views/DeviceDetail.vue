@@ -52,6 +52,7 @@
         layer-type="base"
         name="OpenStreetMap"
       ></l-tile-layer>
+      <l-marker :lat-lng="center"></l-marker>
     </l-map>
   </div>
 </template>
@@ -118,7 +119,8 @@ export default {
       device_id: '',
 //      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       zoom: 15,
-      center: [35.6769883, 139.7588499],    }
+      center: [35.6769883, 139.7588499],
+    }
   },
   methods: {
     showChart: function() {
