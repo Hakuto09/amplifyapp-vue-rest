@@ -39,12 +39,6 @@
       </button>
     </div>
   </div>
-  <div id="map-container">
-    <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker :lat-lng="[35.686541, 139.698851]"></l-marker>
-    </l-map>
-  </div>
 </template>
 
 <script>
@@ -52,8 +46,6 @@ import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { getCurrentInstance } from 'vue';
-import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
 const fileName = "DeviceDetail.vue";
 
 console.log(fileName, ":After import:");
@@ -75,11 +67,6 @@ else if (userBranch == 'feature')
 
 export default {
   name: 'DeviceDetail',
-  components: {
-    LMap,
-    LTileLayer, 
-    LMarker
-  },
   data: function() {
     const funcName = [":data:"];
     console.log(fileName, funcName[0], "In.");
@@ -107,7 +94,6 @@ export default {
 //      deviceId: deviceId.value,
       device_name: '',
       device_id: '',
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     }
   },
   methods: {

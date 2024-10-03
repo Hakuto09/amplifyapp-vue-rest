@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^4.2.8",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vuepic/vue-datepicker": "^8.8.0",
     "@vueuse/core": "^10.10.0",
     "aws-amplify": "^6.3.4",

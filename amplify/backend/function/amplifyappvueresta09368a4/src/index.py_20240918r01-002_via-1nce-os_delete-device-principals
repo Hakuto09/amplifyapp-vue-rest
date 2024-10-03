@@ -678,8 +678,7 @@ def post_device(_in: Request_PostDevice):
         ruleName = 'Hkt_' + '1nceOs_' + device_name
         splitThingName = thingName.split('_')
         _1nce_iccid = splitThingName[0]
-#        topicName = "'" + _1nce_iccid + "/messages'"
-        topicName = "'" + _1nce_iccid + "/+'"
+        topicName = "'" + _1nce_iccid + "/messages'"
 #        roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
         lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb-staging_for-1nce-os_python"
         print('Before client_iot.create_topic_rule():', ' ruleName ', ruleName, ' topicName ', topicName, ' lambdaFunctionArn ', lambdaFunctionArn)
