@@ -291,7 +291,7 @@ export default {
   /*display: flex;*/
   /*justify-content: center;*/
   /*margin: 0 auto;*/
-  margin: 0 auto 100 auto;
+  margin: 0px auto 100px auto;
   /*margin-bottom: 100px;*/
 }
 </style>
