@@ -128,7 +128,7 @@ export default {
       via_1nce_os: '',
 //      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       map_zoom: 15,
-      map_marker_position: [35.6879, 139.7136],
+      map_marker_position: [35.6769883, 139.7588499],
     }
   },
   methods: {
