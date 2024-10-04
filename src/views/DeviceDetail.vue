@@ -215,11 +215,23 @@ export default {
         };
         console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
 //        const response = await axios.post(_1nce_url_base + 'oauth/token', axios_data, axios_headers);
+/*
         const response = await axios.post(_1nce_url_base + 'oauth/token', {
           headers: {
             'Accept': 'Application/json',
             'Authorization': 'Basic ' + _1nce_account_base64,
             'Content-type': 'Application/json',
+          },
+          data: {
+            'grant_type': 'client_credentials'
+          },
+        });
+*/
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+          headers: {
+            'accept': 'application/json',
+            'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+            'content-type': 'application/json',
           },
           data: {
             'grant_type': 'client_credentials'
