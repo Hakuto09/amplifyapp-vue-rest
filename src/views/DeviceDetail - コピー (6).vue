@@ -196,7 +196,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       if (this.via_1nce_os) {
-        const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
+        const _1nce_account_base64 = btoa(input_1nce_username + ':' + input_1nce_password);
         console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
         const axios_data = {
