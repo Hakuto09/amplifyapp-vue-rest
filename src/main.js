@@ -20,6 +20,7 @@ app.use(router);
 console.log(fileName, ":After app.use(router): ");
 //app.use(cors({origin: true, credentials: true}));
 //console.log(fileName, ":After app.use(cors()): ");
+/*
 app.use(function(req, res, next) {
 //    res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,6 +30,7 @@ app.use(function(req, res, next) {
     );
     next();
 });
+*/
 //app.use(store);
 //console.log(fileName, ":After app.use(store): ");
 //app.use(VueLocalStorage);
