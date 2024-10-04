@@ -100,7 +100,7 @@ let currentInstance;
 let devices;
 let _1nce_api_token;
 
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 //const userBranch = process.env.USER_BRANCH;
 const userBranch = localStorage.getItem('userBranch');
