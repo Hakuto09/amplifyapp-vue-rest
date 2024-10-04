@@ -111,6 +111,8 @@ if (userBranch == 'main')
 else if (userBranch == 'feature')
   aws_url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
+console.log(fileName, "aws_url_base ", aws_url_base);
+
 // 1NCE API: Authorization --> Obtain Access Token
 //  curl --request POST \
 //     --url https://api.1nce.com/management-api/oauth/token \
@@ -124,6 +126,7 @@ else if (userBranch == 'feature')
 //     '
 
 const _1nce_url_base = 'https://api.1nce.com/management-api/';
+console.log(fileName, "_1nce_url_base ", _1nce_url_base);
 
 // 1NCE API: 1NCE OS --> Device Locator --> Get Latest Devices Positions
 //  curl --request GET \
@@ -138,6 +141,7 @@ const _1nce_url_base = 'https://api.1nce.com/management-api/';
 //     --header 'authorization: Bearer 1NCE_TOKEN'
 
 const _1nce_url_base_v = _1nce_url_base + 'v1/';
+console.log(fileName, "_1nce_url_base_v ", _1nce_url_base_v);
 
 export default {
   name: 'DeviceDetail',
