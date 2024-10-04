@@ -230,7 +230,7 @@ export default {
         });
 */
 //        const response = await axios.post('https://api.1nce.com/management-api/oauth/token');
-
+/*
         const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
           headers: {
             'Accept': 'application/json',
@@ -241,6 +241,19 @@ export default {
             'grant_type': 'client_credentials'
           },
         });
+*/
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+            data: {
+              'grant_type': 'client_credentials'
+            },
+          }, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'Content-type': 'application/json',
+            },
+          },
+        );
 
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
