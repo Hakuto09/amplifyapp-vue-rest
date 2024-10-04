@@ -173,12 +173,9 @@ export default {
       device_name: '',
       device_id: '',
       via_1nce_os: '',
+//      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       map_zoom: 15,
       map_marker_position: [35.6879, 139.7136],       // Hakuto honsya
-      valid1nceApiToken: false/*true*/,
-      _1nce_username_input: '',
-      _1nce_password_input: '',
-      message_1nce_result: '',
     }
   },
   methods: {
@@ -195,7 +192,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       if (this.via_1nce_os) {
-        _1nce_account_base64 = btoa(_1nce_username_input + ':' + _1nce_password_input);
+        _1nce_account_base64 = base64(_1nce_username_input + ':' + _1nce_password_input);
         console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
         axios_data = {
@@ -203,9 +200,9 @@ export default {
         };
         axios_headers = {
           headers: {
-            "accept": 'application/json',
-            "authorization": "Basic " + _1nce_account_base64,
-            "Content-type": 'application/json'
+            accept: 'application/json',
+            authorization: "Basic " + _1nce_account_base64,
+            content-type: 'application/json'
           }
         };
         console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
@@ -215,12 +212,6 @@ export default {
 
         _1nce_api_token = response.data;
         console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
-
-        localStorage.setItem('_1nce_api_token', _1nce_api_token);
-        console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        valid1nceApiToken = true;
-        message_1nce_result = "1NCEトークンの更新成功！！";
       }
 
       currentInstance = getCurrentInstance();
@@ -347,7 +338,6 @@ export default {
     this.via_1nce_os = deviceInfo.value['via_1nce_os'];
     console.log(fileName, funcName[0], " this.device_name ", this.device_name, " this.device_id ", this.device_id, " this.via_1nce_os ", this.via_1nce_os);
 
-/*
     _1nce_api_token
 
     if (this.via_1nce_os) {
@@ -356,8 +346,11 @@ export default {
       response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
       console.log(fileName, funcName[0], " response.status ", response.status)
       console.log(fileName, funcName[0], " response.data ", response.data);
+
+
+
+
     }
-*/
   },
   updated: function() {
     const funcName = [":updated:"];

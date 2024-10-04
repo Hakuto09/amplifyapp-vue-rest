@@ -195,7 +195,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       if (this.via_1nce_os) {
-        _1nce_account_base64 = btoa(_1nce_username_input + ':' + _1nce_password_input);
+        _1nce_account_base64 = base64(_1nce_username_input + ':' + _1nce_password_input);
         console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
         axios_data = {
@@ -203,9 +203,9 @@ export default {
         };
         axios_headers = {
           headers: {
-            "accept": 'application/json',
-            "authorization": "Basic " + _1nce_account_base64,
-            "Content-type": 'application/json'
+            accept: 'application/json',
+            authorization: "Basic " + _1nce_account_base64,
+            content-type: 'application/json'
           }
         };
         console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
@@ -218,9 +218,6 @@ export default {
 
         localStorage.setItem('_1nce_api_token', _1nce_api_token);
         console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        valid1nceApiToken = true;
-        message_1nce_result = "1NCEトークンの更新成功！！";
       }
 
       currentInstance = getCurrentInstance();

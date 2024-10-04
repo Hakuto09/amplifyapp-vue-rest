@@ -218,9 +218,6 @@ export default {
 
         localStorage.setItem('_1nce_api_token', _1nce_api_token);
         console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        valid1nceApiToken = true;
-        message_1nce_result = "1NCEトークンの更新成功！！";
       }
 
       currentInstance = getCurrentInstance();

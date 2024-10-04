@@ -61,8 +61,6 @@
       1NCE APIトークン更新
     </button>
     <br><br>
-    <p>{{ message_1nce_result }}</p>
-    <br><br>
     <!-- div id="map-container">
       <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
         <l-tile-layer :url="url"></l-tile-layer>
@@ -173,12 +171,9 @@ export default {
       device_name: '',
       device_id: '',
       via_1nce_os: '',
+//      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       map_zoom: 15,
       map_marker_position: [35.6879, 139.7136],       // Hakuto honsya
-      valid1nceApiToken: false/*true*/,
-      _1nce_username_input: '',
-      _1nce_password_input: '',
-      message_1nce_result: '',
     }
   },
   methods: {
@@ -189,46 +184,7 @@ export default {
       this.$router.push({
         name: 'chart',
       })
-    },
-    update1nceApiToken: async function() {
-      const funcName = [":methods:", "update1nceApiToken:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
-
-      if (this.via_1nce_os) {
-        _1nce_account_base64 = btoa(_1nce_username_input + ':' + _1nce_password_input);
-        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
-
-        axios_data = {
-          "grant_type": "client_credentials"
-        };
-        axios_headers = {
-          headers: {
-            "accept": 'application/json',
-            "authorization": "Basic " + _1nce_account_base64,
-            "Content-type": 'application/json'
-          }
-        };
-        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
-        response = await axios.post(_1nce_url_base_v + 'oauth/token', axios_data, axios_headers);
-        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
-        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
-
-        _1nce_api_token = response.data;
-        console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
-
-        localStorage.setItem('_1nce_api_token', _1nce_api_token);
-        console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        valid1nceApiToken = true;
-        message_1nce_result = "1NCEトークンの更新成功！！";
-      }
-
-      currentInstance = getCurrentInstance();
-      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
-
-      currentInstance.proxy.$forceUpdate();
-      console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
-    },
+    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
@@ -347,7 +303,6 @@ export default {
     this.via_1nce_os = deviceInfo.value['via_1nce_os'];
     console.log(fileName, funcName[0], " this.device_name ", this.device_name, " this.device_id ", this.device_id, " this.via_1nce_os ", this.via_1nce_os);
 
-/*
     _1nce_api_token
 
     if (this.via_1nce_os) {
@@ -356,8 +311,11 @@ export default {
       response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
       console.log(fileName, funcName[0], " response.status ", response.status)
       console.log(fileName, funcName[0], " response.data ", response.data);
+
+
+
+
     }
-*/
   },
   updated: function() {
     const funcName = [":updated:"];
