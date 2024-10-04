@@ -18,6 +18,8 @@ const app = createApp(App);
 console.log(fileName, ":After createApp(App): ");
 app.use(router);
 console.log(fileName, ":After app.use(router): ");
+app.use(cors({origin: true, credentials: true}));
+console.log(fileName, ":After app.use(cors()): ");
 //app.use(store);
 //console.log(fileName, ":After app.use(store): ");
 //app.use(VueLocalStorage);
