@@ -248,9 +248,9 @@ export default {
             },
           }, {
             headers: {
-              'Accept': 'application/json',
-              'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
-              'Content-type': 'application/json',
+              'accept': 'application/json',
+              'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'content-type': 'application/json',
             },
           },
         );
