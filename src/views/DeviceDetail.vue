@@ -47,16 +47,16 @@
     <input
       v-model="input_1nce_username"
       :class="$style.input_1nce_username"
-      :disabled=!valid1nceApiToken
+      :disabled = valid1nceApiToken
       placeholder="1nce username">
     <input
       v-model="input_1nce_password"
       :class="$style.input_1nce_password"
-      :disabled=!valid1nceApiToken
+      :disabled = valid1nceApiToken
       placeholder="1nce password">
     <button
       type="is-info"
-      :disabled=!valid1nceApiToken
+      :disabled = valid1nceApiToken
       @click="update1nceApiToken">
       1NCE APIトークン更新
     </button>

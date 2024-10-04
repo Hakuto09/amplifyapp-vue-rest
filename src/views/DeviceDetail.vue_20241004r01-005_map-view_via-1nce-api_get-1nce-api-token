@@ -45,13 +45,13 @@
     <br><br>
     <p>1NCE APIトークンの更新には、1NCEアカウント情報を入力してください。</p>
     <input
-      v-model="_1nce_username_input"
-      :class="$style._1nce_username_input"
+      v-model="input_1nce_username"
+      :class="$style.input_1nce_username"
       :disabled=!valid1nceApiToken
       placeholder="1nce username">
     <input
-      v-model="_1nce_password_input"
-      :class="$style._1nce_password_input"
+      v-model="input_1nce_password"
+      :class="$style.input_1nce_password"
       :disabled=!valid1nceApiToken
       placeholder="1nce password">
     <button
@@ -98,6 +98,7 @@ console.log(fileName, ":After import:");
 
 let currentInstance;
 let devices;
+let _1nce_api_token;
 
 //const userBranch = process.env.USER_BRANCH;
 const userBranch = localStorage.getItem('userBranch');
@@ -122,7 +123,7 @@ else if (userBranch == 'feature')
 //     }
 //     '
 
-_1nce_url_base = 'https://api.1nce.com/management-api/';
+const _1nce_url_base = 'https://api.1nce.com/management-api/';
 
 // 1NCE API: 1NCE OS --> Device Locator --> Get Latest Devices Positions
 //  curl --request GET \
@@ -136,7 +137,7 @@ _1nce_url_base = 'https://api.1nce.com/management-api/';
 //     --header 'accept: application/json' \
 //     --header 'authorization: Bearer 1NCE_TOKEN'
 
-_1nce_url_base_v = _1nce_url_base + 'v1/';
+const _1nce_url_base_v = _1nce_url_base + 'v1/';
 
 export default {
   name: 'DeviceDetail',
@@ -176,8 +177,8 @@ export default {
       map_zoom: 15,
       map_marker_position: [35.6879, 139.7136],       // Hakuto honsya
       valid1nceApiToken: false/*true*/,
-      _1nce_username_input: '',
-      _1nce_password_input: '',
+      input_1nce_username: '',
+      input_1nce_password: '',
       message_1nce_result: '',
     }
   },
@@ -195,21 +196,21 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       if (this.via_1nce_os) {
-        _1nce_account_base64 = base64(_1nce_username_input + ':' + _1nce_password_input);
+        const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
         console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
-        axios_data = {
+        const axios_data = {
           "grant_type": "client_credentials"
         };
-        axios_headers = {
+        const axios_headers = {
           headers: {
-            accept: 'application/json',
-            authorization: "Basic " + _1nce_account_base64,
-            content-type: 'application/json'
+            "accept": 'application/json',
+            "authorization": "Basic " + _1nce_account_base64,
+            "Content-type": 'application/json'
           }
         };
         console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
-        response = await axios.post(_1nce_url_base_v + 'oauth/token', axios_data, axios_headers);
+        const response = await axios.post(_1nce_url_base_v + 'oauth/token', axios_data, axios_headers);
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
@@ -218,6 +219,9 @@ export default {
 
         localStorage.setItem('_1nce_api_token', _1nce_api_token);
         console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
+      
+        this.valid1nceApiToken = true;
+        this.message_1nce_result = "1NCEトークンの更新成功！！";
       }
 
       currentInstance = getCurrentInstance();
