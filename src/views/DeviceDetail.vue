@@ -230,8 +230,6 @@ export default {
 /*
         const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
             'accept': 'application/json',
             'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
             'content-type': 'application/json',
