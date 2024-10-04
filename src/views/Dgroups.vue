@@ -58,13 +58,13 @@ console.log(fileName, "userBranch ", userBranch);
 let dgroups;
 //let dgroups2 = [];
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
-let url_base;
+let aws_url_base;
 if (userBranch == 'main')
-  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+  aws_url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 else if (userBranch == 'feature')
-  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
+  aws_url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
-console.log(fileName, "url_base ", url_base);
+console.log(fileName, "aws_url_base ", aws_url_base);
 
 let userInfo/* = { username, userId, signInDetails }*/; 
 let userId;
@@ -129,8 +129,8 @@ export default {
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
-  //      axios.post(url_base + 'dgroup',
-        await axios.post(url_base + 'dgroup',
+  //      axios.post(aws_url_base + 'dgroup',
+        await axios.post(aws_url_base + 'dgroup',
           {
             dgroup_name: this.dgroup_name_input,
             account_id: /*userInfo.*/userId,
@@ -162,7 +162,7 @@ export default {
 
       // Dgroupリストの更新
       try {
-        response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
+        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {
@@ -200,7 +200,7 @@ export default {
 
       // Deviceリストの取得
       try {
-        response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -227,7 +227,7 @@ export default {
 
       // Dgroup関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete(dgroup):", " payload ", payload);
-      await axios.delete(url_base + 'dgroup',
+      await axios.delete(aws_url_base + 'dgroup',
         {
           data: payload,
         })
@@ -249,7 +249,7 @@ export default {
 
       // Dgroupリストの更新
       try {
-        response_api = await axios.get(url_base + 'dgroups/' + /*userInfo.*/userId);
+        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {
@@ -337,7 +337,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId, " userId ", userId);
 
       try {
-        response_api = await axios.get(url_base + 'dgroups/' + userInfo.userId);
+        response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {

@@ -93,13 +93,13 @@ const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
-let url_base;
+let aws_url_base;
 if (userBranch == 'main')
-  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+  aws_url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 else if (userBranch == 'feature')
-  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
+  aws_url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
-console.log(fileName, "url_base ", url_base);
+console.log(fileName, "aws_url_base ", aws_url_base);
 
 let responseData;
 let certificatePem = '';
@@ -192,7 +192,7 @@ export default {
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post_device):", " check_existing_flag ", check_existing_flag);
-        await axios.post(url_base + '_device',
+        await axios.post(aws_url_base + '_device',
           {
             device_name: this.device_name_input,
             dgroup_id: dgroupId.value,
@@ -259,7 +259,7 @@ export default {
 
       // Deviceリストの更新
       try {
-        response_api = await axios.get(url_base + '_devices/' + dgroupId.value);
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId.value);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -300,7 +300,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url_base + 'ddata/' + device_id_selected);
+        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata)", " response ", response);
         ddata = response.data;
       }
@@ -314,7 +314,7 @@ export default {
         let loops = ddata.length;
         for(let i = 0; i < loops; ++i) {
           try {
-            response = await axios.delete(url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt);
+            response = await axios.delete(aws_url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt);
             console.log(fileName, funcName[0], funcName[1], "After axios.delete(ddata):", " response ", response)
           }
           catch (error) {
@@ -336,7 +336,7 @@ export default {
 
       // Device関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
-      await axios.delete(url_base + '_device',
+      await axios.delete(aws_url_base + '_device',
         {
           data: payload,
         })
@@ -358,7 +358,7 @@ export default {
 
       // Deviceリストの更新
       try {
-        response_api = await axios.get(url_base + '_devices/' + dgroup_id_selected);
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -477,7 +477,7 @@ export default {
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
 //        response_api = await axios.get(url + dgroupId);
-        response_api = await axios.get(url_base + '_devices/' + dgroupId);
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId);
 //        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api.data ", response_api.data);
         devices = response_api.data;

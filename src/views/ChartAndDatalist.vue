@@ -176,13 +176,13 @@ const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
-let url_base;
+let aws_url_base;
 if (userBranch == 'main')
-  url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
+  aws_url_base = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/';
 else if (userBranch == 'feature')
-  url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
+  aws_url_base = 'https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging/';
 
-console.log(fileName, "url_base ", url_base);
+console.log(fileName, "aws_url_base ", aws_url_base);
 
 // Graph data reset.
 let labels = [];
@@ -512,7 +512,7 @@ export default {
 
       try {
 //        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
-        response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
+        response = await axios.get(aws_url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata_between)", " response ", response)
         ddata = response.data;
 
@@ -708,7 +708,7 @@ export default {
       let response;
 
       try {
-        response = await axios.get(url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
+        response = await axios.get(aws_url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         console.log(fileName, funcName[0], funcName[1], "After await axios.get(ddata_between):", " response ", response)
         ddata = response.data;
 
