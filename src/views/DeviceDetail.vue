@@ -269,7 +269,8 @@ export default {
           },
         );
 */
-
+/*
+        // Just CORS error.
         const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
            'grant_type': 'client_credentials',
           }, {
@@ -279,6 +280,17 @@ export default {
               'accept': 'application/json',
               'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
               'content-type': 'application/json',
+            },
+          },
+        );
+*/
+          const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+           'grant_type': 'client_credentials',
+          }, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'Content-Type': 'application/json',
             },
           },
         );
