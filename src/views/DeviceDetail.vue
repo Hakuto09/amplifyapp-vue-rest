@@ -276,7 +276,27 @@ export default {
 
       if (_1nce_api_token != '') {
         const _1nce_device_id = this.device_name.split('_');
-        console.log(fileName, funcName[0], funcName[1], " Before axios.get(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+
+        // GETリクエストの記述
+        console.log(fileName, funcName[0], funcName[1], " Before no-await axios.get(1nce locate):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+        axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=' + _1nce_device_id[0], {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + _1nce_api_token,
+            },
+          }
+        )
+        .then(response => {
+          // レスポンス処理
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
+        })
+        .catch(error => {
+          // エラーハンドリング
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
+        });
+
+        console.log(fileName, funcName[0], funcName[1], " Before await axios.get(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
         const response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=' + _1nce_device_id[0], {
             headers: {
               'Accept': 'application/json',
@@ -284,8 +304,8 @@ export default {
             },
           }
         );
-        console.log(fileName, funcName[0], funcName[1], " After axios.get(1nce locate);", " response.status ", response.status)
-        console.log(fileName, funcName[0], funcName[1], " After axios.get(1nce locate);", " response.data ", response.data);
+        console.log(fileName, funcName[0], funcName[1], " After await axios.get(1nce locate):", " response.status ", response.status)
+        console.log(fileName, funcName[0], funcName[1], " After await axios.get(1nce locate):", " response.data ", response.data);
 
         this.map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
         this.map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
