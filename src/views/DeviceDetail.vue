@@ -391,21 +391,22 @@ export default {
     this.via_1nce_os = deviceInfo.value['via_1nce_os'];
     console.log(fileName, funcName[0], " this.device_name ", this.device_name, " this.device_id ", this.device_id, " this.via_1nce_os ", this.via_1nce_os);
 
-    if (this.via_1nce_os) {
-      console.log(fileName, funcName[0], " Before this.update1nceLocatePos()");
-      this.update1nceLocatePos(this.device_name);
-    }
-    else {
-      // Not via 1nce os.
-      this.valid1nceApiToken = true;
-//      _1nce_api_token = '';
-    }
-
     console.log(fileName, funcName[0], "Out.");
   },
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.");
+
+    if (this.via_1nce_os) {
+      console.log(fileName, funcName[0], " Before this.update1nceLocatePos()", " this.via_1nce_os ", this.via_1nce_os);
+      this.update1nceLocatePos(this.device_name);
+    }
+    else {
+      // Not via 1nce os.
+      console.log(fileName, funcName[0], " Before this.valid1nceApiToken = true", " this.via_1nce_os ", this.via_1nce_os);
+      this.valid1nceApiToken = true;
+//      _1nce_api_token = '';
+    }
 
     console.log(fileName, funcName[0], "Out.");
   },
