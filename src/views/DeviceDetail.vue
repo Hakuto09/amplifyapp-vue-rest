@@ -71,16 +71,18 @@
     </div -->
     <!-- div style="height:600px; width:800px" -->
     <div :class="$style.map" v-if=via_1nce_os>
-      <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="map_marker_position">
+      <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="_1nce_map_marker_position">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
           name="OpenStreetMap"
         ></l-tile-layer>
-        <l-marker :lat-lng="map_marker_position"></l-marker>
+        <l-marker :lat-lng="_1nce_map_marker_position"></l-marker>
       </l-map>
     </div>
     <br><br>
+    <p>1NCE SIM Data Quata情報</p>
+    <p>{{ _1nce_sim_data_quata }}</p>
     <br><br>
   </div>
 </template>
@@ -181,8 +183,9 @@ export default {
       device_id: '',
       via_1nce_os: '',
       map_zoom: 15,
-//      map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
-      map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
+      _1nce_sim_data_quata: '',
+//      _1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
+      _1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
       valid1nceApiToken: false/*true*/,
       input_1nce_username: '',
       input_1nce_password: '',
@@ -257,19 +260,61 @@ export default {
       this.valid1nceApiToken = true;
       this.message_1nce_result = "1NCE APIトークンの更新成功！！";
 
-      // Update 1NCE Locate position.
-      this.update1nceLocatePos();
-      console.log(fileName, funcName[0], funcName[1], "this.update1nceLocatePos():");
-      
+      // Update 1NCE SIM Data Quata.
+      this.update1nceSimDataQuata();
+      console.log(fileName, funcName[0], funcName[1], "this.update1nceSimDataQuata():");
+
+      // Update 1NCE Locate Position.
+      this.update1nceLocatePosition();
+      console.log(fileName, funcName[0], funcName[1], "this.update1nceLocatePosition():");
+
 //      currentInstance = getCurrentInstance();
 //      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
       currentInstance.proxy.$forceUpdate();
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
     },
-//    update1nceLocatePos: async function() {
-    update1nceLocatePos: function() {
-        const funcName = [":methods:", "update1nceLocatePos:"];
+    update1nceSimDataQuata: function() {
+      const funcName = [":methods:", "update1nceSimDataQuata:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      const _1nce_api_token = localStorage.getItem('_1nce_api_token');
+      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " _1nce_api_token ", _1nce_api_token);
+
+      if (_1nce_api_token != '') {
+        const _1nce_device_id = this.device_name.split('_');
+
+        // GETリクエストの記述
+        console.log(fileName, funcName[0], funcName[1], " Before no-await axios.get(1nce sim-data-quata):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+        axios.get(_1nce_url_base_v + 'sims/' + _1nce_device_id[0] + '/quota/data', {
+          headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + _1nce_api_token,
+            },
+          }
+        )
+        .then(response => {
+          // レスポンス処理
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.status ", response.status)
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.data ", response.data);
+
+          console.log(fileName, funcName[0], funcName[1], " Before set this._1nce_sim_data_quata:");
+          this._1nce_sim_data_quata = response.data;
+          console.log(fileName, funcName[0], funcName[1], " After set this._1nce_sim_data_quata:", " this._1nce_sim_data_quata ", this._1nce_sim_data_quata);
+        })
+        .catch(error => {
+          // エラーハンドリング
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).catch:", " error ", error)
+        });
+      }
+      else {
+        this.valid1nceApiToken = false;
+        this.message_1nce_result = "1NCE APIトークンが無効です。更新してください。";
+      }
+    },
+//    update1nceLocatePosition: async function() {
+    update1nceLocatePosition: function() {
+      const funcName = [":methods:", "update1nceLocatePosition:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       const _1nce_api_token = localStorage.getItem('_1nce_api_token');
@@ -293,8 +338,8 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
 
           console.log(fileName, funcName[0], funcName[1], " Before set map position");
-          this.map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-          console.log(fileName, funcName[0], funcName[1], " After set map position", " this.map_marker_position ", this.map_marker_position);
+          this._1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+          console.log(fileName, funcName[0], funcName[1], " After set map position", " this._1nce_map_marker_position ", this._1nce_map_marker_position);
         })
         .catch(error => {
           // エラーハンドリング
@@ -316,10 +361,10 @@ export default {
 
 /*
         console.log(fileName, funcName[0], funcName[1], " Before set map position");
-//        this.map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
-//        this.map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
-        this.map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-        console.log(fileName, funcName[0], funcName[1], " After set map position", " this.map_marker_position ", this.map_marker_position);
+//        this._1nce_map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
+//        this._1nce_map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
+        this._1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+        console.log(fileName, funcName[0], funcName[1], " After set map position", " this._1nce_map_marker_position ", this._1nce_map_marker_position);
 */
       }
       else {
@@ -429,8 +474,11 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
     if (this.via_1nce_os) {
-      console.log(fileName, funcName[0], " Before this.update1nceLocatePos()", " this.via_1nce_os ", this.via_1nce_os);
-      this.update1nceLocatePos(this.device_name);
+      console.log(fileName, funcName[0], " Before this.update1nceSimDataQuata():");
+      this.update1nceSimDataQuata();
+
+      console.log(fileName, funcName[0], " Before this.update1nceLocatePosition():");
+      this.update1nceLocatePosition();
     }
     else {
       // Not via 1nce os.
