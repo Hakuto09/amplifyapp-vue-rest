@@ -203,9 +203,8 @@ export default {
 
       if (this.via_1nce_os) {
         const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
-//        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
+        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
-/*
         const axios_data = {
           "grant_type": "client_credentials"
         };
@@ -216,30 +215,81 @@ export default {
             "Content-type": 'application/json'
           }
         };
-*/
-        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " _1nce_account_base64 ", _1nce_account_base64);
-//        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
+        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
 //        const response = await axios.post(_1nce_url_base + 'oauth/token', axios_data, axios_headers);
 /*
-        // Get _1nce_api_token OK.
+        const response = await axios.post(_1nce_url_base + 'oauth/token', {
+          headers: {
+            'Accept': 'Application/json',
+            'Authorization': 'Basic ' + _1nce_account_base64,
+            'Content-type': 'Application/json',
+          },
+          data: {
+            'grant_type': 'client_credentials'
+          },
+        });
+*/
+//        const response = await axios.post('https://api.1nce.com/management-api/oauth/token');
+/*
         const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+            'Content-type': 'application/json',
+          },
+          data: {
+            'grant_type': 'client_credentials'
+          },
+        });
+*/
+/*
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+            data: {
+              'grant_type': 'client_credentials'
+            },
+          }, {
+            headers: {
+              'accept': 'application/json',
+              'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'content-type': 'application/json',
+            },
+          },
+        );
+*/
+/*
+        // Just CORS error.
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+           'grant_type': 'client_credentials',
+          }, {
+            headers: {
+              'accept': 'application/json',
+              'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'content-type': 'application/json',
+            },
+          },
+        );
+*/
+/*
+        // Just CORS error.
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+           'grant_type': 'client_credentials',
+          }, {
+            headers: {
+              'Access-Control-Request-Headers': 'authorization,content-type',
+              'Access-Control-Request-Method': 'POST',
+              'accept': 'application/json',
+              'authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'content-type': 'application/json',
+            },
+          },
+        );
+*/
+          const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
            'grant_type': 'client_credentials',
           }, {
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
-              'Content-Type': 'application/json',
-            },
-          },
-        );
-*/
-
-        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
-           'grant_type': 'client_credentials',
-          }, {
-            headers: {
-              'Accept': 'application/json',
-              'Authorization': 'Basic ' + _1nce_account_base64,
               'Content-Type': 'application/json',
             },
           },
