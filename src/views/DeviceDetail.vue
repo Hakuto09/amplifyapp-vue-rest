@@ -47,16 +47,16 @@
     <input
       v-model="input_1nce_username"
       :class="$style.input_1nce_username"
-      :disabled = valid1nceApiToken
+      :disabled = !via_1nce_os || valid1nceApiToken
       placeholder="1nce username">
     <input
       v-model="input_1nce_password"
       :class="$style.input_1nce_password"
-      :disabled = valid1nceApiToken
+      :disabled = !via_1nce_os || valid1nceApiToken
       placeholder="1nce password">
     <button
       type="is-info"
-      :disabled = valid1nceApiToken
+      :disabled = !via_1nce_os || valid1nceApiToken
       @click="update1nceApiToken">
       1NCE APIトークン更新
     </button>
@@ -201,8 +201,8 @@ export default {
       const funcName = [":methods:", "update1nceApiToken:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      if (this.via_1nce_os) {
-        const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
+//      if (this.via_1nce_os) {
+      const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
 //        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
 /*
@@ -217,7 +217,7 @@ export default {
           }
         };
 */
-        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " _1nce_account_base64 ", _1nce_account_base64);
+      console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce token);", " _1nce_account_base64 ", _1nce_account_base64);
 //        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
 //        const response = await axios.post(_1nce_url_base + 'oauth/token', axios_data, axios_headers);
 /*
@@ -234,32 +234,52 @@ export default {
         );
 */
 
-        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
-           'grant_type': 'client_credentials',
-          }, {
-            headers: {
-              'Accept': 'application/json',
-              'Authorization': 'Basic ' + _1nce_account_base64,
-              'Content-Type': 'application/json',
-            },
+      const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+          'grant_type': 'client_credentials',
+        }, {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Basic ' + _1nce_account_base64,
+            'Content-Type': 'application/json',
           },
-        );
+        },
+      );
 
-        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
-        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
+      console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
+      console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
-        _1nce_api_token = response.data['access_token'];
-        console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
+      _1nce_api_token = response.data['access_token'];
+      console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
 
-        localStorage.setItem('_1nce_api_token', _1nce_api_token);
-        console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        this.valid1nceApiToken = true;
-        this.message_1nce_result = "1NCEトークンの更新成功！！";
-      }
+      localStorage.setItem('_1nce_api_token', _1nce_api_token);
+      console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
+    
+      this.valid1nceApiToken = true;
+      this.message_1nce_result = "1NCEトークンの更新成功！！";
+//      }
 
 //      currentInstance = getCurrentInstance();
 //      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
+
+      currentInstance.proxy.$forceUpdate();
+      console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
+    },
+    update1nceLocatePos: async function() {
+      const funcName = [":methods:", "update1nceLocatePos:"];
+      console.log(fileName, funcName[0], funcName[1], "In.");
+
+      if (_1nce_api_token) {
+        _1nce_device_id = this.device_id.split('_');
+        console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+        response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
+        console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
+        console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
+
+      }
+      else {
+        this.valid1nceApiToken = false;
+        this.message_1nce_result = "1NCE APIトークンが無効です。更新してください。";
+      }
 
       currentInstance.proxy.$forceUpdate();
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
@@ -382,17 +402,9 @@ export default {
     this.via_1nce_os = deviceInfo.value['via_1nce_os'];
     console.log(fileName, funcName[0], " this.device_name ", this.device_name, " this.device_id ", this.device_id, " this.via_1nce_os ", this.via_1nce_os);
 
-/*
-    _1nce_api_token
-
     if (this.via_1nce_os) {
-      _1nce_device_id = this.device_id.split('_');
-      console.log(fileName, funcName[0], " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
-      response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
-      console.log(fileName, funcName[0], " response.status ", response.status)
-      console.log(fileName, funcName[0], " response.data ", response.data);
+      this.update1nceLocatePos();
     }
-*/
   },
   updated: function() {
     const funcName = [":updated:"];
