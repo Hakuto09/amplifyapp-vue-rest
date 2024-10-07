@@ -201,14 +201,16 @@ export default {
         name: 'chart',
       })
     },
-    update1nceApiToken: /*async*/ function() {
-      const funcName = [":methods:", "update1nceApiToken:"];
+//    update1nceApiToken: async function() {
+    update1nceApiToken: function() {
+        const funcName = [":methods:", "update1nceApiToken:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
 
       console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce token);", " _1nce_account_base64 ", _1nce_account_base64);
-      const response = /*await*/ axios.post('https://api.1nce.com/management-api/oauth/token', {
+//      const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+      axios.post('https://api.1nce.com/management-api/oauth/token', {
           'grant_type': 'client_credentials',
         }, {
           headers: {
