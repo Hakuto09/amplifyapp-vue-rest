@@ -186,7 +186,7 @@ export default {
       d_1nce_sim_data_quata: '',
 //      d_1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
       d_1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
-      valid1nceApiToken: false/*true*/,
+      valid1nceApiToken: true,
       input_1nce_username: '',
       input_1nce_password: '',
       message_1nce_result: '',
@@ -305,6 +305,9 @@ export default {
         .catch(error => {
           // エラーハンドリング
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).catch:", " error ", error)
+
+          this.valid1nceApiToken = false;
+          this.message_1nce_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
         });
       }
       else {
@@ -344,6 +347,9 @@ export default {
         .catch(error => {
           // エラーハンドリング
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
+
+          this.valid1nceApiToken = false;
+          this.message_1nce_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
         });
 
 /*
