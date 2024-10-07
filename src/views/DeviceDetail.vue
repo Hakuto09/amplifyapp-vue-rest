@@ -269,9 +269,9 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       if (_1nce_api_token) {
-        _1nce_device_id = this.device_id.split('_');
+        const _1nce_device_id = this.device_name.split('_');
         console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
-        response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
+        const response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
@@ -281,8 +281,8 @@ export default {
         this.message_1nce_result = "1NCE APIトークンが無効です。更新してください。";
       }
 
-      currentInstance.proxy.$forceUpdate();
-      console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
+//      currentInstance.proxy.$forceUpdate();
+//      console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
     },
   },
   beforeCreate: function() {
@@ -404,7 +404,7 @@ export default {
 
     if (this.via_1nce_os) {
       console.log(fileName, funcName[0], " Before this.update1nceLocatePos()");
-      this.update1nceLocatePos();
+      this.update1nceLocatePos(this.device_name);
     }
 
     console.log(fileName, funcName[0], "Out.");
