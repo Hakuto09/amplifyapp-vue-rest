@@ -181,7 +181,8 @@ export default {
       device_id: '',
       via_1nce_os: '',
       map_zoom: 15,
-      map_marker_position: [35.6879, 139.7136],       // Hakuto honsya
+//      map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
+      map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
       valid1nceApiToken: false/*true*/,
       input_1nce_username: '',
       input_1nce_password: '',
