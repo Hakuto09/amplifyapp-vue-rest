@@ -403,8 +403,11 @@ export default {
     console.log(fileName, funcName[0], " this.device_name ", this.device_name, " this.device_id ", this.device_id, " this.via_1nce_os ", this.via_1nce_os);
 
     if (this.via_1nce_os) {
+      console.log(fileName, funcName[0], " Before this.update1nceLocatePos()");
       this.update1nceLocatePos();
     }
+
+    console.log(fileName, funcName[0], "Out.");
   },
   updated: function() {
     const funcName = [":updated:"];
