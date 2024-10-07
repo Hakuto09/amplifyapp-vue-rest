@@ -284,7 +284,7 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " After axios.get(1nce locate);", " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " After axios.get(1nce locate);", " response.data ", response.data);
 
-        this.map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度　latitude
+        this.map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
         this.map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
         console.log(fileName, funcName[0], funcName[1], " After set map position", " this.map_marker_position ", this.map_marker_position);
       }
