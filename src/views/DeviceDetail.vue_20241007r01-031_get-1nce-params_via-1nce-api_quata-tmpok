@@ -201,14 +201,43 @@ export default {
         name: 'chart',
       })
     },
-    update1nceApiToken: /*async*/ function() {
+    update1nceApiToken: async function() {
       const funcName = [":methods:", "update1nceApiToken:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
       const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
+//        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
+/*
+        const axios_data = {
+          "grant_type": "client_credentials"
+        };
+        const axios_headers = {
+          headers: {
+            "accept": 'application/json',
+            "authorization": "Basic " + _1nce_account_base64,
+            "Content-type": 'application/json'
+          }
+        };
+*/
       console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce token);", " _1nce_account_base64 ", _1nce_account_base64);
-      const response = /*await*/ axios.post('https://api.1nce.com/management-api/oauth/token', {
+//        console.log(fileName, funcName[0], funcName[1], " Before axios.post();", " axios_data ", axios_data, " axios_headers ", axios_headers);
+//        const response = await axios.post(_1nce_url_base + 'oauth/token', axios_data, axios_headers);
+/*
+        // Get _1nce_api_token OK.
+        const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
+           'grant_type': 'client_credentials',
+          }, {
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Basic bWFydXlhbWEtaEBoYWt1dG8uY28uanA6SGFrdXRvODkxMA==',
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+*/
+
+      const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
           'grant_type': 'client_credentials',
         }, {
           headers: {
@@ -217,36 +246,30 @@ export default {
             'Content-Type': 'application/json',
           },
         },
-      )
-      .then(response => {
-          // レスポンス処理
-        console.log(fileName, funcName[0], funcName[1], " axios.get(1nce token).then:", " response.status ", response.status)
-        console.log(fileName, funcName[0], funcName[1], " axios.get(1nce token).then:", " response.data ", response.data);
+      );
 
-        const _1nce_api_token = response.data['access_token'];
-        console.log(fileName, funcName[0], funcName[1], " axios.get(1nce token).then:", " _1nce_api_token ", _1nce_api_token);
+      console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
+      console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
-        localStorage.setItem('_1nce_api_token', _1nce_api_token);
-        console.log(fileName, funcName[0], funcName[1], " After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
-      
-        this.valid1nceApiToken = true;
-        this.message_1nce_result = "1NCE APIトークンの更新成功！！";
+      const _1nce_api_token = response.data['access_token'];
+      console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
 
-        // Update 1NCE SIM Data Quata.
-        this.update1nceSimDataQuata();
-        console.log(fileName, funcName[0], funcName[1], "this.update1nceSimDataQuata():");
+      localStorage.setItem('_1nce_api_token', _1nce_api_token);
+      console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
+    
+      this.valid1nceApiToken = true;
+      this.message_1nce_result = "1NCE APIトークンの更新成功！！";
 
-        // Update 1NCE Locate Position.
-        this.update1nceLocatePosition();
-        console.log(fileName, funcName[0], funcName[1], "this.update1nceLocatePosition():");
-      })
-      .catch(error => {
-        // エラーハンドリング
-        console.log(fileName, funcName[0], funcName[1], " axios.get(1nce token).catch:", " error ", error)
+      // Update 1NCE SIM Data Quata.
+      this.update1nceSimDataQuata();
+      console.log(fileName, funcName[0], funcName[1], "this.update1nceSimDataQuata():");
 
-        this.valid1nceApiToken = false;
-        this.message_1nce_result = "1NCE APIトークンの更新に失敗しました。再度試行してください。";
-      });
+      // Update 1NCE Locate Position.
+      this.update1nceLocatePosition();
+      console.log(fileName, funcName[0], funcName[1], "this.update1nceLocatePosition():");
+
+//      currentInstance = getCurrentInstance();
+//      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
       currentInstance.proxy.$forceUpdate();
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
