@@ -308,8 +308,8 @@ export default {
         this.message_1nce_result = "1NCEトークンの更新成功！！";
       }
 
-      currentInstance = getCurrentInstance();
-      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
+//      currentInstance = getCurrentInstance();
+//      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
       currentInstance.proxy.$forceUpdate();
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);

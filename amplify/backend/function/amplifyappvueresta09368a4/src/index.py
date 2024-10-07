@@ -342,7 +342,8 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
         KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
 #        FilterExpression = Attr('device_id').eq(device_id),
         FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+#        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
         Limit = 1000 # 取得するデータ件数
     )
     print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
