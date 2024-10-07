@@ -98,7 +98,7 @@ console.log(fileName, ":After import:");
 
 let currentInstance;
 let devices;
-//let _1nce_api_token = '';
+let _1nce_api_token = '';
 
 //axios.defaults.withCredentials = true;
 
@@ -248,7 +248,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
       console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
-      const _1nce_api_token = response.data['access_token'];
+      _1nce_api_token = response.data['access_token'];
       console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
 
       localStorage.setItem('_1nce_api_token', _1nce_api_token);
@@ -268,9 +268,6 @@ export default {
       const funcName = [":methods:", "update1nceLocatePos:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      const _1nce_api_token = localStorage.getItem('_1nce_api_token');
-      console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem():", " _1nce_api_token ", _1nce_api_token);
-
       if (_1nce_api_token != '') {
         const _1nce_device_id = this.device_name.split('_');
         console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
@@ -278,7 +275,7 @@ export default {
           }, {
             headers: {
               'Accept': 'application/json',
-              'Authorization': 'Basic ' + _1nce_api_token,
+              'Authorization': 'Basic ' + _1nce_account_base64,
             },
           }
         );
@@ -419,7 +416,7 @@ export default {
     else {
       // Not via 1nce os.
       this.valid1nceApiToken = true;
-//      _1nce_api_token = '';
+      _1nce_api_token = '';
     }
 
     console.log(fileName, funcName[0], "Out.");
