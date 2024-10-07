@@ -298,7 +298,7 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
 
-        _1nce_api_token = response.data['access token'];
+        _1nce_api_token = response.data['access_token'];
         console.log(fileName, funcName[0], funcName[1], " _1nce_api_token ", _1nce_api_token);
 
         localStorage.setItem('_1nce_api_token', _1nce_api_token);
