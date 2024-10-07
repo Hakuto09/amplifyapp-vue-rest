@@ -82,6 +82,7 @@
       </l-map>
     </div>
     <p>{{ message_1nce_locate_result }}</p>
+    <br><br>
     <h2>1NCE SIM Data Quata 情報</h2>
     <p>{{ d_1nce_sim_data_quata }}</p>
     <p>{{ message_1nce_sim_quota_result }}</p>
@@ -572,8 +573,8 @@ export default {
   height: 600px;
   /*display: flex;*/
   /*justify-content: center;*/
-  /*margin: 0 auto;*/
-  margin: 0px auto 100px auto;
+  margin: 0 auto;
+  /*margin: 0px auto 100px auto;*/
   /*margin-bottom: 100px;*/
 }
 </style>
