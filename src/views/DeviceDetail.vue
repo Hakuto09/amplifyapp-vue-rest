@@ -71,13 +71,13 @@
     </div -->
     <!-- div style="height:600px; width:800px" -->
     <div :class="$style.map" v-if=via_1nce_os>
-      <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="_1nce_map_marker_position">
+      <l-map ref="map" v-model:zoom="map_zoom" :use-global-leaflet="false" :center="d_1nce_map_marker_position">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
           name="OpenStreetMap"
         ></l-tile-layer>
-        <l-marker :lat-lng="_1nce_map_marker_position"></l-marker>
+        <l-marker :lat-lng="d_1nce_map_marker_position"></l-marker>
       </l-map>
     </div>
     <br><br>
@@ -184,8 +184,8 @@ export default {
       via_1nce_os: '',
       map_zoom: 15,
       d_1nce_sim_data_quata: '',
-//      _1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
-      _1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
+//      d_1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
+      d_1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
       valid1nceApiToken: false/*true*/,
       input_1nce_username: '',
       input_1nce_password: '',
@@ -338,8 +338,8 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
 
           console.log(fileName, funcName[0], funcName[1], " Before set map position");
-          this._1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-          console.log(fileName, funcName[0], funcName[1], " After set map position", " this._1nce_map_marker_position ", this._1nce_map_marker_position);
+          this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+          console.log(fileName, funcName[0], funcName[1], " After set map position", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
         })
         .catch(error => {
           // エラーハンドリング
@@ -361,10 +361,10 @@ export default {
 
 /*
         console.log(fileName, funcName[0], funcName[1], " Before set map position");
-//        this._1nce_map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
-//        this._1nce_map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
-        this._1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-        console.log(fileName, funcName[0], funcName[1], " After set map position", " this._1nce_map_marker_position ", this._1nce_map_marker_position);
+//        this.d_1nce_map_marker_position[0] = response.data.coordinates[0].coordinate[1]; // 緯度 latitude
+//        this.d_1nce_map_marker_position[1] = response.data.coordinates[0].coordinate[0]; // 経度 longitude
+        this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+        console.log(fileName, funcName[0], funcName[1], " After set map position", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
 */
       }
       else {
