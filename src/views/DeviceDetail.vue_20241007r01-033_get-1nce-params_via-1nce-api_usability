@@ -61,9 +61,8 @@
       1NCE APIトークン更新
     </button>
     <br><br>
-    <p>{{ message_1nce_token_result }}</p>
+    <p>{{ message_1nce_result }}</p>
     <br><br>
-    <h2>1NCE Latest Devices Positions (接続先の基地局位置) 情報</h2>
     <!-- div id="map-container">
       <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
         <l-tile-layer :url="url"></l-tile-layer>
@@ -81,10 +80,9 @@
         <l-marker :lat-lng="d_1nce_map_marker_position"></l-marker>
       </l-map>
     </div>
-    <p>{{ message_1nce_locate_result }}</p>
-    <h2>1NCE SIM Data Quata 情報</h2>
+    <br><br>
+    <p>1NCE SIM Data Quata情報</p>
     <p>{{ d_1nce_sim_data_quata }}</p>
-    <p>{{ message_1nce_sim_quota_result }}</p>
     <br><br>
   </div>
 </template>
@@ -191,9 +189,7 @@ export default {
       valid1nceApiToken: true,
       input_1nce_username: '',
       input_1nce_password: '',
-      message_1nce_token_result: '',
-      message_1nce_locate_result: '',
-      message_1nce_sim_quota_result: '',
+      message_1nce_result: '',
     }
   },
   methods: {
@@ -236,7 +232,7 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
       
         this.valid1nceApiToken = true;
-        this.message_1nce_token_result = "1NCE APIトークンの更新成功！！";
+        this.message_1nce_result = "1NCE APIトークンの更新成功！！";
 
         // Update 1NCE SIM Data Quata.
         this.update1nceSimDataQuata();
@@ -251,7 +247,7 @@ export default {
         console.log(fileName, funcName[0], funcName[1], " axios.get(1nce token).catch:", " error ", error)
 
         this.valid1nceApiToken = false;
-        this.message_1nce_token_result = "1NCE APIトークンの更新に失敗しました。再度試行してください。";
+        this.message_1nce_result = "1NCE APIトークンの更新に失敗しました。再度試行してください。";
       });
 
       currentInstance.proxy.$forceUpdate();
@@ -281,25 +277,21 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.status ", response.status)
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.data ", response.data);
 
-//          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata:");
+          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata:");
           this.d_1nce_sim_data_quata = response.data;
           console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata:", " this.d_1nce_sim_data_quata ", this.d_1nce_sim_data_quata);
-
-          this.message_1nce_token_result = "1NCE APIトークンは有効です。";
-          this.message_1nce_sim_quota_result = "1NCE SIMのデータ割当情報の取得に成功しました。";
         })
         .catch(error => {
           // エラーハンドリング
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).catch:", " error ", error)
 
           this.valid1nceApiToken = false;
-          this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
-          this.message_1nce_sim_quota_result = "1NCE SIMのデータ割当情報の取得に失敗しました。";
+          this.message_1nce_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
         });
       }
       else {
         this.valid1nceApiToken = false;
-        this.message_1nce_token_result = "1NCE APIトークンが無効です。更新してください。";
+        this.message_1nce_result = "1NCE APIトークンが無効です。更新してください。";
       }
     },
 //    update1nceLocatePosition: async function() {
@@ -327,27 +319,16 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
 
-          if (response.data.coordinates == []) {
-            console.log(fileName, funcName[0], funcName[1], " if (response.data.coordinates == []):");
-
-            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報が登録されていません。";
-          }
-          else {
-//            console.log(fileName, funcName[0], funcName[1], " Before set map position");
-            this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-            console.log(fileName, funcName[0], funcName[1], " After set map position:", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
-
-            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に成功しました。";
-          }
-          this.message_1nce_token_result = "1NCE APIトークンは有効です。";
-         })
+          console.log(fileName, funcName[0], funcName[1], " Before set map position");
+          this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+          console.log(fileName, funcName[0], funcName[1], " After set map position", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
+        })
         .catch(error => {
           // エラーハンドリング
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
 
           this.valid1nceApiToken = false;
-          this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
-          this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。";
+          this.message_1nce_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
         });
 
 /*
@@ -373,7 +354,7 @@ export default {
       }
       else {
         this.valid1nceApiToken = false;
-        this.message_1nce_token_result = "1NCE APIトークンが無効です。更新してください。";
+        this.message_1nce_result = "1NCE APIトークンが無効です。更新してください。";
       }
 
 //      currentInstance.proxy.$forceUpdate();
