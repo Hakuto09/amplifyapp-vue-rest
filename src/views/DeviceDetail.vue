@@ -255,7 +255,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After localStorage.setItem():", " _1nce_api_token ", _1nce_api_token);
     
       this.valid1nceApiToken = true;
-      this.message_1nce_result = "1NCEトークンの更新成功！！";
+      this.message_1nce_result = "1NCE APIトークンの更新成功！！";
 //      }
 
 //      currentInstance = getCurrentInstance();
@@ -274,7 +274,7 @@ export default {
       if (_1nce_api_token != '') {
         const _1nce_device_id = this.device_name.split('_');
         console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
-        const response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0], {
+        const response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=' + _1nce_device_id[0], {
             headers: {
               'Accept': 'application/json',
               'Authorization': 'Basic ' + _1nce_api_token,
