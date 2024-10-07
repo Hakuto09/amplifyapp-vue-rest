@@ -47,16 +47,16 @@
     <input
       v-model="input_1nce_username"
       :class="$style.input_1nce_username"
-      :disabled = !via_1nce_os || valid1nceApiToken
+      :disabled = valid1nceApiToken
       placeholder="1nce username">
     <input
       v-model="input_1nce_password"
       :class="$style.input_1nce_password"
-      :disabled = !via_1nce_os || valid1nceApiToken
+      :disabled = valid1nceApiToken
       placeholder="1nce password">
     <button
       type="is-info"
-      :disabled = !via_1nce_os || valid1nceApiToken
+      :disabled = valid1nceApiToken
       @click="update1nceApiToken">
       1NCE APIトークン更新
     </button>
@@ -98,7 +98,7 @@ console.log(fileName, ":After import:");
 
 let currentInstance;
 let devices;
-let _1nce_api_token;
+let _1nce_api_token = '';
 
 //axios.defaults.withCredentials = true;
 
@@ -268,7 +268,7 @@ export default {
       const funcName = [":methods:", "update1nceLocatePos:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
-      if (_1nce_api_token) {
+      if (_1nce_api_token != '') {
         const _1nce_device_id = this.device_name.split('_');
         console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
         const response = await axios.get(_1nce_url_base_v + 'locate/positions/latest?deviceId=/' + _1nce_device_id[0]);
@@ -405,6 +405,11 @@ export default {
     if (this.via_1nce_os) {
       console.log(fileName, funcName[0], " Before this.update1nceLocatePos()");
       this.update1nceLocatePos(this.device_name);
+    }
+    else {
+      // Not via 1nce os.
+      this.valid1nceApiToken = true;
+      _1nce_api_token = '';
     }
 
     console.log(fileName, funcName[0], "Out.");
