@@ -82,7 +82,7 @@
     </div>
     <br><br>
     <p>1NCE SIM Data Quata情報</p>
-    <p>{{ _1nce_sim_data_quata }}</p>
+    <p>{{ d_1nce_sim_data_quata }}</p>
     <br><br>
   </div>
 </template>
@@ -183,7 +183,7 @@ export default {
       device_id: '',
       via_1nce_os: '',
       map_zoom: 15,
-      _1nce_sim_data_quata: '',
+      d_1nce_sim_data_quata: '',
 //      _1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
       _1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
       valid1nceApiToken: false/*true*/,
@@ -298,9 +298,9 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.status ", response.status)
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.data ", response.data);
 
-          console.log(fileName, funcName[0], funcName[1], " Before set this._1nce_sim_data_quata:");
-          this._1nce_sim_data_quata = response.data;
-          console.log(fileName, funcName[0], funcName[1], " After set this._1nce_sim_data_quata:", " this._1nce_sim_data_quata ", this._1nce_sim_data_quata);
+          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata:");
+          this.d_1nce_sim_data_quata = response.data;
+          console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata:", " this.d_1nce_sim_data_quata ", this.d_1nce_sim_data_quata);
         })
         .catch(error => {
           // エラーハンドリング
