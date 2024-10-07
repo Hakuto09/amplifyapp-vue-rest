@@ -202,6 +202,7 @@ export default {
       const funcName = [":methods:", "update1nceApiToken:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
+//      if (this.via_1nce_os) {
       const _1nce_account_base64 = btoa(this.input_1nce_username + ':' + this.input_1nce_password);
 //        console.log(fileName, funcName[0], funcName[1], " _1nce_account_base64 ", _1nce_account_base64);
 
@@ -256,11 +257,8 @@ export default {
     
       this.valid1nceApiToken = true;
       this.message_1nce_result = "1NCE APIトークンの更新成功！！";
+//      }
 
-      // Update 1NCE Locate position.
-      this.update1nceLocatePos();
-      console.log(fileName, funcName[0], funcName[1], "this.update1nceLocatePos():");
-      
 //      currentInstance = getCurrentInstance();
 //      console.log(fileName, funcName[0], funcName[1], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
@@ -380,11 +378,37 @@ export default {
 //    const deviceId = ref('');
 //    deviceId.value = localStorage.getItem('deviceId');
 //    console.log(fileName, ":After localStorage.getItem():", " deviceId.value ", deviceId.value);
+  },
+  created: function() {
+    const funcName = [":created:"];
+    console.log(fileName, funcName[0], "In.");
+  },
+  beforeMount: function() {
+    const funcName = [":beforeMount:"];
+    console.log(fileName, funcName[0], "In.");
+  },
+  mounted: function() {
+    const funcName = [":mounted:"];
+    console.log(fileName, funcName[0], "In.");
+  },
+  beforeUpdate: function() {
+    const funcName = [":beforeUpdate:"];
+    console.log(fileName, funcName[0], "In.");
+
+    // Just for debug only.
+    const route = useRoute();
+    console.log(fileName, funcName[0], "After useRoute():", " route ", route);
+    const id = route.params.id;
+    console.log(fileName, funcName[0], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
 
     // To follow updatad deviceInfo.
     const deviceInfo = ref('');
     deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
     console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
+
+//    this.device_name = devices[id].device_name;
+//    this.device_id = devices[id].device_id;
+//    this.via_1nce_os = devices[id].via_1nce_os;
 
     this.device_name = deviceInfo.value['device_name'];
     this.device_id = deviceInfo.value['device_id'];
@@ -403,57 +427,17 @@ export default {
 
     console.log(fileName, funcName[0], "Out.");
   },
-  created: function() {
-    const funcName = [":created:"];
-    console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
-  },
-  beforeMount: function() {
-    const funcName = [":beforeMount:"];
-    console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
-  },
-  mounted: function() {
-    const funcName = [":mounted:"];
-    console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
-  },
-  beforeUpdate: function() {
-    const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.");
-
-    // Just for debug only.
-    const route = useRoute();
-    console.log(fileName, funcName[0], "After useRoute():", " route ", route);
-    const id = route.params.id;
-    console.log(fileName, funcName[0], "After id = route.params.id:", " id ", id, " route.params.id ", route.params.id);
-
-//    this.device_name = devices[id].device_name;
-//    this.device_id = devices[id].device_id;
-//    this.via_1nce_os = devices[id].via_1nce_os;
-
-    console.log(fileName, funcName[0], "Out.");
-  },
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
     console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
     console.log(fileName, funcName[0], "In.");
-
-    console.log(fileName, funcName[0], "Out.");
   },
 }
 </script>
