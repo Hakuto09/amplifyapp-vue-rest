@@ -87,10 +87,10 @@
     <p>{{ message_1nce_locate_result }}</p>
     <br><br>
     <h3>1NCE SIM Data Quata 情報</h3>
-    <h5>SIM残量 (MB): {{ d_1nce_sim_data_quata_volume }}</h5>
-    <p>JSONデータ: {{ d_1nce_sim_data_quata_all_json }}</p>
+    <h5>SIM残量: {{ d_1nce_sim_data_quata_volume }} MB</h5>
     <br><br>
     <p>{{ message_1nce_sim_quota_result }}</p>
+    <p>JSONデータ: {{ d_1nce_sim_data_quata_all_json }}</p>
     <br><br>
   </div>
 </template>
