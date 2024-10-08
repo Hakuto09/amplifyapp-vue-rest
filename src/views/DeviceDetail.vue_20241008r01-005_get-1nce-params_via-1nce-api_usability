@@ -4,7 +4,6 @@
     <!-- h2>route.params.id: {{ $route.params.id }}</h2 -->
     <!-- h2>route.params.device_id: {{ $route.params.device_id }}</h2 -->
     <!-- h2>Device details of device_id: {{ deviceId }}</h2 -->
-    <h3>Device detail of device_name: {{ device_name }}</h3>
     <div
       :class="$style.deviceinfo">
       <table>
@@ -302,8 +301,8 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).catch:", " error ", error)
 
           this.valid1nceApiToken = false;
-          this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください ↑";
-          this.message_1nce_sim_quota_result = "1NCE SIMのデータ割当情報の取得に失敗しました。1NCE APIトークンを更新してください ↑";
+          this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
+          this.message_1nce_sim_quota_result = "1NCE SIMのデータ割当情報の取得に失敗しました。";
         });
       }
       else {
@@ -356,7 +355,7 @@ export default {
 
           this.valid1nceApiToken = false;
           this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
-          this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。1NCE APIトークンを更新してください ↑";
+          this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。";
         });
 
 /*
