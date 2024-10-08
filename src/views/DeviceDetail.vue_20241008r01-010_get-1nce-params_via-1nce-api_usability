@@ -44,9 +44,6 @@
       </button>
     </div>
     <br><br>
-    <h3>1NCE 関連情報</h3>
-    <h5>{{ message_1nce_result }}</h5>
-    <br><br>
     <p>1NCE APIトークンの更新には、1NCEアカウント情報を入力してください。</p>
     <input
       v-model="input_1nce_username"
@@ -67,8 +64,8 @@
     <br><br>
     <p>{{ message_1nce_token_result }}</p>
     <br><br>
-    <h4>1NCE Latest Devices Positions 情報</h4>
-    <h6>(接続先の基地局位置情報)</h6>
+    <h3>1NCE Latest Devices Positions 情報</h3>
+    <h5>(接続先の基地局位置情報)</h5>
     <!-- div id="map-container">
       <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
         <l-tile-layer :url="url"></l-tile-layer>
@@ -89,8 +86,8 @@
     <br><br>
     <p>{{ message_1nce_locate_result }}</p>
     <br><br>
-    <h4>1NCE SIM Data Quata 情報</h4>
-    <h6>SIM残量: {{ d_1nce_sim_data_quata_volume }} MB</h6>
+    <h3>1NCE SIM Data Quata 情報</h3>
+    <h5>SIM残量: {{ d_1nce_sim_data_quata_volume }} MB</h5>
     <br><br>
     <p>{{ message_1nce_sim_quota_result }}</p>
     <p>JSONデータ: {{ d_1nce_sim_data_quata_all_json }}</p>
@@ -201,13 +198,9 @@ export default {
       valid1nceApiToken: true,
       input_1nce_username: '',
       input_1nce_password: '',
-      message_1nce_result: '以下は、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ使用、表示されます。',
-//      message_1nce_token_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ使用します。',
-      message_1nce_token_result: '',
-//      message_1nce_locate_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ表示されます。',
-      message_1nce_locate_result: '',
-//      message_1nce_sim_quota_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ表示されます。',
-      message_1nce_sim_quota_result: '',
+      message_1nce_token_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ使用します。',
+      message_1nce_locate_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ表示されます。',
+      message_1nce_sim_quota_result: 'こちらは、1NCE OS経由デバイス (via_1nce_os = true) の場合のみ表示されます。',
     }
   },
   methods: {
