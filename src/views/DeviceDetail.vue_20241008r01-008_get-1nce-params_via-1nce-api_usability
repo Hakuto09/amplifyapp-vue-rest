@@ -198,9 +198,9 @@ export default {
       valid1nceApiToken: true,
       input_1nce_username: '',
       input_1nce_password: '',
-      message_1nce_token_result: 'こちらは、1NCE OS経由デバイスの場合のみ使用します。',
-      message_1nce_locate_result: 'こちらは、1NCE OS経由デバイスの場合のみ表示されます。',
-      message_1nce_sim_quota_result: 'こちらは、1NCE OS経由デバイスの場合のみ表示されます。',
+      message_1nce_token_result: '',
+      message_1nce_locate_result: '',
+      message_1nce_sim_quota_result: '',
     }
   },
   methods: {
