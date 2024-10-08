@@ -63,8 +63,7 @@
     <br><br>
     <p>{{ message_1nce_token_result }}</p>
     <br><br>
-    <h2>1NCE Latest Devices Positions 情報</h2>
-    <h3>(接続先の基地局位置情報)</h3>
+    <h2>1NCE Latest Devices Positions (接続先の基地局位置) 情報</h2>
     <!-- div id="map-container">
       <l-map id="map" :zoom="18" :center="[35.686541, 139.698851]">
         <l-tile-layer :url="url"></l-tile-layer>
@@ -82,13 +81,10 @@
         <l-marker :lat-lng="d_1nce_map_marker_position"></l-marker>
       </l-map>
     </div>
-    <br><br>
     <p>{{ message_1nce_locate_result }}</p>
     <br><br>
     <h2>1NCE SIM Data Quata 情報</h2>
-    <h3>SIM残量 (MB): {{ d_1nce_sim_data_quata_volume }}</h3>
-    <p>JSONデータ: {{ d_1nce_sim_data_quata_all_json }}</p>
-    <br><br>
+    <p>{{ d_1nce_sim_data_quata }}</p>
     <p>{{ message_1nce_sim_quota_result }}</p>
     <br><br>
   </div>
@@ -190,8 +186,7 @@ export default {
       device_id: '',
       via_1nce_os: '',
       map_zoom: 15,
-      d_1nce_sim_data_quata_all_json: '',
-      d_1nce_sim_data_quata_volume: 0.0,
+      d_1nce_sim_data_quata: '',
 //      d_1nce_map_marker_position: [35.6879, 139.7136],       // Hakuto 本社
       d_1nce_map_marker_position: [35.68143661183725, 139.76745739072646], // 東京駅
       valid1nceApiToken: true,
@@ -287,11 +282,9 @@ export default {
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.status ", response.status)
           console.log(fileName, funcName[0], funcName[1], " axios.get(1nce sim-data-quata).then:", " response.data ", response.data);
 
-//          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata_all_json:");
-          this.d_1nce_sim_data_quata_all_json = response.data;
-          console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata_all_json:", " this.d_1nce_sim_data_quata_all_json ", this.d_1nce_sim_data_quata_all_json);
-          this.d_1nce_sim_data_quata_volume = d_1nce_sim_data_quata_all_json.volume;
-          console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata_volume:", " this.d_1nce_sim_data_quata_volume ", this.d_1nce_sim_data_quata_volume);
+//          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata:");
+          this.d_1nce_sim_data_quata = response.data;
+          console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata:", " this.d_1nce_sim_data_quata ", this.d_1nce_sim_data_quata);
 
           this.message_1nce_token_result = "1NCE APIトークンは有効です。";
           this.message_1nce_sim_quota_result = "1NCE SIMのデータ割当情報の取得に成功しました。";
