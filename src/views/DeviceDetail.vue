@@ -43,7 +43,7 @@
         Show chart
       </button>
     </div>
-    <hr class="hr1">
+    <hr :class="$style.hr1">
     <br><br>
     <h3>1NCE 関連情報</h3>
     <h5>{{ message_1nce_result }}</h5>
