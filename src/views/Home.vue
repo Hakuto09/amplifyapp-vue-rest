@@ -7,11 +7,11 @@
     <img 
       alt="Hakuto logo" 
       src="../assets/Hakuto_logo_small.jpg">
-    <h2>Welcome to Hakuto BI Cloud.</h2>
+    <h3>Welcome to Hakuto BI Cloud.</h2>
     <br><br>
-    <h5>Ver {{ Version }}</h5>
+    <h4>Ver {{ Version }}</h5>
     <br><br>
-    <h2>LoginId: {{ loginId }}</h2>
+    <h3>LoginId: {{ loginId }}</h2>
   </div>
 </template>
 

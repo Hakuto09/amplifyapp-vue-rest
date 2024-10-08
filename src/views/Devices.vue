@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <!-- h2>Device list of dgroup_id: {{ dgroup_id }}</h2 -->
-    <h2>Device list of dgroup_name: {{ dgroup_name }}</h2>
+    <h3>Device list of dgroup_name: {{ dgroup_name }}</h3>
     <DeviceList :properties="properties" @eventDeleteDevice="deleteDevice" />
     <br><br>
     <div :class="$style.register_device">
@@ -584,6 +584,7 @@ export default {
   margin-right: 100px;
 }
 
+/*
 h1 {
   font-size: 36px;
 }
@@ -595,4 +596,6 @@ h2 {
 p {
   font-size: 12px;
 }
+*/
+
 </style>

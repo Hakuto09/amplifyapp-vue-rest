@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <!-- h2>Device group list of account_id: {{ account_id }}</h2 -->
-    <h2>Device group list of loginId: {{ loginId }}</h2>
+    <h3>Device group list of loginId: {{ loginId }}</h3>
     <!-- DgroupList :properties="properties" / -->
     <DgroupList :properties="properties" @eventDeleteDgroup="deleteDgroup" />
     <!-- button type="is-info" @click="listUpdate">listUpdate</button -->
@@ -453,6 +453,7 @@ export default {
   margin-right: 100px;
 }
 
+/*
 h1 {
   font-size: 36px;
 }
@@ -464,4 +465,6 @@ h2 {
 p {
   font-size: 12px;
 }
+*/
+
 </style>
