@@ -290,7 +290,7 @@ export default {
 //          console.log(fileName, funcName[0], funcName[1], " Before set this.d_1nce_sim_data_quata_all_json:");
           this.d_1nce_sim_data_quata_all_json = response.data;
           console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata_all_json:", " this.d_1nce_sim_data_quata_all_json ", this.d_1nce_sim_data_quata_all_json);
-          this.d_1nce_sim_data_quata_volume = d_1nce_sim_data_quata_all_json.volume;
+          this.d_1nce_sim_data_quata_volume = this.d_1nce_sim_data_quata_all_json.volume;
           console.log(fileName, funcName[0], funcName[1], " After set this.d_1nce_sim_data_quata_volume:", " this.d_1nce_sim_data_quata_volume ", this.d_1nce_sim_data_quata_volume);
 
           this.message_1nce_token_result = "1NCE APIトークンは有効です。";
