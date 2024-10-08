@@ -43,6 +43,7 @@
         Show chart
       </button>
     </div>
+    <hr class="hr1">
     <br><br>
     <h3>1NCE 関連情報</h3>
     <h5>{{ message_1nce_result }}</h5>
@@ -591,5 +592,14 @@ export default {
   margin: 0 auto;
   /*margin: 0px auto 100px auto;*/
   /*margin-bottom: 100px;*/
+}
+
+hr {
+  padding: 20px 0;
+  border: none;
+}
+
+.hr1 {
+  border-top: 1px solid #000;
 }
 </style>
