@@ -164,7 +164,7 @@ export default {
       // Dgroupリストの更新
       try {
 //        const token =  await Auth.currentSession().getIdToken().getJwtToken()
-        const token =  await currentSession.getIdToken().getJwtToken();
+        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
           headers: { 
             Authorization: `Bearer ${token}`,
