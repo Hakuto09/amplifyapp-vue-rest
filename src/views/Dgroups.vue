@@ -346,12 +346,14 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId, " userId ", userId);
 
       try {
-//        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
+//        const token = await Amplify.Auth.currentSession().getIdToken().getJwtToken();
+        const token =  localStorage.getItem('CognitoIdentityServiceProvider.2jh0uupmavlaf3h595p6dvb30r.27b4fa38-1041-7025-21d6-8054e8e5d83b.idToken');
+        console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem(idToken)", " token ", token);
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
-//            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
 //            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
-            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
+//            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
