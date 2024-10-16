@@ -229,8 +229,7 @@ export default {
 
       console.log(fileName, funcName[0], funcName[1], " Before axios.post(1nce token);", " _1nce_account_base64 ", _1nce_account_base64);
 //      const response = await axios.post('https://api.1nce.com/management-api/oauth/token', {
-//      axios.post('https://api.1nce.com/management-api/oauth/token', {
-      axios.post(_1nce_url_base + 'oauth/token', {
+      axios.post('https://api.1nce.com/management-api/oauth/token', {
           'grant_type': 'client_credentials',
         }, {
           headers: {

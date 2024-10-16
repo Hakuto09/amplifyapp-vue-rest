@@ -46,6 +46,7 @@ import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
 import { getCurrentUser } from 'aws-amplify/auth';
+import { currentSession } from 'aws-amplify/auth';
 //import { getCurrentInstance } from 'vue';
 const fileName = "Dgroups.vue";
 
@@ -162,7 +163,13 @@ export default {
 
       // Dgroupリストの更新
       try {
-        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId);
+//        const token =  await Auth.currentSession().getIdToken().getJwtToken()
+        const token =  await currentSession.getIdToken().getJwtToken();
+        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
+          headers: { 
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {
