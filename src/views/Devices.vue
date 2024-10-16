@@ -69,6 +69,7 @@ import DeviceList from '@/components/DeviceList.vue'
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentUser } from 'aws-amplify/auth';
 //import * as fs from "fs-extra";
 const fileName = "Devices.vue";

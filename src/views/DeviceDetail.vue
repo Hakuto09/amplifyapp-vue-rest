@@ -103,6 +103,7 @@
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 import { useRoute } from 'vue-router'
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';

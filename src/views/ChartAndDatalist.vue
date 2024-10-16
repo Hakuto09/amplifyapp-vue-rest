@@ -137,6 +137,7 @@ import 'flatpickr/dist/themes/material_blue.css';
 //import {Japanese} from 'flatpickr/dist/l10n/ja.js';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
 const fileName = "ChartAndDatalist.vue";
 
