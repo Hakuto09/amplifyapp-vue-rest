@@ -346,8 +346,8 @@ export default {
       try {
 //        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
-          headers: { 
-            Authorization: `Bearer ${token}`,
+          headers: {
+//            Authorization: `Bearer ${token}`,
             Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
         });
