@@ -135,25 +135,22 @@ export default {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
   //      axios.post(aws_url_base + 'dgroup',
-        await axios.post(aws_url_base + 'dgroup', {
+        await axios.post(aws_url_base + 'dgroup',
+          {
             dgroup_name: this.dgroup_name_input,
             account_id: /*userInfo.*/userId,
             check_existing_flag: check_existing_flag,
-          }, {
-            headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        })
-        .then(function(response) {
-//          this.message_result = 'Success';
-          res = 1;
-          console.log(funcName[0], funcName[1], "axios.post().then:", " response.data ", response.data);
-        })
-        .catch(function(error) {
-//          this.message_result = 'Error';
-          res = -1;
-          console.log(funcName[0], funcName[1], "axios.post().catch:", " error ", error);
-        })
+          })
+          .then(function(response) {
+  //          this.message_result = 'Success';
+            res = 1;
+            console.log(funcName[0], funcName[1], "axios.post().then:", " response.data ", response.data);
+          })
+          .catch(function(error) {
+  //          this.message_result = 'Error';
+            res = -1;
+            console.log(funcName[0], funcName[1], "axios.post().catch:", " error ", error);
+          })
         
         if (check_existing_flag && res == 1) {
           this.message_result = 'Duplicattion error';
@@ -173,9 +170,13 @@ export default {
 //        const token =  await Auth.currentSession().getIdToken().getJwtToken()
 //        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
+/*
+          headers: { 
+//            Authorization: `Bearer ${token}`,
+//            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
+            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
+*/
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
@@ -214,11 +215,7 @@ export default {
 
       // Deviceリストの取得
       try {
-        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected, {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -247,10 +244,6 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete(dgroup):", " payload ", payload);
       await axios.delete(aws_url_base + 'dgroup', {
         data: payload,
-      }, {
-        headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
       })
       .then(function(response) {
         res = 1;
@@ -270,11 +263,7 @@ export default {
 
       // Dgroupリストの更新
       try {
-        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+        response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {
