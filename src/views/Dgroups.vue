@@ -234,18 +234,17 @@ export default {
 
       // Dgroup関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete(dgroup):", " payload ", payload);
-      await axios.delete(aws_url_base + 'dgroup',
-        {
-          data: payload,
-        })
-        .then(function(response) {
-          res = 1;
-          console.log(funcName[0], funcName[1], "axios.delete(dgroup).then:", " response.data ", response.data);
-        })
-        .catch(function(error) {
-          res = -1;
-          console.log(funcName[0], funcName[1], "axios.delete(dgroup).catch:", " error ", error);
-        })
+      await axios.delete(aws_url_base + 'dgroup', {
+        data: payload,
+      })
+      .then(function(response) {
+        res = 1;
+        console.log(funcName[0], funcName[1], "axios.delete(dgroup).then:", " response.data ", response.data);
+      })
+      .catch(function(error) {
+        res = -1;
+        console.log(funcName[0], funcName[1], "axios.delete(dgroup).catch:", " error ", error);
+      })
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete(dgroup):", " res ", res);
 
@@ -344,7 +343,12 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After await getCurrentUser():", " userInfo ", userInfo, " this.loginId ", this.loginId, " userId ", userId);
 
       try {
-        response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId);
+        const token =  await currentSession.getIdToken().getJwtToken();
+        response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
+          headers: { 
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
       catch (error) {
