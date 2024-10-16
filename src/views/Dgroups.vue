@@ -58,6 +58,8 @@ console.log(fileName, ":After import: ");
 const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
+let idToken;
+
 let dgroups;
 //let dgroups2 = [];
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -351,15 +353,13 @@ export default {
       try {
 //        const token = await Amplify.Auth.currentSession().getIdToken().getJwtToken();
 //        const token =  localStorage.getItem('CognitoIdentityServiceProvider.2jh0uupmavlaf3h595p6dvb30r.27b4fa38-1041-7025-21d6-8054e8e5d83b.idToken');
-        const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-//        console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem(idToken)", " token ", token);
-        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", " accessToken ", accessToken, ' idToken ', idToken);
+//        const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+//        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", " accessToken ", accessToken, ' idToken ', idToken);
+        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
-//            Authorization: `Bearer ${token}`,
             Authorization: `Bearer ${idToken}`,
-//            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
-//            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
