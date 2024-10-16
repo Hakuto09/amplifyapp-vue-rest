@@ -246,12 +246,12 @@ export default {
       // Dgroup関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete(dgroup):", " payload ", payload);
       await axios.delete(aws_url_base + 'dgroup', {
-        data: payload,
-      }, {
-        headers: {
+          data: payload,
+          headers: {
             Authorization: `Bearer ${idToken}`,
           },
-      })
+        },
+      )
       .then(function(response) {
         res = 1;
         console.log(funcName[0], funcName[1], "axios.delete(dgroup).then:", " response.data ", response.data);
