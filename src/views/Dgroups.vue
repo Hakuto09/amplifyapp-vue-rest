@@ -44,7 +44,8 @@
 import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
-import { Amplify } from "aws-amplify";
+//import { Amplify } from "aws-amplify";
+import { Auth } from 'aws-amplify'
 import { getCurrentUser } from 'aws-amplify/auth';
 //import { currentSession } from 'aws-amplify/auth';
 //import { getCurrentInstance } from 'vue';
@@ -168,7 +169,8 @@ export default {
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
           headers: { 
 //            Authorization: `Bearer ${token}`,
-            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
+//            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
+            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
@@ -348,7 +350,8 @@ export default {
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
 //            Authorization: `Bearer ${token}`,
-            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
+//            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
+            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
