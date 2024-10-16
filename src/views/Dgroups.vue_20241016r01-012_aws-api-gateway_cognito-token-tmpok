@@ -59,6 +59,7 @@ const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
 let idToken;
+
 let dgroups;
 //let dgroups2 = [];
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -140,10 +141,9 @@ export default {
             check_existing_flag: check_existing_flag,
           }, {
             headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        )
+            Authorization: `Bearer ${idToken}`,
+          },
+        })
         .then(function(response) {
 //          this.message_result = 'Success';
           res = 1;
@@ -368,7 +368,6 @@ export default {
         idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", " accessToken ", accessToken, ' idToken ', idToken);
         console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
-
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
             Authorization: `Bearer ${idToken}`,

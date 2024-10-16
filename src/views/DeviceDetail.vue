@@ -111,6 +111,7 @@ const fileName = "DeviceDetail.vue";
 console.log(fileName, ":After import:");
 
 let currentInstance;
+let idToken;
 let devices;
 //let _1nce_api_token = '';
 
@@ -412,7 +413,15 @@ export default {
       let response;
 
       try {
-        response = await axios.get(aws_url_base + '_devices/' + dgroupId);
+        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
+
+        response = await axios.get(aws_url_base + '_devices/' + dgroupId, {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          },
+        );
         console.log(fileName, funcName[0], funcName[1], " response.status ", response.status)
         console.log(fileName, funcName[0], funcName[1], " response.data ", response.data);
         devices = response.data;
