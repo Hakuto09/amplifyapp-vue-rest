@@ -45,8 +45,7 @@ import DgroupList from '@/components/DgroupList.vue'
 import axios from 'axios'
 //import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
-//import { Auth } from 'aws-amplify'
-import { fetchAuthSession } from 'aws-amplify/auth';
+import { Auth } from 'aws-amplify'
 import { getCurrentUser } from 'aws-amplify/auth';
 //import { currentSession } from 'aws-amplify/auth';
 //import { getCurrentInstance } from 'vue';
@@ -168,13 +167,11 @@ export default {
 //        const token =  await Auth.currentSession().getIdToken().getJwtToken()
 //        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
-/*
           headers: { 
 //            Authorization: `Bearer ${token}`,
 //            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
             Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
-*/
         });
         console.log(fileName, funcName[0], funcName[1], "After axios.get(dgroups)", " response_api ", response_api);
       }
@@ -350,14 +347,11 @@ export default {
 
       try {
 //        const token = await Amplify.Auth.currentSession().getIdToken().getJwtToken();
-//        const token =  localStorage.getItem('CognitoIdentityServiceProvider.2jh0uupmavlaf3h595p6dvb30r.27b4fa38-1041-7025-21d6-8054e8e5d83b.idToken');
-        const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-//        console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem(idToken)", " token ", token);
-        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", " accessToken ", accessToken, ' idToken ', idToken);
+        const token =  localStorage.getItem('CognitoIdentityServiceProvider.2jh0uupmavlaf3h595p6dvb30r.27b4fa38-1041-7025-21d6-8054e8e5d83b.idToken');
+        console.log(fileName, funcName[0], funcName[1], "After localStorage.getItem(idToken)", " token ", token);
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
-//            Authorization: `Bearer ${token}`,
-            Authorization: `Bearer ${idToken}`,
+            Authorization: `Bearer ${token}`,
 //            Authorization: `Bearer ${(await Amplify.Auth.currentSession()).getIdToken().getJwtToken()}`,
 //            Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`,
           },
