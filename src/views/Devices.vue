@@ -85,7 +85,7 @@ console.log(fileName, ":After reg(prop):", " parentData.value ", parentData.valu
 */
 
 let userInfo;
-let idToken;
+//let idToken;
 const dgroupInfo = ref('');
 let devices;
 let ddata;
@@ -194,6 +194,7 @@ export default {
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post_device):", " check_existing_flag ", check_existing_flag);
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         await axios.post(aws_url_base + '_device', {
             device_name: this.device_name_input,
             dgroup_id: dgroupId.value,
@@ -265,6 +266,7 @@ export default {
 
       // Deviceリストの更新
       try {
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response_api = await axios.get(aws_url_base + '_devices/' + dgroupId.value, {
           headers: {
               Authorization: `Bearer ${idToken}`,
@@ -311,6 +313,7 @@ export default {
       let response;
 
       try {
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response = await axios.get(aws_url_base + 'ddata/' + device_id_selected, {
             headers: {
               Authorization: `Bearer ${idToken}`,
@@ -330,6 +333,7 @@ export default {
         let loops = ddata.length;
         for(let i = 0; i < loops; ++i) {
           try {
+            const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
             response = await axios.delete(aws_url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt, {
                 headers: {
                   Authorization: `Bearer ${idToken}`,
@@ -357,6 +361,7 @@ export default {
 
       // Device関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
+      const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
       await axios.delete(aws_url_base + '_device', {
           data: payload,
           headers: {
@@ -382,6 +387,7 @@ export default {
 
       // Deviceリストの更新
       try {
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected, {
           headers: {
               Authorization: `Bearer ${idToken}`,
@@ -504,8 +510,7 @@ export default {
 
       try {
         idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
-
+//        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
 //        response_api = await axios.get(url + dgroupId);

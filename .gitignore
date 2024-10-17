@@ -42,3 +42,9 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# Backup files
+src/__keep/
+src/assets/__keep/
+src/components/__keep/
+src/views/__keep/

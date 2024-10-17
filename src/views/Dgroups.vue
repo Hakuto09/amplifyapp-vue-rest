@@ -58,7 +58,7 @@ console.log(fileName, ":After import: ");
 const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
-let idToken;
+//let idToken;
 let dgroups;
 //let dgroups2 = [];
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/dgroups/';
@@ -133,7 +133,8 @@ export default {
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post():", " check_existing_flag ", check_existing_flag);
-  //      axios.post(aws_url_base + 'dgroup',
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+//        axios.post(aws_url_base + 'dgroup',
         await axios.post(aws_url_base + 'dgroup', {
             dgroup_name: this.dgroup_name_input,
             account_id: /*userInfo.*/userId,
@@ -170,8 +171,7 @@ export default {
 
       // Dgroupリストの更新
       try {
-//        const token =  await Auth.currentSession().getIdToken().getJwtToken()
-//        const token =  await Amplify.Auth.currentSession().getIdToken().getJwtToken();
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
           headers: {
             Authorization: `Bearer ${idToken}`,
@@ -214,6 +214,7 @@ export default {
 
       // Deviceリストの取得
       try {
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected, {
           headers: {
             Authorization: `Bearer ${idToken}`,
@@ -245,6 +246,7 @@ export default {
 
       // Dgroup関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete(dgroup):", " payload ", payload);
+      const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
       await axios.delete(aws_url_base + 'dgroup', {
           data: payload,
           headers: {
@@ -270,6 +272,7 @@ export default {
 
       // Dgroupリストの更新
       try {
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response_api = await axios.get(aws_url_base + 'dgroups/' + /*userInfo.*/userId, {
           headers: {
             Authorization: `Bearer ${idToken}`,
@@ -365,10 +368,9 @@ export default {
 //        const token = await Amplify.Auth.currentSession().getIdToken().getJwtToken();
 //        const token =  localStorage.getItem('CognitoIdentityServiceProvider.2jh0uupmavlaf3h595p6dvb30r.27b4fa38-1041-7025-21d6-8054e8e5d83b.idToken');
 //        const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", " accessToken ", accessToken, ' idToken ', idToken);
-        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
-
+//        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
         response_api = await axios.get(aws_url_base + 'dgroups/' + userInfo.userId, {
           headers: {
             Authorization: `Bearer ${idToken}`,
