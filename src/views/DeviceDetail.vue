@@ -414,7 +414,7 @@ export default {
       let response;
 
       try {
-        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
         response = await axios.get(aws_url_base + '_devices/' + dgroupId, {
             headers: {

@@ -513,7 +513,7 @@ export default {
       let response;
 
       try {
-        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
 //        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         response = await axios.get(aws_url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso, {

@@ -509,7 +509,7 @@ export default {
       let response_api;
 
       try {
-        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
