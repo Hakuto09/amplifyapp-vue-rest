@@ -330,36 +330,61 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     """
     print('get_ddata_list_between(): In')
 
-    loopEnd = False
+#    loopEnd = False
+    maxNum = 50
+    ddataTmp = []
     ddata = []
-    scanForward = False     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
-    limit = 1000    # データベースから一度に取得し、フィルタに掛けるデータ件数
+#    scanForward = False     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
+    scanForward = True     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
+    ExclusiveStartKey = ''      # Scanの起点
+    limit = 10    # データベースから一度に取得し、フィルタに掛けるデータ件数
+    
+    query_params = {
+        'KeyConditionExpression': Key("device_id").eq(device_id), # 取得するKey情報
+        'ScanIndexForward':scanForward,
+        'Limit': limit,
+    }
+
+    if date_start != 'all' and date_end != 'all' :
+        query_params['FilterExpression'] = Attr('createdAt_c').between(date_start, date_end)
 
     print('device_id ', device_id)
     print('date_start ', date_start)
     print('date_end ', date_end)
     print('scanForward ', scanForward)
+    print('query_params ', query_params)
 
-    while loopEnd == False:
-        if date_start == 'all' or date_end == 'all':
-            response_ddb = ddb_table_ddata.query(
-                KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-                ScanIndexForward = scanForward,
-                Limit = limit,
-            )
-        else :
-            response_ddb = ddb_table_ddata.query(
-                KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-                FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-                ScanIndexForward = scanForward,
-                Limit = limit,
-            )
+#    while loopEnd == False :
+    while True :
+        print('Before ddb_table_ddata.query():', ' query_params ', query_params)
 
+        response_ddb = ddb_table_ddata.query(**query_params)
         print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-        ddata.extend(response_ddb["Items"])
-        print('After ddata.extend():', ' ddata ', ddata)
+        ddataTmp.extend(response_ddb["Items"])
+        print('After ddata.extend():', ' len(ddataTmp) ', len(ddataTmp), ' ddataTmp ', ddataTmp)
 
+        if 'LastEvaluatedKey' not in response_ddb :
+            print('Before break loop:', 'LastEvaluatedKey not in response_ddb:')
+            break
+
+        if len(ddataTmp) >= maxNum :
+            print('Before break loop:', ' len(ddataTmp) >= max:')
+            break
+
+        # If there are possibly more items, update the start key for the next page
+        query_params['ExclusiveStartKey'] = response_ddb['LastEvaluatedKey']
+
+    forNum = min(len(ddataTmp), maxNum)
+    print('Before for loop:', ' forNum ', forNum, ' len(ddataTmp) ', len(ddataTmp), ' maxNum ', maxNum)
+    for i in range(forNum) :
+#        print('Before ddata[i] = ddataTmp[i] in for loop:', ' i ', i, ' ddataTmp[i] ', ddataTmp[i])
+        print('Before ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddataTmp[i] ', ddataTmp[i])
+#        ddata[i] = ddataTmp[i]
+        ddata.append(ddataTmp[i])
+        print('After ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddata[i] ', ddata[i])
+
+    print('Before return:', ' ddata ', ddata)
 #    return response_ddb["Items"]
     return ddata
 

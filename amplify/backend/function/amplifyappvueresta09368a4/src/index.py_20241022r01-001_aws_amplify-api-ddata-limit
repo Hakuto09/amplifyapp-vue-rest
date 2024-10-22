@@ -331,13 +331,13 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     print('get_ddata_list_between(): In')
 
 #    loopEnd = False
-    maxNum = 10000
+    maxNum = 50
     ddataTmp = []
     ddata = []
 #    scanForward = False     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
     scanForward = True     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
     ExclusiveStartKey = ''      # Scanの起点
-    limit = 1000    # データベースから一度に取得し、フィルタに掛けるデータ件数
+    limit = 10    # データベースから一度に取得し、フィルタに掛けるデータ件数
     
     query_params = {
         'KeyConditionExpression': Key("device_id").eq(device_id), # 取得するKey情報
@@ -378,9 +378,7 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     forNum = min(len(ddataTmp), maxNum)
     print('Before for loop:', ' forNum ', forNum, ' len(ddataTmp) ', len(ddataTmp), ' maxNum ', maxNum)
     for i in range(forNum) :
-#        print('Before ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddataTmp[i] ', ddataTmp[i])
-        ddata.append(ddataTmp[i])
-#        print('After ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddata[i] ', ddata[i])
+        ddata[i] = ddataTmp[i]
 
     print('Before return:', ' ddata ', ddata)
 #    return response_ddb["Items"]

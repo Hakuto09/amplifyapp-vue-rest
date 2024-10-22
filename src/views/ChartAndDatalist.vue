@@ -33,20 +33,26 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
+        :disabled=!inProgress
         @click="writeCSV">
         CSVファイル出力
       </button>
     </div>
     <div>
       <label for="input">data0 is .</label>
-      <input v-model="data0_name">
+      <input
+        v-model="data0_name"
+        :disabled=!inProgress>
     </div>
     <div>
       <label for="input">data1 is .</label>
-      <input v-model="data1_name">
+      <input
+        v-model="data1_name"
+        :disabled=!inProgress>
     </div>
     <button
         type="is-info"
+        :disabled=!inProgress
         @click="updateLabel">
         Label update
       </button>
@@ -55,6 +61,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
+        :disabled=!inProgress
         @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
@@ -62,6 +69,7 @@
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
+                  :disabled=!inProgress
                   dateFormat='yy年mm月dd日'
                   :enable-time-picker="true"
                   week-start="0"
@@ -86,6 +94,7 @@
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
+                  :disabled=!inProgress
                   dateFormat="yyyy-MM-dd HH:mm"
                   :enable-time-picker="true"
                   week-start="0"
@@ -199,99 +208,6 @@ let data1_name;
 
 let reRenderFlag = false;
 
-/*
-const chartData = {
-  labels: [],
-  datasets: [
-    {
-      label: 'data0',
-      yAxisID: "yleft",
-      backgroundColor: "rgba(2,63,138,0.8)",
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(2,63,138,0.8)",
-//      pointBorderColor: "#fff",
-//      pointBackgroundColor: "rgba(2,63,138,0.8)",
-//      pointBorderWidth: 2,
-//      pointHoverRadius: 5,
-//      pointHoverBackgroundColor: "#1D5191",
-//      pointHoverBorderColor: "#fff",
-//      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: [],
-    },
-    {
-      label: 'data1',
-      yAxisID: "yright",
-//          backgroundColor: '#f879f9',
-      backgroundColor: "rgba(201,60,58,0.8)",
-      fill: false,
-      borderWidth: 2,
-      borderColor: "rgba(201,60,58,0.8)",
-//      pointBorderColor: "#fff",
-//      pointBackgroundColor: "rgba(201,60,58,0.8)",
-//      pointBorderWidth: 2,
-//      pointHoverRadius: 5,
-//      pointHoverBackgroundColor: "#9A1B19",
-//      pointHoverBorderColor: "#fff",
-//      pointHoverBorderWidth: 2,
-      tension: 0,
-      data: [],
-    },
-//    {
-//      label: 'data2',
-//      yAxisID: "yright",
-////          backgroundColor: '#f8f979',
-//      backgroundColor: "#DB514E",
-//      data: data2s,
-//    },
-  ]
-}
-*/
-
-/*
-const chartOptions = {
-  responsive: true,    // グラフのスクロール対応
-//      responsive: false,    // グラフのスクロール対応
-  maintainAspectRatio: false,
-  spanGaps: true,   //点をつなげる場合
-  scales: {
-    x: {
-      type: 'time',
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: '日付時刻'           // ★必須 タイトルの文字列
-      },
-      time: {
-        unit: 'minute',
-        displayFormats: {
-          minute: 'YYYY-MM-DD HH:mm'
-        }
-      },
-    },
-    yleft: {
-      stacked: false,
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: 'data0'           // ★必須 タイトルの文字列
-      },
-    },
-    // yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける
-    yright: {
-      stacked: false,
-      position: "right",
-      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
-        display: true,             // ★必須 表示設定 省略時は false
-        position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
-        text: 'data1'           // ★必須 タイトルの文字列
-      },
-    },
-  },
-};
-*/
-
 function dateTimeToISOString(dateTime){
   // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
   let dateTimeJstTmp = new Date(dateTime);
@@ -323,18 +239,11 @@ export default {
     return {
       data: {
         labels: labels/*[]*/,
-        datasets: [
-          {
+        datasets: [{
             data: data0s/*[]*/,
-          },
-          {
+          }, {
             data: data1s/*[]*/,
           },
-/*
-          {
-            data: [],
-          },
-*/
         ],
       },
       options: null/*chartOptions*/,
@@ -348,6 +257,7 @@ export default {
       format: 'yyyy-MM-dd HH:mm', 
       data0_name: data0_name,
       data1_name: data1_name,
+      inProgress: false,
     }
   },
   methods: {
@@ -501,6 +411,8 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
+    this.inProgress = true;
+
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
@@ -540,7 +452,7 @@ export default {
 //            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
-            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
+//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
@@ -647,7 +559,10 @@ export default {
         this.device_id = deviceInfo['device_id'];
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
-//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+
+        this.inProgress = false;
+
+        //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
@@ -655,6 +570,7 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
+        this.inProgress = false;
         return error;
       }
     }
@@ -711,6 +627,8 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
+    this.inProgress = true;
+
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
@@ -742,7 +660,7 @@ export default {
 //            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
-            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
+//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
 //            labels_L.push(dateTimeNtJst);
@@ -845,7 +763,10 @@ export default {
         this.device_id = deviceInfo['device_id'];
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
-//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+
+        this.inProgress = false;
+
+        //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
@@ -853,6 +774,7 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
+        this.inProgress = false;
         return error;
       }
     }
