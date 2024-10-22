@@ -156,24 +156,26 @@ class Response_PostDevice(BaseModel):
     PrivateKey: str
 
 # デバイスデータ登録 (1NCE OS Webhook) 用スキーマ
-# {
-#   "payload": {
-#     "type": "JSON",
-#     "value": {
-#       "temperature": 11.1
-#     }
-#   },
-#   "received": "1726030551987",
-#   "id": "1-66e122d7-c01ae7d96af483ca64d340df",
-#   "source": "UDP",
-#   "type": "TELEMETRY_DATA",
-#   "version": "1.0.0",
-#   "device": {
-#     "iccid": "8988228066605204483",
-#     "ip": "10.52.132.3",
-#     "imsi": "901405105204483"
-#   }
-# }
+"""
+{
+  "payload": {
+    "type": "JSON",
+    "value": {
+      "temperature": 11.1
+    }
+  },
+  "received": "1726030551987",
+  "id": "1-66e122d7-c01ae7d96af483ca64d340df",
+  "source": "UDP",
+  "type": "TELEMETRY_DATA",
+  "version": "1.0.0",
+  "device": {
+    "iccid": "8988228066605204483",
+    "ip": "10.52.132.3",
+    "imsi": "901405105204483"
+  }
+}
+"""
 
 class Value(BaseModel):
     temperature: float
@@ -301,27 +303,27 @@ def get_devices_list(dgroup_id: str):
 
     return response_ddb["Items"]
 
-# @app.get("/ddata/{device_id}")
-# def get_ddata_list_all(device_id: str):
-#     """
-#     デバイスに紐付くデバイスデータの一覧を取得する (日時期間なし)
-#     """
-#     print('get_ddata_list_all(): In')
+@app.get("/ddata/{device_id}")
+def get_ddata_list_all(device_id: str):
+    """
+    デバイスに紐付くデバイスデータの一覧を取得する (日時期間なし)
+    """
+    print('get_ddata_list_all(): In')
 
-#     print('device_id ', device_id)
+    print('device_id ', device_id)
 
-# #    response_ddb = ddb_table_ddata.scan(
-#     response_ddb = ddb_table_ddata.query(
-# #        TableName = STORAGE_DB_DDATA,
-#         KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-# #        FilterExpression = Attr('device_id').eq(device_id),
-# #        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-#         ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
-#         Limit = 1000 # 取得するデータ件数
-#     )
-#     print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
+#    response_ddb = ddb_table_ddata.scan(
+    response_ddb = ddb_table_ddata.query(
+#        TableName = STORAGE_DB_DDATA,
+        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
+#        FilterExpression = Attr('device_id').eq(device_id),
+#        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
+        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+        Limit = 1000 # 取得するデータ件数
+    )
+    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-#     return response_ddb["Items"]
+    return response_ddb["Items"]
 
 @app.get("/ddata_between/{device_id}")
 def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
@@ -330,42 +332,23 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     """
     print('get_ddata_list_between(): In')
 
-    loopEnd = False
-    ddata = []
-    scanForward = False     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
-    limit = 1000    # データベースから一度に取得し、フィルタに掛けるデータ件数
-
     print('device_id ', device_id)
     print('date_start ', date_start)
     print('date_end ', date_end)
-    print('scanForward ', scanForward)
 
-    while loopEnd == False :
-        if date_start == 'all' or date_end == 'all':
-            response_ddb = ddb_table_ddata.query(
-                KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-                ScanIndexForward = scanForward,
-                Limit = limit,
-            )
-        else :
-            response_ddb = ddb_table_ddata.query(
-                KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-                FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-                ScanIndexForward = scanForward,
-                Limit = limit,
-            )
+#    response_ddb = ddb_table_ddata.scan(
+    response_ddb = ddb_table_ddata.query(
+#        TableName = STORAGE_DB_DDATA,
+        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
+#        FilterExpression = Attr('device_id').eq(device_id),
+        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
+#        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+        ScanIndexForward = False, # 昇順か降順か(デフォルトはTrue=昇順)
+        Limit = 1000 # 取得するデータ件数
+    )
+    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-        print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
-
-        loopEnd = not ('LastEvaluatedKey' in response_ddb)
-        if loopEnd == False:
-            date_end = response_ddb['LastEvaluatedKey']['createdAt']
-
-        ddata.extend(response_ddb["Items"])
-        print('After ddata.extend():', ' ddata ', ddata, ' loopEnd ', loopEnd, ' date_end ', date_end)
-
-#    return response_ddb["Items"]
-    return ddata
+    return response_ddb["Items"]
 
 @app.get("/items/{id}")
 def get_items(id: str):

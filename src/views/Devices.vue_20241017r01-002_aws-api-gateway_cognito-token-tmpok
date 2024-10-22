@@ -314,8 +314,7 @@ export default {
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-//        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected, {
-        response = await axios.get(aws_url_base + 'ddata_between/' + device_id_selected + '?date_start=all' + '&date_end=all', {
+        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected, {
             headers: {
               Authorization: `Bearer ${idToken}`,
             },

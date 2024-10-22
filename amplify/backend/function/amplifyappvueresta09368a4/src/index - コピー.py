@@ -340,7 +340,7 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     print('date_end ', date_end)
     print('scanForward ', scanForward)
 
-    while loopEnd == False :
+    while loopEnd == False:
         if date_start == 'all' or date_end == 'all':
             response_ddb = ddb_table_ddata.query(
                 KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
@@ -357,12 +357,8 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
 
         print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-        loopEnd = not ('LastEvaluatedKey' in response_ddb)
-        if loopEnd == False:
-            date_end = response_ddb['LastEvaluatedKey']['createdAt']
-
         ddata.extend(response_ddb["Items"])
-        print('After ddata.extend():', ' ddata ', ddata, ' loopEnd ', loopEnd, ' date_end ', date_end)
+        print('After ddata.extend():', ' ddata ', ddata)
 
 #    return response_ddb["Items"]
     return ddata
