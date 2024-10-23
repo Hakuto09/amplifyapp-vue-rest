@@ -782,8 +782,10 @@ export default {
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
 
-        this.inProgress = false;
-        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+//        this.inProgress = false;
+        this.setInProgress(false);
+//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
