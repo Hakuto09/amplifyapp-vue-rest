@@ -61,7 +61,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()">
+        v-bind:disabled="isProcessing()"
         @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
@@ -451,8 +451,10 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso, " me ", me);
       let response;
 
-      this.startProcessing();
-      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
+//      this.startProcessing();
+      this.processing = true
+//      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
+      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
@@ -594,8 +596,10 @@ export default {
 //        this.setInProgress(me, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 //        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-        this.endProcessing();
-        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
+//        this.endProcessing();
+        this.processing = false;
+//        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
+        console.log(fileName, funcName[0], funcName[1], "After this.processing = false:");
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
