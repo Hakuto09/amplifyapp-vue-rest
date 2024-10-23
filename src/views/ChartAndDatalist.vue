@@ -33,7 +33,7 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        v-bind:disabled=processing
         @click="writeCSV">
         CSVファイル出力
       </button>
@@ -42,17 +42,17 @@
       <label for="input">data0 is .</label>
       <input
         v-model="data0_name"
-        v-bind:disabled="isProcessing()">
+        v-bind:disabled=processing>
     </div>
     <div>
       <label for="input">data1 is .</label>
       <input
         v-model="data1_name"
-        v-bind:disabled="isProcessing()">
+        v-bind:disabled=processing>
     </div>
     <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        v-bind:disabled=processing
         @click="updateLabel">
         Label update
       </button>
