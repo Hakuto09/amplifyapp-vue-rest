@@ -637,14 +637,23 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   mounted: function() {
     const funcName = [":mounted:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
@@ -847,9 +856,9 @@ export default {
     console.log(fileName, funcName[0], "In.", " this ", this);
 
 //    this.inProgress = false;
-    this.setInProgress(this, false);
+//    this.setInProgress(this, false);
 //    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-    console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
+//    console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
