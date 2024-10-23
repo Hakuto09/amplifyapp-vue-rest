@@ -412,7 +412,10 @@ export default {
       const funcName = [":methods:", "setInProgress:"];
       console.log(fileName, funcName[0], funcName[1], "setInProgress In:", " inProgress ", inProgress);
 
-      this.inProgress = inProgress;
+      const me = this;
+
+//      this.inProgress = inProgress;
+      me.inProgress = inProgress;
       console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
     },
   },
