@@ -453,9 +453,9 @@ export default {
       let response;
 
 //      this.startProcessing();
-//      this.processing = true
+      this.processing = true
 //      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-//      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
+      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
