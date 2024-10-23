@@ -87,6 +87,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
+        :disabled=!inProgress
         @click="setDateEndNow">
         現在日時を設定
       </button>
