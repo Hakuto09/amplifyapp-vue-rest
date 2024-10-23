@@ -33,7 +33,7 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        :disabled=inProgress
         @click="writeCSV">
         CSVファイル出力
       </button>
@@ -42,17 +42,17 @@
       <label for="input">data0 is .</label>
       <input
         v-model="data0_name"
-        v-bind:disabled="isProcessing()">
+        :disabled=inProgress>
     </div>
     <div>
       <label for="input">data1 is .</label>
       <input
         v-model="data1_name"
-        v-bind:disabled="isProcessing()">
+        :disabled=inProgress>
     </div>
     <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        :disabled=inProgress
         @click="updateLabel">
         Label update
       </button>
@@ -61,7 +61,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()">
+        :disabled=inProgress
         @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
@@ -69,7 +69,7 @@
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
-                  v-bind:disabled="isProcessing()"
+                  :disabled=inProgress
                   dateFormat='yy年mm月dd日'
                   :enable-time-picker="true"
                   week-start="0"
@@ -87,7 +87,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        :disabled=inProgress
         @click="setDateEndNow">
         現在日時を設定
       </button>
@@ -95,7 +95,7 @@
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
-                  v-bind:disabled="isProcessing()"
+                  :disabled=inProgress
                   dateFormat="yyyy-MM-dd HH:mm"
                   :enable-time-picker="true"
                   week-start="0"
@@ -258,8 +258,7 @@ export default {
       format: 'yyyy-MM-dd HH:mm', 
       data0_name: data0_name,
       data1_name: data1_name,
-//      inProgress: false,
-      processing: false,
+      inProgress: false,
     }
   },
   methods: {
@@ -410,7 +409,7 @@ export default {
     },
 
 //    setInProgress: function(me, inProgress) {
-    setInProgress(me, inProgress) {
+      setInProgress(me, inProgress) {
       const funcName = [":methods:", "setInProgress:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this ", this, " me ", me, " inProgress ", inProgress);
 
@@ -422,23 +421,13 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress, " me.inProgress ", me.inProgress, " this ", this, " me ", me);
       console.log(fileName, funcName[0], funcName[1], "After set this.data.inProgress:", " this.data.inProgress ", this.data.inProgress);
     },
-
-    startProcessing: function () {
-      this.processing = true
-    },
-    endProcessing: function () {
-      this.processing = false
-    },
-    isProcessing: function () {
-      return this.processing
-    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
 
-//    this.inProgress = true;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+    this.inProgress = true;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
@@ -450,9 +439,6 @@ export default {
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
-
-      this.startProcessing();
-      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
@@ -591,11 +577,9 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-//        this.setInProgress(me, false);
+        this.setInProgress(me, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-//        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-        this.endProcessing();
-        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
+        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -653,29 +637,35 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   mounted: function() {
     const funcName = [":mounted:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
 
-//    this.inProgress = false;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
-
-      this.startProcessing();
-      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
@@ -808,13 +798,11 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-//        this.setInProgress(me, false);
+        this.setInProgress(me, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-//        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-        this.endProcessing();
-        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
+        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
-//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+        //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
@@ -845,8 +833,8 @@ export default {
     if (reRenderFlag) {
       reRenderFlag = false;
 
-//      this.inProgress = true;
-//      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+      this.inProgress = true;
+      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
       const deviceInfo = ref('');
       deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
