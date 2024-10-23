@@ -650,8 +650,8 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
 
-//    this.inProgress = true;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
