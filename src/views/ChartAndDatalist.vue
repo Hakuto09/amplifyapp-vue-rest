@@ -409,15 +409,17 @@ export default {
     },
 
 //    setInProgress: function(me, inProgress) {
-    setInProgress(me, inProgress) {
+      setInProgress(me, inProgress) {
       const funcName = [":methods:", "setInProgress:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this ", this, " me ", me, " inProgress ", inProgress);
 
 //      const me = this;
 
       this.inProgress = inProgress;
+      this.data.inProgress = inProgress;
       me.inProgress = inProgress;
       console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress, " me.inProgress ", me.inProgress, " this ", this, " me ", me);
+      console.log(fileName, funcName[0], funcName[1], "After set this.data.inProgress:", " this.data.inProgress ", this.data.inProgress);
     },
   },
   beforeCreate: function() {
