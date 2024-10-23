@@ -408,14 +408,15 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
     },
 
-    setInProgress: function(me, inProgress) {
-      const funcName = [":methods:", "setInProgress:"];
+//    setInProgress: function(me, inProgress) {
+    setInProgress(me, inProgress) {
+        const funcName = [":methods:", "setInProgress:"];
       console.log(fileName, funcName[0], funcName[1], "setInProgress In:", " me ", me, " inProgress ", inProgress);
 
 //      const me = this;
 
-//      this.inProgress = inProgress;
-      me.inProgress = inProgress;
+      this.inProgress = inProgress;
+//      me.inProgress = inProgress;
       console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
     },
   },
