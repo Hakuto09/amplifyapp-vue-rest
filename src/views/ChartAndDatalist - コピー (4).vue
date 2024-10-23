@@ -259,8 +259,7 @@ export default {
       data0_name: data0_name,
       data1_name: data1_name,
 //      inProgress: false,
-//      processing: false,
-      processing: true,
+      processing: false,
     }
   },
   methods: {
@@ -453,9 +452,9 @@ export default {
       let response;
 
 //      this.startProcessing();
-//      this.processing = true
+      this.processing = true
 //      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-//      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
+      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
@@ -598,9 +597,9 @@ export default {
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 //        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 //        this.endProcessing();
-//        this.processing = false;
+        this.processing = false;
 //        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
-//        console.log(fileName, funcName[0], funcName[1], "After this.processing = false:");
+        console.log(fileName, funcName[0], funcName[1], "After this.processing = false:");
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -658,9 +657,6 @@ export default {
   created: function() {
     const funcName = [":created:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
-
-    this.endProcessing();
-    console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
