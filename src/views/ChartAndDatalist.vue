@@ -408,11 +408,11 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
     },
 
-    setInProgress: function(inProgress) {
+    setInProgress: function(me, inProgress) {
       const funcName = [":methods:", "setInProgress:"];
-      console.log(fileName, funcName[0], funcName[1], "setInProgress In:", " inProgress ", inProgress);
+      console.log(fileName, funcName[0], funcName[1], "setInProgress In:", " me ", me, " inProgress ", inProgress);
 
-      const me = this;
+//      const me = this;
 
 //      this.inProgress = inProgress;
       me.inProgress = inProgress;
@@ -574,7 +574,7 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-        this.setInProgress(false);
+        this.setInProgress(this, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
@@ -786,7 +786,7 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-        this.setInProgress(false);
+        this.setInProgress(this, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
@@ -841,7 +841,7 @@ export default {
     console.log(fileName, funcName[0], "In.");
 
 //    this.inProgress = false;
-    this.setInProgress(false);
+    this.setInProgress(this, false);
 //    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
     console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
   },
