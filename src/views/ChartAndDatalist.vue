@@ -448,7 +448,7 @@ export default {
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso, " me ", me);
       let response;
 
       this.startProcessing();
@@ -671,7 +671,7 @@ export default {
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso, " me ", me);
       let response;
 
       this.startProcessing();
