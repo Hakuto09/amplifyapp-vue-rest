@@ -414,8 +414,8 @@ export default {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.");
 
-//    this.inProgress = true;
     inProgress = true;
+    this.inProgress = inProgress;
 
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
@@ -564,8 +564,8 @@ export default {
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
 
-//        this.inProgress = false;
         inProgress = false;
+        this.inProgress = inProgress;
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -575,8 +575,8 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
-//        this.inProgress = false;
         inProgress = false;
+        this.inProgress = inProgress;
         return error;
       }
     }
@@ -633,8 +633,8 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-//    this.inProgress = true;
     inProgress = true;
+    this.inProgress = inProgress;
 
     const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
@@ -771,8 +771,8 @@ export default {
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
 
-//        this.inProgress = false;
         inProgress = false;
+        this.inProgress = inProgress;
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -782,8 +782,8 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
-//        this.inProgress = false;
         inProgress = false;
+        this.inProgress = inProgress;
         return error;
       }
     }
