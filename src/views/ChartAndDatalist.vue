@@ -234,7 +234,7 @@ export default {
   },
   data: function() {
     const funcName = [":data:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
 
     console.log(fileName, funcName[0], "Before return():");
     return {
@@ -264,13 +264,13 @@ export default {
   methods: {
     setDateStartNow: function() {
       const funcName = [":methods:", "sedDateStartNow:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
 
       date_start = new Date();
       date_start.setMinutes(date_start.getMinutes() - 1);
 //      localStorage.setItem('date_start', date_start);
       this.date_start = date_start;
-      console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
+      console.log(fileName, funcName[0], funcName[1], "Out.", " date_start ", date_start, " this.date_start ", this.date_start);
     },
 
     setDateEndNow: function() {
@@ -280,12 +280,12 @@ export default {
       date_end = new Date();
 //      localStorage.setItem('date_end', date_end);
       this.date_end = date_end;
-      console.log(fileName, funcName[0], funcName[1], "In.", " date_end ", date_end, " this.date_end ", this.date_end);
+      console.log(fileName, funcName[0], funcName[1], "Out.", " date_end ", date_end, " this.date_end ", this.date_end);
     },
 
     convertJSONtoCSV: function() {
       const funcName = [":methods:", "convertJSONtoCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:");
+      console.log(fileName, funcName[0], funcName[1], "In:", " this ", this);
 
       let keys = ["device_name", "device_id", "date", "data0", "data1"];
       let numOfColumns = keys.length;
@@ -347,7 +347,7 @@ export default {
 
     writeCSV: async function(/*event*/) {
       const funcName = [":methods:", "writeCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:");
+      console.log(fileName, funcName[0], funcName[1], "In:", " this ", this);
 
 //      setDisableButtons(true);
 //      event.preventDefault();
@@ -397,7 +397,7 @@ export default {
 
     updateLabel: function() {
       const funcName = [":methods:", "updateLabel:"];
-      console.log(fileName, funcName[0], funcName[1], "In.");
+      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
 
       localStorage.setItem('data0_name', this.data0_name);
       localStorage.setItem('data1_name', this.data1_name);
@@ -410,8 +410,8 @@ export default {
 
 //    setInProgress: function(me, inProgress) {
     setInProgress(me, inProgress) {
-        const funcName = [":methods:", "setInProgress:"];
-      console.log(fileName, funcName[0], funcName[1], "setInProgress In:", " me ", me, " inProgress ", inProgress);
+      const funcName = [":methods:", "setInProgress:"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this, " me ", me, " inProgress ", inProgress);
 
 //      const me = this;
 
@@ -422,7 +422,7 @@ export default {
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
 
     this.inProgress = true;
     console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
@@ -634,19 +634,19 @@ export default {
   },
   created: function() {
     const funcName = [":created:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
   },
   mounted: function() {
     const funcName = [":mounted:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
 
 //    this.inProgress = true;
 //    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
@@ -842,7 +842,7 @@ export default {
   },
   updated: function() {
     const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
 
 //    this.inProgress = false;
     this.setInProgress(this, false);
@@ -851,11 +851,11 @@ export default {
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
-    console.log(fileName, funcName[0], "In.");
+    console.log(fileName, funcName[0], "In.", " this ", this);
   },
 }
 </script>
