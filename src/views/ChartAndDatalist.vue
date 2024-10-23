@@ -824,6 +824,9 @@ export default {
   updated: function() {
     const funcName = [":updated:"];
     console.log(fileName, funcName[0], "In.");
+
+    this.inProgress = false;
+    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
