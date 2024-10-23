@@ -562,8 +562,8 @@ export default {
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
 
-//        this.inProgress = false;
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+        this.inProgress = false;
+        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -615,8 +615,8 @@ export default {
     let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
-    this.inProgress = false;
-    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+//    this.inProgress = false;
+//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   created: function() {
     const funcName = [":created:"];
@@ -772,8 +772,8 @@ export default {
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
 
-//        this.inProgress = false;
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+        this.inProgress = false;
+        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
         //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
@@ -818,8 +818,8 @@ export default {
       console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
     }
 
-    this.inProgress = false;
-    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+//    this.inProgress = false;
+//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   updated: function() {
     const funcName = [":updated:"];
