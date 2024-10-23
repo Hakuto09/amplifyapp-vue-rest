@@ -33,7 +33,7 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        :disabled=!inProgress
+        :disabled=inProgress
         @click="writeCSV">
         CSVファイル出力
       </button>
@@ -42,17 +42,17 @@
       <label for="input">data0 is .</label>
       <input
         v-model="data0_name"
-        :disabled=!inProgress>
+        :disabled=inProgress>
     </div>
     <div>
       <label for="input">data1 is .</label>
       <input
         v-model="data1_name"
-        :disabled=!inProgress>
+        :disabled=inProgress>
     </div>
     <button
         type="is-info"
-        :disabled=!inProgress
+        :disabled=inProgress
         @click="updateLabel">
         Label update
       </button>
@@ -61,7 +61,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        :disabled=!inProgress
+        :disabled=inProgress
         @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
@@ -69,7 +69,7 @@
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
-                  :disabled=!inProgress
+                  :disabled=inProgress
                   dateFormat='yy年mm月dd日'
                   :enable-time-picker="true"
                   week-start="0"
@@ -87,7 +87,7 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        :disabled=!inProgress
+        :disabled=inProgress
         @click="setDateEndNow">
         現在日時を設定
       </button>
@@ -95,7 +95,7 @@
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
-                  :disabled=!inProgress
+                  :disabled=inProgress
                   dateFormat="yyyy-MM-dd HH:mm"
                   :enable-time-picker="true"
                   week-start="0"
