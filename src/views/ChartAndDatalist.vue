@@ -416,8 +416,8 @@ export default {
 //      const me = this;
 
       this.inProgress = inProgress;
-//      me.inProgress = inProgress;
-      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+      me.inProgress = inProgress;
+      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress, " me.inProgress ", me.inProgress, " this ", this, " me ", me);
     },
   },
   beforeCreate: function() {
@@ -432,7 +432,7 @@ export default {
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
-    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
+    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
@@ -575,7 +575,7 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-        this.setInProgress(this, false);
+        this.setInProgress(me, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
@@ -626,7 +626,7 @@ export default {
 
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
-    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
+    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso, this);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
 
 //    this.inProgress = false;
@@ -648,10 +648,10 @@ export default {
     const funcName = [":beforeUpdate:"];
     console.log(fileName, funcName[0], "In.");
 
-    this.inProgress = true;
-    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+//    this.inProgress = true;
+//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 
-    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
+    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
       console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
@@ -787,7 +787,7 @@ export default {
         this.device_name = deviceInfo['device_name'];
 
 //        this.inProgress = false;
-        this.setInProgress(this, false);
+        this.setInProgress(me, false);
 //        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
 
@@ -822,6 +822,9 @@ export default {
     if (reRenderFlag) {
       reRenderFlag = false;
 
+      this.inProgress = true;
+      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+
       const deviceInfo = ref('');
       deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
@@ -830,7 +833,7 @@ export default {
       let date_end_iso = dateTimeToISOString(this.date_end);
 
       // getDevices を呼び出してデータを読み込む
-      let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
+      let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso, this);
       console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
     }
 
