@@ -58,6 +58,7 @@
       v-model="input_1nce_password"
       :class="$style.input_1nce_password"
       :disabled = valid1nceApiToken
+      type="password"
       placeholder="1nce password">
     <button
       type="is-info"
