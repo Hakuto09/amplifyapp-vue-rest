@@ -249,6 +249,7 @@ export default {
         await axios.post(aws_url_base + 'external_post', {
             url: url_path,
             headers: headers,
+            body: body,
           }, {
             headers: {
               Authorization: `Bearer ${awsIdToken}`,
