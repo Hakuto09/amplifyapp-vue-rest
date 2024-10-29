@@ -244,12 +244,14 @@ export default {
       if (_1nce_access_via_aws) {
         // リクエストの記述
         console.log(fileName, funcName[0], funcName[1], " Before await axios.post(1nce token):", " url_path ", url_path, " headers ", headers);
+        const awsIdToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' awsIdToken ', awsIdToken);
         await axios.post(aws_url_base + 'external_post', {
             url: url_path,
             headers: headers,
           }, {
             headers: {
-              'Content-Type': 'application/json',
+              Authorization: `Bearer ${awsIdToken}`,
             },
           },
         )
