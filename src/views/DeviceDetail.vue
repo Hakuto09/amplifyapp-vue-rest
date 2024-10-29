@@ -233,7 +233,7 @@ export default {
 
       const url_path = _1nce_url_base + 'oauth/token';
       const body = {
-        'grant_type': 'client_credentials',
+        "grant_type": "client_credentials",
       };
       const headers = {
         'Accept': 'application/json',

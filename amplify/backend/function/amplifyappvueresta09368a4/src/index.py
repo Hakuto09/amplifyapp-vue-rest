@@ -525,7 +525,7 @@ async def post_external_post(_in: Request):
     print('url ', url)
     headers = _in_dict["headers"]
     print('headers ', headers)
-    body = in_dict["body"]
+    body = _in_dict["body"]
     print('body ', body)
 
     # POSTリクエスト
