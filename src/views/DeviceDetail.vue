@@ -343,8 +343,9 @@ export default {
 
         if (_1nce_access_via_aws) {
           // リクエストの記述
-          console.log(fileName, funcName[0], funcName[1], " Before no-await axios.post(1nce locate via aws):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+          console.log(fileName, funcName[0], funcName[1], " Before no-await axios.post(1nce locate via aws):", " url_path ", url_path, " headers ", headers);
           const idToken = (/*await*/ fetchAuthSession()).tokens.idToken ?? '';
+          console.log(fileName, funcName[0], funcName[1], "After (fetchAuthSession()).tokens", ' idToken ', idToken);
           axios.post(aws_url_base + 'external_get', {
               url: url_path,
               headers: headers,
