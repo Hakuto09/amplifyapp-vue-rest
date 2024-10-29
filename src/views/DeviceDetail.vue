@@ -326,7 +326,7 @@ export default {
       }
     },
 //    update1nceLocatePosition: async function() {
-    update1nceLocatePosition: function() {
+    update1nceLocatePosition: async function() {
       const funcName = [":methods:", "update1nceLocatePosition:"];
       console.log(fileName, funcName[0], funcName[1], "In.");
 
@@ -343,15 +343,15 @@ export default {
 
         if (_1nce_access_via_aws) {
           // リクエストの記述
-          console.log(fileName, funcName[0], funcName[1], " Before no-await axios.post(1nce locate via aws):", " url_path ", url_path, " headers ", headers);
-          const idToken = (/*await*/ fetchAuthSession()).tokens.idToken ?? '';
-          console.log(fileName, funcName[0], funcName[1], "After (fetchAuthSession()).tokens", ' idToken ', idToken);
-          axios.post(aws_url_base + 'external_get', {
+          console.log(fileName, funcName[0], funcName[1], " Before await axios.post(1nce locate via aws):", " url_path ", url_path, " headers ", headers);
+          const awsIdToken = (await fetchAuthSession()).tokens.idToken ?? '';
+          console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' awsIdToken ', awsIdToken);
+          await axios.post(aws_url_base + 'external_get', {
               url: url_path,
               headers: headers,
             }, {
               headers: {
-                Authorization: `Bearer ${idToken}`,
+                Authorization: `Bearer ${awsIdToken}`,
               },
             },
           )
