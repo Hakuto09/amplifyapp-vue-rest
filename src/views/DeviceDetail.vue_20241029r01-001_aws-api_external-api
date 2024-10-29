@@ -162,8 +162,6 @@ console.log(fileName, "_1nce_url_base ", _1nce_url_base);
 const _1nce_url_base_v = _1nce_url_base + 'v1/';
 console.log(fileName, "_1nce_url_base_v ", _1nce_url_base_v);
 
-const _1nce_access_via_aws = true;
-
 export default {
   name: 'DeviceDetail',
   components: {
@@ -341,82 +339,39 @@ export default {
           'Authorization': 'Bearer ' + _1nce_api_token,
         };
 
-        if (_1nce_access_via_aws) {
-          // リクエストの記述
-          console.log(fileName, funcName[0], funcName[1], " Before no-await axios.post(1nce locate via aws):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
-          const idToken = (/*await*/ fetchAuthSession()).tokens.idToken ?? '';
-          axios.post(aws_url_base + 'external_get', {
-              url: url_path,
-              headers: headers,
-            }, {
-              headers: {
-                Authorization: `Bearer ${idToken}`,
-              },
-            },
-          )
-          .then(response => {
-            // レスポンス処理
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
+        // GETリクエストの記述
+        console.log(fileName, funcName[0], funcName[1], " Before no-await axios.get(1nce locate):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
+        axios.get(url_path, {
+            headers: headers,
+          }
+        )
+        .then(response => {
+          // レスポンス処理
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
 
-            if (response.data.coordinates == []) {
-              console.log(fileName, funcName[0], funcName[1], " if (response.data.coordinates == []):");
+          if (response.data.coordinates == []) {
+            console.log(fileName, funcName[0], funcName[1], " if (response.data.coordinates == []):");
 
-              this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報が登録されていません。";
-            }
-            else {
-  //            console.log(fileName, funcName[0], funcName[1], " Before set map position");
-              this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-              console.log(fileName, funcName[0], funcName[1], " After set map position:", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
+            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報が登録されていません。";
+          }
+          else {
+//            console.log(fileName, funcName[0], funcName[1], " Before set map position");
+            this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+            console.log(fileName, funcName[0], funcName[1], " After set map position:", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
 
-              this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に成功しました。";
-            }
-            this.message_1nce_token_result = "1NCE APIトークンは有効です。";
-          })
-          .catch(error => {
-            // エラーハンドリング
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
+            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に成功しました。";
+          }
+          this.message_1nce_token_result = "1NCE APIトークンは有効です。";
+         })
+        .catch(error => {
+          // エラーハンドリング
+          console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
 
-            this.valid1nceApiToken = false;
-            this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
-            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。1NCE APIトークンを更新してください ↑";
-          });
-        }
-        else {
-          // リクエストの記述
-          console.log(fileName, funcName[0], funcName[1], " Before no-await axios.get(1nce locate):", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
-          axios.get(url_path, {
-              headers: headers,
-            }
-          )
-          .then(response => {
-            // レスポンス処理
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
-
-            if (response.data.coordinates == []) {
-              console.log(fileName, funcName[0], funcName[1], " if (response.data.coordinates == []):");
-
-              this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報が登録されていません。";
-            }
-            else {
-  //            console.log(fileName, funcName[0], funcName[1], " Before set map position");
-              this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
-              console.log(fileName, funcName[0], funcName[1], " After set map position:", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
-
-              this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に成功しました。";
-            }
-            this.message_1nce_token_result = "1NCE APIトークンは有効です。";
-          })
-          .catch(error => {
-            // エラーハンドリング
-            console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).catch:", " error ", error)
-
-            this.valid1nceApiToken = false;
-            this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
-            this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。1NCE APIトークンを更新してください ↑";
-          });
-        }
+          this.valid1nceApiToken = false;
+          this.message_1nce_token_result = "1NCE APIアクセスに失敗しました。トークンを更新してください。";
+          this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に失敗しました。1NCE APIトークンを更新してください ↑";
+        });
 
 /*
         console.log(fileName, funcName[0], funcName[1], " Before await axios.get(1nce locate);", " _1nce_device_id ", _1nce_device_id, " _1nce_device_id[0] ", _1nce_device_id[0]);
