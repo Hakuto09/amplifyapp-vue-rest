@@ -479,24 +479,35 @@ def get_account(account_id: str):
 
 @app.post("/external_get")
 async def post_external_get(_in: Request):
+#def post_external_get(_in: Request):
     """
     外部クラウドサービスのAPIにGetアクセスを行う。
     """
     print('post_external_get(): In')
 
     data_json = await _in.json()
+#    data_json = _in.json()
     print("data_json ", data_json)
+#    _in_dict = _in.dict()
     _in_dict = dict(data_json)
     print('_in_dict ', _in_dict)
+
+#    data_dict = json.loads(data_json)
 
     url = _in_dict["url"]
     print('url ', url)
     headers = _in_dict["headers"]
     print('headers ', headers)
-    headers_json = json.dumps(headers)      # not use.
+    headers_json = json.dumps(headers)
+#    print('headers.json ', headers.json)
     print('headers_json ', headers_json)
 
+    # ここで任意の処理を行います。例えば、データをDBに保存するなど。
+#    processed_data = {"status": "success", "received_data": data}
+
     # GETリクエスト
+#    response = requests.get(url, headers=headers.json)
+#    response = requests.get(url, headers=headers_json)
     response = requests.get(url, headers=headers)
     print('After requests.get():', ' response ', response)
     
@@ -508,36 +519,7 @@ async def post_external_get(_in: Request):
         'statusCode': response.status_code,
         'body': response.json()
     }
-
-@app.post("/external_post")
-async def post_external_post(_in: Request):
-    """
-    外部クラウドサービスのAPIにPostアクセスを行う。
-    """
-    print('post_external_post(): In')
-
-    data_json = await _in.json()
-    print("data_json ", data_json)
-    _in_dict = dict(data_json)
-    print('_in_dict ', _in_dict)
-
-    url = _in_dict["url"]
-    print('url ', url)
-    headers = _in_dict["headers"]
-    print('headers ', headers)
-    body = in_dict["body"]
-    print('body ', body)
-
-    # POSTリクエスト
-#    response = requests.post(url, headers=headers, data=json.dumps(payload))
-    response = requests.post(url, headers=headers, data=body)
-    print('After requests.post():', ' response ', response)
-
-    # レスポンスをLambdaの戻り値として返す
-    return {
-        'statusCode': response.status_code,
-        'body': response.json()
-    }
+#    return processed_data
 
 @app.post("/items", response_model=Response_Item)
 def post_item(item_in: Request_Item):
