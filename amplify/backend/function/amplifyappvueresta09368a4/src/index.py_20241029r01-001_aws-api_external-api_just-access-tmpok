@@ -478,48 +478,35 @@ def get_account(account_id: str):
     return response_ddb["Items"]
 
 @app.post("/external_get")
-async def post_external_get(_in: Request):
-#def post_external_get(_in: Request):
+async def post_external_get(request: Request):
     """
     外部クラウドサービスのAPIにGetアクセスを行う。
     """
     print('post_external_get(): In')
 
-    data_json = await _in.json()
-#    data_json = _in.json()
-    print("data_json ", data_json)
-#    _in_dict = _in.dict()
-    _in_dict = dict(data_json)
-    print('_in_dict ', _in_dict)
+    data = await request.json()
+    # デバッグ出力を追加
+    print("Received JSON data:", data)
 
-#    data_dict = json.loads(data_json)
-
-    url = _in_dict["url"]
-    print('url ', url)
-    headers = _in_dict["headers"]
-    print('headers ', headers)
-    headers_json = json.dumps(headers)
-#    print('headers.json ', headers.json)
-    print('headers_json ', headers_json)
+#    print('url ', url)
+#    print('headers ', headers)
 
     # ここで任意の処理を行います。例えば、データをDBに保存するなど。
-#    processed_data = {"status": "success", "received_data": data}
-
-    # GETリクエスト
-#    response = requests.get(url, headers=headers.json)
-#    response = requests.get(url, headers=headers_json)
-    response = requests.get(url, headers=headers)
-    print('After requests.get():', ' response ', response)
+    processed_data = {"status": "success", "received_data": data}
     
-    # POSTリクエストの場合（必要に応じて）
-    # response = requests.post(url, headers=headers, data=json.dumps(payload))
+    return processed_data
 
-    # レスポンスをLambdaの戻り値として返す
-    return {
-        'statusCode': response.status_code,
-        'body': response.json()
-    }
-#    return processed_data
+#    # GETリクエスト
+#    response = requests.get(url, headers=headers)
+#    
+#    # POSTリクエストの場合（必要に応じて）
+#    # response = requests.post(url, headers=headers, data=json.dumps(payload))
+#
+#    # レスポンスをLambdaの戻り値として返す
+#    return {
+#        'statusCode': response.status_code,
+#        'body': response.json()
+#    }
 
 @app.post("/items", response_model=Response_Item)
 def post_item(item_in: Request_Item):

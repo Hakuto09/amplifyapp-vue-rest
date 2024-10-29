@@ -360,14 +360,14 @@ export default {
             console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.status ", response.status)
             console.log(fileName, funcName[0], funcName[1], " axios.get(1nce locate).then:", " response.data ", response.data);
 
-            if (response.data.body.coordinates == []) {
+            if (response.data.coordinates == []) {
               console.log(fileName, funcName[0], funcName[1], " if (response.data.coordinates == []):");
 
               this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報が登録されていません。";
             }
             else {
   //            console.log(fileName, funcName[0], funcName[1], " Before set map position");
-              this.d_1nce_map_marker_position = [response.data.body.coordinates[0].coordinate[1], response.data.body.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
+              this.d_1nce_map_marker_position = [response.data.coordinates[0].coordinate[1], response.data.coordinates[0].coordinate[0]]; // 緯度 latitude, 経度 longitude
               console.log(fileName, funcName[0], funcName[1], " After set map position:", " this.d_1nce_map_marker_position ", this.d_1nce_map_marker_position);
 
               this.message_1nce_locate_result = "1NCE SIM デバイスの位置情報の取得に成功しました。";

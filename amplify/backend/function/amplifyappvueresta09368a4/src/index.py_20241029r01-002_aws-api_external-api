@@ -507,8 +507,8 @@ async def post_external_get(_in: Request):
 
     # GETリクエスト
 #    response = requests.get(url, headers=headers.json)
-#    response = requests.get(url, headers=headers_json)
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers_json)
+#    response = requests.get(url, headers=headers)
     print('After requests.get():', ' response ', response)
     
     # POSTリクエストの場合（必要に応じて）
