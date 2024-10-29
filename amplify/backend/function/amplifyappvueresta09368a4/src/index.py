@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 #from fastapi.responses import JSONResponse
 #from fastapi.responses import PlainTextResponse
 #from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -13,7 +13,7 @@ import uuid
 from boto3.dynamodb.conditions import Key, Attr
 import json
 from typing import Set, Union
-
+import requests
 
 # 環境変数取得
 ENV = os.environ['ENV']
@@ -476,6 +476,37 @@ def get_account(account_id: str):
 
     print('get_account(): Befre return response["Items"]')
     return response_ddb["Items"]
+
+@app.post("/external_get")
+async def post_external_get(request: Request):
+    """
+    外部クラウドサービスのAPIにGetアクセスを行う。
+    """
+    print('post_external_get(): In')
+
+    data = await request.json()
+    # デバッグ出力を追加
+    print("Received JSON data:", data)
+
+#    print('url ', url)
+#    print('headers ', headers)
+
+    # ここで任意の処理を行います。例えば、データをDBに保存するなど。
+    processed_data = {"status": "success", "received_data": data}
+    
+    return processed_data
+
+#    # GETリクエスト
+#    response = requests.get(url, headers=headers)
+#    
+#    # POSTリクエストの場合（必要に応じて）
+#    # response = requests.post(url, headers=headers, data=json.dumps(payload))
+#
+#    # レスポンスをLambdaの戻り値として返す
+#    return {
+#        'statusCode': response.status_code,
+#        'body': response.json()
+#    }
 
 @app.post("/items", response_model=Response_Item)
 def post_item(item_in: Request_Item):
