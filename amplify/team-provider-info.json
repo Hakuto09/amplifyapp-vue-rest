@@ -18,7 +18,7 @@
       "function": {
         "amplifyappvueresta09368a4": {
           "deploymentBucketName": "amplify-amplifyappvuerest-dev-110423-deployment",
-          "s3Key": "amplify-builds/amplifyappvueresta09368a4-482b752b644469614a47-build.zip"
+          "s3Key": "amplify-builds/amplifyappvueresta09368a4-5442455341694e32584d-build.zip"
         }
       },
       "api": {
@@ -48,7 +48,7 @@
       "function": {
         "amplifyappvueresta09368a4": {
           "deploymentBucketName": "amplify-amplifyappvuerest-staging-141253-deployment",
-          "s3Key": "amplify-builds/amplifyappvueresta09368a4-644a517157354773314b-build.zip"
+          "s3Key": "amplify-builds/amplifyappvueresta09368a4-6e2f6b54795a654a6661-build.zip"
         }
       },
       "api": {

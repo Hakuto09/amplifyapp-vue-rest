@@ -784,7 +784,7 @@ def post_device(_in: Request_PostDevice):
 
     if (via_1nce_os == True) :
         ### IoT Core メッセージングルール (1NCE OS経由用) 登録 ###
-        ruleName = 'Hkt_' + '1nceOs_' + device_name + '_' + ENV
+        ruleName = 'Hkt_' + '1nceOs_' + device_name
         splitThingName = thingName.split('_')
         _1nce_iccid = splitThingName[0]
 #        topicName = "'" + _1nce_iccid + "/messages'"

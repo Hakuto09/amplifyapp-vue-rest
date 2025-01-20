@@ -784,14 +784,13 @@ def post_device(_in: Request_PostDevice):
 
     if (via_1nce_os == True) :
         ### IoT Core メッセージングルール (1NCE OS経由用) 登録 ###
-        ruleName = 'Hkt_' + '1nceOs_' + device_name + '_' + ENV
+        ruleName = 'Hkt_' + '1nceOs_' + device_name
         splitThingName = thingName.split('_')
         _1nce_iccid = splitThingName[0]
 #        topicName = "'" + _1nce_iccid + "/messages'"
         topicName = "'" + _1nce_iccid + "/+'"
 #        roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
-#        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb-staging_for-1nce-os_python"
-        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb_for-1nce-os_-" + ENV + "_python"
+        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb-staging_for-1nce-os_python"
         print('Before client_iot.create_topic_rule():', ' ruleName ', ruleName, ' topicName ', topicName, ' lambdaFunctionArn ', lambdaFunctionArn)
         res_iot_rule = client_iot.create_topic_rule(
             ruleName = ruleName,
@@ -879,17 +878,6 @@ async def post_ddata_1nceos(_in: Request):
     _in_dict = dict(data_json)
     print('_in_dict ', _in_dict)
 
-    type = _in_dict["type"]
-    print("type: ", type)
-
-    if type == "TEST_MESSAGE" :
-        print("type == TEST_MESSAGE")
-        return
-
-#    if _in_dict.get('detail') is not None:
-#        print("キー 'detail' は存在します")
-#        return
-
     payload_type = _in_dict["payload"]["type"]
     print("payload_type: ", payload_type)
 #    print("_in_dict[payload][value]: " + _in_dict["payload"]["value"])
@@ -899,8 +887,8 @@ async def post_ddata_1nceos(_in: Request):
     print("id: ", id)
     source = _in_dict["source"]
     print("source: ", source)
-#    type = _in_dict["type"]
-#    print("type: ", type)
+    type = _in_dict["type"]
+    print("type: ", type)
     version = _in_dict["version"]
     print("version: ", version)
 #    print("_in_dict[device]: " + _in_dict["device"])
