@@ -149,7 +149,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
-import { userBranch } from './userbranch.js';
+import { userBranch } from '../userbranch.js';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");

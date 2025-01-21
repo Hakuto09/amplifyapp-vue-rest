@@ -108,7 +108,7 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
-import { userBranch } from './userbranch.js';
+import { userBranch } from '../userbranch.js';
 const fileName = "DeviceDetail.vue";
 
 console.log(fileName, ":After import:");

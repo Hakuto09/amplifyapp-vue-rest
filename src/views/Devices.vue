@@ -72,7 +72,7 @@ import { /*defineProps,*/ ref } from 'vue';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentUser } from 'aws-amplify/auth';
 //import * as fs from "fs-extra";
-import { userBranch } from './userbranch.js';
+import { userBranch } from '../userbranch.js';
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");

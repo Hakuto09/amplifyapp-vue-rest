@@ -50,7 +50,7 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentUser } from 'aws-amplify/auth';
 //import { currentSession } from 'aws-amplify/auth';
 //import { getCurrentInstance } from 'vue';
-import { userBranch } from './userbranch.js';
+import { userBranch } from '../userbranch.js';
 const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
