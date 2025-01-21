@@ -33,7 +33,7 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        v-bind:disabled=processing
+        v-bind:disabled="isProcessing()"
         @click="writeCSV">
         CSVファイル出力
       </button>
@@ -42,17 +42,17 @@
       <label for="input">data0 is .</label>
       <input
         v-model="data0_name"
-        v-bind:disabled=processing>
+        v-bind:disabled="isProcessing()">
     </div>
     <div>
       <label for="input">data1 is .</label>
       <input
         v-model="data1_name"
-        v-bind:disabled=processing>
+        v-bind:disabled="isProcessing()">
     </div>
     <button
         type="is-info"
-        v-bind:disabled=processing
+        v-bind:disabled="isProcessing()"
         @click="updateLabel">
         Label update
       </button>
@@ -453,9 +453,9 @@ export default {
       let response;
 
 //      this.startProcessing();
-      this.processing = true
+//      this.processing = true
 //      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
+//      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';

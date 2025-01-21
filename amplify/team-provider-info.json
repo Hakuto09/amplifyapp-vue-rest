@@ -18,7 +18,7 @@
       "function": {
         "amplifyappvueresta09368a4": {
           "deploymentBucketName": "amplify-amplifyappvuerest-dev-110423-deployment",
-          "s3Key": "amplify-builds/amplifyappvueresta09368a4-482b752b644469614a47-build.zip"
+          "s3Key": "amplify-builds/amplifyappvueresta09368a4-53476868337335545750-build.zip"
         }
       },
       "api": {

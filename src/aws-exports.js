@@ -3,13 +3,6 @@
 
 const awsmobile = {
     "aws_project_region": "ap-northeast-1",
-    "aws_dynamodb_all_tables_region": "ap-northeast-1",
-    "aws_dynamodb_table_schemas": [
-        {
-            "tableName": "dynamo29652a67-dev",
-            "region": "ap-northeast-1"
-        }
-    ],
     "aws_cloud_logic_custom": [
         {
             "name": "apib620dd96",
@@ -39,6 +32,13 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
+    ],
+    "aws_dynamodb_all_tables_region": "ap-northeast-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "dynamo29652a67-dev",
+            "region": "ap-northeast-1"
+        }
     ]
 };
 

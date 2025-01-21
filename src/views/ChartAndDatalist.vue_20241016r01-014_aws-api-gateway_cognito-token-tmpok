@@ -33,26 +33,20 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        v-bind:disabled=processing
         @click="writeCSV">
         CSVファイル出力
       </button>
     </div>
     <div>
       <label for="input">data0 is .</label>
-      <input
-        v-model="data0_name"
-        v-bind:disabled=processing>
+      <input v-model="data0_name">
     </div>
     <div>
       <label for="input">data1 is .</label>
-      <input
-        v-model="data1_name"
-        v-bind:disabled=processing>
+      <input v-model="data1_name">
     </div>
     <button
         type="is-info"
-        v-bind:disabled=processing
         @click="updateLabel">
         Label update
       </button>
@@ -61,7 +55,6 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
         @click="setDateStartNow">
         現在日時 (-1分) を設定
       </button>
@@ -69,7 +62,6 @@
     <div id="box">
       <datepicker v-model="date_start" 
                   :format="format"
-                  v-bind:disabled="isProcessing()"
                   dateFormat='yy年mm月dd日'
                   :enable-time-picker="true"
                   week-start="0"
@@ -87,7 +79,6 @@
     <div :class="$style.set_date">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
         @click="setDateEndNow">
         現在日時を設定
       </button>
@@ -95,7 +86,6 @@
     <div id="box">
       <datepicker v-model="date_end" 
                   :format="format"
-                  v-bind:disabled="isProcessing()"
                   dateFormat="yyyy-MM-dd HH:mm"
                   :enable-time-picker="true"
                   week-start="0"
@@ -180,7 +170,7 @@ ChartJS.register(
 )
 
 let currentInstance;
-//let idToken;
+let idToken;
 let ddata;
 
 //const userBranch = process.env.USER_BRANCH;
@@ -209,6 +199,99 @@ let data1_name;
 
 let reRenderFlag = false;
 
+/*
+const chartData = {
+  labels: [],
+  datasets: [
+    {
+      label: 'data0',
+      yAxisID: "yleft",
+      backgroundColor: "rgba(2,63,138,0.8)",
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(2,63,138,0.8)",
+//      pointBorderColor: "#fff",
+//      pointBackgroundColor: "rgba(2,63,138,0.8)",
+//      pointBorderWidth: 2,
+//      pointHoverRadius: 5,
+//      pointHoverBackgroundColor: "#1D5191",
+//      pointHoverBorderColor: "#fff",
+//      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: [],
+    },
+    {
+      label: 'data1',
+      yAxisID: "yright",
+//          backgroundColor: '#f879f9',
+      backgroundColor: "rgba(201,60,58,0.8)",
+      fill: false,
+      borderWidth: 2,
+      borderColor: "rgba(201,60,58,0.8)",
+//      pointBorderColor: "#fff",
+//      pointBackgroundColor: "rgba(201,60,58,0.8)",
+//      pointBorderWidth: 2,
+//      pointHoverRadius: 5,
+//      pointHoverBackgroundColor: "#9A1B19",
+//      pointHoverBorderColor: "#fff",
+//      pointHoverBorderWidth: 2,
+      tension: 0,
+      data: [],
+    },
+//    {
+//      label: 'data2',
+//      yAxisID: "yright",
+////          backgroundColor: '#f8f979',
+//      backgroundColor: "#DB514E",
+//      data: data2s,
+//    },
+  ]
+}
+*/
+
+/*
+const chartOptions = {
+  responsive: true,    // グラフのスクロール対応
+//      responsive: false,    // グラフのスクロール対応
+  maintainAspectRatio: false,
+  spanGaps: true,   //点をつなげる場合
+  scales: {
+    x: {
+      type: 'time',
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "bottom",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: '日付時刻'           // ★必須 タイトルの文字列
+      },
+      time: {
+        unit: 'minute',
+        displayFormats: {
+          minute: 'YYYY-MM-DD HH:mm'
+        }
+      },
+    },
+    yleft: {
+      stacked: false,
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "left",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: 'data0'           // ★必須 タイトルの文字列
+      },
+    },
+    // yright (y軸・右): Y軸が、複数あるので yleft と yright のように軸にIDを付ける
+    yright: {
+      stacked: false,
+      position: "right",
+      title: {                   // タイトルの設定  軸ラベル ChartJS ver 4
+        display: true,             // ★必須 表示設定 省略時は false
+        position: "right",        // 表示位置 省略時は top、他に left, right が指定できる
+        text: 'data1'           // ★必須 タイトルの文字列
+      },
+    },
+  },
+};
+*/
+
 function dateTimeToISOString(dateTime){
   // toISOString()で、UTC時間になってしまう（-9時間されてしまう）
   let dateTimeJstTmp = new Date(dateTime);
@@ -234,17 +317,24 @@ export default {
   },
   data: function() {
     const funcName = [":data:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
 
     console.log(fileName, funcName[0], "Before return():");
     return {
       data: {
         labels: labels/*[]*/,
-        datasets: [{
+        datasets: [
+          {
             data: data0s/*[]*/,
-          }, {
+          },
+          {
             data: data1s/*[]*/,
           },
+/*
+          {
+            data: [],
+          },
+*/
         ],
       },
       options: null/*chartOptions*/,
@@ -258,21 +348,18 @@ export default {
       format: 'yyyy-MM-dd HH:mm', 
       data0_name: data0_name,
       data1_name: data1_name,
-//      inProgress: false,
-//      processing: false,
-      processing: true,
     }
   },
   methods: {
     setDateStartNow: function() {
       const funcName = [":methods:", "sedDateStartNow:"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
+      console.log(fileName, funcName[0], funcName[1], "In.");
 
       date_start = new Date();
       date_start.setMinutes(date_start.getMinutes() - 1);
 //      localStorage.setItem('date_start', date_start);
       this.date_start = date_start;
-      console.log(fileName, funcName[0], funcName[1], "Out.", " date_start ", date_start, " this.date_start ", this.date_start);
+      console.log(fileName, funcName[0], funcName[1], "In.", " date_start ", date_start, " this.date_start ", this.date_start);
     },
 
     setDateEndNow: function() {
@@ -282,12 +369,12 @@ export default {
       date_end = new Date();
 //      localStorage.setItem('date_end', date_end);
       this.date_end = date_end;
-      console.log(fileName, funcName[0], funcName[1], "Out.", " date_end ", date_end, " this.date_end ", this.date_end);
+      console.log(fileName, funcName[0], funcName[1], "In.", " date_end ", date_end, " this.date_end ", this.date_end);
     },
 
     convertJSONtoCSV: function() {
       const funcName = [":methods:", "convertJSONtoCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:", " this ", this);
+      console.log(fileName, funcName[0], funcName[1], "In:");
 
       let keys = ["device_name", "device_id", "date", "data0", "data1"];
       let numOfColumns = keys.length;
@@ -349,7 +436,7 @@ export default {
 
     writeCSV: async function(/*event*/) {
       const funcName = [":methods:", "writeCSV:"];
-      console.log(fileName, funcName[0], funcName[1], "In:", " this ", this);
+      console.log(fileName, funcName[0], funcName[1], "In:");
 
 //      setDisableButtons(true);
 //      event.preventDefault();
@@ -399,7 +486,7 @@ export default {
 
     updateLabel: function() {
       const funcName = [":methods:", "updateLabel:"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
+      console.log(fileName, funcName[0], funcName[1], "In.");
 
       localStorage.setItem('data0_name', this.data0_name);
       localStorage.setItem('data1_name', this.data1_name);
@@ -409,57 +496,26 @@ export default {
       currentInstance.proxy.$forceUpdate();
       console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
     },
-
-//    setInProgress: function(me, inProgress) {
-    setInProgress(me, inProgress) {
-      const funcName = [":methods:", "setInProgress:"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this, " me ", me, " inProgress ", inProgress);
-
-//      const me = this;
-
-      this.inProgress = inProgress;
-      this.data.inProgress = inProgress;
-      me.inProgress = inProgress;
-      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress, " me.inProgress ", me.inProgress, " this ", this, " me ", me);
-      console.log(fileName, funcName[0], funcName[1], "After set this.data.inProgress:", " this.data.inProgress ", this.data.inProgress);
-    },
-
-    startProcessing: function () {
-      this.processing = true
-    },
-    endProcessing: function () {
-      this.processing = false
-    },
-    isProcessing: function () {
-      return this.processing
-    }
   },
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
-
-//    this.inProgress = true;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
+    console.log(fileName, funcName[0], "In.");
 
     currentInstance = getCurrentInstance();
     console.log(fileName, funcName[0], "After getCurrentInstance():", " currentInstance ", currentInstance);
 
 //    async function getDeviceData(deviceId) {
 //    const getDeviceData = async (deviceId) => {
-    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
+    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
         const funcName = [":beforeCreate:", "getDeviceData():"];
 //      console.log(fileName, funcName[0], funcName[1], "In.", " deviceId ", deviceId);
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso, " me ", me);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
 
-//      this.startProcessing();
-      this.processing = true
-//      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
-
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-//        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
+        idToken = (await fetchAuthSession()).tokens.idToken ?? '';
+        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
+
 //        response = await axios.get(url + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso);
         response = await axios.get(aws_url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso, {
             headers: {
@@ -485,7 +541,7 @@ export default {
 //            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
-//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
+            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
             data0s.push(ddata[i].data0);
@@ -592,17 +648,7 @@ export default {
         this.device_id = deviceInfo['device_id'];
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
-
-//        this.inProgress = false;
-//        this.setInProgress(me, false);
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-//        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-//        this.endProcessing();
-//        this.processing = false;
-//        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
-//        console.log(fileName, funcName[0], funcName[1], "After this.processing = false:");
-
-        //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
+//        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
         console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo['device_name'] ", deviceInfo['device_name']);
@@ -610,8 +656,6 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
-//        this.inProgress = false;
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         return error;
       }
     }
@@ -649,44 +693,31 @@ export default {
 
     // getDevices を呼び出してデータを読み込む
 //    let response_ga = getDeviceData(deviceId.value);
-    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso, this);
+    let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
     console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
-
-//    this.inProgress = false;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   created: function() {
     const funcName = [":created:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
-
-    this.endProcessing();
-    console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
+    console.log(fileName, funcName[0], "In.");
   },
   beforeMount: function() {
     const funcName = [":beforeMount:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
   },
   mounted: function() {
     const funcName = [":mounted:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
 
-//    this.inProgress = false;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-
-    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso, me) => {
+    const getDeviceData = async (deviceInfo, date_start_iso, date_end_iso) => {
       const funcName = [":beforeUpdate:", "getDeviceData():"];
-      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso, " me ", me);
+      console.log(fileName, funcName[0], funcName[1], "In.", " deviceInfo ", deviceInfo, " date_start_iso ", date_start_iso, " date_end_iso ", date_end_iso);
       let response;
 
-      this.startProcessing();
-      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
         response = await axios.get(aws_url_base + 'ddata_between/' + deviceInfo.device_id + '?date_start=' + date_start_iso + '&date_end=' + date_end_iso, {
             headers: {
               Authorization: `Bearer ${idToken}`,
@@ -711,7 +742,7 @@ export default {
 //            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " date_nt ", date_nt, " date_nt_jst ", date_nt_jst);
 
             const dateTimeNtJst = dateTimeToNtJst(ddata[i].createdAt_c);
-//            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
+            console.log(fileName, funcName[0], funcName[1], ":In loop for chart data", " i ", i, " ddata[i] ", ddata[i], " dateTimeNtJst ", dateTimeNtJst);
 
             labels.push(dateTimeNtJst);
 //            labels_L.push(dateTimeNtJst);
@@ -814,14 +845,6 @@ export default {
         this.device_id = deviceInfo['device_id'];
 //        this.device_name = deviceInfo.device_name;
         this.device_name = deviceInfo['device_name'];
-
-//        this.inProgress = false;
-//        this.setInProgress(me, false);
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-//        console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-        this.endProcessing();
-        console.log(fileName, funcName[0], funcName[1], "After this.endProcessing():");
-
 //        console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id);
         console.log(fileName, funcName[0], funcName[1], "Before return:", " this.data ", this.data, " this.options ", this.options, " this.device_id ", this.device_id," this.device_name ", this.device_name, " deviceInfo ", deviceInfo);
 //        console.log(fileName, funcName[0], funcName[1], "Before return 2:", " deviceInfo.device_id ", deviceInfo.device_id, " deviceInfo['device_id'] ", deviceInfo['device_id'], " deviceInfo.device_name ", deviceInfo.device_name, " deviceInfo['device_name'] ", deviceInfo['device_name']);
@@ -830,8 +853,6 @@ export default {
       }
       catch (error) {
         console.error(fileName, funcName[0], funcName[1], "catch for axios.get(ddata_between):", " error ", error);
-//        this.inProgress = false;
-//        console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
         return error;
       }
     }
@@ -853,9 +874,6 @@ export default {
     if (reRenderFlag) {
       reRenderFlag = false;
 
-//      this.inProgress = true;
-//      console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-
       const deviceInfo = ref('');
       deviceInfo.value = JSON.parse(localStorage.getItem('deviceInfo'));
       console.log(fileName, funcName[0], " deviceInfo.value ", deviceInfo.value);
@@ -864,29 +882,21 @@ export default {
       let date_end_iso = dateTimeToISOString(this.date_end);
 
       // getDevices を呼び出してデータを読み込む
-      let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso, this);
+      let response_ga = getDeviceData(deviceInfo.value, date_start_iso, date_end_iso);
       console.log(fileName, funcName[0], ":After getDeviceData()", " ddata ", ddata, " response_ga ", response_ga);
     }
-
-//    this.inProgress = false;
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
   },
   updated: function() {
     const funcName = [":updated:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
-
-//    this.inProgress = false;
-//    this.setInProgress(this, false);
-//    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
-//    console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
+    console.log(fileName, funcName[0], "In.");
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
-    console.log(fileName, funcName[0], "In.", " this ", this);
+    console.log(fileName, funcName[0], "In.");
   },
 }
 </script>

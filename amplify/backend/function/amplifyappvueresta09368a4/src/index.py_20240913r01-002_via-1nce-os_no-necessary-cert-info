@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException
 #from fastapi.responses import JSONResponse
 #from fastapi.responses import PlainTextResponse
 #from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -13,10 +13,6 @@ import uuid
 from boto3.dynamodb.conditions import Key, Attr
 import json
 from typing import Set, Union
-import requests
-from datetime import datetime, timezone, timedelta
-#from zoneinfo import ZoneInfo
-from decimal import Decimal
 
 
 # 環境変数取得
@@ -74,25 +70,20 @@ app.logger = Logger(level="INFO", service=__name__)
 
 # CORS設定
 #allow_origins = ['http://localhost:8080']
-#allow_origins = ['*']
-#if ENV == 'dev':
-#    allow_origins = ['https://main.d2c5unubsoy5p6.amplifyapp.com']
-#elif ENV == 'staging':
-#    allow_origins = ['https://feature.d2c5unubsoy5p6.amplifyapp.com']
+if ENV == 'dev':
+    allow_origins = ['https://main.d2c5unubsoy5p6.amplifyapp.com']
+elif ENV == 'staging':
+    allow_origins = ['https://feature.d2c5unubsoy5p6.amplifyapp.com']
 
-#allow_origins2 = ['52.29.71.11']
-#allow_origins.append(allow_origins2)
+print('allow_origins ', allow_origins)
 
-#print('allow_origins ', allow_origins)
-
-#if 'ALLOW_ORIGIN' in os.environ.keys():
-#    allow_origins.append(os.environ['ALLOW_ORIGIN'])
-#    print('After allow_origins.append()')
+if 'ALLOW_ORIGIN' in os.environ.keys():
+    allow_origins.append(os.environ['ALLOW_ORIGIN'])
+    print('After allow_origins.append()')
 
 app.add_middleware(
     CORSMiddleware,
-#    allow_origins=allow_origins,
-    allow_origins=["*"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -165,45 +156,47 @@ class Response_PostDevice(BaseModel):
     PrivateKey: str
 
 # デバイスデータ登録 (1NCE OS Webhook) 用スキーマ
-# {
-#   "payload": {
-#     "type": "JSON",
-#     "value": {
-#       "temperature": 11.1
-#     }
-#   },
-#   "received": "1726030551987",
-#   "id": "1-66e122d7-c01ae7d96af483ca64d340df",
-#   "source": "UDP",
-#   "type": "TELEMETRY_DATA",
-#   "version": "1.0.0",
-#   "device": {
-#     "iccid": "8988228066605204483",
-#     "ip": "10.52.132.3",
-#     "imsi": "901405105204483"
-#   }
-# }
+"""
+{
+  "payload": {
+    "type": "JSON",
+    "value": {
+      "temperature": 11.1
+    }
+  },
+  "received": "1726030551987",
+  "id": "1-66e122d7-c01ae7d96af483ca64d340df",
+  "source": "UDP",
+  "type": "TELEMETRY_DATA",
+  "version": "1.0.0",
+  "device": {
+    "iccid": "8988228066605204483",
+    "ip": "10.52.132.3",
+    "imsi": "901405105204483"
+  }
+}
+"""
 
-#class Value(BaseModel):
-#    temperature: float
-#
-#class Payload(BaseModel):
-#    type: str
-#    value: Union[Value, None] = None
-#
-#class Device(BaseModel):
-#    iccid: str
-#    ip: str
-#    imsi: str
-#
-#class Request_PostDdata1nceOs(BaseModel):
-#    payload: Union[Payload, None] = None
-#    received: str
-#    id: str
-#    source: str
-#    type: str
-#    version: str
-#    device: Union[Device, None] = None
+class Value(BaseModel):
+    temperature: float
+
+class Payload(BaseModel):
+    type: str
+    value: Union[Value, None] = None
+
+class Device(BaseModel):
+    iccid: str
+    ip: str
+    imsi: str
+
+class Request_PostDdata1nceOs(BaseModel):
+    payload: Union[Payload, None] = None
+    received: str
+    id: str
+    source: str
+    type: str
+    version: str
+    device: Union[Device, None] = None
 
 # デバイス削除用スキーマ
 class Request_DeleteDevice(BaseModel):
@@ -310,27 +303,27 @@ def get_devices_list(dgroup_id: str):
 
     return response_ddb["Items"]
 
-# @app.get("/ddata/{device_id}")
-# def get_ddata_list_all(device_id: str):
-#     """
-#     デバイスに紐付くデバイスデータの一覧を取得する (日時期間なし)
-#     """
-#     print('get_ddata_list_all(): In')
+@app.get("/ddata/{device_id}")
+def get_ddata_list_all(device_id: str):
+    """
+    デバイスに紐付くデバイスデータの一覧を取得する (日時期間なし)
+    """
+    print('get_ddata_list_all(): In')
 
-#     print('device_id ', device_id)
+    print('device_id ', device_id)
 
-# #    response_ddb = ddb_table_ddata.scan(
-#     response_ddb = ddb_table_ddata.query(
-# #        TableName = STORAGE_DB_DDATA,
-#         KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
-# #        FilterExpression = Attr('device_id').eq(device_id),
-# #        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
-#         ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
-#         Limit = 1000 # 取得するデータ件数
-#     )
-#     print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
+#    response_ddb = ddb_table_ddata.scan(
+    response_ddb = ddb_table_ddata.query(
+#        TableName = STORAGE_DB_DDATA,
+        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
+#        FilterExpression = Attr('device_id').eq(device_id),
+#        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
+        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+        Limit = 1000 # 取得するデータ件数
+    )
+    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-#     return response_ddb["Items"]
+    return response_ddb["Items"]
 
 @app.get("/ddata_between/{device_id}")
 def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
@@ -339,61 +332,22 @@ def get_ddata_list_between(device_id: str, date_start: str, date_end: str):
     """
     print('get_ddata_list_between(): In')
 
-#    loopEnd = False
-    maxNum = 10000
-    ddataTmp = []
-    ddata = []
-#    scanForward = False     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
-    scanForward = True     # データベースのscanが昇順か降順か(デフォルトはTrue=昇順)
-    ExclusiveStartKey = ''      # Scanの起点
-    limit = 1000    # データベースから一度に取得し、フィルタに掛けるデータ件数
-    
-    query_params = {
-        'KeyConditionExpression': Key("device_id").eq(device_id), # 取得するKey情報
-        'ScanIndexForward':scanForward,
-        'Limit': limit,
-    }
-
-    if date_start != 'all' and date_end != 'all' :
-        query_params['FilterExpression'] = Attr('createdAt_c').between(date_start, date_end)
-
     print('device_id ', device_id)
     print('date_start ', date_start)
     print('date_end ', date_end)
-    print('scanForward ', scanForward)
-    print('query_params ', query_params)
 
-#    while loopEnd == False :
-    while True :
-        print('Before ddb_table_ddata.query():', ' query_params ', query_params)
+#    response_ddb = ddb_table_ddata.scan(
+    response_ddb = ddb_table_ddata.query(
+#        TableName = STORAGE_DB_DDATA,
+        KeyConditionExpression = Key("device_id").eq(device_id), # 取得するKey情報
+#        FilterExpression = Attr('device_id').eq(device_id),
+        FilterExpression = Attr('createdAt_c').between(date_start, date_end),
+        ScanIndexForward = True, # 昇順か降順か(デフォルトはTrue=昇順)
+        Limit = 1000 # 取得するデータ件数
+    )
+    print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
 
-        response_ddb = ddb_table_ddata.query(**query_params)
-        print('After ddb_table_ddata.query():', ' response_ddb ', response_ddb)
-
-        ddataTmp.extend(response_ddb["Items"])
-        print('After ddata.extend():', ' len(ddataTmp) ', len(ddataTmp), ' ddataTmp ', ddataTmp)
-
-        if 'LastEvaluatedKey' not in response_ddb :
-            print('Before break loop:', 'LastEvaluatedKey not in response_ddb:')
-            break
-
-        if len(ddataTmp) >= maxNum :
-            print('Before break loop:', ' len(ddataTmp) >= max:')
-            break
-
-        # If there are possibly more items, update the start key for the next page
-        query_params['ExclusiveStartKey'] = response_ddb['LastEvaluatedKey']
-
-    forNum = min(len(ddataTmp), maxNum)
-    print('Before for loop:', ' forNum ', forNum, ' len(ddataTmp) ', len(ddataTmp), ' maxNum ', maxNum)
-    for i in range(forNum) :
-#        print('Before ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddataTmp[i] ', ddataTmp[i])
-        ddata.append(ddataTmp[i])
-#        print('After ddata.append(ddataTmp[i]) in for loop:', ' i ', i, ' ddata[i] ', ddata[i])
-
-    print('Before return:', ' ddata ', ddata)
-#    return response_ddb["Items"]
-    return ddata
+    return response_ddb["Items"]
 
 @app.get("/items/{id}")
 def get_items(id: str):
@@ -486,69 +440,6 @@ def get_account(account_id: str):
     print('get_account(): Befre return response["Items"]')
     return response_ddb["Items"]
 
-@app.post("/external_get")
-async def post_external_get(_in: Request):
-    """
-    外部クラウドサービスのAPIにGetアクセスを行う。
-    """
-    print('post_external_get(): In')
-
-    data_json = await _in.json()
-    print("data_json ", data_json)
-    _in_dict = dict(data_json)
-    print('_in_dict ', _in_dict)
-
-    url = _in_dict["url"]
-    print('url ', url)
-    headers = _in_dict["headers"]
-    print('headers ', headers)
-    headers_json = json.dumps(headers)      # not use.
-    print('headers_json ', headers_json)
-
-    # GETリクエスト
-    response = requests.get(url, headers=headers)
-    print('After requests.get():', ' response ', response)
-    
-    # POSTリクエストの場合（必要に応じて）
-    # response = requests.post(url, headers=headers, data=json.dumps(payload))
-
-    # レスポンスをLambdaの戻り値として返す
-    return {
-        'statusCode': response.status_code,
-        'body': response.json()
-    }
-
-@app.post("/external_post")
-async def post_external_post(_in: Request):
-    """
-    外部クラウドサービスのAPIにPostアクセスを行う。
-    """
-    print('post_external_post(): In')
-
-    data_json = await _in.json()
-    print("data_json ", data_json)
-    _in_dict = dict(data_json)
-    print('_in_dict ', _in_dict)
-
-    url = _in_dict["url"]
-    print('url ', url)
-    headers = _in_dict["headers"]
-    print('headers ', headers)
-    body = _in_dict["body"]
-    print('body ', body)
-
-    # POSTリクエスト
-#    response = requests.post(url, headers=headers, data=json.dumps(payload))
-#    response = requests.post(url, headers=headers, data=body)
-    response = requests.post(url, headers=headers, data=json.dumps(body))
-    print('After requests.post():', ' response ', response)
-
-    # レスポンスをLambdaの戻り値として返す
-    return {
-        'statusCode': response.status_code,
-        'body': response.json()
-    }
-
 @app.post("/items", response_model=Response_Item)
 def post_item(item_in: Request_Item):
     """
@@ -597,7 +488,7 @@ def post_dgroup(_in: Request_PostDGroup):
     create_dgroup_dict = _in.dict()
     print('create_dgroup_dict ', create_dgroup_dict)
 
-    create_dgroup_json = json.dumps(create_dgroup_dict)     # debug only.
+    create_dgroup_json = json.dumps(create_dgroup_dict)     # degug only.
     print('create_dgroup_json ', create_dgroup_json)
 
     # Check allowed user with DynamoDB.
@@ -784,14 +675,12 @@ def post_device(_in: Request_PostDevice):
 
     if (via_1nce_os == True) :
         ### IoT Core メッセージングルール (1NCE OS経由用) 登録 ###
-        ruleName = 'Hkt_' + '1nceOs_' + device_name + '_' + ENV
+        ruleName = 'Hkt_' + '1nceOs_' + device_name
         splitThingName = thingName.split('_')
         _1nce_iccid = splitThingName[0]
-#        topicName = "'" + _1nce_iccid + "/messages'"
-        topicName = "'" + _1nce_iccid + "/+'"
+        topicName = "'" + _1nce_iccid + "/messages'"
 #        roleArn = 'arn:aws:iam::366256405539:role/Hkt_aws_iam-role_AmazonDynamoDBFullAccess'
-#        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb-staging_for-1nce-os_python"
-        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb_for-1nce-os_-" + ENV + "_python"
+        lambdaFunctionArn = "arn:aws:lambda:ap-northeast-1:366256405539:function:Hkt_aws-iotcore-to-dynamodb-staging_for-1nce-os_python"
         print('Before client_iot.create_topic_rule():', ' ruleName ', ruleName, ' topicName ', topicName, ' lambdaFunctionArn ', lambdaFunctionArn)
         res_iot_rule = client_iot.create_topic_rule(
             ruleName = ruleName,
@@ -866,96 +755,15 @@ def post_device(_in: Request_PostDevice):
             'PrivateKey': PrivateKey
         }
 
-@app.post("/ddata_1nceos")
-#def post_ddata_1nceos(_in: Request_PostDdata1nceOs):
-async def post_ddata_1nceos(_in: Request):
+@app.post("/ddata_1nce")
+def post_ddata_1nce(_in: Request_PostDdata1nceOs):
     """
-    デバイスデータ (1NCE OS用) をデータベースに登録する
+    デバイスデータ (1NCE用) を登録する
     """
-    print('post_ddata_1nceos(): In')
+    print('post_ddata_1nce(): In')
 
-    data_json = await _in.json()
-    print("data_json ", data_json)
-    _in_dict = dict(data_json)
-    print('_in_dict ', _in_dict)
-
-    type = _in_dict["type"]
-    print("type: ", type)
-
-    if type == "TEST_MESSAGE" :
-        print("type == TEST_MESSAGE")
-        return
-
-#    if _in_dict.get('detail') is not None:
-#        print("キー 'detail' は存在します")
-#        return
-
-    payload_type = _in_dict["payload"]["type"]
-    print("payload_type: ", payload_type)
-#    print("_in_dict[payload][value]: " + _in_dict["payload"]["value"])
-    received = _in_dict["received"]
-    print("received: ", received)
-    id = _in_dict["id"]
-    print("id: ", id)
-    source = _in_dict["source"]
-    print("source: ", source)
-#    type = _in_dict["type"]
-#    print("type: ", type)
-    version = _in_dict["version"]
-    print("version: ", version)
-#    print("_in_dict[device]: " + _in_dict["device"])
-    device_iccid = _in_dict["device"]["iccid"]
-    print("device_iccid: ", device_iccid)
-    device_ip = _in_dict["device"]["ip"]
-    print("device_ip: ", device_ip)
-    device_imsi = _in_dict["device"]["imsi"]
-    print("device_imsi: ", device_imsi)
-
-    device_ip_array4 = device_ip.split('.')
-    print("device_ip_array4: ", device_ip_array4)
-    device_ip_padding = device_ip_array4[0].zfill(3) + device_ip_array4[1].zfill(3) + device_ip_array4[2].zfill(3) + device_ip_array4[3].zfill(3)
-    print("device_ip_padding: ", device_ip_padding)
-    thingName = device_iccid + '_' + device_ip_padding
-    print("thingName: ", thingName)
-
-    if source == 'UDP' or source == 'COAP' :
-        temperature = _in_dict["payload"]["value"]["temperature"]
-    if source == 'LWM2M' :
-        temperature = _in_dict["payload"]["value"]["/3303/0/5700"]
-    print("temperature: ", str(temperature))
-
-    ### デバイス名からthingIdの取得 ###
-    # デバイス情報の取得
-    res_iot_thing = client_iot.describe_thing(
-        thingName = thingName,
-    )
-    print('After client_iot.describe_thing():', ' res_iot_thing ', res_iot_thing)
-
-    # デバイスIDの取得
-    device_id = res_iot_thing.get('thingId')
-    print('After response_iot_thing.get(thingId):', ' device_id ', device_id)
-
-    ### 日時形式の変換、タイムゾーンの設定 ###
-    JST = timezone(timedelta(hours=+9), 'JST')
-    datetime.now(JST)
-    dt = datetime.fromtimestamp(int(received) / 1000, JST)
-    print('After datetime fromtimestamp:', ' dt ', dt)
-    dt_iso = dt.isoformat(timespec="milliseconds")
-    print('After datetime isoformat:', ' dt_iso ', dt_iso)
-    
-    ### Dynamo DBへのデバイスデータの書き込み ###
-    item = {
-        "device_id": device_id,
-        "createdAt": dt_iso,
-        "createdAt_c": dt_iso,
-        "data0": Decimal(str(temperature)),
-        "source": source,
-    }
-    
-    res_ddb = ddb_table_ddata.put_item(
-        Item = item
-    )
-    print('After ddb_table_ddata.put_item():', ' res_ddb ', res_ddb, ' item ', item)
+    create_ddata_dict = _in.dict()
+    print('create_ddata_dict ', create_ddata_dict)
 
     return
 
