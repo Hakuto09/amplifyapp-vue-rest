@@ -149,9 +149,12 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
+import { userBranch } from './userbranch.js';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
+
+console.log(userBranch);
 
 //const date = ref('2022-10-28');
 //let date = new Date();
@@ -183,9 +186,9 @@ let currentInstance;
 //let idToken;
 let ddata;
 
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
-console.log(fileName, "userBranch ", userBranch);
+////const userBranch = process.env.USER_BRANCH;
+//const userBranch = localStorage.getItem('userBranch');
+//console.log(fileName, "userBranch ", userBranch);
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
 let aws_url_base;

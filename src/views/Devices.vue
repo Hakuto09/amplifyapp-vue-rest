@@ -72,9 +72,12 @@ import { /*defineProps,*/ ref } from 'vue';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentUser } from 'aws-amplify/auth';
 //import * as fs from "fs-extra";
+import { userBranch } from './userbranch.js';
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
+
+console.log(userBranch);
 
 /*
 const props = defineProps({
@@ -90,9 +93,9 @@ const dgroupInfo = ref('');
 let devices;
 let ddata;
 
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
-console.log(fileName, "userBranch ", userBranch);
+////const userBranch = process.env.USER_BRANCH;
+//const userBranch = localStorage.getItem('userBranch');
+//console.log(fileName, "userBranch ", userBranch);
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 let aws_url_base;
