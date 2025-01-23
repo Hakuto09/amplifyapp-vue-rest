@@ -315,6 +315,10 @@ export default {
 
       let response;
 
+      if (via_1nce_os_selected != true) {
+        via_1nce_os_selected = false;
+      }
+
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
 //        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected, {
