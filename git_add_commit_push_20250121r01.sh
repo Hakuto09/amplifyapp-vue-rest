@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 echo "sh <branch> <commit comment>"
 
 if [ "$1" = "main" ]; then
