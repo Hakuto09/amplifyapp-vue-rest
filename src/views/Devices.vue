@@ -93,15 +93,9 @@ const dgroupInfo = ref('');
 let devices;
 let ddata;
 
-<<<<<<< HEAD
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
-console.log(fileName, "userBranch ", userBranch);
-=======
 ////const userBranch = process.env.USER_BRANCH;
 //const userBranch = localStorage.getItem('userBranch');
 //console.log(fileName, "userBranch ", userBranch);
->>>>>>> main
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 let aws_url_base;

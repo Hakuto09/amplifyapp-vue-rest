@@ -55,17 +55,11 @@ const fileName = "Dgroups.vue";
 
 console.log(fileName, ":After import: ");
 
-<<<<<<< HEAD
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
-console.log(fileName, "userBranch ", userBranch);
-=======
 console.log(userBranch);
 
 ////const userBranch = process.env.USER_BRANCH;
 //const userBranch = localStorage.getItem('userBranch');
 //console.log(fileName, "userBranch ", userBranch);
->>>>>>> main
 
 //let idToken;
 let dgroups;

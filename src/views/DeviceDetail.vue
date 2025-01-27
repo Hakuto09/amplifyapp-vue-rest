@@ -108,10 +108,7 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
-<<<<<<< HEAD
-=======
 import { userBranch } from '../userbranch.js';
->>>>>>> main
 const fileName = "DeviceDetail.vue";
 
 console.log(fileName, ":After import:");
@@ -125,15 +122,9 @@ let devices;
 
 //axios.defaults.withCredentials = true;
 
-<<<<<<< HEAD
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
-console.log(fileName, "userBranch ", userBranch);
-=======
 ////const userBranch = process.env.USER_BRANCH;
 //const userBranch = localStorage.getItem('userBranch');
 //console.log(fileName, "userBranch ", userBranch);
->>>>>>> main
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 let aws_url_base;

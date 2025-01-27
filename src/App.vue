@@ -14,22 +14,15 @@ import { toRaw } from 'vue';
 //import { toRefs, reactive } from 'vue';
 import { getCurrentUser } from 'aws-amplify/auth'
 import router from './router'
-<<<<<<< HEAD
-=======
 import { userBranch } from './userbranch.js';
->>>>>>> main
 const fileName = "App.vue";
 
 //const disConsoleLog = true;
 const disConsoleLog = false;
 
 //const userBranch = 'main';
-<<<<<<< HEAD
-const userBranch = 'feature';
-=======
 //const userBranch = 'feature';
 console.log(userBranch);
->>>>>>> main
 
 /*
 function swConsoleLog(word){
@@ -48,13 +41,8 @@ if (disConsoleLog) {
 console.log(fileName, ":<script>:", " After import: ");
 //swConsoleLog([fileName, ":<script>:", " After import: "]);
 
-<<<<<<< HEAD
-localStorage.setItem('userBranch', userBranch);
-console.log(fileName, " After setItem: ", 'userBranch ', userBranch);
-=======
 //localStorage.setItem('userBranch', userBranch);
 //console.log(fileName, " After setItem: ", 'userBranch ', userBranch);
->>>>>>> main
 
 /*
 const listener = (data) => {
