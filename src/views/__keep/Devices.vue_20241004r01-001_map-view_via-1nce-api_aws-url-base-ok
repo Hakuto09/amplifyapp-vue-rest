@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.component">
     <!-- h2>Device list of dgroup_id: {{ dgroup_id }}</h2 -->
-    <h3>Device list of dgroup_name: {{ dgroup_name }}</h3>
+    <h2>Device list of dgroup_name: {{ dgroup_name }}</h2>
     <DeviceList :properties="properties" @eventDeleteDevice="deleteDevice" />
     <br><br>
     <div :class="$style.register_device">
@@ -69,15 +69,11 @@ import DeviceList from '@/components/DeviceList.vue'
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
 //import { Amplify } from "aws-amplify";
-import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentUser } from 'aws-amplify/auth';
 //import * as fs from "fs-extra";
-import { userBranch } from '../userbranch.js';
 const fileName = "Devices.vue";
 
 console.log(fileName, ":After import:");
-
-console.log(userBranch);
 
 /*
 const props = defineProps({
@@ -88,20 +84,13 @@ console.log(fileName, ":After reg(prop):", " parentData.value ", parentData.valu
 */
 
 let userInfo;
-//let idToken;
 const dgroupInfo = ref('');
 let devices;
 let ddata;
 
-<<<<<<< HEAD
 //const userBranch = process.env.USER_BRANCH;
 const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
-=======
-////const userBranch = process.env.USER_BRANCH;
-//const userBranch = localStorage.getItem('userBranch');
-//console.log(fileName, "userBranch ", userBranch);
->>>>>>> main
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/_devices/';
 let aws_url_base;
@@ -203,31 +192,26 @@ export default {
       for (let i = 0; i < 2; i++) {
         check_existing_flag = !i;
         console.log(fileName, funcName[0], funcName[1], "Before await axios.post_device):", " check_existing_flag ", check_existing_flag);
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-        await axios.post(aws_url_base + '_device', {
+        await axios.post(aws_url_base + '_device',
+          {
             device_name: this.device_name_input,
             dgroup_id: dgroupId.value,
             via_1nce_os: this.via1nceOs,
             account_id: userInfo.userId,
             csr: csr,
             check_existing_flag: check_existing_flag,
-          }, {
-              headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          },
-        )
-        .then(function(response) {
-//          this.message_result = 'Success';
-          res = 1;
-          responseData = response.data;
-          console.log(funcName[0], funcName[1], "axios.post(_device).then:", " response.data ", response.data);
-        })
-        .catch(function(error) {
-//          this.message_result = 'Error';
-          res = -1;
-          console.log(funcName[0], funcName[1], "axios.post(_device).catch:", " error ", error);
-        })
+          })
+          .then(function(response) {
+  //          this.message_result = 'Success';
+            res = 1;
+            responseData = response.data;
+            console.log(funcName[0], funcName[1], "axios.post(_device).then:", " response.data ", response.data);
+          })
+          .catch(function(error) {
+  //          this.message_result = 'Error';
+            res = -1;
+            console.log(funcName[0], funcName[1], "axios.post(_device).catch:", " error ", error);
+          })
         
         if (check_existing_flag && res == 1) {
           this.message_result = 'Duplicattion error';
@@ -275,13 +259,7 @@ export default {
 
       // Deviceリストの更新
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId.value, {
-          headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          },
-        );
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId.value);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -321,19 +299,8 @@ export default {
 
       let response;
 
-      if (via_1nce_os_selected != true) {
-        via_1nce_os_selected = false;
-      }
-
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-//        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected, {
-        response = await axios.get(aws_url_base + 'ddata_between/' + device_id_selected + '?date_start=all' + '&date_end=all', {
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
+        response = await axios.get(aws_url_base + 'ddata/' + device_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata)", " response ", response);
         ddata = response.data;
       }
@@ -347,13 +314,7 @@ export default {
         let loops = ddata.length;
         for(let i = 0; i < loops; ++i) {
           try {
-            const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-            response = await axios.delete(aws_url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt, {
-                headers: {
-                  Authorization: `Bearer ${idToken}`,
-               },
-              }
-            );
+            response = await axios.delete(aws_url_base + 'ddata/' + device_id_selected + '/' + ddata[i].createdAt);
             console.log(fileName, funcName[0], funcName[1], "After axios.delete(ddata):", " response ", response)
           }
           catch (error) {
@@ -375,22 +336,18 @@ export default {
 
       // Device関連リソースの削除
       console.log(fileName, funcName[0], funcName[1], "Before await axios.delete():", " payload ", payload);
-      const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-      await axios.delete(aws_url_base + '_device', {
+      await axios.delete(aws_url_base + '_device',
+        {
           data: payload,
-          headers: {
-              Authorization: `Bearer ${idToken}`,
-          },
-        }
-      )
-      .then(function(response) {
-        res = 1;
-        console.log(funcName[0], funcName[1], "axios.delete(_device).then:", " response.data ", response.data);
-      })
-      .catch(function(error) {
-        res = -1;
-        console.log(funcName[0], funcName[1], "axios.delete(_device).catch:", " error ", error);
-      })
+        })
+        .then(function(response) {
+          res = 1;
+          console.log(funcName[0], funcName[1], "axios.delete(_device).then:", " response.data ", response.data);
+        })
+        .catch(function(error) {
+          res = -1;
+          console.log(funcName[0], funcName[1], "axios.delete(_device).catch:", " error ", error);
+        })
       
       console.log(fileName, funcName[0], funcName[1], "After await axios.delete(_device):", " res ", res);
 
@@ -401,13 +358,7 @@ export default {
 
       // Deviceリストの更新
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected, {
-          headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroup_id_selected);
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices)", " response_api ", response_api);
       }
       catch (error) {
@@ -523,17 +474,10 @@ export default {
       let response_api;
 
       try {
-        const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
-//        console.log(fileName, funcName[0], funcName[1], "After (await fetchAuthSession()).tokens", ' idToken ', idToken);
     //    response_api = await axios.get(url + properties.account_id);
     //    response_api = await axios.get(url + this.account_id);
 //        response_api = await axios.get(url + dgroupId);
-        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId, {
-          headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          }
-        );
+        response_api = await axios.get(aws_url_base + '_devices/' + dgroupId);
 //        console.log(fileName, funcName[0], funcName[1], " response_api.status ", response_api.status)
         console.log(fileName, funcName[0], funcName[1], "After axios.get(_devices):", " response_api.data ", response_api.data);
         devices = response_api.data;
@@ -640,7 +584,6 @@ export default {
   margin-right: 100px;
 }
 
-/*
 h1 {
   font-size: 36px;
 }
@@ -652,6 +595,4 @@ h2 {
 p {
   font-size: 12px;
 }
-*/
-
 </style>
