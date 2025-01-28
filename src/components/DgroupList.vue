@@ -297,20 +297,13 @@ export default {
 
       if (confirm('選択Device groupの削除を実行してもよろしいですか？')) {
         // OKがクリックされた場合の処理
-        //this.performAction();
-        // 先に進む
+        this.$emit('eventDeleteDgroup', { 'selected': this.selected });
+        console.log(fileName, funcName[0], funcName[1], "After $emit()", " this.selected ", this.selected);
       }
       else {
         // キャンセルがクリックされた場合の処理
         alert('操作はキャンセルされました');
       }
-
-//      const emit = defineEmits(['eventDeleteDgroup']);
-//      const execEmit = () => {
-//        emit('eventDeleteDgroup', { 'selected': this.selected });
-      this.$emit('eventDeleteDgroup', { 'selected': this.selected });
-      console.log(fileName, funcName[0], funcName[1], "After $emit()", " this.selected ", this.selected);
-        //      }
     },
   },
   beforeCreate: function() {
