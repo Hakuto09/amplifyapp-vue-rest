@@ -295,6 +295,16 @@ export default {
         return false;
       }
 
+      if (confirm('選択Device groupの削除を実行してもよろしいですか？')) {
+        // OKがクリックされた場合の処理
+        //this.performAction();
+        // 先に進む
+      }
+      else {
+        // キャンセルがクリックされた場合の処理
+        alert('操作はキャンセルされました');
+      }
+
 //      const emit = defineEmits(['eventDeleteDgroup']);
 //      const execEmit = () => {
 //        emit('eventDeleteDgroup', { 'selected': this.selected });

@@ -33,7 +33,7 @@
     <div :class="$style.write_csv">
       <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        v-bind:disabled=processing
         @click="writeCSV">
         CSVファイル出力
       </button>
@@ -42,17 +42,17 @@
       <label for="input">data0 is .</label>
       <input
         v-model="data0_name"
-        v-bind:disabled="isProcessing()">
+        v-bind:disabled=processing>
     </div>
     <div>
       <label for="input">data1 is .</label>
       <input
         v-model="data1_name"
-        v-bind:disabled="isProcessing()">
+        v-bind:disabled=processing>
     </div>
     <button
         type="is-info"
-        v-bind:disabled="isProcessing()"
+        v-bind:disabled=processing
         @click="updateLabel">
         Label update
       </button>
@@ -149,9 +149,11 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { getCurrentInstance } from 'vue';
+import { userBranch } from '../userbranch.js';
 const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
+
 
 //const date = ref('2022-10-28');
 //let date = new Date();
@@ -183,8 +185,8 @@ let currentInstance;
 //let idToken;
 let ddata;
 
-//const userBranch = process.env.USER_BRANCH;
-const userBranch = localStorage.getItem('userBranch');
+////const userBranch = process.env.USER_BRANCH;
+//const userBranch = localStorage.getItem('userBranch');
 console.log(fileName, "userBranch ", userBranch);
 
 //const url = 'https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev/ddata/';
@@ -453,9 +455,9 @@ export default {
       let response;
 
 //      this.startProcessing();
-//      this.processing = true
+      this.processing = true
 //      console.log(fileName, funcName[0], funcName[1], "After this.startProcessing():");
-//      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
+      console.log(fileName, funcName[0], funcName[1], "After this.processing = true:");
 
       try {
         const idToken = (await fetchAuthSession()).tokens.idToken ?? '';
