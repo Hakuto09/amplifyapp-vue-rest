@@ -22,7 +22,6 @@ const disConsoleLog = false;
 
 //const userBranch = 'main';
 //const userBranch = 'feature';
-console.log(userBranch);
 
 /*
 function swConsoleLog(word){
@@ -37,6 +36,8 @@ if (disConsoleLog) {
     // 本番環境の場合、コンソール出力を無効にする
     console.log = console.info = console.debug = console.warn = console.error = () => {};
 }
+
+console.log(fileName, "userBranch ", userBranch);
 
 console.log(fileName, ":<script>:", " After import: ");
 //swConsoleLog([fileName, ":<script>:", " After import: "]);

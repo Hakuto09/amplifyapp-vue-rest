@@ -6,14 +6,14 @@ const awsmobile = {
     "aws_cloud_logic_custom": [
         {
             "name": "apib620dd96",
-            "endpoint": "https://ig57m9ooi1.execute-api.ap-northeast-1.amazonaws.com/dev",
+            "endpoint": "https://4nhe6ayc48.execute-api.ap-northeast-1.amazonaws.com/staging",
             "region": "ap-northeast-1"
         }
     ],
-    "aws_cognito_identity_pool_id": "ap-northeast-1:46003758-d0fd-41ce-94a6-68ed1a00c89f",
+    "aws_cognito_identity_pool_id": "ap-northeast-1:6db91e88-56ef-4e2d-92c0-4e6ec05e26c6",
     "aws_cognito_region": "ap-northeast-1",
-    "aws_user_pools_id": "ap-northeast-1_KTbJwMSDf",
-    "aws_user_pools_web_client_id": "7lbu8qm4jbqktkd94pqrojrd6t",
+    "aws_user_pools_id": "ap-northeast-1_dInjnViQz",
+    "aws_user_pools_web_client_id": "2jh0uupmavlaf3h595p6dvb30r",
     "oauth": {},
     "aws_cognito_username_attributes": [
         "EMAIL"
@@ -36,7 +36,7 @@ const awsmobile = {
     "aws_dynamodb_all_tables_region": "ap-northeast-1",
     "aws_dynamodb_table_schemas": [
         {
-            "tableName": "dynamo29652a67-dev",
+            "tableName": "dynamo29652a67-staging",
             "region": "ap-northeast-1"
         }
     ]
