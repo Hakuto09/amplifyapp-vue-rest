@@ -242,7 +242,8 @@ export default {
   components: {
 //    Line,
     LineChart: {
-      extends: Line,
+//      extends: Line,
+      mixins: Line,
       props: ['data', 'options'],
       methods: {
         renderChartWithCatch() {
