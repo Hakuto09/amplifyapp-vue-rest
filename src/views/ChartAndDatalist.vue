@@ -285,8 +285,8 @@ export default {
             this._chartInstance = new ChartJS(this.$refs.canvas.getContext('2d'), {
               type: 'line',
 //              data: chartData,
-              data: data,
-              options: options
+              data: this.data,
+              options: this.options
             });
           }
           catch(error) {
