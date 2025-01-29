@@ -6,7 +6,8 @@
     <div>
       <!-- Line width="1280" height="720" :data="data" :options="options" / -->
       <!-- line-chart :data="data" :options="options" @chart-error="handleChartError" / -->
-      <LineChart :chartData="data" :options="options" @chart-error="handleChartError" />
+      <!-- LineChart :chartData="data" :options="options" @chart-error="handleChartError" / -->
+      <LineChart :data="data" :options="options" @chart-error="handleChartError" />
     </div>
     <!-- section>
         <div class="form-group">
@@ -163,7 +164,7 @@ const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
 
-const { reactiveProp } = mixins
+//const { reactiveProp } = mixins
 
 //const date = ref('2022-10-28');
 //let date = new Date();
@@ -250,7 +251,8 @@ export default {
 //      mixins: [reactiveProp],
 //      props: ['data', 'options'],
       props: {
-        chartData: {
+//        chartData: {
+        data: {
           type: Object,
           required: true
         },
@@ -282,7 +284,8 @@ export default {
             console.log(fileName, funcName[0], funcName[1], "Before this._chartInstance = new ChartJS()");
             this._chartInstance = new ChartJS(this.$refs.canvas.getContext('2d'), {
               type: 'line',
-              data: chartData,
+//              data: chartData,
+              data: data,
               options: options
             });
           }
