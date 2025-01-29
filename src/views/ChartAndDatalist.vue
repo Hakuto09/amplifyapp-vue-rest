@@ -4,7 +4,8 @@
     <!-- h2>Chart and data list of device_id: {{ device_id }}</h2 -->
     <h3>Chart of device_name: {{ device_name }}</h3>
     <div>
-      <Line width="1280" height="720" :data="data" :options="options" />
+      <!-- Line width="1280" height="720" :data="data" :options="options" / -->
+      <line-chart :data="data" :options="options" @chart-error="handleChartError" />
     </div>
     <!-- section>
         <div class="form-group">
@@ -127,6 +128,7 @@
 <script>
 import axios from 'axios'
 import { /*defineProps,*/ ref } from 'vue';
+/*
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -137,7 +139,9 @@ import {
   Tooltip,
   Legend,
   TimeScale,
-} from 'chart.js'
+} from 'chart.js';
+*/
+import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line } from 'vue-chartjs'
 import 'chartjs-adapter-moment';
 //import moment from "moment";
@@ -173,6 +177,7 @@ const config = ref({
 });
 */
 
+/*
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -183,6 +188,8 @@ ChartJS.register(
   Legend,
   TimeScale,
 )
+*/
+ChartJS.register(...registerables);
 
 let currentInstance;
 //let idToken;
@@ -233,7 +240,32 @@ function dateTimeToNtJst(dateTime){
 export default {
   name: 'ChartAndDatalist',
   components: {
-    Line,
+//    Line,
+    LineChart: {
+      extends: Line,
+      props: ['data', 'options'],
+      methods: {
+        renderChartWithCatch() {
+          // Chart.jsインスタンスをtry-catchでラップ
+          try {
+            this.renderChart(this.data, this.options);
+          } catch (error) {
+            this.$emit('chart-error', error);
+          }
+        }
+      },
+      mounted() {
+        this.renderChartWithCatch();
+      },
+      watch: {
+        data() {
+          this.renderChartWithCatch();
+        },
+        options() {
+          this.renderChartWithCatch();
+        }
+      }
+    },
 //    flatPickr,
     datepicker: VueDatePicker,
   },
@@ -270,6 +302,17 @@ export default {
     }
   },
   methods: {
+    handleChartError(error) {
+      const funcName = [":methods:", "handleChartError:"];
+      if (error.message.includes('too far apart with stepSize')) {
+        console.error(fileName, funcName[0], funcName[1], 'The data points are too far apart for the specified stepSize:', error.message);
+        alert('データポイントが指定されたステップサイズに対して離れすぎています。データを確認してください。');
+      } else {
+        console.error(fileName, funcName[0], funcName[1], 'An unexpected error occurred:', error.message);
+        alert('予期しないエラーが発生しました。');
+      }
+    },
+
     setDateStartNow: function() {
       const funcName = [":methods:", "sedDateStartNow:"];
       console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);

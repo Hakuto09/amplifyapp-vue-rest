@@ -57,6 +57,9 @@
         Label update
       </button>
     <br><br>
+    <br><br>
+    <p>Num of data: {{ num_of_data }}</p>
+    <br><br>
     <p>開始日時</p>
     <div :class="$style.set_date">
       <button
@@ -252,7 +255,8 @@ export default {
       options: null/*chartOptions*/,
       device_id: '',
       device_name: '',
-//      date: date,
+      num_of_data: 0,
+      //      date: date,
 //      config: config,
 //      date: new Date(),
       date_start: date_start,
@@ -471,6 +475,9 @@ export default {
         );
         console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata_between)", " response ", response)
         ddata = response.data;
+
+        this.num_of_data = ddata.length;
+        console.log(fileName, funcName[0], funcName[1], " this.num_of_data ", this.num_of_data)
 
         if (ddata != null) {
           // Graph data reset.
@@ -697,6 +704,9 @@ export default {
         );
         console.log(fileName, funcName[0], funcName[1], "After await axios.get(ddata_between):", " response ", response)
         ddata = response.data;
+
+        this.num_of_data = ddata.length;
+        console.log(fileName, funcName[0], funcName[1], " this.num_of_data ", this.num_of_data)
 
         if (ddata != null) {
           // Graph data reset.
