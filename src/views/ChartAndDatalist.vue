@@ -142,7 +142,7 @@ import {
 } from 'chart.js';
 */
 import { Chart as ChartJS, registerables } from 'chart.js';
-import { Line } from 'vue-chartjs'
+//import { Line } from 'vue-chartjs'
 import { Line, mixins } from 'vue-chartjs'
 import 'chartjs-adapter-moment';
 //import moment from "moment";
