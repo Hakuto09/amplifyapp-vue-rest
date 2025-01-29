@@ -5,7 +5,8 @@
     <h3>Chart of device_name: {{ device_name }}</h3>
     <div>
       <!-- Line width="1280" height="720" :data="data" :options="options" / -->
-      <line-chart :data="data" :options="options" @chart-error="handleChartError" />
+      <!-- line-chart :data="data" :options="options" @chart-error="handleChartError" / -->
+      <LineChart :chartData="data" :options="options" @chart-error="handleChartError" />
     </div>
     <!-- section>
         <div class="form-group">
@@ -142,8 +143,8 @@ import {
 } from 'chart.js';
 */
 import { Chart as ChartJS, registerables } from 'chart.js';
-//import { Line } from 'vue-chartjs'
-import { Line, mixins } from 'vue-chartjs'
+import { Line } from 'vue-chartjs'
+//import { Line, mixins } from 'vue-chartjs'
 import 'chartjs-adapter-moment';
 //import moment from "moment";
 
@@ -246,16 +247,44 @@ export default {
     LineChart: {
       extends: Line,
 //      mixins: [mixins.reactiveProp],
-      mixins: [reactiveProp],
-      props: ['data', 'options'],
+//      mixins: [reactiveProp],
+//      props: ['data', 'options'],
+      props: {
+        chartData: {
+          type: Object,
+          required: true
+        },
+        options: {
+          type: Object,
+          required: true
+        }
+      },
       methods: {
         renderChartWithCatch() {
           const funcName = [":components:", "renderChartWithCatch:"];
           console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
+/*
           // Chart.jsインスタンスをtry-catchでラップ
           try {
             console.log(fileName, funcName[0], funcName[1], "Before this.renderChart(this.data, this.options)");
             this.renderChart(this.data, this.options);
+          }
+          catch(error) {
+            console.log(fileName, funcName[0], funcName[1], "Before this.$emit('chart-error', error)");
+            this.$emit('chart-error', error);
+          }
+*/
+          try {
+            if(this._chartInstance) {
+              console.log(fileName, funcName[0], funcName[1], "Before this._chartInstance.destroy()");
+              this._chartInstance.destroy();
+            }
+            console.log(fileName, funcName[0], funcName[1], "Before this._chartInstance = new ChartJS()");
+            this._chartInstance = new ChartJS(this.$refs.canvas.getContext('2d'), {
+              type: 'line',
+              data: chartData,
+              options: options
+            });
           }
           catch(error) {
             console.log(fileName, funcName[0], funcName[1], "Before this.$emit('chart-error', error)");
