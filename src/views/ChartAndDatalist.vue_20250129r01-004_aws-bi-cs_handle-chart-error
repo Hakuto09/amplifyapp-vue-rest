@@ -246,36 +246,22 @@ export default {
       props: ['data', 'options'],
       methods: {
         renderChartWithCatch() {
-          const funcName = [":components:", "renderChartWithCatch:"];
-          console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
           // Chart.jsインスタンスをtry-catchでラップ
           try {
-            console.log(fileName, funcName[0], funcName[1], "Before this.renderChart(this.data, this.options)");
             this.renderChart(this.data, this.options);
-          }
-          catch(error) {
-            console.log(fileName, funcName[0], funcName[1], "Before this.$emit('chart-error', error)");
+          } catch (error) {
             this.$emit('chart-error', error);
           }
         }
       },
       mounted() {
-        const funcName = [":components:", "mounted:"];
-        console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
-        console.log(fileName, funcName[0], funcName[1], "Before this.renderChartWithCatch()");
         this.renderChartWithCatch();
       },
       watch: {
         data() {
-          const funcName = [":components:", "watch:data():"];
-          console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
-          console.log(fileName, funcName[0], funcName[1], "Before this.renderChartWithCatch()");
           this.renderChartWithCatch();
         },
         options() {
-          const funcName = [":components:", "watch:options():"];
-          console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
-          console.log(fileName, funcName[0], funcName[1], "Before this.renderChartWithCatch()");
           this.renderChartWithCatch();
         }
       }
@@ -318,11 +304,10 @@ export default {
   methods: {
     handleChartError(error) {
       const funcName = [":methods:", "handleChartError:"];
-      if(error.message.includes('too far apart with stepSize')) {
+      if (error.message.includes('too far apart with stepSize')) {
         console.error(fileName, funcName[0], funcName[1], 'The data points are too far apart for the specified stepSize:', error.message);
         alert('データポイントが指定されたステップサイズに対して離れすぎています。データを確認してください。');
-      }
-      else {
+      } else {
         console.error(fileName, funcName[0], funcName[1], 'An unexpected error occurred:', error.message);
         alert('予期しないエラーが発生しました。');
       }
