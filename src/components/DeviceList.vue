@@ -143,8 +143,15 @@ export default {
         return false;
       }
 
-      this.$emit('eventDeleteDevice', { 'selected': this.selected });
-      console.log(fileName, funcName[0], funcName[1], "After $emit()", " this.selected ", this.selected);
+      if (confirm('選択Deviceの削除を実行してもよろしいですか？')) {
+        // OKがクリックされた場合の処理
+        this.$emit('eventDeleteDevice', { 'selected': this.selected });
+        console.log(fileName, funcName[0], funcName[1], "After $emit()", " this.selected ", this.selected);
+      }
+      else {
+        // キャンセルがクリックされた場合の処理
+        alert('操作はキャンセルされました');
+      }
     },
   },
   beforeCreate: function() {
