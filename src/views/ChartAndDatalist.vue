@@ -143,7 +143,7 @@ import {
 */
 import { Chart as ChartJS, registerables } from 'chart.js';
 //import { Line } from 'vue-chartjs'
-import { /*Line,*/ mixins } from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs'
 import 'chartjs-adapter-moment';
 //import moment from "moment";
 
@@ -162,6 +162,7 @@ const fileName = "ChartAndDatalist.vue";
 
 console.log(fileName, ":After import:");
 
+const { reactiveProp } = mixins
 
 //const date = ref('2022-10-28');
 //let date = new Date();
@@ -243,9 +244,9 @@ export default {
   components: {
 //    Line,
     LineChart: {
-//      extends: Line,
-//      mixins: Line,
-      mixins: [mixins.reactiveProp],
+      extends: Line,
+//      mixins: [mixins.reactiveProp],
+      mixins: [reactiveProp],
       props: ['data', 'options'],
       methods: {
         renderChartWithCatch() {
