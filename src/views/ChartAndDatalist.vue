@@ -207,8 +207,6 @@ let data0s = [];
 let data1s = [];
 //let data2s = [];
 
-let num_of_data = 0;
-
 let date_start;
 let date_end;
 let data0_name;
@@ -257,7 +255,7 @@ export default {
       options: null/*chartOptions*/,
       device_id: '',
       device_name: '',
-      num_of_data: num_of_data,
+      num_of_data: 0,
       //      date: date,
 //      config: config,
 //      date: new Date(),
@@ -478,7 +476,8 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After axios.get(ddata_between)", " response ", response)
         ddata = response.data;
 
-        num_of_data = ddata.length;
+        this.num_of_data = ddata.length;
+        console.log(fileName, funcName[0], funcName[1], " this.num_of_data ", this.num_of_data)
 
         if (ddata != null) {
           // Graph data reset.
@@ -706,7 +705,8 @@ export default {
         console.log(fileName, funcName[0], funcName[1], "After await axios.get(ddata_between):", " response ", response)
         ddata = response.data;
 
-        num_of_data = ddata.length;
+        this.num_of_data = ddata.length;
+        console.log(fileName, funcName[0], funcName[1], " this.num_of_data ", this.num_of_data)
 
         if (ddata != null) {
           // Graph data reset.
