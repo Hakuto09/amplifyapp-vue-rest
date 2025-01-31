@@ -243,7 +243,7 @@ function dateTimeToNtJst(dateTime){
 export default {
   name: 'ChartAndDatalist',
   components: {
-    Line,
+//    Line,
 /*
     LineChart: {
       extends: Line,
@@ -550,9 +550,11 @@ export default {
       }
     },
   },
+/*
   mounted() {
     this.createChart();
   },
+*/
   beforeCreate: function() {
     const funcName = [":beforeCreate:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
@@ -791,6 +793,9 @@ export default {
   mounted: function() {
     const funcName = [":mounted:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    console.log(fileName, funcName[0], "Before this.createChart()");
+    this.createChart();
   },
   beforeUpdate: function() {
     const funcName = [":beforeUpdate:"];
