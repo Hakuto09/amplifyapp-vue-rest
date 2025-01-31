@@ -560,7 +560,9 @@ export default {
       }
       catch(error) {
         console.log(fileName, funcName[0], funcName[1], "In catch(error)");
-        console.error('グラフの描画中にエラーが発生しました:', error);
+//        console.error('グラフの描画中にエラーが発生しました:', error);
+        this.chartInstance = null; // チャートインスタンスの初期化に失敗したのでnullを設定
+
         // エラー時の処理を追加
         if(error.message.includes('too far apart with stepSize')) {
           console.error(fileName, funcName[0], funcName[1], 'The data points are too far apart for the specified stepSize:', error.message);
