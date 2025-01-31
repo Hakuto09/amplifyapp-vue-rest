@@ -350,6 +350,7 @@ export default {
 //      inProgress: false,
 //      processing: false,
       processing: true,
+      chartInstance: null, // チャートインスタンスを保持する変数
     }
   },
   methods: {
@@ -536,9 +537,13 @@ export default {
     },
 
     createChart() {
+      if(this.chartInstance) {
+        this.chartInstance.destroy(); 
+      }
+
       try {
         const ctx = this.$refs.chartCanvas.getContext('2d');
-        new Chart(ctx, {
+        this.chartInstance = new Chart(ctx, {
           type: 'line',
           data: this.data,
           options: this.options,
@@ -1016,6 +1021,10 @@ export default {
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
     console.log(fileName, funcName[0], "In.", " this ", this);
+
+    if(this.chartInstance) {
+      this.chartInstance.destroy(); 
+    }
   },
   unmounted: function() {
     const funcName = [":unmounted:"];
