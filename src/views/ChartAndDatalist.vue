@@ -144,7 +144,7 @@ import {
   TimeScale,
 } from 'chart.js';
 //import { Chart as ChartJS, registerables } from 'chart.js';
-import { Line } from 'vue-chartjs'
+//import { Line } from 'vue-chartjs'
 //import { Line, mixins } from 'vue-chartjs'
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment';
