@@ -543,7 +543,7 @@ export default {
       console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
 
       if(this.chartInstance) {
-        console.log(fileName, funcName[0], funcName[1], "Before this.chartInstance.destroy()");
+        console.log(fileName, funcName[0], funcName[1], "Before this.chartInstance.destroy(): ", " this.chartInstance ", this.chartInstance);
         this.chartInstance.destroy(); 
       }
 
@@ -556,6 +556,7 @@ export default {
           data: this.data,
           options: this.options,
         });
+        console.log(fileName, funcName[0], funcName[1], "After new Chart(ctx, {}): ", " this.chartInstance ", this.chartInstance);
       }
       catch(error) {
         console.log(fileName, funcName[0], funcName[1], "In catch(error)");
@@ -1040,6 +1041,7 @@ export default {
     console.log(fileName, funcName[0], "In.", " this ", this);
 
     if(this.chartInstance) {
+      console.log(fileName, funcName[0], "Before this.chartInstance.destroy(): ", " this.chartInstance ", this.chartInstance);
       this.chartInstance.destroy(); 
     }
   },
