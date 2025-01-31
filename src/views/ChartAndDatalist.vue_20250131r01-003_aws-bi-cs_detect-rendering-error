@@ -1009,9 +1009,6 @@ export default {
 //    this.setInProgress(this, false);
 //    console.log(fileName, funcName[0], funcName[1], "After set this.inProgress:", " this.inProgress ", this.inProgress);
 //    console.log(fileName, funcName[0], funcName[1], "After this.setInProgress(false):", " this.inProgress ", this.inProgress);
-
-    console.log(fileName, funcName[0], "Before this.createChart()");
-    this.createChart();
   },
   beforeUnmount: function() {
     const funcName = [":beforeUnmount:"];
