@@ -539,12 +539,18 @@ export default {
     },
 
     createChart() {
+      const funcName = [":methods:", "createChart:"];
+      console.log(fileName, funcName[0], funcName[1], "In.", " this ", this);
+
       if(this.chartInstance) {
+        console.log(fileName, funcName[0], funcName[1], "Before this.chartInstance.destroy()");
         this.chartInstance.destroy(); 
       }
 
       try {
+        console.log(fileName, funcName[0], funcName[1], "Before this.$refs.chartCanvas.getContext('2d')");
         const ctx = this.$refs.chartCanvas.getContext('2d');
+        console.log(fileName, funcName[0], funcName[1], "Before new Chart(ctx, {})");
         this.chartInstance = new Chart(ctx, {
           type: 'line',
           data: this.data,
@@ -552,6 +558,7 @@ export default {
         });
       }
       catch(error) {
+        console.log(fileName, funcName[0], funcName[1], "In catch(error)");
         console.error('グラフの描画中にエラーが発生しました:', error);
         // エラー時の処理を追加
         if(error.message.includes('too far apart with stepSize')) {
