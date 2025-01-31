@@ -550,26 +550,27 @@ export default {
       try {
         console.log(fileName, funcName[0], funcName[1], "Before this.$refs.chartCanvas.getContext('2d')");
         const ctx = this.$refs.chartCanvas.getContext('2d');
-        console.log(fileName, funcName[0], funcName[1], "Before new Chart(ctx, {})");
+        console.log(fileName, funcName[0], funcName[1], "Before new Chart(ctx, {}):", " ctx ", ctx, " this.$refs.chartCanvas ", this.$refs.chartCanvas);
         this.chartInstance = new Chart(ctx, {
           type: 'line',
           data: this.data,
           options: this.options,
         });
-        console.log(fileName, funcName[0], funcName[1], "After new Chart(ctx, {}): ", " this.chartInstance ", this.chartInstance);
+        console.log(fileName, funcName[0], funcName[1], "After new Chart(ctx, {}):", " this.chartInstance ", this.chartInstance);
       }
       catch(error) {
-        console.log(fileName, funcName[0], funcName[1], "In catch(error)");
+        console.log(fileName, funcName[0], funcName[1], "In catch(error):");
 //        console.error('グラフの描画中にエラーが発生しました:', error);
+        console.log(fileName, funcName[0], funcName[1], "Before this.chartInstance = null: ");
         this.chartInstance = null; // チャートインスタンスの初期化に失敗したのでnullを設定
 
         // エラー時の処理を追加
         if(error.message.includes('too far apart with stepSize')) {
-          console.error(fileName, funcName[0], funcName[1], 'The data points are too far apart for the specified stepSize:', error.message);
+          console.error(fileName, funcName[0], funcName[1], 'The data points are too far apart with stepSize: ', error.message);
           alert('グラフの日時間隔が広すぎるため、もう少し間隔を狭くして再試行してください。');
         }
         else {
-          console.error(fileName, funcName[0], funcName[1], 'An unexpected error occurred:', error.message);
+          console.error(fileName, funcName[0], funcName[1], 'An unexpected error occurred: ', error.message);
           alert('グラフ描画中に予期しないエラーが発生しました。');
         }
       }
