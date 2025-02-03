@@ -571,10 +571,10 @@ export default {
         }
         else {
           console.error(fileName, funcName[0], funcName[1], 'An unexpected error occurred: ', error.message);
-          alert('グラフ描画中に予期しないエラーが発生しました。');
+          alert('グラフ描画中に予期しないエラーが発生しました。画面リロードをお願いします。');
 
-          currentInstance.proxy.$forceUpdate();
-          console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
+//          currentInstance.proxy.$forceUpdate();
+//          console.log(fileName, funcName[0], funcName[1], "After instance.proxy.forceUpdate():", " currentInstance ", currentInstance);
         }
       }
     },
