@@ -9,7 +9,7 @@
       <!-- line-chart :data="data" :options="options" @chart-error="handleChartError" / -->
       <!-- LineChart :chartData="data" :options="options" @chart-error="handleChartError" / -->
       <!-- LineChart :data="data" :options="options" @chart-error="handleChartError" / -->
-      <canvas ref="chartCanvas"></canvas>
+      <!-- canvas ref="chartCanvas"></canvas -->
       <canvas ref="chartCanvas" width="1280" height="720"></canvas>
     </div>
     <!-- section>
